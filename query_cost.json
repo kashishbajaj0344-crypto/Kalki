@@ -1,0 +1,164 @@
+[
+  {
+    "query": "who are you?",
+    "model": "gpt-3.5-turbo",
+    "tokens_used": 3,
+    "cost_estimate": 6e-06
+  },
+  {
+    "query": "hello who are you?",
+    "model": "gpt-3.5-turbo",
+    "tokens_used": 4,
+    "cost_estimate": 8e-06
+  },
+  {
+    "query": "Design a solar power plant for Rajasthan",
+    "model": "gpt-4-turbo",
+    "tokens_used": 7,
+    "cost_estimate": 1.4e-05
+  },
+  {
+    "query": "",
+    "model": "gpt-3.5-turbo",
+    "tokens_used": 0,
+    "cost_estimate": 0.0
+  },
+  {
+    "query": "source ~/Desktop/Kalki/kalki_env/bin/activate",
+    "model": "gpt-3.5-turbo",
+    "tokens_used": 2,
+    "cost_estimate": 4e-06
+  },
+  {
+    "query": "python asset_downloader.py",
+    "model": "gpt-3.5-turbo",
+    "tokens_used": 2,
+    "cost_estimate": 4e-06
+  },
+  {
+    "query": "source ~/Desktop/Kalki/kalki_env/bin/activate",
+    "model": "gpt-3.5-turbo",
+    "tokens_used": 2,
+    "cost_estimate": 4e-06
+  },
+  {
+    "query": "python asset_downloader.py",
+    "model": "gpt-3.5-turbo",
+    "tokens_used": 2,
+    "cost_estimate": 4e-06
+  },
+  {
+    "query": "source ~/Desktop/Kalki/kalki_env/bin/activate",
+    "model": "gpt-3.5-turbo",
+    "tokens_used": 2,
+    "cost_estimate": 4e-06
+  },
+  {
+    "query": "python asset_downloader.py",
+    "model": "gpt-3.5-turbo",
+    "tokens_used": 2,
+    "cost_estimate": 4e-06
+  },
+  {
+    "query": "source ~/Desktop/Kalki/kalki_env/bin/activate",
+    "model": "gpt-3.5-turbo",
+    "tokens_used": 2,
+    "cost_estimate": 4e-06
+  },
+  {
+    "query": "python ~/Desktop/Kalki/pdfs/computer_science/asset_downloader.py",
+    "model": "gpt-3.5-turbo",
+    "tokens_used": 2,
+    "cost_estimate": 4e-06
+  },
+  {
+    "query": "source ~/Desktop/Kalki/kalki_env/bin/activate",
+    "model": "gpt-3.5-turbo",
+    "tokens_used": 2,
+    "cost_estimate": 4e-06
+  },
+  {
+    "query": "source ~/Desktop/Kalki/kalki_env/bin/activate",
+    "model": "gpt-3.5-turbo",
+    "tokens_used": 2,
+    "cost_estimate": 4e-06
+  },
+  {
+    "query": "python ~/Desktop/Kalki/pdfs/computer_science/asset_downloader.py",
+    "model": "gpt-3.5-turbo",
+    "tokens_used": 2,
+    "cost_estimate": 4e-06
+  },
+  {
+    "query": "cd ~/Desktop/Kalki/",
+    "model": "gpt-3.5-turbo",
+    "tokens_used": 2,
+    "cost_estimate": 4e-06
+  },
+  {
+    "query": "",
+    "model": "gpt-3.5-turbo",
+    "tokens_used": 0,
+    "cost_estimate": 0.0
+  },
+  {
+    "query": "source kalki_env/bin/activate",
+    "model": "gpt-3.5-turbo",
+    "tokens_used": 2,
+    "cost_estimate": 4e-06
+  },
+  {
+    "query": "",
+    "model": "gpt-3.5-turbo",
+    "tokens_used": 0,
+    "cost_estimate": 0.0
+  },
+  {
+    "pipeline_step": "query",
+    "query": "generate me a game",
+    "domains_used": [],
+    "chunks_used": [],
+    "retrieved_count": 0,
+    "model": "gpt-5",
+    "answer_length": 1370,
+    "duration_s": 21.320966958999634,
+    "timestamp": "2025-10-01T15:07:06",
+    "error": null
+  },
+  {
+    "pipeline_step": "query",
+    "query": ">>> generate_project MyFirstGame Platformer",
+    "domains_used": [],
+    "chunks_used": [],
+    "retrieved_count": 0,
+    "model": "gpt-5",
+    "answer_length": 2080,
+    "duration_s": 12.418583869934082,
+    "timestamp": "2025-10-01T15:09:19",
+    "error": null
+  },
+  {
+    "pipeline_step": "query",
+    "query": ">>> generate_project MyFirstGame Platformer",
+    "domains_used": [],
+    "chunks_used": [],
+    "retrieved_count": 0,
+    "model": "gpt-5",
+    "answer_length": 3270,
+    "duration_s": 14.483742952346802,
+    "timestamp": "2025-10-01T15:09:35",
+    "error": null
+  },
+  {
+    "pipeline_step": "query",
+    "query": ">>> generate_project MyFirstGame Platformer",
+    "domains_used": [],
+    "chunks_used": [],
+    "retrieved_count": 0,
+    "model": "gpt-5",
+    "answer_length": 1897,
+    "duration_s": 9.93425989151001,
+    "timestamp": "2025-10-01T15:09:45",
+    "error": null
+  }
+]

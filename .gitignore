@@ -1,0 +1,13 @@
+# Ignore large game dev PDFs and archives
+pdfs/**/game_dev_data/*.pdf
+pdfs/**/game_dev_data/*.zip
+pdfs/**/game_dev_data/*.dmg
+pdfs/**/game_dev_data/*.tar
+pdfs/**/game_dev_data/*.7z
+pdfs/**/game_dev_data/*.rar
+
+# Ignore system/cache files
+*.DS_Store
+__pycache__/
+*.pyc
+*.pyo
