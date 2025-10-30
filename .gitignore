@@ -11,3 +11,13 @@ pdfs/**/game_dev_data/*.rar
 __pycache__/
 *.pyc
 *.pyo
+
+# Ignore generated agent data
+sessions/
+memory/
+knowledge_lifecycle/
+checkpoints/
+vector_db_backups/
+
+# Ignore log files
+*.log
