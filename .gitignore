@@ -1,0 +1,26 @@
+# Ignore large game dev PDFs and archives
+pdfs/**/game_dev_data/*.pdf
+pdfs/**/game_dev_data/*.zip
+pdfs/**/game_dev_data/*.dmg
+pdfs/**/game_dev_data/*.tar
+pdfs/**/game_dev_data/*.7z
+pdfs/**/game_dev_data/*.rar
+
+# Ignore system/cache files
+*.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore logs
+*.log
+kalki_agents.log
+
+# Ignore data directories (created at runtime)
+/vector_db/
+/pdfs/
+
+# Ignore local settings
+kalki_settings.json
+kalki_resources.json
+query_cost.json

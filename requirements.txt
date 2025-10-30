@@ -1,0 +1,27 @@
+# Core Kalki packages
+python-dotenv==1.1.1
+keyring==24.2.0
+portalocker==2.10.0
+pdfplumber==0.9.0
+pdf2image==1.17.0
+pytesseract==0.3.13
+langchain-community==0.4
+chromadb==1.2.0
+openai==2.5.0
+requests==2.32.5
+apscheduler==3.11.0
+tqdm==4.67.1
+coloredlogs==15.0.1
+pydantic==2.12.3
+pytest==8.4.2
+
+# PyTorch / embeddings stack
+torch==2.9.0
+torchvision==0.24.0
+torchaudio==2.9.0
+transformers==4.57.1
+sentencepiece==0.2.1
+
+# Numerical / scientific utilities
+numpy==1.26.4
+scipy==1.11.2
