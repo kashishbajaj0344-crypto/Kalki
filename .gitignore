@@ -19,8 +19,11 @@ kalki_agents.log
 # Ignore data directories (created at runtime)
 /vector_db/
 /pdfs/
+data/vector_db/chroma.sqlite3
+data/vector_db/*.sqlite3
 
 # Ignore local settings
+.env
 kalki_settings.json
 kalki_resources.json
 query_cost.json
