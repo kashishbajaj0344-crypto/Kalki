@@ -1,0 +1,11 @@
+{
+  "session_id": "session_test_20251030_120456",
+  "user_id": "test",
+  "created_at": "2025-10-30T19:04:56.750581",
+  "updated_at": "2025-10-30T19:04:56.750583",
+  "metadata": {
+    "test": true
+  },
+  "context": [],
+  "state": "active"
+}

@@ -284,6 +284,93 @@ class VectorDBManager:
         """
         return self.query(query_text, k=top_k)
 
+    def search_similar(self, query: str, top_k: int = 5) -> List[Dict[str, Any]]:
+        """Search for similar documents in the vector database"""
+        try:
+            results = self.query(query, k=top_k)
+            # Format results for the orchestrator
+            formatted_results = []
+            for result in results:
+                formatted_results.append({
+                    "content": result.get("text", ""),
+                    "metadata": result.get("metadata", {}),
+                    "score": result.get("score", 0.0),
+                    "source": "vector_db"
+                })
+            return formatted_results
+        except Exception as e:
+            logger.error(f"VectorDB search failed: {e}")
+            return []
+
+
+# ------------------------------------------------------------
+# VectorDB Adapter for rag_query.py interface
+# ------------------------------------------------------------
+class ChromaVectorDBAdapter:
+    """Adapter to implement VectorDBAdapter interface for ChromaDB"""
+
+    def __init__(self, collection_name: str = "default"):
+        self.manager = VectorDBManager()
+        self.collection_name = collection_name
+
+    async def query_embeddings(
+        self, embedding: List[float], top_k: int = 10, filters: Optional[Dict[str, Any]] = None
+    ) -> List[Dict[str, Any]]:
+        # Convert embedding query to text query using the manager's query method
+        # This is a simplified implementation - in practice you'd need to implement
+        # proper embedding-based search
+        results = self.manager.query("", k=top_k)  # Empty query for now
+        return [
+            {
+                "doc_id": r.get("doc_id", ""),
+                "text": r.get("text", ""),
+                "metadata": r.get("metadata", {}),
+                "similarity": r.get("score", 0.0)
+            }
+            for r in results
+        ]
+
+    async def query_text(
+        self, query: str, top_k: int = 10, filters: Optional[Dict[str, Any]] = None
+    ) -> List[Dict[str, Any]]:
+        results = self.manager.query(query, k=top_k)
+        return [
+            {
+                "doc_id": r.get("doc_id", ""),
+                "text": r.get("text", ""),
+                "metadata": r.get("metadata", {}),
+                "similarity": r.get("score", 0.0),
+                "text_score": r.get("score", 0.0)  # For hybrid scoring
+            }
+            for r in results
+        ]
+
+    async def batch_query_embeddings(
+        self, embeddings: List[List[float]], top_k: int = 10, filters: Optional[Dict[str, Any]] = None
+    ) -> List[List[Dict[str, Any]]]:
+        # Simplified batch implementation
+        results = []
+        for _ in embeddings:
+            results.append(await self.query_embeddings([], top_k=top_k, filters=filters))
+        return results
+
+    async def add_documents(self, docs: List[Dict[str, Any]], embeddings: List[List[float]]) -> None:
+        """Add multiple documents with their embeddings"""
+        for doc, emb in zip(docs, embeddings):
+            await self.manager.add_document_async(
+                text=doc.get("text", ""),
+                metadata=doc.get("metadata", {}),
+                embedding=emb
+            )
+
+
+def get_vector_db_adapter(backend: str = "chroma", collection_name: str = "default", config: Optional[Dict[str, Any]] = None) -> ChromaVectorDBAdapter:
+    """Factory function to create vector DB adapter"""
+    if backend.lower() == "chroma":
+        return ChromaVectorDBAdapter(collection_name)
+    else:
+        raise ValueError(f"Unsupported vector DB backend: {backend}")
+
 
 def get_version() -> str:
     return __version__

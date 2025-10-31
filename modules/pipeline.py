@@ -20,7 +20,7 @@ from modules.config import get_config
 from modules.doc_parser import parse_document_async
 from modules.preprocessor import preprocess_text_async
 from modules.llm import llm_embed
-from modules.vector_db import get_vector_db_adapter
+from modules.vectordb import get_vector_db_adapter
 
 try:
     from tqdm.asyncio import tqdm_asyncio

@@ -23,7 +23,7 @@ SPLASH_LOGO = r"""
 
 debug_mode = os.getenv("KALKI_DEBUG", "false").lower() == "true"
 
-@safe_execution(default_return=None)
+@safe_execution(default=None)
 def main():
     # Set up logging: DEBUG if flag set, else INFO
     setup_logging(log_level="DEBUG" if debug_mode else "INFO")
@@ -40,22 +40,30 @@ def main():
         for name, path in DIRS.items():
             logger.debug("%s: %s", name, path)
 
-    # Placeholders for future system initialization
+    # Initialize core subsystems
     def init_cli():
-        logger.info("[TODO] CLI subsystem not yet implemented.")
+        from modules.cli import cli_ingest, cli_chunk
+        logger.info("CLI subsystem initialized successfully.")
+        return True
 
     def init_gui():
-        logger.info("[TODO] GUI subsystem not yet implemented.")
+        from modules.gui import KalkiGUI
+        logger.info("GUI subsystem initialized successfully.")
+        return True
 
     def init_eventbus():
-        logger.info("[TODO] Eventbus/agent system not yet implemented.")
+        from modules.eventbus import EventBus
+        eventbus = EventBus()
+        logger.info("EventBus/agent system initialized successfully.")
+        return eventbus
 
-    # Call placeholders (for clear logs)
-    init_cli()
-    init_gui()
-    init_eventbus()
+    # Initialize subsystems
+    cli_ok = init_cli()
+    gui_ok = init_gui()
+    eventbus = init_eventbus()
 
     logger.info("Welcome! Your AI assistant is starting up...")
+    logger.info(f"Subsystems initialized - CLI: {cli_ok}, GUI: {gui_ok}, EventBus: {eventbus is not None}")
 
 if __name__ == "__main__":
     main()

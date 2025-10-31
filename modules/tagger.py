@@ -121,21 +121,13 @@ def extract_tags(text: str) -> Dict[str, List[str]]:
 
 def generate_tags(chunk: Dict[str, Any], method: str = "keywords", top_n: int = TOP_N) -> List[str]:
     """
-    Generates tags for a given chunk dict.
+    Generates tags for a given chunk dict using rule-based keyword extraction.
     Accepts:
         chunk = {"text": ..., "chunk_id": ..., ...}
     Returns list of tags.
-    method: "keywords" (default), "llm" (future expansion)
     """
     text = chunk.get("text", "")
-    if method == "keywords":
-        tags = extract_keywords(text, top_n)
-    elif method == "llm" and CONFIG.get("OPENAI_API_KEY"):
-        # LLM-based tag generation placeholder (future implementation)
-        logger.warning("LLM tag generation not yet implemented. Falling back to keywords.")
-        tags = extract_keywords(text, top_n)
-    else:
-        tags = extract_keywords(text, top_n)
+    tags = extract_keywords(text, top_n)
     logger.debug("Generated %d tags for chunk %s", len(tags), chunk.get("chunk_id"))
     return tags
 

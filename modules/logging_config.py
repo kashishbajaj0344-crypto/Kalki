@@ -39,6 +39,46 @@ except ImportError:
 
 _log_lock = threading.Lock()
 
+def setup_logging(log_level: str = None, log_file: str = None):
+    """
+    Sets up the root logger for Kalki applications.
+    This is a convenience function for applications that want simple setup.
+    """
+    level = log_level or LOG_LEVEL
+    root_logger = logging.getLogger("Kalki")
+    root_logger.setLevel(getattr(logging, level.upper(), logging.INFO))
+    
+    # Clear any existing handlers
+    for handler in root_logger.handlers[:]:
+        root_logger.removeHandler(handler)
+    
+    # Console handler
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setFormatter(logging.Formatter(LOG_FORMAT, datefmt=LOG_DATEFMT))
+    root_logger.addHandler(handler)
+    
+    # File handler if specified
+    if log_file:
+        log_file = add_timestamp_to_logfile(log_file)
+        file_handler = RotatingFileHandler(
+            log_file,
+            maxBytes=10_000_000,  # 10 MB
+            backupCount=5,
+            encoding="utf-8"
+        )
+        file_handler.setFormatter(logging.Formatter(LOG_FORMAT, datefmt=LOG_DATEFMT))
+        root_logger.addHandler(file_handler)
+    
+    if HAVE_COLOREDLOGS:
+        coloredlogs.install(
+            level=root_logger.level,
+            logger=root_logger,
+            fmt=LOG_FORMAT,
+            datefmt=LOG_DATEFMT
+        )
+    
+    return root_logger
+
 def add_timestamp_to_logfile(log_file: str) -> str:
     """
     Returns logfile path with a trailing _YYYYMMDD_HHMMSS if not already present.

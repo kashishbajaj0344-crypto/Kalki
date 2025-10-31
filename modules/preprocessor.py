@@ -9,6 +9,7 @@
 import re
 import unicodedata
 from typing import List, Callable, Optional
+import asyncio
 
 from modules.logging_config import get_logger
 
@@ -103,6 +104,22 @@ def preprocess(
         units = [text.strip()]
     logger.debug(f"Preprocessing produced {len(units)} units")
     return units
+
+# ----------- Async version for pipeline -----------
+async def preprocess_text_async(
+    text: str,
+    cleaning: bool = True,
+    split: Optional[str] = None,  # None, 'paragraph', 'sentence', 'chunk'
+    chunk_size: int = 512,
+    custom_filters: Optional[List[Callable[[str], str]]] = None
+) -> List[str]:
+    """
+    Async version of preprocess function for pipeline usage.
+    """
+    # Since preprocessing is CPU-bound and fast, we can just call the sync version
+    # In a thread pool if needed, but for now this is sufficient
+    loop = asyncio.get_event_loop()
+    return await loop.run_in_executor(None, preprocess, text, cleaning, split, chunk_size, custom_filters)
 
 # ----------- Optional: PDF/Image OCR Hook -----------
 def preprocess_pdf_ocr(text: str) -> str:

@@ -1,0 +1,15 @@
+{
+  "memory_id": "semantic_test_concept_20251030_120553",
+  "concept": "test_concept",
+  "timestamp": "2025-10-30T19:05:53.607659",
+  "knowledge": {
+    "description": "Test semantic knowledge",
+    "attributes": [
+      "test",
+      "memory",
+      "integration"
+    ],
+    "confidence": 0.95
+  },
+  "type": "semantic"
+}

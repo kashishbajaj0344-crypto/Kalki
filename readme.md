@@ -70,7 +70,87 @@ pip install -r requirements.txt
 
 ---
 
-## 4. Usage
+## 4. Internet Connectivity Setup
+
+Kalki now supports internet connectivity for web search, research, and real-time data retrieval. This enables agents to access current information, research external topics, and understand contemporary concepts.
+
+### Quick Setup
+
+Run the automated setup script:
+
+```bash
+python setup_internet.py
+```
+
+This will:
+- Install required dependencies (`beautifulsoup4`, `aiohttp`, `lxml`, `python-dotenv`)
+- Guide you through API key configuration
+- Test connectivity and API keys
+- Create/update `.env` file with your keys
+
+### Manual Setup
+
+1. **Install Dependencies:**
+```bash
+pip install beautifulsoup4==4.12.2 aiohttp==3.9.1 lxml==4.9.3 python-dotenv==1.1.1
+```
+
+2. **Configure API Keys:**
+Create a `.env` file in the project root:
+
+```bash
+# Google Custom Search (recommended)
+GOOGLE_SEARCH_API_KEY=your_google_api_key
+GOOGLE_CSE_ID=your_custom_search_engine_id
+
+# Bing Search API
+BING_SEARCH_API_KEY=your_bing_api_key
+
+# SerpApi (alternative Google search)
+SERPAPI_KEY=your_serpapi_key
+
+# OpenAI API (enhanced LLM features)
+OPENAI_API_KEY=your_openai_key
+
+# HuggingFace API (Llama models)
+HUGGINGFACE_API_KEY=your_huggingface_key
+```
+
+3. **Get API Keys:**
+- **Google Custom Search:** https://console.developers.google.com/ + https://cse.google.com/
+- **Bing Search:** https://www.microsoft.com/en-us/bing/apis/bing-web-search-api
+- **SerpApi:** https://serpapi.com/
+- **OpenAI:** https://platform.openai.com/api-keys
+- **HuggingFace:** https://huggingface.co/settings/tokens
+
+### Features
+
+- **Web Search:** Search across multiple providers (Google, Bing, DuckDuckGo)
+- **Content Research:** Deep research with multiple search queries and synthesis
+- **URL Fetching:** Direct content retrieval from specific URLs
+- **Safety Controls:** Content filtering, rate limiting, and blocked domain handling
+- **Fallback Support:** Automatic fallback between search providers
+- **Caching:** Intelligent caching to reduce API calls and improve performance
+
+### Usage Examples
+
+```bash
+# Web search
+kalki web search "Call of Duty game mechanics" --results 5
+
+# Research a topic
+kalki web research "artificial intelligence trends" --depth comprehensive
+
+# Fetch content from URL
+kalki web fetch "https://en.wikipedia.org/wiki/Call_of_Duty"
+
+# Regular queries now use web search when appropriate
+kalki query "What are the latest Call of Duty games?"
+```
+
+---
+
+## 5. Usage
 
 ### CLI Commands
 
@@ -89,6 +169,15 @@ python kalki.py --status
 
 # Interactive mode
 python kalki.py --interactive
+
+# Web search (new)
+kalki web search "quantum physics latest research" --results 5
+
+# Web research (new)
+kalki web research "artificial intelligence trends" --depth comprehensive
+
+# Fetch content from URL (new)
+kalki web fetch "https://en.wikipedia.org/wiki/Quantum_mechanics"
 ```
 
 ### Example Agent Query
@@ -100,7 +189,7 @@ A: [MedicineAgent] ... (context + LLM-based synthesis)
 
 ---
 
-## 5. Configuration
+## 6. Configuration
 
 **Example: `kalki_resources.json` v0.3**
 ```json
@@ -129,7 +218,7 @@ A: [MedicineAgent] ... (context + LLM-based synthesis)
 
 ---
 
-## 6. Modules
+## 7. Modules
 
 - **AgentManager:** Loads and manages all agent classes, routes queries, handles ingestion.
 - **vectordb:** Abstraction for ChromaDB or other vector DBs. Handles indexing, search, and metadata.
@@ -139,7 +228,7 @@ A: [MedicineAgent] ... (context + LLM-based synthesis)
 
 ---
 
-## 7. Notes & Recommendations
+## 8. Notes & Recommendations
 
 - **Device selection:** Use "auto" or set manually; M1/M2/M4 is fastest for BGE.
 - **Batch size/chunking:** Larger batches == better throughput, up to VRAM limits.
@@ -150,11 +239,12 @@ A: [MedicineAgent] ... (context + LLM-based synthesis)
 
 ---
 
-## 8. Changelog
+## 9. Changelog
 
 - **v0.1**: Project skeleton, CLI, config, README, initial agent/ingestion/vector DB modules.
 - **v0.2**: Device auto-detection, batch size, chunking, status reporting.
 - **v0.3**: Persistence options, query timeout, parallel ingestion, performance metadata, fallback models.
+- **v0.4**: Internet connectivity with WebSearchAgent, multiple search providers (Google, Bing, DuckDuckGo, SerpApi), safety controls, CLI web commands, and real-time data retrieval.
 
 ---
 

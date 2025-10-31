@@ -43,6 +43,7 @@ class AgentCapability(Enum):
     SIMULATION = "simulation"
     EXPERIMENTATION = "experimentation"
     SANDBOX = "sandbox"
+    ANALYTICS = "analytics"
     
     # Phase 10: Creativity
     CREATIVE_SYNTHESIS = "creative_synthesis"
@@ -64,6 +65,9 @@ class AgentCapability(Enum):
     AUDIO = "audio"
     SENSOR_FUSION = "sensor_fusion"
     NEUROMORPHIC = "neuromorphic"
+    WEB_SEARCH = "web_search"
+    DATA_RETRIEVAL = "data_retrieval"
+    API_INTEGRATION = "api_integration"
     
     # Phase 14: Quantum & Predictive
     QUANTUM_REASONING = "quantum_reasoning"
@@ -93,6 +97,20 @@ class AgentCapability(Enum):
     # Phase 19: Autonomy
     AUTONOMOUS_INVENTION = "autonomous_invention"
     ROBOTICS = "robotics"
+    ROBOTICS_SIMULATION = "robotics_simulation"
+    ROBOTICS_CAD = "robotics_cad"
+    ROBOTICS_KINEMATICS = "robotics_kinematics"
+    ROBOTICS_CONTROL = "robotics_control"
+    KINEMATICS_ANALYSIS = "kinematics_analysis"
+    DYNAMICS_SIMULATION = "dynamics_simulation"
+    TRAJECTORY_PLANNING = "trajectory_planning"
+    CAD_MODELING = "cad_modeling"
+    FILE_EXPORT = "file_export"
+    MANUFACTURING_PREP = "manufacturing_prep"
+    MOTION_OPTIMIZATION = "motion_optimization"
+    CONTROL_SYSTEMS = "control_systems"
+    PID_CONTROL = "pid_control"
+    TRAJECTORY_TRACKING = "trajectory_tracking"
     IOT_INTEGRATION = "iot_integration"
     
     # Phase 20: Self-Evolution
@@ -150,6 +168,9 @@ class BaseAgent(ABC):
         self.task_count = 0
         self.error_count = 0
         self.logger = logging.getLogger(f"kalki.agent.{name}")
+        
+        # Additional metadata storage
+        self.metadata = {}
         
         # Event bus will be set by AgentManager
         self.event_bus = None
@@ -236,6 +257,11 @@ class BaseAgent(ABC):
         self.error_count += 1
         self.last_active = datetime.utcnow()
     
+    def update_metadata(self, key: str, value: Any):
+        """Update agent metadata"""
+        self.metadata[key] = value
+        self.last_active = datetime.utcnow()
+    
     def get_info(self) -> Dict[str, Any]:
         """Get agent information"""
         return {
@@ -247,5 +273,9 @@ class BaseAgent(ABC):
             "status": self.status.value,
             "created_at": self.created_at.isoformat(),
             "task_count": self.task_count,
-            "error_count": self.error_count
+            "error_count": self.error_count,
+            "metadata": self.metadata
         }
+    
+    def __repr__(self):
+        return f"<{self.__class__.__name__} id={self.id[:8]} name={self.name} status={self.status.value}>"

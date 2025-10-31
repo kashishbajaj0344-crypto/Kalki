@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  simulation-sandbox:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: kalki-simulation-sandbox
+    volumes:
+      - ./tmp:/app/tmp:ro
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=100m
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    restart: "no"
+    command: ["python3", "/app/simulation.py"]

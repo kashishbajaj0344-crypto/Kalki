@@ -34,7 +34,7 @@ logger = get_logger()
 # =============================================================
 # Safe execution decorator
 # =============================================================
-def safe_execution(default: Any = None):
+def safe_execution(default: Any = None, logger: Optional[logging.Logger] = None):
     """Decorator to safely execute a function and log exceptions."""
     def decorator(func: Callable):
         @functools.wraps(func)
@@ -42,7 +42,11 @@ def safe_execution(default: Any = None):
             try:
                 return func(*args, **kwargs)
             except Exception as e:
-                logger.exception("Error in %s: %s", func.__name__, e)
+                log = logger or globals().get('logger')
+                if log:
+                    log.exception("Error in %s: %s", func.__name__, e)
+                else:
+                    print(f"Error in {func.__name__}: {e}")
                 return default
         return wrapper
     return decorator
@@ -165,12 +169,12 @@ def ensure_dir(path: Path) -> Path:
     return path
 
 # Backwards-compatible alias: some modules import `ensure_dirs` (plural)
-def ensure_dirs(path: Path) -> Path:
-    """Compatibility wrapper for older code that calls `ensure_dirs`.
-
-    Delegates to `ensure_dir` to maintain a single implementation.
-    """
-    return ensure_dir(path)
+def ensure_dirs(*paths: Path) -> List[Path]:
+    """Ensure multiple directories exist (create if missing)."""
+    result = []
+    for path in paths:
+        result.append(ensure_dir(path))
+    return result
 
 def list_files_recursively(directory: Path, extensions: Optional[List[str]] = None) -> List[Path]:
     """List all files in a directory recursively matching extensions."""

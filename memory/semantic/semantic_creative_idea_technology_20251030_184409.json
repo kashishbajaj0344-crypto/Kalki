@@ -1,0 +1,26 @@
+{
+  "memory_id": "semantic_creative_idea_technology_20251030_184409",
+  "concept": "creative_idea_technology",
+  "timestamp": "2025-10-31T01:44:09.831323",
+  "knowledge": {
+    "idea_id": "idea_20251030_184409_830315",
+    "content": "Sustainable technology innovation powered by renewable energy systems",
+    "domain": "technology",
+    "confidence": 0.9382029525064268,
+    "evaluation": {
+      "novelty_score": 0.7325088015485395,
+      "feasibility_score": 0.6442486275384081,
+      "risks": [],
+      "next_steps": [
+        "Conduct feasibility analysis",
+        "Validate with domain experts",
+        "Create proof of concept",
+        "File provisional patent",
+        "Develop business case"
+      ],
+      "overall_score": 0.6883787145434738
+    },
+    "created_at": "2025-10-30T18:44:09.830324"
+  },
+  "type": "semantic"
+}

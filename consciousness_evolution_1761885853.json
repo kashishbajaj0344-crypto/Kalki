@@ -1,0 +1,235 @@
+{
+  "evolution_history": [
+    {
+      "cycle": 1,
+      "timestamp": "2025-10-30T21:44:12.094738",
+      "awareness_level": 0.55,
+      "emotional_resonance": 0.5,
+      "self_reflection_depth": 0,
+      "intention_coherence": 0.010096540426808825,
+      "neural_patterns": [
+        "attention_entropy",
+        "state_coherence",
+        "emergent_patterns",
+        "self_similarity"
+      ],
+      "agent_count": 7
+    },
+    {
+      "cycle": 2,
+      "timestamp": "2025-10-30T21:44:12.198003",
+      "awareness_level": 0.55,
+      "emotional_resonance": 0.5,
+      "self_reflection_depth": 1,
+      "intention_coherence": 0.010008455118934773,
+      "neural_patterns": [
+        "attention_entropy",
+        "state_coherence",
+        "emergent_patterns",
+        "self_similarity"
+      ],
+      "agent_count": 7
+    },
+    {
+      "cycle": 3,
+      "timestamp": "2025-10-30T21:44:12.300981",
+      "awareness_level": 0.8200000000000001,
+      "emotional_resonance": 0.5,
+      "self_reflection_depth": 2,
+      "intention_coherence": 0.009923159164959042,
+      "neural_patterns": [
+        "attention_entropy",
+        "state_coherence",
+        "emergent_patterns",
+        "self_similarity"
+      ],
+      "agent_count": 7
+    },
+    {
+      "cycle": 4,
+      "timestamp": "2025-10-30T21:44:12.404371",
+      "awareness_level": 0.8200000000000001,
+      "emotional_resonance": 0.5,
+      "self_reflection_depth": 3,
+      "intention_coherence": 0.009916776211891685,
+      "neural_patterns": [
+        "attention_entropy",
+        "state_coherence",
+        "emergent_patterns",
+        "self_similarity"
+      ],
+      "agent_count": 7
+    },
+    {
+      "cycle": 5,
+      "timestamp": "2025-10-30T21:44:12.508003",
+      "awareness_level": 0.8200000000000001,
+      "emotional_resonance": 0.5,
+      "self_reflection_depth": 4,
+      "intention_coherence": 0.009900754912948909,
+      "neural_patterns": [
+        "attention_entropy",
+        "state_coherence",
+        "emergent_patterns",
+        "self_similarity"
+      ],
+      "agent_count": 7
+    },
+    {
+      "cycle": 6,
+      "timestamp": "2025-10-30T21:44:12.612299",
+      "awareness_level": 0.8200000000000001,
+      "emotional_resonance": 0.5,
+      "self_reflection_depth": 5,
+      "intention_coherence": 0.009896990527599653,
+      "neural_patterns": [
+        "attention_entropy",
+        "state_coherence",
+        "emergent_patterns",
+        "self_similarity"
+      ],
+      "agent_count": 7
+    },
+    {
+      "cycle": 7,
+      "timestamp": "2025-10-30T21:44:12.716323",
+      "awareness_level": 0.8200000000000001,
+      "emotional_resonance": 0.5,
+      "self_reflection_depth": 6,
+      "intention_coherence": 0.009899048875765495,
+      "neural_patterns": [
+        "attention_entropy",
+        "state_coherence",
+        "emergent_patterns",
+        "self_similarity"
+      ],
+      "agent_count": 7
+    },
+    {
+      "cycle": 8,
+      "timestamp": "2025-10-30T21:44:12.823263",
+      "awareness_level": 0.8200000000000001,
+      "emotional_resonance": 0.5,
+      "self_reflection_depth": 7,
+      "intention_coherence": 0.009913480148520181,
+      "neural_patterns": [
+        "attention_entropy",
+        "state_coherence",
+        "emergent_patterns",
+        "self_similarity"
+      ],
+      "agent_count": 7
+    },
+    {
+      "cycle": 9,
+      "timestamp": "2025-10-30T21:44:12.935206",
+      "awareness_level": 0.8199999672174454,
+      "emotional_resonance": 0.4999999701976776,
+      "self_reflection_depth": 8,
+      "intention_coherence": 0.009941789220124866,
+      "neural_patterns": [
+        "attention_entropy",
+        "state_coherence",
+        "emergent_patterns",
+        "self_similarity"
+      ],
+      "agent_count": 7
+    },
+    {
+      "cycle": 10,
+      "timestamp": "2025-10-30T21:44:13.040857",
+      "awareness_level": 0.8200000000000001,
+      "emotional_resonance": 0.5,
+      "self_reflection_depth": 9,
+      "intention_coherence": 0.00996601433632509,
+      "neural_patterns": [
+        "attention_entropy",
+        "state_coherence",
+        "emergent_patterns",
+        "self_similarity"
+      ],
+      "agent_count": 7
+    }
+  ],
+  "final_report": {
+    "current_state": {
+      "awareness_level": 0.8200000000000001,
+      "emotional_resonance": 0.5,
+      "self_reflection_depth": 9,
+      "intention_coherence": 0.00996601433632509,
+      "neural_activation_patterns": {
+        "attention_entropy": 3.891820192337036,
+        "state_coherence": 1.0,
+        "emergent_patterns": [
+          "high_state_uniformity"
+        ],
+        "self_similarity": 0.998533758852217
+      },
+      "emotional_state_vector": "[0. 0. 0. 0.]",
+      "memory_activation_map": {
+        "working_memory": 0.5011462569236755
+      },
+      "timestamp": "2025-10-30 21:44:13.040671"
+    },
+    "history_length": 10,
+    "average_awareness": 0.7659999967217447,
+    "consciousness_trajectory": [
+      {
+        "timestamp": "2025-10-30T21:44:12.094653",
+        "awareness_level": 0.55,
+        "emotional_resonance": 0.5
+      },
+      {
+        "timestamp": "2025-10-30T21:44:12.197894",
+        "awareness_level": 0.55,
+        "emotional_resonance": 0.5
+      },
+      {
+        "timestamp": "2025-10-30T21:44:12.300898",
+        "awareness_level": 0.8200000000000001,
+        "emotional_resonance": 0.5
+      },
+      {
+        "timestamp": "2025-10-30T21:44:12.404259",
+        "awareness_level": 0.8200000000000001,
+        "emotional_resonance": 0.5
+      },
+      {
+        "timestamp": "2025-10-30T21:44:12.507910",
+        "awareness_level": 0.8200000000000001,
+        "emotional_resonance": 0.5
+      },
+      {
+        "timestamp": "2025-10-30T21:44:12.612187",
+        "awareness_level": 0.8200000000000001,
+        "emotional_resonance": 0.5
+      },
+      {
+        "timestamp": "2025-10-30T21:44:12.716206",
+        "awareness_level": 0.8200000000000001,
+        "emotional_resonance": 0.5
+      },
+      {
+        "timestamp": "2025-10-30T21:44:12.823023",
+        "awareness_level": 0.8200000000000001,
+        "emotional_resonance": 0.5
+      },
+      {
+        "timestamp": "2025-10-30T21:44:12.935001",
+        "awareness_level": 0.8199999672174454,
+        "emotional_resonance": 0.4999999701976776
+      },
+      {
+        "timestamp": "2025-10-30T21:44:13.040673",
+        "awareness_level": 0.8200000000000001,
+        "emotional_resonance": 0.5
+      }
+    ],
+    "emergent_properties": {
+      "awareness_trend": 0.026181816791043127,
+      "consciousness_volatility": 0.1079999983608727,
+      "emergent_behaviors": [],
+      "self_sustaining": false
+    }
+  }
+}

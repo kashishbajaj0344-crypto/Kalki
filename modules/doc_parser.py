@@ -19,14 +19,15 @@ import mimetypes
 from typing import Optional, Dict, Any, List, Callable, Union
 from collections import Counter
 from modules.logging_config import get_logger
-from modules.utils import safe_execution, sha256_of_file
+from modules.utils import safe_execution, compute_sha256
+from modules.metadata import extract_text_metadata
 
 import asyncio
 
 logger = get_logger("Kalki.DocParser")
 
 # --- PDF Metadata Extraction (safe, with fallback to first page title) ---
-@safe_execution(default_return={}, logger=logger)
+@safe_execution(default={}, logger=logger)
 def extract_pdf_metadata(filepath: str) -> Dict[str, Any]:
     try:
         from PyPDF2 import PdfReader
@@ -57,7 +58,7 @@ def extract_pdf_metadata(filepath: str) -> Dict[str, Any]:
         return {}
 
 # --- DOCX Metadata and Text Extraction ---
-@safe_execution(default_return={}, logger=logger)
+@safe_execution(default={}, logger=logger)
 def extract_docx_metadata(filepath: str) -> Dict[str, Any]:
     try:
         import docx
@@ -85,7 +86,7 @@ def extract_docx_metadata(filepath: str) -> Dict[str, Any]:
         return {}
 
 # --- EPUB Metadata Extraction ---
-@safe_execution(default_return={}, logger=logger)
+@safe_execution(default={}, logger=logger)
 def extract_epub_metadata(filepath: str) -> Dict[str, Any]:
     try:
         from ebooklib import epub
@@ -107,7 +108,7 @@ def extract_epub_metadata(filepath: str) -> Dict[str, Any]:
         return {}
 
 # --- HTML Metadata and Title Extraction ---
-@safe_execution(default_return={}, logger=logger)
+@safe_execution(default={}, logger=logger)
 def extract_html_metadata(filepath: str) -> Dict[str, Any]:
     try:
         from bs4 import BeautifulSoup
@@ -268,7 +269,7 @@ async def parse_document_async(
     path = Path(filepath)
     ext = (filetype or path.suffix.lower().lstrip("."))
     mime_type, _ = mimetypes.guess_type(filepath)
-    file_hash = sha256_of_file(filepath)
+    file_hash = compute_sha256(filepath)
     if hash_cache is not None and file_hash in hash_cache:
         logger.info(f"Skipping {filepath}: already parsed (hash {file_hash})")
         return hash_cache[file_hash]
