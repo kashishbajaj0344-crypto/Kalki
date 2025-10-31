@@ -1,11 +1,17 @@
-# Core Kalki packages
+# ============================================================
+# Kalki v2.4 — Production Requirements
+# ============================================================
+# Pinned versions for production stability and reproducibility
+# Core dependencies with security and compatibility guarantees
+
+# Core Kalki packages - pinned for stability
 python-dotenv==1.1.1
 keyring==24.2.0
 portalocker==2.10.0
 pdfplumber==0.9.0
 pdf2image==1.17.0
 pytesseract==0.3.13
-langchain-community==0.4
+langchain-community==0.4.0
 chromadb==1.2.0
 openai==2.5.0
 requests==2.32.5
@@ -14,22 +20,59 @@ tqdm==4.67.1
 coloredlogs==15.0.1
 pydantic==2.12.3
 pytest==8.4.2
+pytest-asyncio==0.23.0
 
-# Web search and scraping
+# Web search and scraping - pinned
 beautifulsoup4==4.12.2
 aiohttp==3.9.1
 lxml==4.9.3
 
-# PyTorch / embeddings stack
+# PyTorch / ML stack - pinned for CUDA compatibility
 torch==2.9.0
 torchvision==0.24.0
 torchaudio==2.9.0
 transformers==4.57.1
 sentencepiece==0.2.1
+tokenizers==0.15.0
 
-# Numerical / scientific utilities
-numpy>=1.26.0
-scipy>=1.11.0
-scikit-learn>=1.5.0
-networkx>=3.4.0
-psutil>=5.9.0
+# Numerical / scientific utilities - minimum versions for compatibility
+numpy>=1.26.0,<2.0.0
+scipy>=1.11.0,<2.0.0
+scikit-learn>=1.5.0,<2.0.0
+networkx>=3.4.0,<4.0.0
+psutil>=5.9.0,<6.0.0
+
+# Additional production dependencies
+fastapi==0.104.1
+uvicorn==0.24.0
+python-multipart==0.0.6
+jinja2==3.1.2
+click==8.1.7
+
+# Development and testing
+black==23.11.0
+isort==5.12.0
+mypy==1.7.1
+ruff==0.1.6
+pre-commit==3.5.0
+
+# Security and cryptography
+cryptography==41.0.7
+bcrypt==4.1.2
+
+# Database and caching
+redis==5.0.1
+sqlalchemy==2.0.23
+
+# Monitoring and observability
+prometheus-client==0.19.0
+opentelemetry-distro==0.42b0
+opentelemetry-instrumentation==0.42b0
+
+# Container and deployment
+docker==6.1.3
+kubernetes==28.1.0
+
+# Documentation
+mkdocs==1.5.3
+mkdocs-material==9.4.8

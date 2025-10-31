@@ -181,3 +181,5 @@ if __name__ == "__main__":
     print("Registered Versions:", get_module_versions())
     validate_config()
     save_config_to_file()
+
+# Kalki v2.3 — config.py v1.5
