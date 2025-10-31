@@ -8,10 +8,14 @@ from .meta_hypothesis import MetaHypothesisAgent
 from .creative import CreativeAgent
 from .feedback import FeedbackAgent
 from .optimization import OptimizationAgent
+from .performance_monitor import PerformanceMonitorAgent
+from .conflict_detection import ConflictDetectionAgent
 
 __all__ = [
     "MetaHypothesisAgent",
     "CreativeAgent",
     "FeedbackAgent",
     "OptimizationAgent",
+    "PerformanceMonitorAgent",
+    "ConflictDetectionAgent",
 ]

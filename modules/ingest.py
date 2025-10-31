@@ -177,6 +177,22 @@ class DocumentIngestor:
         return count
 
 
+# Global ingestor instance
+_ingestor = None
+
+def get_ingestor():
+    """Get or create global DocumentIngestor instance"""
+    global _ingestor
+    if _ingestor is None:
+        _ingestor = DocumentIngestor()
+    return _ingestor
+
+def ingest_pdf_file(file_path: str, domain: str = "general") -> bool:
+    """Simplified PDF ingestion function for external use"""
+    ingestor = get_ingestor()
+    return ingestor.ingest_file(Path(file_path))
+
+
 def run_cli():
     print("\n=== Kalki Document Ingest CLI ===")
     print("Drag & drop files or folders here, then press Enter:")

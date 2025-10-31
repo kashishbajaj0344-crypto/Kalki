@@ -1,0 +1,47 @@
+{
+  "problem": "Test problem with memory",
+  "steps": [
+    {
+      "step_id": 0,
+      "step_type": "observation",
+      "content": "Problem: Test problem with memory",
+      "facts": [
+        "problem:Test problem with memory"
+      ],
+      "metadata": {},
+      "timestamp": "2025-10-30T21:01:05.529574"
+    },
+    {
+      "step_id": 1,
+      "step_type": "observation",
+      "content": "Extracted 1 initial facts",
+      "facts": [
+        "fact:test problem with memory"
+      ],
+      "metadata": {},
+      "timestamp": "2025-10-30T21:01:05.529580"
+    },
+    {
+      "step_id": 2,
+      "step_type": "conclusion",
+      "content": "Analysis complete. Derived 2 facts with 20.0% confidence in the reasoning chain.",
+      "facts": [],
+      "metadata": {},
+      "timestamp": "2025-10-30T21:01:05.529600"
+    }
+  ],
+  "conclusion": "Analysis complete. Derived 2 facts with 20.0% confidence in the reasoning chain.",
+  "metadata": {
+    "meta": {
+      "steps_taken": 3,
+      "facts_derived": 2,
+      "reasoning_mode": "forward",
+      "goal_achieved": null,
+      "confidence": 0.2,
+      "duration_seconds": 3e-05,
+      "llm_used": false
+    }
+  },
+  "started_at": "2025-10-30T21:01:05.529571",
+  "completed_at": "2025-10-30T21:01:05.529601"
+}

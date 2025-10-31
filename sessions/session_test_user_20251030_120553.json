@@ -1,0 +1,21 @@
+{
+  "session_id": "session_test_user_20251030_120553",
+  "user_id": "test_user",
+  "created_at": "2025-10-30T19:05:53.606839",
+  "updated_at": "2025-10-30T19:05:53.607296",
+  "metadata": {
+    "test_session": true,
+    "purpose": "memory_integration_test"
+  },
+  "context": [
+    {
+      "timestamp": "2025-10-30T19:05:53.607294",
+      "data": {
+        "phase": "testing",
+        "progress": "session_created"
+      }
+    }
+  ],
+  "state": "closed",
+  "closed_at": "2025-10-30T19:05:53.607408"
+}

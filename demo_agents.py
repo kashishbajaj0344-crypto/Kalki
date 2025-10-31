@@ -8,12 +8,12 @@ import logging
 # Suppress excessive logging for demo
 logging.basicConfig(level=logging.WARNING)
 
-from agents import AgentManager, EventBus
-from agents.base_agent import AgentCapability
-from agents.core import SearchAgent, PlannerAgent, ReasoningAgent, MemoryAgent
-from agents.cognitive import CreativeAgent, MetaHypothesisAgent, OptimizationAgent
-from agents.safety import EthicsAgent, RiskAssessmentAgent
-from agents.multimodal import VisionAgent, AudioAgent, SensorFusionAgent
+from modules.agents import AgentManager, EventBus
+from modules.agents.base_agent import AgentCapability
+from modules.agents.core import SearchAgent, PlannerAgent, ReasoningAgent, MemoryAgent
+from modules.agents.cognitive import CreativeAgent, MetaHypothesisAgent, OptimizationAgent
+from modules.agents.safety import EthicsAgent, RiskAssessmentAgent
+from modules.agents.multimodal import VisionAgent, AudioAgent, SensorFusionAgent
 
 
 async def demo():

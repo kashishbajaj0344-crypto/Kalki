@@ -1,0 +1,9 @@
+{
+  "memory_id": "episodic_20251030_120501_484164",
+  "timestamp": "2025-10-30T19:05:01.484173",
+  "event": {
+    "type": "test",
+    "description": "test event"
+  },
+  "type": "episodic"
+}

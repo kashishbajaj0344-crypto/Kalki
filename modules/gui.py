@@ -6,7 +6,7 @@ Simple GUI for Kalki Phase 1 using Tkinter.
 import tkinter as tk
 from tkinter import scrolledtext
 from modules.llm import LLMEngine
-from modules.ingest import Ingestor
+from modules.ingest import DocumentIngestor
 import logging
 
 logger = logging.getLogger(__name__)
@@ -19,7 +19,7 @@ class KalkiGUI:
 
         # LLM Engine
         self.llm = LLMEngine()
-        self.ingestor = Ingestor()
+        self.ingestor = DocumentIngestor()
 
         # Query input
         self.input_label = tk.Label(self.root, text="Enter query:")
@@ -46,7 +46,7 @@ class KalkiGUI:
             self.output_text.insert(tk.END, response)
 
     def run_ingest(self):
-        self.ingestor.ingest_pdfs()
+        self.ingestor.ingest_all()
         self.output_text.delete(1.0, tk.END)
         self.output_text.insert(tk.END, "PDF ingestion completed.")
 

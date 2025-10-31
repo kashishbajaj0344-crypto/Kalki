@@ -1,0 +1,14 @@
+{
+  "memory_id": "episodic_20251030_184409_830331",
+  "timestamp": "2025-10-31T01:44:09.830337",
+  "event": {
+    "event_type": "idea_created",
+    "idea_id": "idea_20251030_184409_830315",
+    "domain": "technology",
+    "confidence": 0.9382029525064268,
+    "backend": "rule_based",
+    "session_id": "session_1761875049",
+    "timestamp": "2025-10-30T18:44:09.830324"
+  },
+  "type": "episodic"
+}

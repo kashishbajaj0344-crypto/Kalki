@@ -19,8 +19,8 @@ class ReasoningAgent(BaseAgent):
 
     async def initialize(self) -> bool:
         try:
-            from modules import llm
-            self.llm = llm
+            from modules.llm import LLMEngine
+            self.llm_engine = LLMEngine()
             self.logger.info(f"{self.name} initialized successfully")
             return True
         except Exception as e:
@@ -42,7 +42,7 @@ class ReasoningAgent(BaseAgent):
             steps = params.get("steps", 1)
             
             # Use LLM for reasoning
-            answer = self.llm.ask_kalki(query)
+            answer = self.llm_engine.rag_query(query)
             
             return {
                 "status": "success",

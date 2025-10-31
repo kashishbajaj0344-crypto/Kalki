@@ -1,0 +1,13 @@
+{
+  "memory_id": "episodic_20251030_120553_607488",
+  "timestamp": "2025-10-30T19:05:53.607494",
+  "event": {
+    "type": "test_event",
+    "description": "Testing episodic memory storage",
+    "test_data": {
+      "key": "value",
+      "number": 42
+    }
+  },
+  "type": "episodic"
+}

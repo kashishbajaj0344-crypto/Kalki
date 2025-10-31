@@ -3,7 +3,6 @@ KALKI v2.3 — Config Module v1.5
 ------------------------------------------------------------
 Central configuration manager for all Kalki modules.
 - Loads .env with override support (dotenv)
-- Keyring secrets fallback (OPENAI_API_KEY)
 - Ensures all core directories exist, dynamic path helpers
 - Exposes runtime CONFIG dict for all modules
 - Registers module versions globally for traceability
@@ -26,6 +25,10 @@ except ImportError:
 __version__ = "KALKI v2.3 — config.py v1.5"
 CONFIG_SCHEMA_VERSION = "1.0.0"
 
+# Config signature for integrity checking
+import hashlib
+CONFIG_SIGNATURE = hashlib.md5(str(__version__ + CONFIG_SCHEMA_VERSION).encode()).hexdigest()[:8]
+
 # -------------------------------
 # Project root and directories
 # -------------------------------
@@ -42,6 +45,17 @@ SESSION_FILE = DATA_DIR / "session.json"
 
 for p in (DATA_DIR, LOG_DIR, VECTOR_DB_DIR, PDF_DIR, INGEST_DIR):
     p.mkdir(parents=True, exist_ok=True)
+
+# Directory mapping for easy access
+DIRS = {
+    "root": str(ROOT),
+    "data": str(DATA_DIR),
+    "vector_db": str(VECTOR_DB_DIR),
+    "logs": str(LOG_DIR),
+    "pdfs": str(PDF_DIR),
+    "ingested": str(INGEST_DIR),
+    "session": str(SESSION_FILE)
+}
 
 # -------------------------------
 # Dynamic log file naming (Phase 2)
@@ -69,23 +83,9 @@ CONFIG: Dict[str, Any] = {
     "log_path": str(LOG_PATH),
     "ingest_dir": str(INGEST_DIR),
     "session_file": str(SESSION_FILE),
-    "OPENAI_API_KEY": _get_env("OPENAI_API_KEY"),
     "LOG_LEVEL": _get_env("LOG_LEVEL", "INFO"),
     "KALKI_ENV": _get_env("KALKI_ENV", "development"),
-    "KALKI_KEYRING_SERVICE": _get_env("KALKI_KEYRING_SERVICE", "kalki_v2"),
 }
-
-# -------------------------------
-# Keyring Fallback for Secrets
-# -------------------------------
-try:
-    import keyring
-    if not CONFIG["OPENAI_API_KEY"]:
-        secret = keyring.get_password(CONFIG["KALKI_KEYRING_SERVICE"], "OPENAI_API_KEY")
-        if secret:
-            CONFIG["OPENAI_API_KEY"] = secret
-except Exception:
-    print("[Kalki.Config] keyring fallback failed.")
 
 # -------------------------------
 # Version Registry (audit/trace)
@@ -157,7 +157,6 @@ def validate_config() -> None:
         ("vector_db_dir", VECTOR_DB_DIR),
         ("pdf_dir", PDF_DIR),
         ("ingest_dir", INGEST_DIR),
-        ("OPENAI_API_KEY", CONFIG["OPENAI_API_KEY"]),
     ]
     for key, val in required:
         if not val or (isinstance(val, Path) and not val.exists()):

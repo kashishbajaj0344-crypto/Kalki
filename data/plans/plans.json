@@ -1,0 +1,516 @@
+{
+  "plans": {
+    "plan_20251030_125029": {
+      "id": "plan_20251030_125029",
+      "description": "Ingest PDF documents and build a searchable knowledge base",
+      "reasoning": "Task classified as: data_ingestion with low complexity. Key components identified: data_processing. Resource requirements: memory_buffering, cpu_processing, file_io. Task dependencies: input_validation. Execution strategy: simple_sequential_execution",
+      "subtasks": [
+        {
+          "id": "validate_input",
+          "description": "Validate input files and data formats",
+          "action": "validate",
+          "dependencies": [],
+          "priority": "high",
+          "estimated_duration": 6,
+          "resource_requirements": {
+            "cpu_cores": 1,
+            "memory_gb": 0.5
+          }
+        },
+        {
+          "id": "prepare_processing",
+          "description": "Set up processing environment and resources",
+          "action": "prepare",
+          "dependencies": [
+            "validate_input"
+          ],
+          "priority": "medium",
+          "estimated_duration": 10,
+          "resource_requirements": {
+            "cpu_cores": 1,
+            "memory_gb": 1.0
+          }
+        },
+        {
+          "id": "extract_content",
+          "description": "Extract content from input files",
+          "action": "extract",
+          "dependencies": [
+            "prepare_processing"
+          ],
+          "priority": "high",
+          "estimated_duration": 36,
+          "resource_requirements": {
+            "cpu_cores": 2,
+            "memory_gb": 2.0
+          }
+        },
+        {
+          "id": "process_metadata",
+          "description": "Process and store metadata",
+          "action": "process_metadata",
+          "dependencies": [
+            "extract_content"
+          ],
+          "priority": "medium",
+          "estimated_duration": 15,
+          "resource_requirements": {
+            "cpu_cores": 1,
+            "memory_gb": 1.0
+          }
+        },
+        {
+          "id": "generate_embeddings",
+          "description": "Generate vector embeddings for search",
+          "action": "embed",
+          "dependencies": [
+            "extract_content"
+          ],
+          "priority": "medium",
+          "estimated_duration": 45,
+          "resource_requirements": {
+            "cpu_cores": 4,
+            "memory_gb": 4.0
+          }
+        },
+        {
+          "id": "store_results",
+          "description": "Store processed data and update indices",
+          "action": "store",
+          "dependencies": [
+            "process_metadata",
+            "generate_embeddings"
+          ],
+          "priority": "high",
+          "estimated_duration": 24,
+          "resource_requirements": {
+            "cpu_cores": 2,
+            "memory_gb": 1.5
+          }
+        },
+        {
+          "id": "verify_ingestion",
+          "description": "Verify successful ingestion and data integrity",
+          "action": "verify",
+          "dependencies": [
+            "store_results"
+          ],
+          "priority": "medium",
+          "estimated_duration": 10,
+          "resource_requirements": {
+            "cpu_cores": 1,
+            "memory_gb": 0.5
+          }
+        }
+      ],
+      "dependencies": {
+        "graph": {
+          "validate_input": {
+            "depends_on": [],
+            "depended_by": [
+              "prepare_processing"
+            ]
+          },
+          "prepare_processing": {
+            "depends_on": [
+              "validate_input"
+            ],
+            "depended_by": [
+              "extract_content"
+            ]
+          },
+          "extract_content": {
+            "depends_on": [
+              "prepare_processing"
+            ],
+            "depended_by": [
+              "process_metadata",
+              "generate_embeddings"
+            ]
+          },
+          "process_metadata": {
+            "depends_on": [
+              "extract_content"
+            ],
+            "depended_by": [
+              "store_results"
+            ]
+          },
+          "generate_embeddings": {
+            "depends_on": [
+              "extract_content"
+            ],
+            "depended_by": [
+              "store_results"
+            ]
+          },
+          "store_results": {
+            "depends_on": [
+              "process_metadata",
+              "generate_embeddings"
+            ],
+            "depended_by": [
+              "verify_ingestion"
+            ]
+          },
+          "verify_ingestion": {
+            "depends_on": [
+              "store_results"
+            ],
+            "depended_by": []
+          }
+        },
+        "cycles_detected": false,
+        "cycle_nodes": [],
+        "execution_order": [
+          "verify_ingestion",
+          "store_results",
+          "generate_embeddings",
+          "process_metadata",
+          "extract_content",
+          "prepare_processing",
+          "validate_input"
+        ],
+        "parallel_groups": [
+          [
+            "validate_input",
+            "extract_content",
+            "store_results"
+          ],
+          [
+            "prepare_processing",
+            "process_metadata",
+            "generate_embeddings",
+            "verify_ingestion"
+          ]
+        ]
+      },
+      "resource_requirements": {
+        "cpu_cores": 12,
+        "memory_gb": 10.5,
+        "max_concurrent_cpu": 7,
+        "max_concurrent_memory": 6.5,
+        "estimated_cost": 0.08100000000000002
+      },
+      "estimated_duration": 146,
+      "priority": "normal",
+      "created_at": "2025-10-30T12:50:29.429658",
+      "status": "created"
+    },
+    "plan_20251030_125030": {
+      "id": "plan_20251030_125030",
+      "description": "Process documents and answer questions",
+      "reasoning": "Task classified as: general_task with low complexity. Key components identified: data_processing. Resource requirements: standard_resources. Task dependencies: input_validation. Execution strategy: simple_sequential_execution",
+      "subtasks": [
+        {
+          "id": "analyze_task",
+          "description": "Analyze task requirements and constraints",
+          "action": "analyze",
+          "dependencies": [],
+          "priority": "high",
+          "estimated_duration": 48,
+          "resource_requirements": {
+            "cpu_cores": 4,
+            "memory_gb": 4.0
+          }
+        },
+        {
+          "id": "prepare_resources",
+          "description": "Prepare necessary resources and environment",
+          "action": "prepare",
+          "dependencies": [
+            "analyze_task"
+          ],
+          "priority": "medium",
+          "estimated_duration": 10,
+          "resource_requirements": {
+            "cpu_cores": 1,
+            "memory_gb": 1.0
+          }
+        },
+        {
+          "id": "execute_task",
+          "description": "Execute main task: Process documents and answer questions",
+          "action": "execute",
+          "dependencies": [
+            "prepare_resources"
+          ],
+          "priority": "high",
+          "estimated_duration": 36,
+          "resource_requirements": {
+            "cpu_cores": 1,
+            "memory_gb": 1.0
+          }
+        },
+        {
+          "id": "validate_results",
+          "description": "Validate task execution results",
+          "action": "validate",
+          "dependencies": [
+            "execute_task"
+          ],
+          "priority": "medium",
+          "estimated_duration": 5,
+          "resource_requirements": {
+            "cpu_cores": 1,
+            "memory_gb": 0.5
+          }
+        },
+        {
+          "id": "cleanup_resources",
+          "description": "Clean up resources and temporary data",
+          "action": "cleanup",
+          "dependencies": [
+            "validate_results"
+          ],
+          "priority": "low",
+          "estimated_duration": 5,
+          "resource_requirements": {
+            "cpu_cores": 1,
+            "memory_gb": 0.5
+          }
+        }
+      ],
+      "dependencies": {
+        "graph": {
+          "analyze_task": {
+            "depends_on": [],
+            "depended_by": [
+              "prepare_resources"
+            ]
+          },
+          "prepare_resources": {
+            "depends_on": [
+              "analyze_task"
+            ],
+            "depended_by": [
+              "execute_task"
+            ]
+          },
+          "execute_task": {
+            "depends_on": [
+              "prepare_resources"
+            ],
+            "depended_by": [
+              "validate_results"
+            ]
+          },
+          "validate_results": {
+            "depends_on": [
+              "execute_task"
+            ],
+            "depended_by": [
+              "cleanup_resources"
+            ]
+          },
+          "cleanup_resources": {
+            "depends_on": [
+              "validate_results"
+            ],
+            "depended_by": []
+          }
+        },
+        "cycles_detected": false,
+        "cycle_nodes": [],
+        "execution_order": [
+          "cleanup_resources",
+          "validate_results",
+          "execute_task",
+          "prepare_resources",
+          "analyze_task"
+        ],
+        "parallel_groups": [
+          [
+            "analyze_task",
+            "execute_task",
+            "cleanup_resources"
+          ],
+          [
+            "prepare_resources",
+            "validate_results"
+          ]
+        ]
+      },
+      "resource_requirements": {
+        "cpu_cores": 8,
+        "memory_gb": 7.0,
+        "max_concurrent_cpu": 6,
+        "max_concurrent_memory": 5.5,
+        "estimated_cost": 0.054000000000000006
+      },
+      "estimated_duration": 104,
+      "priority": "normal",
+      "created_at": "2025-10-30T12:50:30.066029",
+      "status": "created"
+    },
+    "plan_20251030_125043": {
+      "id": "plan_20251030_125043",
+      "description": "Process documents and answer questions",
+      "reasoning": "Task classified as: general_task with low complexity. Key components identified: data_processing. Resource requirements: standard_resources. Task dependencies: input_validation. Execution strategy: simple_sequential_execution",
+      "subtasks": [
+        {
+          "id": "analyze_task",
+          "description": "Analyze task requirements and constraints",
+          "action": "analyze",
+          "dependencies": [],
+          "priority": "high",
+          "estimated_duration": 48,
+          "resource_requirements": {
+            "cpu_cores": 4,
+            "memory_gb": 4.0
+          }
+        },
+        {
+          "id": "prepare_resources",
+          "description": "Prepare necessary resources and environment",
+          "action": "prepare",
+          "dependencies": [
+            "analyze_task"
+          ],
+          "priority": "medium",
+          "estimated_duration": 10,
+          "resource_requirements": {
+            "cpu_cores": 1,
+            "memory_gb": 1.0
+          }
+        },
+        {
+          "id": "execute_task",
+          "description": "Execute main task: Process documents and answer questions",
+          "action": "execute",
+          "dependencies": [
+            "prepare_resources"
+          ],
+          "priority": "high",
+          "estimated_duration": 36,
+          "resource_requirements": {
+            "cpu_cores": 1,
+            "memory_gb": 1.0
+          }
+        },
+        {
+          "id": "validate_results",
+          "description": "Validate task execution results",
+          "action": "validate",
+          "dependencies": [
+            "execute_task"
+          ],
+          "priority": "medium",
+          "estimated_duration": 5,
+          "resource_requirements": {
+            "cpu_cores": 1,
+            "memory_gb": 0.5
+          }
+        },
+        {
+          "id": "cleanup_resources",
+          "description": "Clean up resources and temporary data",
+          "action": "cleanup",
+          "dependencies": [
+            "validate_results"
+          ],
+          "priority": "low",
+          "estimated_duration": 5,
+          "resource_requirements": {
+            "cpu_cores": 1,
+            "memory_gb": 0.5
+          }
+        }
+      ],
+      "dependencies": {
+        "graph": {
+          "analyze_task": {
+            "depends_on": [],
+            "depended_by": [
+              "prepare_resources"
+            ]
+          },
+          "prepare_resources": {
+            "depends_on": [
+              "analyze_task"
+            ],
+            "depended_by": [
+              "execute_task"
+            ]
+          },
+          "execute_task": {
+            "depends_on": [
+              "prepare_resources"
+            ],
+            "depended_by": [
+              "validate_results"
+            ]
+          },
+          "validate_results": {
+            "depends_on": [
+              "execute_task"
+            ],
+            "depended_by": [
+              "cleanup_resources"
+            ]
+          },
+          "cleanup_resources": {
+            "depends_on": [
+              "validate_results"
+            ],
+            "depended_by": []
+          }
+        },
+        "cycles_detected": false,
+        "cycle_nodes": [],
+        "execution_order": [
+          "cleanup_resources",
+          "validate_results",
+          "execute_task",
+          "prepare_resources",
+          "analyze_task"
+        ],
+        "parallel_groups": [
+          [
+            "analyze_task",
+            "execute_task",
+            "cleanup_resources"
+          ],
+          [
+            "prepare_resources",
+            "validate_results"
+          ]
+        ]
+      },
+      "resource_requirements": {
+        "cpu_cores": 8,
+        "memory_gb": 7.0,
+        "max_concurrent_cpu": 6,
+        "max_concurrent_memory": 5.5,
+        "estimated_cost": 0.054000000000000006
+      },
+      "estimated_duration": 104,
+      "priority": "normal",
+      "created_at": "2025-10-30T12:50:43.909840",
+      "status": "created"
+    }
+  },
+  "history": [
+    {
+      "plan_id": "plan_20251030_125029",
+      "action": "created",
+      "timestamp": "2025-10-30T12:50:29.429732"
+    },
+    {
+      "plan_id": "plan_20251030_125030",
+      "action": "created",
+      "timestamp": "2025-10-30T12:50:30.066127"
+    },
+    {
+      "plan_id": "plan_20251030_125043",
+      "action": "created",
+      "timestamp": "2025-10-30T12:50:43.272763"
+    },
+    {
+      "plan_id": "plan_20251030_125043",
+      "action": "created",
+      "timestamp": "2025-10-30T12:50:43.909956"
+    }
+  ],
+  "last_updated": "2025-10-30T12:50:43.909964"
+}
