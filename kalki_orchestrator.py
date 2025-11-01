@@ -34,6 +34,8 @@ from modules.vectordb import VectorDBManager
 from modules.metrics.collector import MetricsCollector
 from modules.robustness import RobustnessManager
 from modules.session import Session
+from modules.meta_core import get_meta_core, TaskResult
+from modules.self_model_manager import get_self_model_manager
 
 # Kalki v2.4 — kalki_orchestrator.py v2.4.0
 
@@ -50,6 +52,8 @@ class KalkiOrchestrator:
         self.metrics: Optional[MetricsCollector] = None
         self.robustness: Optional[RobustnessManager] = None
         self.session_manager: Optional[Session] = None
+        self.meta_core = None  # Will be initialized asynchronously
+        self.self_model_manager = None  # Will be initialized asynchronously
         self.running = False
 
     async def initialize_core_systems(self) -> bool:
@@ -92,10 +96,18 @@ class KalkiOrchestrator:
             await self.robustness.initialize()
             logger.info("✅ Robustness monitoring initialized")
 
+            # 8. Meta-core (self-modeling and meta-cognition)
+            self.meta_core = await get_meta_core()
+            logger.info("✅ Meta-core initialized")
+
+            # 9. Self-model manager
+            self.self_model_manager = await get_self_model_manager()
+            logger.info("✅ Self-model manager initialized")
+
             # Publish system ready event
             await self.eventbus.publish_async("system.orchestrator.ready", {
                 "version": "2.4.0",
-                "components": ["eventbus", "metrics", "vectordb", "llm", "agents", "robustness"]
+                "components": ["eventbus", "metrics", "vectordb", "llm", "agents", "robustness", "meta_core", "self_model"]
             })
 
             logger.info("🎉 All core systems initialized successfully")
