@@ -16,10 +16,10 @@ import asyncio
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Callable
 
-from modules.logger import get_logger
-from modules.config import CONFIG, register_module_version
+from modules.utils.logger import get_logger
+from modules.utils.config import CONFIG, register_module_version
 from modules.ingest import DocumentIngestor
-from modules.vectordb import VectorDBManager
+from modules.learning.vectordb import VectorDBManager
 
 try:
     from modules.ocr import extract_text_file as ocr_extract_text

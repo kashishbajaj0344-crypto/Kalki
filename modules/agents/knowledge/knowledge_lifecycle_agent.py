@@ -36,7 +36,11 @@ try:
 except ImportError:
     JSONSCHEMA_AVAILABLE = False
 
-from ..base_agent import BaseAgent
+from ..base_agent import BaseAgent, AgentCapability
+
+def now_ts() -> str:
+    """Return current timestamp in ISO format"""
+    return datetime.utcnow().isoformat() + 'Z'
 
 
 class KnowledgeLifecycleAgent(BaseAgent):
@@ -71,7 +75,12 @@ class KnowledgeLifecycleAgent(BaseAgent):
     }
 
     def __init__(self, config: Optional[Dict[str, Any]] = None):
-        super().__init__(name="KnowledgeLifecycleAgent", config=config)
+        super().__init__(
+            name="KnowledgeLifecycleAgent",
+            capabilities=[AgentCapability.LIFECYCLE_MANAGEMENT, AgentCapability.VALIDATION],
+            description="Manages knowledge versioning, archival, and lifecycle with integrity",
+            config=config
+        )
 
         # Directory structure
         self.knowledge_dir = Path.home() / "Desktop" / "Kalki" / "vector_db" / "knowledge_lifecycle"
@@ -520,3 +529,13 @@ class KnowledgeLifecycleAgent(BaseAgent):
 
         except Exception as e:
             self.logger.exception(f"Failed to archive specific versions for {knowledge_id}: {e}")
+
+    async def shutdown(self) -> None:
+        """Gracefully shutdown the knowledge lifecycle agent."""
+        try:
+            self.logger.info("Shutting down KnowledgeLifecycleAgent")
+            # Save any pending changes to index
+            await self._sync_index()
+            self.logger.info("KnowledgeLifecycleAgent shutdown complete")
+        except Exception as e:
+            self.logger.exception(f"Error during KnowledgeLifecycleAgent shutdown: {e}")

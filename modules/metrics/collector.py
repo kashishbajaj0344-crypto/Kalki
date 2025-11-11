@@ -399,6 +399,62 @@ class MetricsCollector:
             logger.error(f"Failed to save metrics to memory: {e}")
             return False
 
+    async def record_task_metrics(self, task_id: str, agent_id: str, task_type: str,
+                                success: bool, latency: float, tokens_in: int = 0,
+                                tokens_out: int = 0, context_switches: int = 0,
+                                attention_weight: float = 0.0, error: Optional[str] = None,
+                                metadata: Optional[Dict[str, Any]] = None) -> None:
+        """
+        Asynchronously record comprehensive task metrics.
+
+        Args:
+            task_id: Unique task identifier
+            agent_id: Agent that executed the task
+            task_type: Type/category of task
+            success: Whether the task succeeded
+            latency: Task execution time in seconds
+            tokens_in: Input tokens used
+            tokens_out: Output tokens generated
+            context_switches: Number of context switches
+            attention_weight: Attention weight metric
+            error: Optional error message
+            metadata: Additional metadata
+        """
+        try:
+            # Create task metrics entry
+            start_time = datetime.now() - timedelta(seconds=latency)  # Approximate start time
+            end_time = datetime.now()
+
+            metrics = TaskMetrics(
+                task_id=task_id,
+                agent_id=agent_id,
+                task_type=task_type,
+                start_time=start_time,
+                end_time=end_time,
+                latency=latency,
+                success=success,
+                tokens_in=tokens_in,
+                tokens_out=tokens_out,
+                context_switches=context_switches,
+                attention_weight=attention_weight,
+                metadata=metadata or {}
+            )
+
+            if error:
+                metrics.errors.append(error)
+
+            # Store metrics
+            self.task_metrics[task_id] = metrics
+
+            # Update memory lookup count if available
+            if task_id in self.memory_lookup_count:
+                metrics.memory_lookups = self.memory_lookup_count[task_id]
+
+            logger.debug(f"Recorded metrics for task {task_id}: success={success}, latency={latency:.2f}s")
+
+        except Exception as e:
+            logger.error(f"Failed to record task metrics for {task_id}: {e}")
+
     def run_ci_checks(self) -> Dict[str, Any]:
         """
         Run CI/regression checks against thresholds.

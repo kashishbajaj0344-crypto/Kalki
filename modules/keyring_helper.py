@@ -4,7 +4,7 @@ Handles secure storage and retrieval of API keys using keyring.
 """
 
 import keyring
-from modules.config import OPENAI_API_KEY
+from modules.utils.config import OPENAI_API_KEY
 
 SERVICE_NAME = "KalkiAI"
 

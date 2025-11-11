@@ -17,3 +17,6 @@ Also includes AgentOrchestrator: a dependency-aware orchestrator with:
 
 from .vision import VisionAgent
 from .audio import AudioAgent
+from .sensor_fusion import SensorFusionAgent
+from .ar_insight import ARInsightAgent
+from .orchestrator import AgentOrchestrator

@@ -48,7 +48,7 @@ except ImportError:
     PositiveFloat = float
     NonNegativeFloat = float
 
-from modules.logging_config import get_logger
+from modules.utils.logging_config import get_logger
 from ..base_agent import BaseAgent, AgentCapability, AgentStatus
 from ..knowledge.rollback_manager import RollbackManager
 
@@ -906,43 +906,140 @@ class OptimizationBackend(SimulationBackend):
             return False
     
     async def execute_simulation(self, scenario: "SimulationScenario", parameters: Dict[str, Any]) -> Dict[str, Any]:
-        """Execute optimization"""
-        # Placeholder for optimization logic
-        # Would parse scenario constraints and objective function
-        
-        model = self.scip.Model("OptimizationProblem")
-        
-        # Add variables (placeholder)
-        x = model.addVar("x", vtype="C")
-        y = model.addVar("y", vtype="C")
-        
-        # Add constraints (placeholder)
-        model.addCons(x + y <= 10)
-        model.addCons(x >= 0)
-        model.addCons(y >= 0)
-        
-        # Set objective
-        model.setObjective(x + 2*y, sense="maximize")
-        
-        # Solve
-        model.optimize()
-        
-        if model.getStatus() == "optimal":
+        """Execute optimization using real problem formulation"""
+        try:
+            # Parse optimization problem from scenario
+            problem = self._parse_optimization_problem(scenario, parameters)
+
+            # Create optimization model
+            model = self.scip.Model(f"Optimization_{scenario.scenario_id}")
+
+            # Add variables based on problem definition
+            variables = {}
+            for var_name, var_config in problem.get("variables", {}).items():
+                var_type = var_config.get("type", "C")  # C=continuous, I=integer, B=binary
+                lb = var_config.get("lb", None)  # lower bound
+                ub = var_config.get("ub", None)  # upper bound
+
+                variables[var_name] = model.addVar(var_name, vtype=var_type, lb=lb, ub=ub)
+
+            # Add constraints
+            for constraint_name, constraint_config in problem.get("constraints", {}).items():
+                expr_parts = []
+                for term in constraint_config.get("terms", []):
+                    coeff = term.get("coefficient", 1.0)
+                    var_name = term.get("variable")
+                    if var_name in variables:
+                        expr_parts.append(coeff * variables[var_name])
+
+                if expr_parts:
+                    lhs = sum(expr_parts[1:], expr_parts[0]) if len(expr_parts) > 1 else expr_parts[0]
+                    sense = constraint_config.get("sense", "<=")  # <=, >=, ==
+                    rhs = constraint_config.get("rhs", 0.0)
+
+                    if sense == "<=":
+                        model.addCons(lhs <= rhs, name=constraint_name)
+                    elif sense == ">=":
+                        model.addCons(lhs >= rhs, name=constraint_name)
+                    elif sense == "==":
+                        model.addCons(lhs == rhs, name=constraint_name)
+
+            # Set objective function
+            obj_config = problem.get("objective", {})
+            obj_terms = []
+            for term in obj_config.get("terms", []):
+                coeff = term.get("coefficient", 1.0)
+                var_name = term.get("variable")
+                if var_name in variables:
+                    obj_terms.append(coeff * variables[var_name])
+
+            if obj_terms:
+                objective = sum(obj_terms[1:], obj_terms[0]) if len(obj_terms) > 1 else obj_terms[0]
+                sense = obj_config.get("sense", "minimize")
+                model.setObjective(objective, sense=sense)
+
+            # Solve the optimization problem
+            model.optimize()
+
+            # Extract results
+            status = model.getStatus()
+            if status == "optimal":
+                solution = {}
+                for var_name, var in variables.items():
+                    solution[var_name] = model.getVal(var)
+
+                return {
+                    "method": "optimization",
+                    "status": "optimal",
+                    "objective_value": model.getObjVal(),
+                    "solution": solution,
+                    "solve_time": model.getSolvingTime(),
+                    "gap": model.getGap() if hasattr(model, 'getGap') else None
+                }
+            else:
+                return {
+                    "method": "optimization",
+                    "status": status,
+                    "error": f"Optimization failed with status: {status}"
+                }
+
+        except Exception as e:
+            self.logger.error(f"Optimization execution failed: {e}")
             return {
                 "method": "optimization",
-                "status": "optimal",
-                "objective_value": model.getObjVal(),
-                "solution": {
-                    "x": model.getVal(x),
-                    "y": model.getVal(y)
+                "status": "error",
+                "error": str(e)
+            }
+
+    def _parse_optimization_problem(self, scenario: "SimulationScenario", parameters: Dict[str, Any]) -> Dict[str, Any]:
+        """Parse optimization problem from scenario and parameters"""
+        # Extract problem definition from scenario description and parameters
+        problem = {
+            "variables": {},
+            "constraints": {},
+            "objective": {}
+        }
+
+        # Default optimization problem if no specific definition provided
+        if not parameters.get("optimization_problem"):
+            # Simple resource allocation problem
+            problem["variables"] = {
+                "x": {"type": "C", "lb": 0, "ub": None},  # Resource 1 allocation
+                "y": {"type": "C", "lb": 0, "ub": None}   # Resource 2 allocation
+            }
+            problem["constraints"] = {
+                "budget": {
+                    "terms": [
+                        {"coefficient": 2.0, "variable": "x"},
+                        {"coefficient": 3.0, "variable": "y"}
+                    ],
+                    "sense": "<=",
+                    "rhs": 100.0
+                },
+                "demand": {
+                    "terms": [
+                        {"coefficient": 1.0, "variable": "x"},
+                        {"coefficient": 1.0, "variable": "y"}
+                    ],
+                    "sense": ">=",
+                    "rhs": 20.0
                 }
             }
-        else:
-            return {
-                "method": "optimization",
-                "status": model.getStatus(),
-                "error": "Optimization failed to find optimal solution"
+            problem["objective"] = {
+                "terms": [
+                    {"coefficient": 5.0, "variable": "x"},
+                    {"coefficient": 4.0, "variable": "y"}
+                ],
+                "sense": "maximize"
             }
+        else:
+            # Parse custom optimization problem from parameters
+            opt_problem = parameters["optimization_problem"]
+            problem["variables"] = opt_problem.get("variables", problem["variables"])
+            problem["constraints"] = opt_problem.get("constraints", problem["constraints"])
+            problem["objective"] = opt_problem.get("objective", problem["objective"])
+
+        return problem
 
 
 class BackendManager:

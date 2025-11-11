@@ -18,7 +18,7 @@ from pathlib import Path
 import mimetypes
 from typing import Optional, Dict, Any, List, Callable, Union
 from collections import Counter
-from modules.logging_config import get_logger
+from modules.utils.logging_config import get_logger
 from modules.utils import safe_execution, compute_sha256
 from modules.metadata import extract_text_metadata
 

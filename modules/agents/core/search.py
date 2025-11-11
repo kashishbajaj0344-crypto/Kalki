@@ -2,7 +2,7 @@ from typing import Dict, Any
 import logging
 
 from ..base_agent import BaseAgent, AgentCapability, AgentStatus
-from modules.vectordb import VectorDBManager
+from modules.learning.vectordb import VectorDBManager
 
 
 class SearchAgent(BaseAgent):
@@ -32,7 +32,11 @@ class SearchAgent(BaseAgent):
         params = task.get("params", {})
 
         if action == "search":
-            return await self._search(params)
+            query = params.get("query") or task.get("query")
+            top_k = params.get("top_k") if isinstance(params, dict) else None
+            top_k = top_k if top_k is not None else task.get("top_k", 5)
+            composed_params = {"query": query or "", "top_k": top_k}
+            return await self._search(composed_params)
         else:
             return {
                 "status": "error",

@@ -17,7 +17,7 @@ import numpy as np
 from sklearn.ensemble import IsolationForest
 from pathlib import Path
 
-from modules.logging_config import get_logger
+from modules.utils.logging_config import get_logger
 from ..base_agent import BaseAgent, AgentCapability, AgentStatus
 from ..knowledge.rollback_manager import RollbackManager
 

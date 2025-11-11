@@ -6,16 +6,16 @@ import asyncio
 import logging
 import sys
 from typing import Dict, Any
-from agents import AgentManager, EventBus
-from agents.base_agent import AgentCapability
-from agents.core import (
+from modules.agents import AgentManager, EventBus
+from modules.agents.base_agent import AgentCapability
+from modules.agents.core import (
     DocumentIngestAgent,
     SearchAgent,
     PlannerAgent,
     ReasoningAgent,
     MemoryAgent
 )
-from agents.cognitive import (
+from modules.agents.cognitive import (
     MetaHypothesisAgent,
     CreativeAgent,
     FeedbackAgent,

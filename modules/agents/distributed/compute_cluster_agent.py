@@ -36,7 +36,7 @@ try:
 except ImportError:
     SKLEARN_AVAILABLE = False
 
-from modules.logging_config import get_logger
+from modules.utils.logging_config import get_logger
 from ..base_agent import BaseAgent, AgentCapability, AgentStatus
 from .load_balancing import LoadBalancingAgent, ServerInstance
 from .self_healing import SelfHealingAgent
@@ -1061,3 +1061,12 @@ class ComputeClusterAgent(BaseAgent):
         """Clean up expired tasks."""
         # Would implement cleanup logic
         pass
+    async def shutdown(self) -> None:
+        """Gracefully shutdown the compute cluster agent."""
+        try:
+            logger.info("Shutting down ComputeClusterAgent")
+            await self._save_cluster_state()
+            logger.info("ComputeClusterAgent shutdown complete")
+        except Exception as e:
+            logger.exception(f"Error during ComputeClusterAgent shutdown: {e}")
+

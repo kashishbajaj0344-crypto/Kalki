@@ -19,7 +19,7 @@ from dataclasses import dataclass
 from collections import defaultdict, deque
 import numpy as np
 
-from modules.logging_config import get_logger
+from modules.utils.logging_config import get_logger
 from ..base_agent import BaseAgent, AgentCapability, AgentStatus
 
 logger = get_logger("Kalki.LoadBalancing")
@@ -92,6 +92,10 @@ class LoadBalancingAgent(BaseAgent):
         self.node_reputation_scores = defaultdict(lambda: 1.0)
         self.task_similarity_cache = {}
         self.performance_history = deque(maxlen=1000)
+
+        # Request tracking
+        self.request_history: List[Dict[str, Any]] = []
+        self.server_load_history: Dict[str, List[float]] = defaultdict(list)
 
         # Advanced ML-based task similarity system
         self.task_similarity_model = None

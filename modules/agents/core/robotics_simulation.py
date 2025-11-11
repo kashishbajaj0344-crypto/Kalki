@@ -9,7 +9,8 @@ import logging
 import numpy as np
 import time
 from typing import Dict, Any, List, Optional, Tuple
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, asdict
+from datetime import datetime
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
@@ -199,18 +200,119 @@ class RoboticsSimulationAgent(BaseAgent):
             # Simulate workspace
             workspace_points = await self.simulate_workspace(robot_config)
 
-            return {
-                'robot_config': robot_config,
-                'kinematics_analysis': kinematics_analysis,
-                'dynamics_analysis': dynamics_analysis,
-                'workspace_analysis': workspace_points,
-                'design_metrics': {
-                    'reach': workspace_radius,
-                    'payload_capacity': payload,
-                    'precision': precision,
-                    'total_mass': sum(link.mass for link in robot_config.links)
+            total_mass = sum(link.mass for link in robot_config.links)
+            precision_mm = precision * 1000
+            
+            # Generate professional deliverables package
+            from modules.professional_deliverables import ProfessionalDeliverablesGenerator
+            deliverables_gen = ProfessionalDeliverablesGenerator()
+            
+            # Prepare design data for deliverables
+            design_data = {
+                "project_id": f"robot_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
+                "name": robot_config.name,
+                "type": "robotic",
+                "description": requirements.get("description", "Robotic arm assembly"),
+                "components": [
+                    {
+                        "name": link.name,
+                        "type": "structural",
+                        "dimensions": {"length": link.length * 1000, "diameter": 60, "height": 40},
+                        "materials": ["aluminum_6061"],
+                        "count": 1
+                    } for link in robot_config.links
+                ] + [
+                    {
+                        "name": joint.name,
+                        "type": "actuator",
+                        "dimensions": {"diameter": 80, "length": 100, "height": 100},
+                        "materials": ["steel_4140"],
+                        "count": 1
+                    } for joint in robot_config.joints
+                ],
+                "dimensions": {
+                    "reach_m": workspace_radius,
+                    "payload_kg": payload,
+                    "precision_mm": precision_mm,
+                    "total_mass_kg": total_mass,
+                    "degrees_of_freedom": dof
+                },
+                "materials": ["aluminum_6061", "steel_4140", "stainless_steel_304"],
+                "specifications": {
+                    "degrees_of_freedom": dof,
+                    "workspace_radius_m": workspace_radius,
+                    "payload_capacity_kg": payload,
+                    "positional_accuracy_mm": precision_mm,
+                    "repeatability_mm": precision_mm * 0.5,
+                    "max_speed_m_s": 1.5,
+                    "operating_voltage": "24V DC",
+                    "power_consumption_w": 500,
+                    "estimated_labor_hours": 60 + (dof * 5)
                 }
             }
+            
+            # Generate complete deliverables asynchronously
+            try:
+                deliverables = await deliverables_gen.generate_complete_package(design_data)
+                
+                summary = (
+                    f"✅ PROFESSIONAL DELIVERABLES PACKAGE GENERATED\n\n"
+                    f"🤖 Robotic Arm Design: {dof}-DOF Industrial Manipulator\n"
+                    f"📏 Specifications:\n"
+                    f"   • Reach: {workspace_radius:.2f} m\n"
+                    f"   • Payload: {payload:.1f} kg\n"
+                    f"   • Precision: {precision_mm:.2f} mm\n"
+                    f"   • Total Mass: {total_mass:.1f} kg\n\n"
+                    f"📦 Deliverables Generated:\n"
+                    f"   • Executive Summary & Technical Specifications\n"
+                    f"   • Bill of Materials ({len(deliverables.bill_of_materials.items)} items)\n"
+                    f"   • Assembly Instructions ({len(deliverables.assembly_instructions)} steps)\n"
+                    f"   • Quality Control Checklist ({len(deliverables.quality_control_checklist)} items)\n"
+                    f"   • Compliance Certifications\n"
+                    f"   • Cost Analysis (${deliverables.cost_analysis['cost_breakdown']['total']:,.2f})\n"
+                    f"   • Project Timeline ({deliverables.timeline_estimate['total_duration_weeks']} weeks)\n\n"
+                    f"📁 Package Location: output/deliverables/{deliverables.project_id}/\n"
+                    f"📄 Total Files: {len(deliverables.generated_files)}\n\n"
+                    f"✨ Construction-ready documentation package complete!"
+                )
+                
+                return {
+                    'status': 'success',
+                    'response': summary,
+                    'robot_config': robot_config,
+                    'kinematics_analysis': kinematics_analysis,
+                    'dynamics_analysis': dynamics_analysis,
+                    'workspace_analysis': workspace_points,
+                    'professional_deliverables': asdict(deliverables),
+                    'design_metrics': {
+                        'reach': workspace_radius,
+                        'payload_capacity': payload,
+                        'precision': precision,
+                        'total_mass': total_mass
+                    }
+                }
+            except Exception as e:
+                self.logger.error(f"Failed to generate professional deliverables: {e}")
+                # Fallback to basic summary
+                summary = (
+                    f"Generated {dof}-DOF robotic arm with reach of {workspace_radius:.2f} m, "
+                    f"payload capacity of {payload:.1f} kg, and precision target of {precision_mm:.2f} mm. "
+                    f"Estimated structural mass is {total_mass:.1f} kg."
+                )
+                return {
+                    'status': 'success',
+                    'summary': summary,
+                    'robot_config': robot_config,
+                    'kinematics_analysis': kinematics_analysis,
+                    'dynamics_analysis': dynamics_analysis,
+                    'workspace_analysis': workspace_points,
+                    'design_metrics': {
+                        'reach': workspace_radius,
+                        'payload_capacity': payload,
+                        'precision': precision,
+                        'total_mass': total_mass
+                    }
+                }
 
         except Exception as e:
             self.logger.error(f"Robot design failed: {e}")

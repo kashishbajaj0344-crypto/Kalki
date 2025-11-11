@@ -15,8 +15,8 @@ import os
 import asyncio
 from pathlib import Path
 from typing import List, Optional, Union
-from modules.config import register_module_version
-from modules.logger import get_logger
+from modules.utils.config import register_module_version
+from modules.utils.logger import get_logger
 
 __version__ = "KALKI v2.3 — ocr.py v1.5"
 register_module_version("ocr.py", __version__)

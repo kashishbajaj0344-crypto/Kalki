@@ -11,7 +11,7 @@ from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass
 from .base_agent import BaseAgent, AgentCapability, AgentStatus
 from .consciousness_agent import ConsciousnessAgent
-from modules.eventbus import EventBus
+from modules.utils.eventbus import EventBus
 
 # Optional psutil import for resource monitoring
 try:
@@ -150,6 +150,10 @@ class AgentManager:
 
         return resources
 
+    def _update_system_resources(self) -> None:
+        """Update system resources snapshot"""
+        self.system_resources = self._get_current_resources()
+
     def allocate_resources(self, agent_name: str, allocation: ResourceAllocation) -> bool:
         """
         Allocate resources for an agent
@@ -157,18 +161,29 @@ class AgentManager:
         Returns:
             True if allocation successful, False otherwise
         """
+        # Ensure system resources are initialized
+        if self.system_resources.memory_total_mb == 0:
+            self._update_system_resources()
+
         # Check if allocation would exceed system limits
         total_allocated_cpu = sum(a.cpu_cores for a in self.resource_allocations.values())
         total_allocated_memory = sum(a.memory_mb for a in self.resource_allocations.values())
 
-        if total_allocated_cpu + allocation.cpu_cores > psutil.cpu_count() if HAS_PSUTIL else 8:
+        # Be more permissive with CPU allocation
+        max_cpu_cores = psutil.cpu_count() * 2 if HAS_PSUTIL else 16  # Allow oversubscription
+        if total_allocated_cpu + allocation.cpu_cores > max_cpu_cores:
             self.logger.warning(f"CPU allocation would exceed available cores for {agent_name}")
             return False
 
-        # Estimate memory limit (leave 1GB headroom)
-        available_memory_mb = self.system_resources.memory_total_mb - 1024
+        # Be more permissive with memory allocation - use 80% of total memory instead of leaving 1GB headroom
+        if self.system_resources.memory_total_mb > 0:
+            available_memory_mb = int(self.system_resources.memory_total_mb * 0.8)  # Use 80% of total RAM
+        else:
+            available_memory_mb = 8192  # Default 8GB if unknown
+
         if total_allocated_memory + allocation.memory_mb > available_memory_mb:
-            self.logger.warning(f"Memory allocation would exceed available RAM for {agent_name}")
+            self.logger.warning(f"Memory allocation would exceed available RAM for {agent_name} "
+                             f"(requested: {allocation.memory_mb}MB, available: {available_memory_mb}MB)")
             return False
 
         self.resource_allocations[agent_name] = allocation
@@ -343,9 +358,8 @@ class AgentManager:
                 
                 # Remove from capability index
                 for capability in agent.capabilities:
-                    if capability in self.capability_index:
-                        if agent_name in self.capability_index[capability]:
-                            self.capability_index[capability].remove(agent_name)
+                    if capability in self.capability_index and agent_name in self.capability_index[capability]:
+                        self.capability_index[capability].remove(agent_name)
                 
                 # Remove from registry
                 del self.agents[agent_name]
@@ -470,42 +484,60 @@ class AgentManager:
             return ResourceAllocation(cpu_cores=1, memory_mb=512, priority=5)
     
     async def execute_by_capability(self, 
-                                    capability: AgentCapability, 
+                                    capability,  # Can be AgentCapability enum or string
                                     task: Dict[str, Any],
                                     strategy: str = "optimal") -> Dict[str, Any]:
         """
         Execute a task on an agent with a specific capability using intelligent selection
 
         Args:
-            capability: Required capability
+            capability: Required capability (AgentCapability enum or string)
             task: Task dictionary
             strategy: Selection strategy ("optimal", "first", "least_loaded", "round_robin")
 
         Returns:
             Result dictionary
         """
+        # Convert string capability to enum if needed
+        if isinstance(capability, str):
+            try:
+                capability = AgentCapability(capability.lower())
+            except ValueError:
+                # Try to match by value
+                for cap in AgentCapability:
+                    if cap.value == capability.lower():
+                        capability = cap
+                        break
+                else:
+                    return {
+                        "status": "error",
+                        "error": f"Unknown capability: {capability}"
+                    }
+        elif not isinstance(capability, AgentCapability):
+            return {
+                "status": "error",
+                "error": f"Capability must be AgentCapability enum or string, got {type(capability)}"
+            }
         # Check if this is a complex task requiring multi-agent coordination
         task_complexity = task.get("complexity", "medium")
         task_description = task.get("description", "")
-        
+
         # Use LLM planning for high complexity tasks or tasks with detailed descriptions
         if (task_complexity == "high" or 
             (task_description and len(task_description.split()) > 20) or
             task.get("requires_coordination", False)):
-            
+
             self.logger.info(f"Using LLM-powered planning for complex task (complexity: {task_complexity})")
             return await self.plan_and_execute_complex_task(task)
-        
+
         if strategy == "optimal":
             # Use intelligent agent selection based on load, resources, and reliability
-            agent = self.get_optimal_agent(capability, task_complexity)
+            agent = await self.get_optimal_agent(capability, task_complexity)
             if not agent:
                 return {
                     "status": "error",
                     "error": f"No suitable agent found for capability {capability.value}"
                 }
-            return await self.execute_task(agent.name, task)
-
         else:
             # Fallback to original strategies
             agents = self.find_agents_by_capability(capability)
@@ -533,7 +565,8 @@ class AgentManager:
             else:  # default to first
                 agent = ready_agents[0]
 
-            return await self.execute_task(agent.name, task)
+
+        return await self.execute_task(agent.name, task)
     
     async def health_check_all(self) -> Dict[str, Any]:
         """
@@ -588,6 +621,70 @@ class AgentManager:
             # Event bus stats
             "event_bus_stats": self.event_bus.get_stats()
         }
+
+    async def get_system_status(self) -> Dict[str, Any]:
+        """Return a real-time snapshot of agent health and resource usage."""
+        stats = self.get_system_stats()
+        agent_health = await self.health_check_all()
+        snapshot_time = datetime.utcnow()
+
+        agents_snapshot: List[Dict[str, Any]] = []
+        for name, agent in self.agents.items():
+            info = agent.get_info()
+            last_active = getattr(agent, "last_active", None)
+            if isinstance(last_active, datetime):
+                last_active_iso = last_active.isoformat()
+            elif last_active is not None:
+                last_active_iso = str(last_active)
+            else:
+                last_active_iso = None
+
+            info.update({
+                "status": agent.status.value,
+                "last_active": last_active_iso,
+                "uptime_seconds": (snapshot_time - agent.created_at).total_seconds(),
+                "health": agent_health.get(name, {}),
+                "capabilities": [cap.value for cap in agent.capabilities],
+            })
+            agents_snapshot.append(info)
+
+        system_resources = stats.get("system_resources", {})
+        cpu_usage = system_resources.get("cpu_percent") or 0.0
+        memory_usage = system_resources.get("memory_percent") or 0.0
+        error_rate = stats.get("error_rate") or 0.0
+
+        if cpu_usage > 90 or memory_usage > 95 or error_rate > 50:
+            system_health = "critical"
+        elif cpu_usage > 75 or memory_usage > 85 or error_rate > 20:
+            system_health = "warning"
+        elif cpu_usage > 60 or memory_usage > 70 or error_rate > 10:
+            system_health = "degraded"
+        else:
+            system_health = "optimal"
+
+        return {
+            "timestamp": snapshot_time.isoformat(),
+            "system_health": system_health,
+            "resource_monitoring_active": stats.get("resource_monitoring_active", False),
+            "consciousness_monitoring_active": self.consciousness_monitoring_active,
+            "awareness_level": self.get_system_awareness_level(),
+            "total_agents": stats.get("total_agents", 0),
+            "active_agents": {
+                "count": stats.get("active_agents", 0),
+                "limit": stats.get("max_concurrent_agents", self.max_concurrent_agents),
+                "names": list(self.active_agents),
+            },
+            "tasks": {
+                "total_executed": stats.get("total_tasks_executed", 0),
+                "total_errors": stats.get("total_errors", 0),
+                "error_rate": error_rate,
+            },
+            "capabilities": stats.get("capabilities", {}),
+            "system_resources": system_resources,
+            "resource_allocations": stats.get("resource_allocations", {}),
+            "event_bus": stats.get("event_bus_stats", {}),
+            "agents": agents_snapshot,
+        }
     
     async def _store_task_event(self, event_type: str, agent_name: str, task: Dict[str, Any], result: Dict[str, Any] = None):
         """Store task execution event in episodic memory"""
@@ -602,14 +699,20 @@ class AgentManager:
                 "event_type": event_type,
                 "agent_name": agent_name,
                 "capability": task.get("action", "unknown"),
-                "task_summary": str(task)[:200] + "..." if len(str(task)) > 200 else str(task),
+                "task_summary": (
+                    f"{str(task)[:200]}..." if len(str(task)) > 200 else str(task)
+                ),
                 "timestamp": datetime.utcnow().isoformat(),
-                "complexity": task.get("complexity", "medium")
+                "complexity": task.get("complexity", "medium"),
             }
 
             if result:
                 event["result_status"] = result.get("status")
-                event["result_summary"] = str(result)[:200] + "..." if len(str(result)) > 200 else str(result)
+                event["result_summary"] = (
+                    f"{str(result)[:200]}..."
+                    if len(str(result)) > 200
+                    else str(result)
+                )
 
             memory_task = {
                 "action": "store",
@@ -706,7 +809,7 @@ class AgentManager:
         
         return indicators
     
-    def get_optimal_agent(self, capability: AgentCapability, task_complexity: str) -> Optional[BaseAgent]:
+    async def get_optimal_agent(self, capability: AgentCapability, task_complexity: str) -> Optional[BaseAgent]:
         """
         Use LLM-powered reasoning to select the optimal agent for a task
         
@@ -722,27 +825,25 @@ class AgentManager:
             candidates = self.find_agents_by_capability(capability)
             if not candidates:
                 return None
-            
+
             # Filter to ready agents only
             ready_candidates = [a for a in candidates if a.status == AgentStatus.READY]
             if not ready_candidates:
                 return None
-            
+
             if len(ready_candidates) == 1:
                 return ready_candidates[0]
-            
-            # Use LLM for intelligent agent selection
-            optimal_agent = self._llm_select_optimal_agent(ready_candidates, capability, task_complexity)
-            return optimal_agent
-            
+
+            return await self._llm_select_optimal_agent(
+                ready_candidates, capability, task_complexity
+            )
         except Exception as e:
             self.logger.exception(f"Error in get_optimal_agent: {e}")
             # Fallback to simple selection
             candidates = self.find_agents_by_capability(capability)
             ready_candidates = [a for a in candidates if a.status == AgentStatus.READY]
             return ready_candidates[0] if ready_candidates else None
-    
-    def _llm_select_optimal_agent(self, candidates: List[BaseAgent], capability: AgentCapability, task_complexity: str) -> Optional[BaseAgent]:
+    async def _llm_select_optimal_agent(self, candidates: List[BaseAgent], capability: AgentCapability, task_complexity: str) -> Optional[BaseAgent]:
         """
         Use LLM to analyze agent performance and select the optimal one
         
@@ -756,11 +857,15 @@ class AgentManager:
         """
         try:
             # Import LLM engine
-            from modules.llm import LLMEngine
-            
-            # Get LLM instance
-            llm_engine = LLMEngine()
-            
+            from modules.llm import LlamaEngine
+
+            # Get LLM instance and initialize it
+            llm_engine = LlamaEngine()
+            init_success = await llm_engine.initialize()
+            if not init_success:
+                self.logger.warning("LLM initialization failed, falling back to rule-based selection")
+                return self._fallback_agent_selection(candidates, task_complexity)
+
             # Build agent analysis prompt
             agent_summaries = []
             for agent in candidates:
@@ -768,9 +873,9 @@ class AgentManager:
                 success_rate = 0.0
                 if agent.task_count > 0:
                     success_rate = ((agent.task_count - agent.error_count) / agent.task_count) * 100
-                
+
                 avg_response_time = getattr(agent, 'avg_response_time', 0.0)
-                
+
                 summary = f"""
 Agent: {agent.name}
 - Status: {agent.status.value}
@@ -782,11 +887,11 @@ Agent: {agent.name}
 - Current Load: {'High' if agent.task_count > 10 else 'Medium' if agent.task_count > 5 else 'Low'}
 """
                 agent_summaries.append(summary)
-            
+
             # Get system resource context
             system_load = "High" if self.system_resources.cpu_percent > 80 else "Medium" if self.system_resources.cpu_percent > 50 else "Low"
             memory_pressure = "High" if self.system_resources.memory_percent > 80 else "Medium" if self.system_resources.memory_percent > 60 else "Low"
-            
+
             prompt = f"""
 You are an intelligent agent coordinator for a complex AI system. You need to select the optimal agent for a task requiring the {capability.value} capability with {task_complexity} complexity.
 
@@ -806,40 +911,35 @@ Selection Criteria (in priority order):
 4. Response time performance
 5. Task complexity alignment
 
-Analyze the agents and select the single best one for this task. Provide your reasoning and the selected agent name.
+IMPORTANT: Respond with ONLY the agent name, nothing else. Choose from: {', '.join([a.name for a in candidates])}
 
-Response format:
-REASONING: [Your detailed analysis]
-SELECTED_AGENT: [agent_name]
+Example response: ReasoningAgent
 """
-            
+
             # Get LLM response
-            response = llm_engine.generate(prompt, max_tokens=500, temperature=0.3)
-            
+            response = await llm_engine.generate(prompt, max_new_tokens=500, temperature=0.3)
+
             if not response:
                 # Fallback to rule-based selection
                 return self._fallback_agent_selection(candidates, task_complexity)
-            
+
             # Parse response to extract selected agent
             response_lines = response.strip().split('\n')
-            selected_agent_name = None
-            
-            for line in response_lines:
-                if line.startswith('SELECTED_AGENT:'):
-                    selected_agent_name = line.replace('SELECTED_AGENT:', '').strip()
-                    break
-            
-            if selected_agent_name:
+            selected_agent_name = response.strip()  # The entire response should be just the agent name
+
+            if selected_agent_name := selected_agent_name.replace(
+                '```', ''
+            ).strip():
                 # Find the agent by name
                 for agent in candidates:
                     if agent.name == selected_agent_name:
                         self.logger.info(f"LLM selected agent {selected_agent_name} for {capability.value} task (complexity: {task_complexity})")
                         return agent
-            
+
             # If parsing failed, fallback
             self.logger.warning(f"Failed to parse LLM response for agent selection: {response}")
             return self._fallback_agent_selection(candidates, task_complexity)
-            
+
         except Exception as e:
             self.logger.exception(f"Error in LLM agent selection: {e}")
             return self._fallback_agent_selection(candidates, task_complexity)
@@ -855,11 +955,7 @@ SELECTED_AGENT: [agent_name]
         Returns:
             Selected agent using simple heuristics
         """
-        if not candidates:
-            return None
-        
-        # Simple selection based on task count (least loaded)
-        return min(candidates, key=lambda a: a.task_count)
+        return min(candidates, key=lambda a: a.task_count) if candidates else None
     
     async def shutdown_all(self):
         """Shutdown all agents and cleanup resources"""
@@ -891,22 +987,21 @@ SELECTED_AGENT: [agent_name]
         try:
             # Import LLM engine
             from modules.llm import LLMEngine
-            
+
             llm_engine = LLMEngine()
-            
-            # Get available agents and their capabilities
-            available_agents = {}
-            for agent_name, agent in self.agents.items():
-                available_agents[agent_name] = {
+
+            available_agents = {
+                agent_name: {
                     "capabilities": [cap.value for cap in agent.capabilities],
                     "status": agent.status.value,
-                    "task_count": agent.task_count
+                    "task_count": agent.task_count,
                 }
-            
+                for agent_name, agent in self.agents.items()
+            }
             # Build planning prompt
             task_description = task.get("description", str(task))
             task_complexity = task.get("complexity", "high")
-            
+
             planning_prompt = f"""
 You are an expert task planner for a multi-agent AI system. You need to break down a complex task into coordinated subtasks that can be executed by specialized agents.
 
@@ -945,20 +1040,20 @@ FALLBACK_STRATEGIES:
 - If [agent capability] unavailable, use [alternative approach]
 ...
 """
-            
+
             # Get LLM planning response
             plan_response = llm_engine.generate(planning_prompt, max_tokens=1000, temperature=0.2)
-            
+
             if not plan_response:
                 # Fallback to simple execution
                 return await self._execute_simple_task(task)
-            
+
             # Parse the plan and execute
             execution_plan = self._parse_execution_plan(plan_response)
-            
+
             # Execute the plan
             return await self._execute_coordinated_plan(execution_plan, task)
-            
+
         except Exception as e:
             self.logger.exception(f"Error in complex task planning: {e}")
             # Fallback to simple execution
@@ -1031,10 +1126,10 @@ FALLBACK_STRATEGIES:
             "subtask_results": [],
             "coordination_notes": []
         }
-        
+
         # Simple execution for now - execute subtasks in order
         # This could be enhanced with parallel execution and dependency management
-        
+
         for subtask_desc in plan.get('subtasks', []):
             try:
                 # Parse subtask to extract capability and agent
@@ -1043,28 +1138,28 @@ FALLBACK_STRATEGIES:
                     if len(parts) >= 2:
                         task_description = parts[0].strip()
                         capability_name = parts[1].strip()
-                        
-                        # Find capability enum
-                        capability = None
-                        for cap in AgentCapability:
-                            if cap.value == capability_name:
-                                capability = cap
-                                break
-                        
-                        if capability:
+
+                        if capability := next(
+                            (
+                                cap
+                                for cap in AgentCapability
+                                if cap.value == capability_name
+                            ),
+                            None,
+                        ):
                             # Execute subtask
                             subtask = {
                                 "action": task_description,
                                 "complexity": original_task.get("complexity", "medium"),
                                 "description": f"Subtask of complex task: {task_description}"
                             }
-                            
+
                             subtask_result = await self.execute_by_capability(capability, subtask)
                             results["subtask_results"].append({
                                 "subtask": task_description,
                                 "result": subtask_result
                             })
-                            
+
                             if subtask_result.get("status") != "success":
                                 results["status"] = "partial_success"
                                 results["coordination_notes"].append(f"Subtask failed: {task_description}")
@@ -1074,7 +1169,7 @@ FALLBACK_STRATEGIES:
                         results["coordination_notes"].append(f"Malformed subtask: {subtask_desc}")
                 else:
                     results["coordination_notes"].append(f"Could not parse subtask: {subtask_desc}")
-                    
+
             except Exception as e:
                 self.logger.exception(f"Error executing subtask {subtask_desc}: {e}")
                 results["subtask_results"].append({
@@ -1082,7 +1177,7 @@ FALLBACK_STRATEGIES:
                     "result": {"status": "error", "error": str(e)}
                 })
                 results["status"] = "partial_success"
-        
+
         return results
     
     async def _execute_simple_task(self, task: Dict[str, Any]) -> Dict[str, Any]:
@@ -1120,16 +1215,16 @@ FALLBACK_STRATEGIES:
         """
         try:
             from modules.llm import LLMEngine
-            
+
             llm_engine = LLMEngine()
-            
+
             # Collect agent performance data
             agent_performance = {}
             for agent_name, agent in self.agents.items():
                 success_rate = 0.0
                 if agent.task_count > 0:
                     success_rate = ((agent.task_count - agent.error_count) / agent.task_count) * 100
-                
+
                 agent_performance[agent_name] = {
                     "task_count": agent.task_count,
                     "error_count": agent.error_count,
@@ -1137,12 +1232,13 @@ FALLBACK_STRATEGIES:
                     "capabilities": [cap.value for cap in agent.capabilities],
                     "status": agent.status.value
                 }
-            
+
             # Get recent task history from memory if available
             recent_tasks = []
             try:
-                memory_agents = self.find_agents_by_capability(AgentCapability.MEMORY)
-                if memory_agents:
+                if memory_agents := self.find_agents_by_capability(
+                    AgentCapability.MEMORY
+                ):
                     # Query recent task executions
                     memory_query = {
                         "action": "query",
@@ -1155,7 +1251,7 @@ FALLBACK_STRATEGIES:
                         recent_tasks = memory_result.get("results", [])
             except Exception as e:
                 self.logger.debug(f"Could not retrieve task history: {e}")
-            
+
             analysis_prompt = f"""
 You are a performance analyst for a multi-agent AI system. Analyze the current agent performance data and recent task history to identify patterns, bottlenecks, and opportunities for improvement.
 
@@ -1179,24 +1275,23 @@ PERFORMANCE_ANALYSIS: [Your detailed analysis]
 RECOMMENDATIONS: [Specific actionable recommendations]
 ADAPTATION_PLAN: [Step-by-step plan for implementing improvements]
 """
-            
+
             analysis_response = llm_engine.generate(analysis_prompt, max_tokens=800, temperature=0.3)
-            
-            if analysis_response:
-                # Store analysis results for future reference
-                await self._store_performance_analysis(analysis_response)
-                
-                return {
-                    "status": "success",
-                    "analysis": analysis_response,
-                    "timestamp": datetime.utcnow().isoformat()
-                }
-            else:
+
+            if not analysis_response:
                 return {
                     "status": "error",
                     "message": "Failed to generate performance analysis"
                 }
-                
+            # Store analysis results for future reference
+            await self._store_performance_analysis(analysis_response)
+
+            return {
+                "status": "success",
+                "analysis": analysis_response,
+                "timestamp": datetime.utcnow().isoformat()
+            }
+
         except Exception as e:
             self.logger.exception(f"Error in performance analysis: {e}")
             return {
@@ -1261,3 +1356,83 @@ ADAPTATION_PLAN: [Step-by-step plan for implementing improvements]
                 break
         
         return recommendations[:5]  # Limit to top 5
+
+    async def route_query(self, query: str, context: Dict[str, Any] = None) -> Dict[str, Any]:
+        """
+        Route a user query to the appropriate agent based on content analysis
+        
+        Args:
+            query: User query string
+            context: Additional context information
+            
+        Returns:
+            Query result from appropriate agent
+        """
+        if context is None:
+            context = {}
+            
+        # Analyze query to determine required capability
+        query_lower = query.lower()
+        
+        # Design and engineering queries
+        if any(kw in query_lower for kw in ["design", "create", "build", "blueprint", "cad", "model", "engineer", "manufacture"]):
+            capability = AgentCapability.DESIGN
+            task = {
+                "description": query,
+                "type": "design",
+                "context": context,
+                "complexity": "high" if len(query.split()) > 10 else "medium"
+            }
+        
+        # Analysis and calculation queries
+        elif any(kw in query_lower for kw in ["analyze", "calculate", "compute", "evaluate", "assess", "optimize"]):
+            capability = AgentCapability.ANALYSIS
+            task = {
+                "description": query,
+                "type": "analysis",
+                "context": context,
+                "complexity": "medium"
+            }
+        
+        # Search and research queries
+        elif any(kw in query_lower for kw in ["search", "find", "lookup", "research", "discover"]):
+            capability = AgentCapability.SEARCH
+            task = {
+                "description": query,
+                "type": "search",
+                "context": context,
+                "complexity": "low"
+            }
+        
+        # Learning and reasoning queries
+        elif any(kw in query_lower for kw in ["learn", "reason", "understand", "explain", "teach"]):
+            capability = AgentCapability.REASONING
+            task = {
+                "description": query,
+                "type": "reasoning",
+                "context": context,
+                "complexity": "medium"
+            }
+        
+        # Memory and knowledge queries
+        elif any(kw in query_lower for kw in ["remember", "recall", "knowledge", "history", "experience"]):
+            capability = AgentCapability.MEMORY
+            task = {
+                "description": query,
+                "type": "memory",
+                "context": context,
+                "complexity": "low"
+            }
+        
+        # Default to general LLM processing
+        else:
+            capability = AgentCapability.LLM
+            task = {
+                "description": query,
+                "type": "general",
+                "context": context,
+                "complexity": "low"
+            }
+        
+        # Execute the task using the determined capability
+        return await self.execute_by_capability(capability, task)

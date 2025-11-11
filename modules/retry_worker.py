@@ -12,11 +12,11 @@ import asyncio
 import time
 from datetime import datetime, timedelta
 
-from modules.vector_db import (
+from modules.learning.vectordb import (
     get_embedding, add_documents, load_retry_queue, persist_retry_queue,
     EMBEDDING_RETRY_PATH, SCHEMA_VERSION, EMBEDDER
 )
-from modules.logging_config import get_logger
+from modules.utils.logging_config import get_logger
 
 logger = get_logger("Kalki.RetryWorker")
 

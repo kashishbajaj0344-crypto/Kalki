@@ -16,13 +16,13 @@ from typing import List, Dict, Any
 from collections import Counter
 
 try:
-    from modules.logger import get_logger
+    from modules.utils.logger import get_logger
 except ImportError:
     def get_logger(name="tagger"): import logging; return logging.getLogger(name)
 logger = get_logger("tagger")
 
 try:
-    from modules.config import register_module_version, CONFIG
+    from modules.utils.config import register_module_version, CONFIG
 except ImportError:
     def register_module_version(module, version): pass
     CONFIG = {}

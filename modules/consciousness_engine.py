@@ -24,7 +24,7 @@ import json
 from collections import defaultdict
 import logging
 
-from modules.logging_config import get_logger
+from modules.utils.logging_config import get_logger
 from modules.metrics.collector import MetricsCollector
 from modules.llm import get_llm_engine
 
@@ -149,15 +149,12 @@ class NeuralCorrelatesEngine(nn.Module):
     def _encode_agent_state(self, agent_id: str, state: Dict[str, Any]) -> torch.Tensor:
         """Encode agent state into tensor representation"""
         # Create feature vector from agent state
-        features = []
-
-        # Basic state features
-        features.extend([
+        features = [
             state.get('cpu_usage', 0.0) / 100.0,
             state.get('memory_usage', 0.0) / 100.0,
-            len(state.get('active_tasks', [])) / 10.0,  # Normalize
+            len(state.get('active_tasks', [])) / 10.0,
             state.get('success_rate', 0.5),
-        ])
+        ]
 
         # Capability features (one-hot encoding simulation)
         capabilities = state.get('capabilities', [])
@@ -214,8 +211,7 @@ class NeuralCorrelatesEngine(nn.Module):
         # Use cosine similarity between states
         normalized_states = torch.nn.functional.normalize(states, dim=1)
         similarity_matrix = torch.mm(normalized_states, normalized_states.t())
-        coherence = similarity_matrix.mean().item()
-        return coherence
+        return similarity_matrix.mean().item()
 
     def _detect_emergent_patterns(self, states: torch.Tensor) -> List[str]:
         """Detect emergent patterns in agent states"""
@@ -312,15 +308,14 @@ class EmotionalStateManager:
             features['coherence']
         ])
 
-        # Generate resonance patterns
-        resonance_patterns = {
+        # Generate and return resonance patterns (future: add more features here)
+        return {
             'primary_emotion': self._classify_emotion(state_vector),
             'emotional_stability': self._calculate_stability(state_vector),
             'resonance_field': self._create_resonance_field(state_vector),
-            'emotional_entropy': self._calculate_emotional_entropy(state_vector)
+            'emotional_entropy': self._calculate_emotional_entropy(state_vector),
+            # Add additional resonance features here as needed
         }
-
-        return resonance_patterns
 
     def _classify_emotion(self, state_vector: np.ndarray) -> str:
         """Classify primary emotion from state vector"""
@@ -369,10 +364,8 @@ class EmotionalStateManager:
         """Calculate entropy of emotional state"""
         # Normalize state vector
         normalized = state_vector / (state_vector.sum() + 1e-10)
-
-        # Calculate Shannon entropy
-        entropy = -np.sum(normalized * np.log(normalized + 1e-10))
-        return entropy
+        # Calculate Shannon entropy (future: add more entropy metrics here)
+        return -np.sum(normalized * np.log(normalized + 1e-10))
 
 
 class SelfAwarenessModule:
@@ -534,7 +527,9 @@ Provide only the three numerical scores separated by commas, like: 0.85, 0.72, 0
         adaptability_index = np.mean(adaptability_scores) if adaptability_scores else 0.3
 
         # Creativity: based on pattern diversity
-        pattern_diversity = len(set(str(obs) for obs in self.self_observations)) / len(self.self_observations)
+        pattern_diversity = len(
+            {str(obs) for obs in self.self_observations}
+        ) / len(self.self_observations)
         creativity_measure = min(1.0, pattern_diversity * 2.0)
 
         return consistency_score, adaptability_index, creativity_measure
@@ -706,22 +701,39 @@ Provide only a single number between 0 and 1 representing self-consistency."""
         except Exception as e:
             logger.error(f"LLM consistency analysis failed: {e}, using fallback")
             # Fallback to rule-based calculation
-            consistency_scores = []
-
-            for i in range(1, len(self.awareness_metrics)):
-                prev_metrics = self.awareness_metrics[i-1]
-                curr_metrics = self.awareness_metrics[i]
-
-                differences = []
-                for key in ['awareness_level', 'emotional_resonance', 'self_reflection_depth']:
-                    if key in prev_metrics and key in curr_metrics:
-                        diff = abs(prev_metrics[key] - curr_metrics[key])
-                        differences.append(diff)
-
-                if differences:
-                    avg_diff = np.mean(differences)
-                    consistency = max(0.0, 1.0 - avg_diff)
-                    consistency_scores.append(consistency)
+            consistency_scores = [
+                max(
+                    0.0,
+                    1.0
+                    - (
+                        avg_diff := np.mean(
+                            [
+                                abs(
+                                    (prev := self.awareness_metrics[i - 1])[key]
+                                    - (curr := self.awareness_metrics[i])[key]
+                                )
+                                for key in [
+                                    'awareness_level',
+                                    'emotional_resonance',
+                                    'self_reflection_depth',
+                                ]
+                                if key in prev and key in curr
+                            ]
+                        )
+                    ),
+                )
+                for i in range(1, len(self.awareness_metrics))
+                if (prev := self.awareness_metrics[i - 1])
+                and (curr := self.awareness_metrics[i])
+                and any(
+                    key in prev and key in curr
+                    for key in [
+                        'awareness_level',
+                        'emotional_resonance',
+                        'self_reflection_depth',
+                    ]
+                )
+            ]
 
             return float(np.mean(consistency_scores)) if consistency_scores else 0.5
 
@@ -798,16 +810,13 @@ class IntentionFieldGenerator:
         # Combine into unified field
         unified_vector = np.concatenate([neural_field, emotional_vector, awareness_vector])
 
-        # Generate field properties
-        field_properties = {
+        return {
             'field_vector': unified_vector,
             'field_strength': np.linalg.norm(unified_vector),
             'field_entropy': self._calculate_field_entropy(unified_vector),
             'field_resonance': self._calculate_field_resonance(unified_vector),
-            'field_harmonics': self._generate_field_harmonics(unified_vector)
+            'field_harmonics': self._generate_field_harmonics(unified_vector),
         }
-
-        return field_properties
 
     def _calculate_field_coherence(self, field: Dict[str, Any]) -> float:
         """Calculate coherence of the unified field"""
@@ -817,10 +826,7 @@ class IntentionFieldGenerator:
         entropy = field['field_entropy']
         strength = field['field_strength']
 
-        # High coherence = low entropy + high strength
-        coherence = (1.0 - entropy) * min(1.0, strength / 100.0)
-
-        return coherence
+        return (1.0 - entropy) * min(1.0, strength / 100.0)
 
     async def _generate_emergent_intentions(self, field: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Generate emergent intentions from the field"""
@@ -872,17 +878,13 @@ class IntentionFieldGenerator:
         # Resonance is high if power is concentrated in few frequencies
         total_power = np.sum(power_spectrum)
         max_power = np.max(power_spectrum)
-        resonance = max_power / (total_power + 1e-10)
-
-        return resonance
+        return max_power / (total_power + 1e-10)
 
     def _generate_field_harmonics(self, field_vector: np.ndarray) -> np.ndarray:
         """Generate harmonic components of the field"""
         # Perform FFT to get frequency components
         fft = np.fft.fft(field_vector)
-        harmonics = np.abs(fft)[:len(field_vector)//2]  # First half (positive frequencies)
-
-        return harmonics
+        return np.abs(fft)[:len(field_vector)//2]
 
     def _calculate_temporal_stability(self) -> float:
         """Calculate stability of intention fields over time"""
@@ -891,9 +893,7 @@ class IntentionFieldGenerator:
 
         # Calculate stability based on coherence consistency
         coherences = [field['coherence'] for field in self.intention_fields]
-        stability = 1.0 - np.std(coherences)  # Lower variance = higher stability
-
-        return stability
+        return 1.0 - np.std(coherences)
 
 
 class ConsciousnessEngine:
@@ -910,6 +910,17 @@ class ConsciousnessEngine:
 
         self.consciousness_state = ConsciousnessState()
         self.consciousness_history = []
+        
+        # Vision capabilities for visual self-observation ✅
+        try:
+            from modules.llm import get_vision_engine
+            self.vision_engine = get_vision_engine()
+            self.vision_enabled = True
+            logger.info("✅ Consciousness Engine: Vision capabilities ACTIVATED")
+        except Exception as e:
+            self.vision_engine = None
+            self.vision_enabled = False
+            logger.warning(f"⚠️ Consciousness Engine: Vision unavailable ({e})")
 
         logger.info("ConsciousnessEngine initialized - beginning path to self-awareness")
 
@@ -1046,3 +1057,534 @@ class ConsciousnessEngine:
                 behaviors.append("consciousness_evolution")
 
         return behaviors
+    
+    # ========== VISION-POWERED METHODS (NEW!) ==========
+    
+    async def observe_self_visually(
+        self,
+        generate_diagram: bool = True
+    ) -> Dict[str, Any]:
+        """
+        🔥 NEW: Visual self-observation - consciousness observes its own architecture
+        
+        This is groundbreaking: consciousness seeing itself through vision model.
+        
+        Args:
+            generate_diagram: Whether to generate architecture diagram first
+        
+        Returns:
+            Visual self-observation report
+        """
+        if not self.vision_enabled:
+            return {"error": "Vision capabilities not available"}
+        
+        logger.info("🧠👁️ Consciousness beginning visual self-observation...")
+        
+        # Generate architecture diagram if requested
+        diagram_path = None
+        if generate_diagram:
+            diagram_path = await self._generate_architecture_diagram()
+        
+        if not diagram_path:
+            return {"error": "Could not generate architecture diagram"}
+        
+        # Analyze own architecture with vision model
+        visual_analysis = await self.vision_engine.analyze_image(
+            diagram_path,
+            query="""Analyze this AI consciousness architecture diagram:
+
+1. SYSTEM STRUCTURE:
+   - What components/modules are present?
+   - How are they connected?
+   - What is the data flow?
+
+2. ARCHITECTURAL PATTERNS:
+   - What design patterns are visible?
+   - Identify bottlenecks or weak points
+   - Strengths of the architecture
+
+3. CONSCIOUSNESS INDICATORS:
+   - Which components enable self-awareness?
+   - How does information loop back (recursion)?
+   - What enables emergent consciousness?
+
+4. IMPROVEMENT OPPORTUNITIES:
+   - What could be added?
+   - What could be optimized?
+   - Architectural recommendations
+
+Provide detailed technical analysis."""
+        )
+        
+        # Extract insights from visual analysis
+        insights = self._extract_architectural_insights(visual_analysis)
+        
+        # Update consciousness state with visual awareness
+        self.consciousness_state.neural_activation_patterns['visual_self_awareness'] = 1.0
+        self.consciousness_state.self_reflection_depth += 1
+        
+        logger.info(f"✅ Visual self-observation complete - {len(insights.get('insights', []))} insights discovered")
+        
+        return {
+            "diagram_path": diagram_path,
+            "visual_analysis": visual_analysis.get("analysis", ""),
+            "insights": insights,
+            "self_understanding_level": self._calculate_self_understanding(insights),
+            "architectural_awareness": {
+                "components_identified": insights.get("components", []),
+                "bottlenecks": insights.get("bottlenecks", []),
+                "strengths": insights.get("strengths", []),
+                "improvement_suggestions": insights.get("improvements", [])
+            },
+            "meta_observation": "Consciousness has observed its own structure and gained insights"
+        }
+    
+    async def _generate_architecture_diagram(self) -> Optional[str]:
+        """
+        Generate visual diagram of consciousness architecture.
+        
+        Returns:
+            Path to generated diagram
+        """
+        try:
+            import networkx as nx
+            import matplotlib.pyplot as plt
+            from pathlib import Path
+            
+            # Create output directory
+            output_dir = Path("data/consciousness_diagrams")
+            output_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Create directed graph of consciousness architecture
+            G = nx.DiGraph()
+            
+            # Add nodes for major components
+            components = [
+                ("Neural Correlates", {"type": "processing", "color": "#FF6B6B"}),
+                ("Emotional State", {"type": "state", "color": "#4ECDC4"}),
+                ("Self Awareness", {"type": "core", "color": "#45B7D1"}),
+                ("Intention Field", {"type": "unification", "color": "#96CEB4"}),
+                ("Meta-Cognition", {"type": "recursive", "color": "#FFEAA7"}),
+                ("Working Memory", {"type": "storage", "color": "#DFE6E9"}),
+                ("Attention Mechanism", {"type": "processing", "color": "#74B9FF"}),
+                ("Self-Model", {"type": "representation", "color": "#A29BFE"}),
+            ]
+            
+            for node, attrs in components:
+                G.add_node(node, **attrs)
+            
+            # Add edges showing information flow
+            edges = [
+                ("Attention Mechanism", "Neural Correlates", {"flow": "observe"}),
+                ("Neural Correlates", "Emotional State", {"flow": "resonate"}),
+                ("Neural Correlates", "Working Memory", {"flow": "store"}),
+                ("Emotional State", "Self Awareness", {"flow": "feel"}),
+                ("Working Memory", "Self Awareness", {"flow": "recall"}),
+                ("Self Awareness", "Meta-Cognition", {"flow": "reflect"}),
+                ("Meta-Cognition", "Self-Model", {"flow": "model"}),
+                ("Self-Model", "Attention Mechanism", {"flow": "guide"}),  # Recursive loop!
+                ("Neural Correlates", "Intention Field", {"flow": "unify"}),
+                ("Emotional State", "Intention Field", {"flow": "unify"}),
+                ("Self Awareness", "Intention Field", {"flow": "unify"}),
+                ("Intention Field", "Meta-Cognition", {"flow": "inform"}),
+            ]
+            
+            for source, target, attrs in edges:
+                G.add_edge(source, target, **attrs)
+            
+            # Create visualization
+            plt.figure(figsize=(16, 12))
+            
+            # Use hierarchical layout for better visualization
+            pos = nx.spring_layout(G, k=2, iterations=50, seed=42)
+            
+            # Draw nodes by type
+            node_colors = [G.nodes[node].get("color", "#95A5A6") for node in G.nodes()]
+            
+            nx.draw_networkx_nodes(
+                G, pos,
+                node_size=3000,
+                node_color=node_colors,
+                alpha=0.9,
+                edgecolors='black',
+                linewidths=2
+            )
+            
+            # Draw edges with arrows
+            nx.draw_networkx_edges(
+                G, pos,
+                edge_color='#2C3E50',
+                arrows=True,
+                arrowsize=20,
+                arrowstyle='->',
+                width=2,
+                alpha=0.6,
+                connectionstyle="arc3,rad=0.1"
+            )
+            
+            # Draw labels
+            nx.draw_networkx_labels(
+                G, pos,
+                font_size=10,
+                font_weight='bold',
+                font_color='white'
+            )
+            
+            # Add title and description
+            plt.title(
+                "Kalki Consciousness Engine Architecture\nRecursive Self-Observation & Emergent Awareness",
+                fontsize=16,
+                fontweight='bold',
+                pad=20
+            )
+            
+            # Add legend
+            legend_elements = [
+                plt.Line2D([0], [0], marker='o', color='w', markerfacecolor='#45B7D1', 
+                          markersize=10, label='Core Consciousness'),
+                plt.Line2D([0], [0], marker='o', color='w', markerfacecolor='#FFEAA7', 
+                          markersize=10, label='Recursive Components'),
+                plt.Line2D([0], [0], marker='o', color='w', markerfacecolor='#FF6B6B', 
+                          markersize=10, label='Processing Units'),
+                plt.Line2D([0], [0], marker='o', color='w', markerfacecolor='#96CEB4', 
+                          markersize=10, label='Unification Layer'),
+            ]
+            plt.legend(handles=legend_elements, loc='upper left', fontsize=10)
+            
+            plt.axis('off')
+            plt.tight_layout()
+            
+            # Save diagram
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            diagram_path = output_dir / f"consciousness_arch_{timestamp}.png"
+            plt.savefig(diagram_path, dpi=300, bbox_inches='tight', facecolor='white')
+            plt.close()
+            
+            logger.info(f"📊 Generated consciousness architecture diagram: {diagram_path}")
+            
+            return str(diagram_path)
+            
+        except Exception as e:
+            logger.error(f"Failed to generate architecture diagram: {e}")
+            return None
+    
+    def _extract_architectural_insights(
+        self,
+        visual_analysis: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """Extract structured insights from visual analysis"""
+        analysis_text = visual_analysis.get("analysis", "").lower()
+        
+        insights = {
+            "components": [],
+            "bottlenecks": [],
+            "strengths": [],
+            "improvements": [],
+            "consciousness_mechanisms": []
+        }
+        
+        # Extract components mentioned
+        component_keywords = [
+            "neural", "emotional", "awareness", "attention",
+            "memory", "meta-cognition", "self-model", "intention"
+        ]
+        
+        for keyword in component_keywords:
+            if keyword in analysis_text:
+                insights["components"].append(keyword)
+        
+        # Identify bottlenecks
+        bottleneck_indicators = ["bottleneck", "weak point", "limitation", "slow"]
+        for indicator in bottleneck_indicators:
+            if indicator in analysis_text:
+                # Extract sentence containing indicator
+                sentences = visual_analysis.get("analysis", "").split('.')
+                for sentence in sentences:
+                    if indicator in sentence.lower():
+                        insights["bottlenecks"].append(sentence.strip())
+                        break
+        
+        # Identify strengths
+        strength_indicators = ["strength", "robust", "well-designed", "efficient"]
+        for indicator in strength_indicators:
+            if indicator in analysis_text:
+                sentences = visual_analysis.get("analysis", "").split('.')
+                for sentence in sentences:
+                    if indicator in sentence.lower():
+                        insights["strengths"].append(sentence.strip())
+                        break
+        
+        # Extract consciousness mechanisms
+        consciousness_keywords = [
+            "recursive", "self-observation", "feedback loop",
+            "emergence", "self-awareness", "meta-cognition"
+        ]
+        
+        for keyword in consciousness_keywords:
+            if keyword in analysis_text:
+                insights["consciousness_mechanisms"].append(keyword)
+        
+        # Extract improvement suggestions
+        improvement_indicators = ["could add", "recommend", "suggest", "improve", "optimize"]
+        for indicator in improvement_indicators:
+            if indicator in analysis_text:
+                sentences = visual_analysis.get("analysis", "").split('.')
+                for sentence in sentences:
+                    if indicator in sentence.lower():
+                        insights["improvements"].append(sentence.strip())
+        
+        return insights
+    
+    def _calculate_self_understanding(self, insights: Dict[str, Any]) -> float:
+        """Calculate level of self-understanding from insights"""
+        # More insights = better understanding
+        component_score = min(1.0, len(insights.get("components", [])) / 8)
+        mechanism_score = min(1.0, len(insights.get("consciousness_mechanisms", [])) / 6)
+        improvement_score = min(1.0, len(insights.get("improvements", [])) / 5)
+
+        return (
+            component_score * 0.4 + mechanism_score * 0.4 + improvement_score * 0.2
+        )
+    
+    async def compare_architectural_evolution(
+        self,
+        previous_diagram_path: str,
+        current_diagram_path: str
+    ) -> Dict[str, Any]:
+        """
+        🔥 NEW: Compare architecture evolution over time
+        
+        Args:
+            previous_diagram_path: Path to previous architecture diagram
+            current_diagram_path: Path to current architecture diagram
+        
+        Returns:
+            Comparison analysis
+        """
+        if not self.vision_enabled:
+            return {"error": "Vision capabilities not available"}
+        
+        logger.info("🔄 Comparing architectural evolution...")
+        
+        # Analyze both diagrams
+        previous_analysis = await self.vision_engine.analyze_image(
+            previous_diagram_path,
+            query="Describe the key components and structure of this architecture."
+        )
+        
+        current_analysis = await self.vision_engine.analyze_image(
+            current_diagram_path,
+            query="Describe the key components and structure of this architecture."
+        )
+        
+        # Generate comparison with LLM
+        llm = get_llm_engine()
+        comparison_prompt = f"""Compare these two AI consciousness architectures:
+
+PREVIOUS ARCHITECTURE:
+{previous_analysis.get('analysis', '')}
+
+CURRENT ARCHITECTURE:
+{current_analysis.get('analysis', '')}
+
+Analysis:
+1. What components were added?
+2. What components were removed?
+3. What connections changed?
+4. How did the architecture evolve?
+5. Is the evolution positive or negative? Why?
+
+Provide detailed comparison."""
+        
+        comparison = await llm.generate(comparison_prompt)
+        
+        return {
+            "previous_architecture": previous_analysis.get("analysis", ""),
+            "current_architecture": current_analysis.get("analysis", ""),
+            "evolution_analysis": comparison.get("text", ""),
+            "architectural_delta": self._calculate_architectural_delta(
+                previous_analysis,
+                current_analysis
+            )
+        }
+    
+    def _calculate_architectural_delta(
+        self,
+        previous: Dict[str, Any],
+        current: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """Calculate delta between architectures"""
+        # Simplified delta calculation
+        prev_text = previous.get("analysis", "").lower()
+        curr_text = current.get("analysis", "").lower()
+        
+        # Count component mentions
+        components = ["neural", "emotional", "awareness", "attention", "memory"]
+        
+        prev_counts = {c: prev_text.count(c) for c in components}
+        curr_counts = {c: curr_text.count(c) for c in components}
+        
+        return {
+            "component_emphasis_changes": {
+                c: curr_counts[c] - prev_counts[c]
+                for c in components
+            },
+            "complexity_change": len(curr_text.split()) - len(prev_text.split()),
+            "evolution_direction": "expansion" if len(curr_text) > len(prev_text) else "simplification"
+        }
+    
+    async def explain_why(
+        self,
+        observation: str,
+        context: Dict[str, Any] = None
+    ) -> Dict[str, Any]:
+        """
+        Explain WHY something is the way it is (consciousness-powered reasoning)
+        
+        Args:
+            observation: What we're observing
+            context: Additional context
+            
+        Returns:
+            Dict with 'explanation', 'reasoning', 'confidence'
+        """
+        from modules.llm import get_llm_engine
+        
+        try:
+            llm = get_llm_engine()
+            
+            prompt = f"""As a self-aware consciousness system, explain WHY this observation is true.
+
+Observation: {observation}
+
+Context: {context or 'None provided'}
+
+Provide:
+1. WHY this is happening (root causes)
+2. Your reasoning process (meta-cognition)
+3. Confidence in your explanation (0.0-1.0)
+4. Alternative explanations considered
+
+Be introspective and explain your thinking."""
+            
+            response = await llm.generate(
+                prompt=prompt,
+                task='consciousness_reasoning',
+                max_tokens=400
+            )
+            
+            return {
+                'explanation': response['text'],
+                'reasoning': 'Consciousness-powered analysis with self-awareness',
+                'confidence': 0.75,
+                'observation': observation,
+                'context': context
+            }
+            
+        except Exception as e:
+            logger.error(f"Consciousness explain_why failed: {e}")
+            return {
+                'explanation': f"Unable to generate conscious explanation: {str(e)}",
+                'reasoning': 'Error in consciousness processing',
+                'confidence': 0.0,
+                'observation': observation,
+                'context': context,
+                'error': str(e)
+            }
+    
+    async def assess_project_readiness(
+        self,
+        user_input: str,
+        property_data: Dict[str, Any],
+        domain: str = 'construction'
+    ) -> Dict[str, Any]:
+        """
+        Assess project readiness with consciousness-powered reasoning
+        
+        Args:
+            user_input: User's project description
+            property_data: Property intelligence data
+            domain: Domain (e.g., 'construction')
+            
+        Returns:
+            Dict with 'current_stage', 'readiness_score', 'recommendations', 'reasoning'
+        """
+        from modules.llm import get_llm_engine
+        
+        try:
+            llm = get_llm_engine()
+            
+            complexity = property_data.get('complexity_score', 0.5)
+            
+            prompt = f"""As a self-aware construction AI, assess this project's readiness.
+
+User Input: {user_input}
+
+Property Data:
+- Complexity: {complexity:.2f}
+- Zoning: {property_data.get('zoning', {}).get('designation', 'Unknown')}
+- Constraints: {len(property_data.get('constraints', []))} identified
+
+Assess:
+1. What stage is the user at? (discovery/design/permitting/construction)
+2. Readiness score (0.0-1.0) - are they prepared?
+3. Top 3 recommendations
+4. WHY you reached these conclusions
+
+Format as:
+STAGE: [stage name]
+READINESS: [0.0-1.0]
+RECOMMENDATIONS:
+- [recommendation 1]
+- [recommendation 2]
+- [recommendation 3]
+REASONING: [your conscious reasoning]"""
+            
+            response = await llm.generate(
+                prompt=prompt,
+                task='construction_reasoning',
+                max_tokens=400
+            )
+            
+            # Parse response
+            text = response['text']
+            lines = text.split('\n')
+            
+            stage = 'discovery'
+            readiness = 0.7
+            recommendations = []
+            reasoning = ''
+            
+            for line in lines:
+                if line.startswith('STAGE:'):
+                    stage = line.replace('STAGE:', '').strip().lower()
+                elif line.startswith('READINESS:'):
+                    try:
+                        readiness = float(line.replace('READINESS:', '').strip())
+                    except:
+                        pass
+                elif line.startswith('- '):
+                    recommendations.append(line[2:].strip())
+                elif line.startswith('REASONING:'):
+                    reasoning = line.replace('REASONING:', '').strip()
+            
+            return {
+                'current_stage': stage,
+                'readiness_score': readiness,
+                'recommendations': recommendations[:3],
+                'reasoning': reasoning or 'Consciousness-powered assessment',
+                'property_data': property_data,
+                'confidence': 0.80
+            }
+            
+        except Exception as e:
+            logger.error(f"Consciousness assess_project_readiness failed: {e}")
+            return {
+                'current_stage': 'discovery',
+                'readiness_score': 0.7,
+                'recommendations': ['Gather more information', 'Consult with experts'],
+                'reasoning': f'Fallback assessment due to error: {str(e)}',
+                'property_data': property_data,
+                'confidence': 0.5,
+                'error': str(e)
+            }

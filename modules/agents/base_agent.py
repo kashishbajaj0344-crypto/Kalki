@@ -17,12 +17,15 @@ class AgentCapability(Enum):
     DOCUMENT_INGESTION = "document_ingestion"
     SEARCH = "search"
     VECTORIZATION = "vectorization"
+    LLM = "llm"
     
     # Phase 3-5: Core Cognition
     PLANNING = "planning"
     REASONING = "reasoning"
     ORCHESTRATION = "orchestration"
     MEMORY = "memory"
+    ANALYSIS = "analysis"
+    DESIGN = "design"
     
     # Phase 6: Meta-Cognition
     META_REASONING = "meta_reasoning"
@@ -38,6 +41,14 @@ class AgentCapability(Enum):
     COMPUTE_SCALING = "compute_scaling"
     LOAD_BALANCING = "load_balancing"
     SELF_HEALING = "self_healing"
+    CONSENSUS = "consensus"
+    COORDINATION = "coordination"
+    FAULT_TOLERANCE = "fault_tolerance"
+    OBSERVABILITY = "observability"
+    COMPUTE_CLUSTER = "compute_cluster"
+    MONITORING = "monitoring"
+    TRACING = "tracing"
+    METRICS = "metrics"
     
     # Phase 9: Simulation
     SIMULATION = "simulation"

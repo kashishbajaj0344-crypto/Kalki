@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 import json
-from modules.logging_config import get_logger
+from modules.utils.logging_config import get_logger
 
 from ..base_agent import BaseAgent, AgentCapability, AgentStatus
 

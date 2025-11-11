@@ -8,8 +8,8 @@ Enhanced with robustness checks and automatic recovery mechanisms.
 import shutil
 from typing import List
 from pathlib import Path
-from modules.config import CONFIG, register_module_version
-from modules.logger import get_logger
+from modules.utils.config import CONFIG, register_module_version
+from modules.utils.logger import get_logger
 from modules.utils import ensure_dirs
 
 __version__ = "Kalki v2.4 - modules/boot.py - v0.4"

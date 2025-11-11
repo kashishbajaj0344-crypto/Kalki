@@ -18,7 +18,7 @@ from collections import defaultdict, deque
 from datetime import datetime, timedelta
 import statistics
 
-from modules.logging_config import get_logger
+from modules.utils.logging_config import get_logger
 from ..base_agent import BaseAgent, AgentCapability, AgentStatus
 
 logger = get_logger("Kalki.Observability")

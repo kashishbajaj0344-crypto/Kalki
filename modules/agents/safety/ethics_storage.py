@@ -9,7 +9,7 @@ from typing import Dict, Any, List, Optional
 from datetime import datetime
 from cryptography.fernet import Fernet
 
-from ...config import ROOT
+from ...utils.config import ROOT
 
 
 class EthicsStorage:

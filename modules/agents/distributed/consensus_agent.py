@@ -16,7 +16,7 @@ from dataclasses import dataclass, field
 from collections import defaultdict, deque
 from enum import Enum
 
-from modules.logging_config import get_logger
+from modules.utils.logging_config import get_logger
 from ..base_agent import BaseAgent, AgentCapability, AgentStatus
 
 logger = get_logger("Kalki.Consensus")

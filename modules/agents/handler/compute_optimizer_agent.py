@@ -13,7 +13,7 @@ from typing import Any, Dict, List, Optional
 import psutil
 
 from modules.agents.base_agent import BaseAgent, AgentCapability
-from modules.config import get_config, CONFIG
+from modules.utils.config import get_config, CONFIG
 
 
 class ComputeOptimizerAgent(BaseAgent):

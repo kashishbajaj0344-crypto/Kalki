@@ -13,11 +13,11 @@ import argparse
 import sys
 from pathlib import Path
 from typing import Optional
-from modules.logger import get_logger
+from modules.utils.logger import get_logger
 from modules.ingest import DocumentIngestor, run_cli
 from modules.chunker import chunk_text
-from modules.vectordb import VectorDBManager
-from modules.config import CONFIG, register_module_version, get_module_versions
+from modules.learning.vectordb import VectorDBManager
+from modules.utils.config import CONFIG, register_module_version, get_module_versions
 
 __version__ = "KALKI v2.3 — cli.py v1.4"
 register_module_version("cli.py", __version__)

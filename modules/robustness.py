@@ -27,9 +27,9 @@ import gc
 import signal
 import os
 
-from modules.config import CONFIG, register_module_version
-from modules.logger import get_logger
-from modules.eventbus import EventBus
+from modules.utils.config import CONFIG, register_module_version
+from modules.utils.logger import get_logger
+from modules.utils.eventbus import EventBus
 
 __version__ = "KALKI v2.4 — robustness.py v1.0"
 register_module_version("robustness.py", __version__)
@@ -668,7 +668,7 @@ def with_circuit_breaker(circuit_name: str):
 
 if __name__ == "__main__":
     # Test robustness module
-    from modules.eventbus import EventBus
+    from modules.utils.eventbus import EventBus
     eventbus = EventBus()
     manager = start_robustness_monitoring(eventbus)
 

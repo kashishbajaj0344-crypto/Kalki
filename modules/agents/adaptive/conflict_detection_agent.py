@@ -123,11 +123,7 @@ class ConflictDetectionAgent(BaseAgent):
                             return True
 
             # Conflicting temporal information
-            if self._have_temporal_conflict(text1, text2):
-                return True
-
-            return False
-
+            return bool(self._have_temporal_conflict(text1, text2))
         except Exception as e:
             self.logger.debug(f"Error checking conflict: {e}")
             return False
@@ -135,12 +131,11 @@ class ConflictDetectionAgent(BaseAgent):
     def _extract_text_content(self, item: Dict[str, Any]) -> str:
         """Extract text content from knowledge item"""
         # Try common fields
-        for field in ['content', 'text', 'description', 'summary', 'hypothesis']:
-            if field in item and isinstance(item[field], str):
-                return item[field]
-
-        # Fallback to string representation
-        return str(item)
+        return next(
+            (item[field] for field in ['content', 'text', 'description', 'summary', 'hypothesis']
+             if field in item and isinstance(item[field], str)),
+            str(item)
+        )
 
     def _extract_numbers(self, text: str) -> List[float]:
         """Extract numerical values from text"""
@@ -180,13 +175,14 @@ class ConflictDetectionAgent(BaseAgent):
         Resolve a detected conflict using specified strategy
         """
         try:
-            # Find the conflict
-            conflict = None
-            for c in self.conflict_records:
-                if c["conflict_id"] == conflict_id:
-                    conflict = c
-                    break
-
+            conflict = next(
+                (
+                    c
+                    for c in self.conflict_records
+                    if c["conflict_id"] == conflict_id
+                ),
+                None,
+            )
             if not conflict:
                 raise ValueError(f"Conflict {conflict_id} not found")
 
@@ -277,20 +273,28 @@ class ConflictDetectionAgent(BaseAgent):
             # Resolution strategy counts
             strategy_counts = {}
             for conflict in conflicts:
-                strategy = conflict.get("resolution_strategy")
-                if strategy:
+                if strategy := conflict.get("resolution_strategy"):
                     strategy_counts[strategy] = strategy_counts.get(strategy, 0) + 1
 
-            summary = {
+            return {
                 "total_conflicts": len(conflicts),
                 "by_type": type_counts,
                 "by_resolution_strategy": strategy_counts,
-                "unresolved_count": len([c for c in conflicts if c.get("resolution_status") == "unresolved"]),
-                "resolved_count": len([c for c in conflicts if c.get("resolution_status") == "resolved"])
+                "unresolved_count": len(
+                    [
+                        c
+                        for c in conflicts
+                        if c.get("resolution_status") == "unresolved"
+                    ]
+                ),
+                "resolved_count": len(
+                    [
+                        c
+                        for c in conflicts
+                        if c.get("resolution_status") == "resolved"
+                    ]
+                ),
             }
-
-            return summary
-
         except Exception as e:
             self.logger.exception(f"Failed to get conflict summary: {e}")
             return {"error": str(e)}
@@ -303,8 +307,9 @@ class ConflictDetectionAgent(BaseAgent):
             conflicts = self.detect_conflicts(task["knowledge_base"])
             return {"status": "success", "conflicts": conflicts}
         elif action == "resolve":
-            result = self.resolve_conflict(task["conflict_id"], task.get("strategy", "confidence_weighted"))
-            return result
+            return self.resolve_conflict(
+                task["conflict_id"], task.get("strategy", "confidence_weighted")
+            )
         elif action == "summary":
             summary = self.get_conflict_summary(task.get("status"))
             return {"status": "success", "summary": summary}

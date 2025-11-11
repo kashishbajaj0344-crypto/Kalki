@@ -19,7 +19,7 @@ from ..knowledge.rollback_manager import RollbackManager
 from ..memory.memory_agent import MemoryAgent
 from ..core.planner import PlannerAgent
 from ..cognitive.performance_monitor import PerformanceMonitorAgent
-from ...eventbus import EventBus
+from ...utils.eventbus import EventBus
 
 logger = logging.getLogger("kalki.agents.creative")
 

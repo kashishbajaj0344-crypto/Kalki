@@ -13,6 +13,7 @@ from .base import (
 from .sample_agents import (
     SearchAgent, ExecutorAgent, SafetyAgent, ReasoningAgent
 )
+from .emotional import EmotionalIntelligenceAgent
 
 __all__ = [
     'Agent',
@@ -29,6 +30,7 @@ __all__ = [
     'ExecutorAgent',
     'SafetyAgent',
     'ReasoningAgent',
+    'EmotionalIntelligenceAgent',
 ]
 
 # [Kalki v2.3 — agents/__init__.py v1.0]

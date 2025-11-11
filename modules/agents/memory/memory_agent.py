@@ -11,7 +11,7 @@ from datetime import datetime
 from cryptography.fernet import Fernet
 
 from ..base_agent import BaseAgent, AgentCapability, AgentStatus
-from ...config import ROOT
+from ...utils.config import ROOT
 
 
 def now_ts() -> str:

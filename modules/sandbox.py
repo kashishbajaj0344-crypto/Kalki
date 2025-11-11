@@ -23,3 +23,13 @@ class Sandbox:
         except Exception as e:
             logger.error(f"Command execution failed: {command} -> {e}")
             return str(e)
+
+# Global sandbox instance
+_sandbox = None
+
+def get_sandbox_manager() -> Sandbox:
+    """Get the global sandbox manager instance"""
+    global _sandbox
+    if _sandbox is None:
+        _sandbox = Sandbox()
+    return _sandbox

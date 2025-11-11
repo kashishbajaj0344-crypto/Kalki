@@ -10,7 +10,7 @@ from typing import Dict, Any, Optional, List
 from datetime import datetime
 from collections import defaultdict
 import statistics
-from modules.logging_config import get_logger
+from modules.utils.logging_config import get_logger
 
 from ..base_agent import BaseAgent, AgentCapability, AgentStatus
 

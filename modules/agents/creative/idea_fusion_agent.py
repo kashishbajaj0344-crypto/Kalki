@@ -17,7 +17,7 @@ from collections import defaultdict
 from ..base_agent import BaseAgent, AgentCapability
 from ..memory.memory_agent import MemoryAgent
 from ..cognitive.performance_monitor import PerformanceMonitorAgent
-from ...eventbus import EventBus
+from ...utils.eventbus import EventBus
 
 logger = logging.getLogger("kalki.agents.idea_fusion")
 

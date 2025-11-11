@@ -8,7 +8,7 @@ Generates and tests hypotheses for problem-solving with scientific method approa
 import logging
 from typing import Dict, Any, Optional, List
 from datetime import datetime
-from modules.logging_config import get_logger
+from modules.utils.logging_config import get_logger
 
 from ..base_agent import BaseAgent, AgentCapability, AgentStatus
 

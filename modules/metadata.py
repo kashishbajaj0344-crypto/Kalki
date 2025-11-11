@@ -31,7 +31,7 @@ except ImportError:
     docx = None
 
 try:
-    from modules.config import register_module_version
+    from modules.utils.config import register_module_version
 except ImportError:
     def register_module_version(module: str, version: str):
         pass

@@ -15,12 +15,12 @@ import asyncio
 import uuid
 import time
 from typing import List, Dict, Any, Optional, Callable
-from modules.logging_config import get_logger
-from modules.config import get_config
+from modules.utils.logging_config import get_logger
+from modules.utils.config import get_config
 from modules.doc_parser import parse_document_async
 from modules.preprocessor import preprocess_text_async
 from modules.llm import llm_embed
-from modules.vectordb import get_vector_db_adapter
+from modules.learning.vectordb import get_vector_db_adapter
 
 try:
     from tqdm.asyncio import tqdm_asyncio

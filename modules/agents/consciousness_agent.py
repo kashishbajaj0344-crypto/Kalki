@@ -10,7 +10,7 @@ from typing import Dict, List, Optional, Any
 from datetime import datetime
 from .base_agent import BaseAgent, AgentCapability, AgentStatus
 from modules.consciousness_engine import ConsciousnessEngine
-from modules.eventbus import EventBus
+from modules.utils.eventbus import EventBus
 
 
 class ConsciousnessAgent(BaseAgent):

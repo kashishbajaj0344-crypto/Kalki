@@ -12,7 +12,6 @@ from typing import Dict, Any, List, Optional
 from datetime import datetime, timedelta
 import time
 
-import requests
 from bs4 import BeautifulSoup
 import aiohttp
 
@@ -47,11 +46,13 @@ class WebSearchAgent(BaseAgent):
         self.agent_version = "1.0"
 
         # Search providers configuration
+        google_api_key = os.getenv('GOOGLE_CSE_API_KEY') or os.getenv('GOOGLE_SEARCH_API_KEY')
+        google_cse_id = os.getenv('GOOGLE_CSE_CX') or os.getenv('GOOGLE_CSE_ID')
         self.providers = {
             'google': {
-                'enabled': bool(os.getenv('GOOGLE_SEARCH_API_KEY') and os.getenv('GOOGLE_CSE_ID')),
-                'api_key': os.getenv('GOOGLE_SEARCH_API_KEY'),
-                'cse_id': os.getenv('GOOGLE_CSE_ID'),
+                'enabled': bool(google_api_key and google_cse_id),
+                'api_key': google_api_key,
+                'cse_id': google_cse_id,
                 'endpoint': 'https://www.googleapis.com/customsearch/v1'
             },
             'bing': {
@@ -203,9 +204,19 @@ class WebSearchAgent(BaseAgent):
             params = task.get('params', {})
 
             if action == 'search':
-                query = params.get('query', '')
-                max_results = params.get('max_results', 5)
-                provider = params.get('provider')
+                # Support legacy payloads that may pass query/max_results at the top level
+                query = params.get('query') if isinstance(params, dict) else None
+                max_results = params.get('max_results') if isinstance(params, dict) else None
+                provider = params.get('provider') if isinstance(params, dict) else None
+
+                query = query or task.get('query', '')
+                max_results = max_results if max_results is not None else task.get('max_results', 5)
+
+                if not query:
+                    return {
+                        'status': 'error',
+                        'error': 'Missing search query'
+                    }
 
                 results = await self.search(query, max_results, provider)
                 return {
