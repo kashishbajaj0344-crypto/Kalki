@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+    <!-- Title -->
+    <text x="50" y="50" font-family="Arial" font-size="16" font-weight="bold">ROBOTIC ARM TECHNICAL SPECIFICATIONS</text>
+
+    <!-- Specifications Table -->
+    <rect x="50" y="70" width="700" height="500" fill="none" stroke="black" stroke-width="1"/>
+
+    <!-- Headers -->
+    <line x1="50" y1="100" x2="750" y2="100" stroke="black" stroke-width="1"/>
+    <text x="60" y="90" font-family="Arial" font-size="12" font-weight="bold">PARAMETER</text>
+    <text x="300" y="90" font-family="Arial" font-size="12" font-weight="bold">VALUE</text>
+    <text x="500" y="90" font-family="Arial" font-size="12" font-weight="bold">UNITS</text>
+
+    <!-- Specification Rows -->
+    <text x="60" y="120" font-family="Arial" font-size="10">Degrees of Freedom</text>
+    <text x="300" y="120" font-family="Arial" font-size="10">6</text>
+    <text x="500" y="120" font-family="Arial" font-size="10">-</text>
+
+    <text x="60" y="140" font-family="Arial" font-size="10">Reach</text>
+    <text x="300" y="140" font-family="Arial" font-size="10">850</text>
+    <text x="500" y="140" font-family="Arial" font-size="10">mm</text>
+
+    <text x="60" y="160" font-family="Arial" font-size="10">Payload Capacity</text>
+    <text x="300" y="160" font-family="Arial" font-size="10">5</text>
+    <text x="500" y="160" font-family="Arial" font-size="10">kg</text>
+
+    <text x="60" y="180" font-family="Arial" font-size="10">Repeatability</text>
+    <text x="300" y="180" font-family="Arial" font-size="10">0.05</text>
+    <text x="500" y="180" font-family="Arial" font-size="10">mm</text>
+
+    <text x="60" y="200" font-family="Arial" font-size="10">Power Consumption</text>
+    <text x="300" y="200" font-family="Arial" font-size="10">500</text>
+    <text x="500" y="200" font-family="Arial" font-size="10">W</text>
+
+    <text x="60" y="220" font-family="Arial" font-size="10">Operating Temperature</text>
+    <text x="300" y="220" font-family="Arial" font-size="10">[5, 45]</text>
+    <text x="500" y="220" font-family="Arial" font-size="10">°C</text>
+
+    <text x="60" y="240" font-family="Arial" font-size="10">Total Weight</text>
+    <text x="300" y="240" font-family="Arial" font-size="10">18.5</text>
+    <text x="500" y="240" font-family="Arial" font-size="10">kg</text>
+
+    <!-- Materials Section -->
+    <text x="60" y="280" font-family="Arial" font-size="12" font-weight="bold">MATERIALS:</text>
+    <text x="60" y="300" font-family="Arial" font-size="10">• Base & Links: Aluminum 6061</text>
+    <text x="60" y="315" font-family="Arial" font-size="10">• Joints & Gears: Steel 4140</text>
+    <text x="60" y="330" font-family="Arial" font-size="10">• Fasteners: Stainless Steel</text>
+    <text x="60" y="345" font-family="Arial" font-size="10">• Cables & Insulation: Various Polymers</text>
+
+    <!-- Components Section -->
+    <text x="60" y="380" font-family="Arial" font-size="12" font-weight="bold">MAJOR COMPONENTS:</text>
+    <text x="60" y="400" font-family="Arial" font-size="10">• 6x Harmonic Drive Actuators</text>
+    <text x="60" y="415" font-family="Arial" font-size="10">• 6x Servo Motors (50W each)</text>
+    <text x="60" y="430" font-family="Arial" font-size="10">• 12x Precision Bearings</text>
+    <text x="60" y="445" font-family="Arial" font-size="10">• 1x Parallel Gripper End Effector</text>
+    <text x="60" y="460" font-family="Arial" font-size="10">• Integrated Controller & Sensors</text>
+</svg>

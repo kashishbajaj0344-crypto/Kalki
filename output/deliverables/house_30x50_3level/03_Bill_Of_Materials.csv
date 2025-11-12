@@ -1,0 +1,11 @@
+Item,Part Number,Description,Qty,Material,Unit Cost,Total Cost,Supplier,Lead Time
+001,KLK-3level-001,Foundation,1,Concrete,155.52,155.52,McMaster-Carr,7
+002,KLK-3level-002,First Floor Frame,1,Lumber 2X6,466.56,466.56,McMaster-Carr,7
+003,KLK-3level-003,Second Floor Frame,1,Lumber 2X6,466.56,466.56,McMaster-Carr,7
+004,KLK-3level-004,Third Floor Frame,1,Lumber 2X6,466.56,466.56,McMaster-Carr,7
+005,KLK-3level-005,Roof Structure,1,Lumber 2X10,311.04,311.04,McMaster-Carr,7
+006,KLK-3level-006,Exterior Siding,1,Fiber Cement,0.03,0.03,McMaster-Carr,7
+007,KLK-3level-007,Windows,24,Vinyl,0.03,0.72,McMaster-Carr,7
+008,KLK-3level-008,Entry Doors,2,Steel,0.03,0.06,McMaster-Carr,7
+009,KLK-3level-009,Interior Doors,12,Wood,0.03,0.36,McMaster-Carr,7
+F01,FASTENERS-ASSORTED,Fasteners, bolts, nuts, washers (assorted),45,Stainless Steel 304,0.5,93.37,McMaster-Carr,3

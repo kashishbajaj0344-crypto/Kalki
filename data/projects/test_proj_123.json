@@ -1,0 +1,22 @@
+{
+  "project_id": "test_proj_123",
+  "project_type": "adu",
+  "current_stage": "completed",
+  "address": "123 Test St",
+  "start_date": "2024-11-26T09:25:05.553460",
+  "timeline_estimate_weeks": 48,
+  "budget_estimate": 200000.0,
+  "actual_budget_spent": 230000.0,
+  "actual_timeline_weeks": 50.0,
+  "completion_percentage": 1.0,
+  "completion_date": "2025-11-11T09:25:05.553464",
+  "property_intelligence": {},
+  "roadmap": {},
+  "decisions_made": [],
+  "milestones_completed": [],
+  "site_photos": [],
+  "issues_encountered": [],
+  "user_satisfaction_score": null,
+  "domain": "construction",
+  "last_updated": "2025-11-11T09:25:05.553486"
+}

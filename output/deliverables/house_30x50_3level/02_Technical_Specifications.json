@@ -1,0 +1,114 @@
+{
+  "general": {
+    "project_type": "architecture",
+    "design_standard": "ISO 2768-1 (General Tolerances)",
+    "measurement_system": "Metric (SI Units)",
+    "revision": "1.0",
+    "date": "2025-11-06T10:00:02.718114"
+  },
+  "dimensional_requirements": {
+    "width_ft": {
+      "nominal": 30,
+      "tolerance": "\u00b10.1mm",
+      "units": "mm"
+    },
+    "depth_ft": {
+      "nominal": 50,
+      "tolerance": "\u00b10.1mm",
+      "units": "mm"
+    },
+    "levels": {
+      "nominal": 3,
+      "tolerance": "\u00b10.05mm",
+      "units": "mm"
+    },
+    "total_area_sqft": {
+      "nominal": 4500,
+      "tolerance": "\u00b10.5mm",
+      "units": "mm"
+    },
+    "ceiling_height_ft": {
+      "nominal": 9,
+      "tolerance": "\u00b10.05mm",
+      "units": "mm"
+    },
+    "lot_size_sqft": {
+      "nominal": 12000,
+      "tolerance": "\u00b10.5mm",
+      "units": "mm"
+    }
+  },
+  "material_specifications": {
+    "concrete": {
+      "grade": "concrete",
+      "standard": "To be specified"
+    },
+    "lumber_2x6": {
+      "grade": "lumber_2x6",
+      "standard": "To be specified"
+    },
+    "lumber_2x10": {
+      "grade": "lumber_2x10",
+      "standard": "To be specified"
+    },
+    "fiber_cement": {
+      "grade": "fiber_cement",
+      "standard": "To be specified"
+    },
+    "vinyl": {
+      "grade": "vinyl",
+      "standard": "To be specified"
+    },
+    "steel": {
+      "grade": "steel",
+      "standard": "To be specified"
+    },
+    "wood": {
+      "grade": "wood",
+      "standard": "To be specified"
+    }
+  },
+  "manufacturing_specifications": {
+    "total_components": 9,
+    "recommended_processes": [
+      "CNC Machining",
+      "Welding/Joining"
+    ],
+    "assembly_complexity": "MEDIUM - Moderate complexity requiring skilled labor",
+    "estimated_labor_hours": 23
+  },
+  "performance_requirements": {
+    "building_type": "Single Family Residential",
+    "construction_type": "Type V - Wood Frame",
+    "occupancy_group": "R-3 Residential",
+    "bedrooms": 4,
+    "bathrooms": 3.5,
+    "parking_spaces": 2,
+    "building_code": "2021 International Building Code",
+    "zoning": "R-1 Single Family Residential",
+    "estimated_labor_hours": 2400
+  },
+  "safety_requirements": {
+    "structural_safety_factor": 2.0,
+    "electrical_safety_standard": "IEC 60950-1",
+    "fire_safety_rating": "Class A",
+    "emergency_shutdown": "Required for all motorized components"
+  },
+  "environmental_conditions": {
+    "operating_temperature": {
+      "min": -10,
+      "max": 50,
+      "units": "\u00b0C"
+    },
+    "storage_temperature": {
+      "min": -20,
+      "max": 60,
+      "units": "\u00b0C"
+    },
+    "humidity": {
+      "max": 85,
+      "units": "% RH non-condensing"
+    },
+    "ip_rating": "IP54 (Dust protected, splash resistant)"
+  }
+}

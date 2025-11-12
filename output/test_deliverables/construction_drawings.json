@@ -1,0 +1,87 @@
+{
+  "drawings": {
+    "site_plan": {
+      "scale": "1:200",
+      "sheets": [
+        "A1.0"
+      ],
+      "description": "Site layout showing building footprint, setbacks, parking",
+      "notes": []
+    },
+    "floor_plans": {
+      "scale": "1:50",
+      "sheets": [
+        "A2.1",
+        "A2.2",
+        "A2.3"
+      ],
+      "description": "Detailed floor plans with dimensions and room labels",
+      "notes": [
+        "All dimensions in millimeters unless noted",
+        "Verify all dimensions on site"
+      ]
+    },
+    "elevations": {
+      "scale": "1:100",
+      "sheets": [
+        "A3.1",
+        "A3.2",
+        "A3.3",
+        "A3.4"
+      ],
+      "description": "North, South, East, West elevations",
+      "notes": [
+        "Exterior finishes per spec section 07"
+      ]
+    },
+    "sections": {
+      "scale": "1:50",
+      "sheets": [
+        "A4.1",
+        "A4.2"
+      ],
+      "description": "Building sections showing floor-to-floor heights",
+      "notes": [
+        "Ceiling heights per code minimum"
+      ]
+    },
+    "details": {
+      "scale": "1:10, 1:5",
+      "sheets": [
+        "A5.1",
+        "A5.2",
+        "A5.3"
+      ],
+      "description": "Construction details for critical assemblies",
+      "notes": [
+        "See structural drawings for beam connections"
+      ]
+    },
+    "structural_plans": {
+      "scale": "1:50",
+      "sheets": [
+        "S1.1",
+        "S1.2"
+      ],
+      "description": "Foundation and framing plans",
+      "notes": [
+        "All lumber to be Grade #2 or better unless noted"
+      ]
+    }
+  },
+  "project_info": {
+    "project_name": "Build 3-story home in Vancouver, BC",
+    "project_id": "test-deliv-123",
+    "location": "Vancouver, BC",
+    "building_type": "residential_multi_story",
+    "total_area_sqft": 2500,
+    "stories": 3
+  },
+  "total_sheets": 15,
+  "status": "ready_for_review",
+  "notes": [
+    "Drawings conform to BC Building Code 2018",
+    "All structural members sized per span tables",
+    "Requires professional engineer stamp before permit submission"
+  ]
+}

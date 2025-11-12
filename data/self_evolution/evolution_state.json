@@ -1,0 +1,164 @@
+{
+  "evolution_state": {
+    "last_audit": "2025-11-11T09:19:34.325429",
+    "pending_recommendations": [],
+    "implemented_changes": [],
+    "evolution_goals": {
+      "interdisciplinary_coverage": 0.9,
+      "confidence_calibration": 0.85,
+      "ethical_alignment": 1.0,
+      "creativity_rigor_balance": 0.9,
+      "efficiency_ratio": 0.9,
+      "learning_rate": 0.1
+    },
+    "self_awareness_level": 0.7,
+    "evolution_velocity": 0.0,
+    "performance_history": {
+      "construction_copilot": [
+        {
+          "timestamp": "2025-11-11T09:19:34.326716",
+          "metrics": {
+            "user_completion_rate": 0.14285714285714285,
+            "average_satisfaction": 0.5,
+            "time_to_first_value": 2.5,
+            "bottleneck_stages": [
+              "budget_setting",
+              "contractor_selection",
+              "permit_waiting"
+            ],
+            "common_user_questions": [
+              "What is the next step?",
+              "How much will this cost?",
+              "When will permits be approved?"
+            ],
+            "abandon_points": [
+              {
+                "stage": "budget_setting",
+                "abandon_rate": 0.25
+              },
+              {
+                "stage": "architect_selection",
+                "abandon_rate": 0.15
+              }
+            ]
+          },
+          "scorecard": {
+            "completion_rate": 0.14285714285714285,
+            "satisfaction": 0.5,
+            "time_to_value": 0.75,
+            "issue_load": 1.0,
+            "abandonment_pressure": 0.6,
+            "trend": {}
+          },
+          "trend": {}
+        },
+        {
+          "timestamp": "2025-11-11T09:24:44.347016",
+          "metrics": {
+            "user_completion_rate": 0.09090909090909091,
+            "average_satisfaction": 0.5,
+            "time_to_first_value": 2.5,
+            "bottleneck_stages": [
+              "budget_setting",
+              "contractor_selection",
+              "permit_waiting"
+            ],
+            "common_user_questions": [
+              "What is the next step?",
+              "How much will this cost?",
+              "When will permits be approved?"
+            ],
+            "abandon_points": [
+              {
+                "stage": "budget_setting",
+                "abandon_rate": 0.25
+              },
+              {
+                "stage": "architect_selection",
+                "abandon_rate": 0.15
+              }
+            ]
+          },
+          "scorecard": {
+            "completion_rate": 0.09090909090909091,
+            "satisfaction": 0.5,
+            "time_to_value": 0.75,
+            "issue_load": 1.0,
+            "abandonment_pressure": 0.6,
+            "trend": {
+              "user_completion_rate": -0.05194805194805194,
+              "average_satisfaction": 0.0,
+              "time_to_first_value": 0.0,
+              "bottleneck_stages": 0,
+              "common_user_questions": 0,
+              "abandon_points": 0
+            }
+          },
+          "trend": {
+            "user_completion_rate": -0.05194805194805194,
+            "average_satisfaction": 0.0,
+            "time_to_first_value": 0.0,
+            "bottleneck_stages": 0,
+            "common_user_questions": 0,
+            "abandon_points": 0
+          }
+        },
+        {
+          "timestamp": "2025-11-11T09:25:05.581951",
+          "metrics": {
+            "user_completion_rate": 0.06666666666666667,
+            "average_satisfaction": 0.5,
+            "time_to_first_value": 2.5,
+            "bottleneck_stages": [
+              "budget_setting",
+              "contractor_selection",
+              "permit_waiting"
+            ],
+            "common_user_questions": [
+              "What is the next step?",
+              "How much will this cost?",
+              "When will permits be approved?"
+            ],
+            "abandon_points": [
+              {
+                "stage": "budget_setting",
+                "abandon_rate": 0.25
+              },
+              {
+                "stage": "architect_selection",
+                "abandon_rate": 0.15
+              }
+            ]
+          },
+          "scorecard": {
+            "completion_rate": 0.06666666666666667,
+            "satisfaction": 0.5,
+            "time_to_value": 0.75,
+            "issue_load": 1.0,
+            "abandonment_pressure": 0.6,
+            "trend": {
+              "user_completion_rate": -0.024242424242424246,
+              "average_satisfaction": 0.0,
+              "time_to_first_value": 0.0,
+              "bottleneck_stages": 0,
+              "common_user_questions": 0,
+              "abandon_points": 0
+            }
+          },
+          "trend": {
+            "user_completion_rate": -0.024242424242424246,
+            "average_satisfaction": 0.0,
+            "time_to_first_value": 0.0,
+            "bottleneck_stages": 0,
+            "common_user_questions": 0,
+            "abandon_points": 0
+          }
+        }
+      ]
+    },
+    "improvement_backlog": [],
+    "execution_history": []
+  },
+  "pending_recommendations": [],
+  "last_updated": "2025-11-11T09:25:05.582218"
+}

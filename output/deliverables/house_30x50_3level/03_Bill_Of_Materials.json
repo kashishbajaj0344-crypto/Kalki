@@ -1,0 +1,185 @@
+{
+  "items": [
+    {
+      "item_number": "001",
+      "part_number": "KLK-3level-001",
+      "description": "Foundation",
+      "type": "structural",
+      "quantity": 1,
+      "material": "Concrete",
+      "dimensions": {
+        "length": 360,
+        "width": 600,
+        "height": 36
+      },
+      "weight_kg": 15.552,
+      "unit_cost_usd": 155.52,
+      "total_cost_usd": 155.52,
+      "supplier": "McMaster-Carr",
+      "lead_time_days": 7,
+      "notes": "Verify dimensions and tolerances before ordering. Request material certifications."
+    },
+    {
+      "item_number": "002",
+      "part_number": "KLK-3level-002",
+      "description": "First Floor Frame",
+      "type": "structural",
+      "quantity": 1,
+      "material": "Lumber 2X6",
+      "dimensions": {
+        "length": 360,
+        "width": 600,
+        "height": 108
+      },
+      "weight_kg": 46.656,
+      "unit_cost_usd": 466.56,
+      "total_cost_usd": 466.56,
+      "supplier": "McMaster-Carr",
+      "lead_time_days": 7,
+      "notes": "Verify dimensions and tolerances before ordering. Request material certifications."
+    },
+    {
+      "item_number": "003",
+      "part_number": "KLK-3level-003",
+      "description": "Second Floor Frame",
+      "type": "structural",
+      "quantity": 1,
+      "material": "Lumber 2X6",
+      "dimensions": {
+        "length": 360,
+        "width": 600,
+        "height": 108
+      },
+      "weight_kg": 46.656,
+      "unit_cost_usd": 466.56,
+      "total_cost_usd": 466.56,
+      "supplier": "McMaster-Carr",
+      "lead_time_days": 7,
+      "notes": "Verify dimensions and tolerances before ordering. Request material certifications."
+    },
+    {
+      "item_number": "004",
+      "part_number": "KLK-3level-004",
+      "description": "Third Floor Frame",
+      "type": "structural",
+      "quantity": 1,
+      "material": "Lumber 2X6",
+      "dimensions": {
+        "length": 360,
+        "width": 600,
+        "height": 108
+      },
+      "weight_kg": 46.656,
+      "unit_cost_usd": 466.56,
+      "total_cost_usd": 466.56,
+      "supplier": "McMaster-Carr",
+      "lead_time_days": 7,
+      "notes": "Verify dimensions and tolerances before ordering. Request material certifications."
+    },
+    {
+      "item_number": "005",
+      "part_number": "KLK-3level-005",
+      "description": "Roof Structure",
+      "type": "structural",
+      "quantity": 1,
+      "material": "Lumber 2X10",
+      "dimensions": {
+        "length": 360,
+        "width": 600,
+        "height": 72
+      },
+      "weight_kg": 31.104,
+      "unit_cost_usd": 311.04,
+      "total_cost_usd": 311.04,
+      "supplier": "McMaster-Carr",
+      "lead_time_days": 7,
+      "notes": "Verify dimensions and tolerances before ordering. Request material certifications."
+    },
+    {
+      "item_number": "006",
+      "part_number": "KLK-3level-006",
+      "description": "Exterior Siding",
+      "type": "finish",
+      "quantity": 1,
+      "material": "Fiber Cement",
+      "dimensions": {
+        "area": 4320
+      },
+      "weight_kg": 0.002,
+      "unit_cost_usd": 0.03,
+      "total_cost_usd": 0.03,
+      "supplier": "McMaster-Carr",
+      "lead_time_days": 7,
+      "notes": "Verify dimensions and tolerances before ordering. Request material certifications."
+    },
+    {
+      "item_number": "007",
+      "part_number": "KLK-3level-007",
+      "description": "Windows",
+      "type": "opening",
+      "quantity": 24,
+      "material": "Vinyl",
+      "dimensions": {
+        "width": 48,
+        "height": 60
+      },
+      "weight_kg": 0.002,
+      "unit_cost_usd": 0.03,
+      "total_cost_usd": 0.72,
+      "supplier": "McMaster-Carr",
+      "lead_time_days": 7,
+      "notes": "Verify dimensions and tolerances before ordering. Request material certifications."
+    },
+    {
+      "item_number": "008",
+      "part_number": "KLK-3level-008",
+      "description": "Entry Doors",
+      "type": "opening",
+      "quantity": 2,
+      "material": "Steel",
+      "dimensions": {
+        "width": 36,
+        "height": 84
+      },
+      "weight_kg": 0.002,
+      "unit_cost_usd": 0.03,
+      "total_cost_usd": 0.06,
+      "supplier": "McMaster-Carr",
+      "lead_time_days": 7,
+      "notes": "Verify dimensions and tolerances before ordering. Request material certifications."
+    },
+    {
+      "item_number": "009",
+      "part_number": "KLK-3level-009",
+      "description": "Interior Doors",
+      "type": "opening",
+      "quantity": 12,
+      "material": "Wood",
+      "dimensions": {
+        "width": 30,
+        "height": 80
+      },
+      "weight_kg": 0.002,
+      "unit_cost_usd": 0.03,
+      "total_cost_usd": 0.36,
+      "supplier": "McMaster-Carr",
+      "lead_time_days": 7,
+      "notes": "Verify dimensions and tolerances before ordering. Request material certifications."
+    },
+    {
+      "item_number": "F01",
+      "part_number": "FASTENERS-ASSORTED",
+      "description": "Fasteners, bolts, nuts, washers (assorted)",
+      "quantity": 45,
+      "material": "Stainless Steel 304",
+      "unit_cost_usd": 0.5,
+      "total_cost_usd": 93.37,
+      "supplier": "McMaster-Carr",
+      "lead_time_days": 3,
+      "notes": "M4, M6, M8 metric fasteners"
+    }
+  ],
+  "total_cost_estimate": 1960.78,
+  "total_weight": 186.7,
+  "lead_time_days": 12
+}

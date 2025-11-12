@@ -1,0 +1,12 @@
+
+        Construction Project Specification
+        ==================================
+        
+        Project: Test ADU
+        Square Footage: 1200 sqft
+        Building Type: Residential ADU
+        Structural System: Wood Frame
+        Foundation: Concrete Slab
+        
+        This is a test document for quality assurance validation.
+        

@@ -1,0 +1,51 @@
+{
+  "audit_id": "audit_20251103_181654",
+  "timestamp": "2025-11-03T18:16:54.173404",
+  "time_range_days": 7,
+  "metrics_summary": {
+    "reinforcement_metrics": {
+      "total_responses": 0,
+      "average_composite_score": 0.0,
+      "improvement_rate": 0.0,
+      "bias_detection_rate": 0.0,
+      "ethical_alignment_rate": 1.0,
+      "efficiency_ratio": 1.0,
+      "learning_sessions": 0,
+      "last_update": ""
+    },
+    "temporal_metrics": {
+      "total_conclusions": 0,
+      "total_contradictions": 0,
+      "total_evolutions": 0,
+      "active_projects": 0,
+      "overall_continuity_score": 1.0,
+      "recent_activity": []
+    },
+    "system_integration": {
+      "integration_score": 0.8,
+      "operational_systems": 3,
+      "total_systems": 3,
+      "systems_status": {
+        "reinforcement_loop": true,
+        "temporal_buffer": true,
+        "meta_core": true
+      }
+    }
+  },
+  "trend_analysis": {
+    "composite_score_trend": "stable",
+    "learning_efficiency": "stable",
+    "consistency_trend": "stable",
+    "improvement_velocity": 0.0,
+    "concerning_patterns": [],
+    "positive_patterns": [
+      "Strong temporal consistency maintained"
+    ]
+  },
+  "bottleneck_identification": [],
+  "strength_assessment": [
+    "Excellent ethical alignment achieved",
+    "Strong temporal consistency across sessions"
+  ],
+  "overall_health_score": 0.44000000000000006
+}

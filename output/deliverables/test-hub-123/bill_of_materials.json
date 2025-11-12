@@ -1,0 +1,767 @@
+{
+  "items": [
+    {
+      "item": "Concrete, 30 MPa",
+      "unit": "m\u00b3",
+      "quantity": 21.0,
+      "unit_cost": 150.0,
+      "category": "foundation",
+      "total_cost": 3150.0
+    },
+    {
+      "item": "Rebar #4",
+      "unit": "kg",
+      "quantity": 350.0,
+      "unit_cost": 1.2,
+      "category": "foundation",
+      "total_cost": 420.0
+    },
+    {
+      "item": "Formwork, plywood",
+      "unit": "m\u00b2",
+      "quantity": 56.0,
+      "unit_cost": 25.0,
+      "category": "foundation",
+      "total_cost": 1400.0
+    },
+    {
+      "item": "Vapor barrier, 6mil poly",
+      "unit": "m\u00b2",
+      "quantity": 185.8045336306206,
+      "unit_cost": 2.5,
+      "category": "foundation",
+      "total_cost": 464.51
+    },
+    {
+      "item": "2x6 SPF stud, 8'",
+      "unit": "pcs",
+      "quantity": 3200.0,
+      "unit_cost": 8.5,
+      "category": "framing",
+      "total_cost": 27200.0
+    },
+    {
+      "item": "2x10 SPF joist, 16'",
+      "unit": "pcs",
+      "quantity": 300.0,
+      "unit_cost": 25.0,
+      "category": "framing",
+      "total_cost": 7500.0
+    },
+    {
+      "item": "2x12 SPF beam",
+      "unit": "pcs",
+      "quantity": 30.0,
+      "unit_cost": 45.0,
+      "category": "framing",
+      "total_cost": 1350.0
+    },
+    {
+      "item": "Plywood sheathing 1/2\"",
+      "unit": "sheets",
+      "quantity": 125.0,
+      "unit_cost": 42.0,
+      "category": "framing",
+      "total_cost": 5250.0
+    },
+    {
+      "item": "OSB roof sheathing 7/16\"",
+      "unit": "sheets",
+      "quantity": 62.5,
+      "unit_cost": 35.0,
+      "category": "framing",
+      "total_cost": 2187.5
+    },
+    {
+      "item": "Framing nails, 16d",
+      "unit": "kg",
+      "quantity": 40.0,
+      "unit_cost": 4.5,
+      "category": "framing",
+      "total_cost": 180.0
+    },
+    {
+      "item": "Vinyl siding",
+      "unit": "m\u00b2",
+      "quantity": 148.64362690449647,
+      "unit_cost": 15.0,
+      "category": "exterior",
+      "total_cost": 2229.65
+    },
+    {
+      "item": "Asphalt shingles",
+      "unit": "squares",
+      "quantity": 24.0,
+      "unit_cost": 120.0,
+      "category": "exterior",
+      "total_cost": 2880.0
+    },
+    {
+      "item": "House wrap",
+      "unit": "roll",
+      "quantity": 1.4864362690449646,
+      "unit_cost": 200.0,
+      "category": "exterior",
+      "total_cost": 297.29
+    },
+    {
+      "item": "Windows, vinyl",
+      "unit": "pcs",
+      "quantity": 18.0,
+      "unit_cost": 450.0,
+      "category": "exterior",
+      "total_cost": 8100.0
+    },
+    {
+      "item": "Entry door, steel",
+      "unit": "pcs",
+      "quantity": 2.0,
+      "unit_cost": 800.0,
+      "category": "exterior",
+      "total_cost": 1600.0
+    },
+    {
+      "item": "Interior door, hollow core",
+      "unit": "pcs",
+      "quantity": 16.0,
+      "unit_cost": 150.0,
+      "category": "exterior",
+      "total_cost": 2400.0
+    },
+    {
+      "item": "Fiberglass insulation R20",
+      "unit": "m\u00b2",
+      "quantity": 371.6090672612412,
+      "unit_cost": 8.0,
+      "category": "insulation",
+      "total_cost": 2972.87
+    },
+    {
+      "item": "Vapor barrier, poly",
+      "unit": "m\u00b2",
+      "quantity": 371.6090672612412,
+      "unit_cost": 1.5,
+      "category": "insulation",
+      "total_cost": 557.41
+    },
+    {
+      "item": "Drywall 1/2\"",
+      "unit": "sheets",
+      "quantity": 250.0,
+      "unit_cost": 15.0,
+      "category": "interior",
+      "total_cost": 3750.0
+    },
+    {
+      "item": "Joint compound",
+      "unit": "pail",
+      "quantity": 20.0,
+      "unit_cost": 25.0,
+      "category": "interior",
+      "total_cost": 500.0
+    },
+    {
+      "item": "Drywall screws",
+      "unit": "box",
+      "quantity": 30.0,
+      "unit_cost": 12.0,
+      "category": "interior",
+      "total_cost": 360.0
+    },
+    {
+      "item": "Paint, interior",
+      "unit": "gallon",
+      "quantity": 11.428571428571429,
+      "unit_cost": 45.0,
+      "category": "interior",
+      "total_cost": 514.29
+    },
+    {
+      "item": "Electrical panel, 200A",
+      "unit": "pcs",
+      "quantity": 1.0,
+      "unit_cost": 350.0,
+      "category": "electrical",
+      "total_cost": 350.0
+    },
+    {
+      "item": "Romex 14/2",
+      "unit": "m",
+      "quantity": 1000.0,
+      "unit_cost": 0.8,
+      "category": "electrical",
+      "total_cost": 800.0
+    },
+    {
+      "item": "Romex 12/2",
+      "unit": "m",
+      "quantity": 400.0,
+      "unit_cost": 1.2,
+      "category": "electrical",
+      "total_cost": 480.0
+    },
+    {
+      "item": "Outlets & switches",
+      "unit": "pcs",
+      "quantity": 100.0,
+      "unit_cost": 8.0,
+      "category": "electrical",
+      "total_cost": 800.0
+    },
+    {
+      "item": "Light fixtures",
+      "unit": "pcs",
+      "quantity": 40.0,
+      "unit_cost": 65.0,
+      "category": "electrical",
+      "total_cost": 2600.0
+    },
+    {
+      "item": "PEX piping 3/4\"",
+      "unit": "m",
+      "quantity": 160.0,
+      "unit_cost": 3.5,
+      "category": "plumbing",
+      "total_cost": 560.0
+    },
+    {
+      "item": "PEX fittings",
+      "unit": "pcs",
+      "quantity": 100.0,
+      "unit_cost": 2.5,
+      "category": "plumbing",
+      "total_cost": 250.0
+    },
+    {
+      "item": "HVAC ducting",
+      "unit": "m",
+      "quantity": 100.0,
+      "unit_cost": 15.0,
+      "category": "hvac",
+      "total_cost": 1500.0
+    },
+    {
+      "item": "Furnace, gas",
+      "unit": "pcs",
+      "quantity": 1.0,
+      "unit_cost": 2500.0,
+      "category": "hvac",
+      "total_cost": 2500.0
+    },
+    {
+      "item": "Laminate flooring",
+      "unit": "m\u00b2",
+      "quantity": 130.06317354143442,
+      "unit_cost": 25.0,
+      "category": "flooring",
+      "total_cost": 3251.58
+    },
+    {
+      "item": "Carpet",
+      "unit": "m\u00b2",
+      "quantity": 55.74136008918618,
+      "unit_cost": 30.0,
+      "category": "flooring",
+      "total_cost": 1672.24
+    },
+    {
+      "item": "Tile, ceramic",
+      "unit": "m\u00b2",
+      "quantity": 60.0,
+      "unit_cost": 45.0,
+      "category": "flooring",
+      "total_cost": 2700.0
+    },
+    {
+      "item": "Baseboard trim",
+      "unit": "m",
+      "quantity": 743.2181345224824,
+      "unit_cost": 8.0,
+      "category": "finishing",
+      "total_cost": 5945.75
+    },
+    {
+      "item": "Crown molding",
+      "unit": "m",
+      "quantity": 371.6090672612412,
+      "unit_cost": 12.0,
+      "category": "finishing",
+      "total_cost": 4459.31
+    },
+    {
+      "item": "Kitchen cabinets",
+      "unit": "lf",
+      "quantity": 20.0,
+      "unit_cost": 150.0,
+      "category": "fixtures",
+      "total_cost": 3000.0
+    },
+    {
+      "item": "Countertop, laminate",
+      "unit": "m",
+      "quantity": 6.0,
+      "unit_cost": 200.0,
+      "category": "fixtures",
+      "total_cost": 1200.0
+    },
+    {
+      "item": "Kitchen sink",
+      "unit": "pcs",
+      "quantity": 1.0,
+      "unit_cost": 250.0,
+      "category": "fixtures",
+      "total_cost": 250.0
+    },
+    {
+      "item": "Bathroom vanity",
+      "unit": "pcs",
+      "quantity": 4.0,
+      "unit_cost": 350.0,
+      "category": "fixtures",
+      "total_cost": 1400.0
+    },
+    {
+      "item": "Toilet",
+      "unit": "pcs",
+      "quantity": 4.0,
+      "unit_cost": 250.0,
+      "category": "fixtures",
+      "total_cost": 1000.0
+    },
+    {
+      "item": "Bathtub",
+      "unit": "pcs",
+      "quantity": 2.0,
+      "unit_cost": 600.0,
+      "category": "fixtures",
+      "total_cost": 1200.0
+    },
+    {
+      "item": "Shower stall",
+      "unit": "pcs",
+      "quantity": 1.0,
+      "unit_cost": 800.0,
+      "category": "fixtures",
+      "total_cost": 800.0
+    }
+  ],
+  "categories": {
+    "foundation": {
+      "items": [
+        {
+          "item": "Concrete, 30 MPa",
+          "unit": "m\u00b3",
+          "quantity": 21.0,
+          "unit_cost": 150.0,
+          "category": "foundation",
+          "total_cost": 3150.0
+        },
+        {
+          "item": "Rebar #4",
+          "unit": "kg",
+          "quantity": 350.0,
+          "unit_cost": 1.2,
+          "category": "foundation",
+          "total_cost": 420.0
+        },
+        {
+          "item": "Formwork, plywood",
+          "unit": "m\u00b2",
+          "quantity": 56.0,
+          "unit_cost": 25.0,
+          "category": "foundation",
+          "total_cost": 1400.0
+        },
+        {
+          "item": "Vapor barrier, 6mil poly",
+          "unit": "m\u00b2",
+          "quantity": 185.8045336306206,
+          "unit_cost": 2.5,
+          "category": "foundation",
+          "total_cost": 464.51
+        }
+      ],
+      "subtotal": 5434.51
+    },
+    "framing": {
+      "items": [
+        {
+          "item": "2x6 SPF stud, 8'",
+          "unit": "pcs",
+          "quantity": 3200.0,
+          "unit_cost": 8.5,
+          "category": "framing",
+          "total_cost": 27200.0
+        },
+        {
+          "item": "2x10 SPF joist, 16'",
+          "unit": "pcs",
+          "quantity": 300.0,
+          "unit_cost": 25.0,
+          "category": "framing",
+          "total_cost": 7500.0
+        },
+        {
+          "item": "2x12 SPF beam",
+          "unit": "pcs",
+          "quantity": 30.0,
+          "unit_cost": 45.0,
+          "category": "framing",
+          "total_cost": 1350.0
+        },
+        {
+          "item": "Plywood sheathing 1/2\"",
+          "unit": "sheets",
+          "quantity": 125.0,
+          "unit_cost": 42.0,
+          "category": "framing",
+          "total_cost": 5250.0
+        },
+        {
+          "item": "OSB roof sheathing 7/16\"",
+          "unit": "sheets",
+          "quantity": 62.5,
+          "unit_cost": 35.0,
+          "category": "framing",
+          "total_cost": 2187.5
+        },
+        {
+          "item": "Framing nails, 16d",
+          "unit": "kg",
+          "quantity": 40.0,
+          "unit_cost": 4.5,
+          "category": "framing",
+          "total_cost": 180.0
+        }
+      ],
+      "subtotal": 43667.5
+    },
+    "exterior": {
+      "items": [
+        {
+          "item": "Vinyl siding",
+          "unit": "m\u00b2",
+          "quantity": 148.64362690449647,
+          "unit_cost": 15.0,
+          "category": "exterior",
+          "total_cost": 2229.65
+        },
+        {
+          "item": "Asphalt shingles",
+          "unit": "squares",
+          "quantity": 24.0,
+          "unit_cost": 120.0,
+          "category": "exterior",
+          "total_cost": 2880.0
+        },
+        {
+          "item": "House wrap",
+          "unit": "roll",
+          "quantity": 1.4864362690449646,
+          "unit_cost": 200.0,
+          "category": "exterior",
+          "total_cost": 297.29
+        },
+        {
+          "item": "Windows, vinyl",
+          "unit": "pcs",
+          "quantity": 18.0,
+          "unit_cost": 450.0,
+          "category": "exterior",
+          "total_cost": 8100.0
+        },
+        {
+          "item": "Entry door, steel",
+          "unit": "pcs",
+          "quantity": 2.0,
+          "unit_cost": 800.0,
+          "category": "exterior",
+          "total_cost": 1600.0
+        },
+        {
+          "item": "Interior door, hollow core",
+          "unit": "pcs",
+          "quantity": 16.0,
+          "unit_cost": 150.0,
+          "category": "exterior",
+          "total_cost": 2400.0
+        }
+      ],
+      "subtotal": 17506.94
+    },
+    "insulation": {
+      "items": [
+        {
+          "item": "Fiberglass insulation R20",
+          "unit": "m\u00b2",
+          "quantity": 371.6090672612412,
+          "unit_cost": 8.0,
+          "category": "insulation",
+          "total_cost": 2972.87
+        },
+        {
+          "item": "Vapor barrier, poly",
+          "unit": "m\u00b2",
+          "quantity": 371.6090672612412,
+          "unit_cost": 1.5,
+          "category": "insulation",
+          "total_cost": 557.41
+        }
+      ],
+      "subtotal": 3530.2799999999997
+    },
+    "interior": {
+      "items": [
+        {
+          "item": "Drywall 1/2\"",
+          "unit": "sheets",
+          "quantity": 250.0,
+          "unit_cost": 15.0,
+          "category": "interior",
+          "total_cost": 3750.0
+        },
+        {
+          "item": "Joint compound",
+          "unit": "pail",
+          "quantity": 20.0,
+          "unit_cost": 25.0,
+          "category": "interior",
+          "total_cost": 500.0
+        },
+        {
+          "item": "Drywall screws",
+          "unit": "box",
+          "quantity": 30.0,
+          "unit_cost": 12.0,
+          "category": "interior",
+          "total_cost": 360.0
+        },
+        {
+          "item": "Paint, interior",
+          "unit": "gallon",
+          "quantity": 11.428571428571429,
+          "unit_cost": 45.0,
+          "category": "interior",
+          "total_cost": 514.29
+        }
+      ],
+      "subtotal": 5124.29
+    },
+    "electrical": {
+      "items": [
+        {
+          "item": "Electrical panel, 200A",
+          "unit": "pcs",
+          "quantity": 1.0,
+          "unit_cost": 350.0,
+          "category": "electrical",
+          "total_cost": 350.0
+        },
+        {
+          "item": "Romex 14/2",
+          "unit": "m",
+          "quantity": 1000.0,
+          "unit_cost": 0.8,
+          "category": "electrical",
+          "total_cost": 800.0
+        },
+        {
+          "item": "Romex 12/2",
+          "unit": "m",
+          "quantity": 400.0,
+          "unit_cost": 1.2,
+          "category": "electrical",
+          "total_cost": 480.0
+        },
+        {
+          "item": "Outlets & switches",
+          "unit": "pcs",
+          "quantity": 100.0,
+          "unit_cost": 8.0,
+          "category": "electrical",
+          "total_cost": 800.0
+        },
+        {
+          "item": "Light fixtures",
+          "unit": "pcs",
+          "quantity": 40.0,
+          "unit_cost": 65.0,
+          "category": "electrical",
+          "total_cost": 2600.0
+        }
+      ],
+      "subtotal": 5030.0
+    },
+    "plumbing": {
+      "items": [
+        {
+          "item": "PEX piping 3/4\"",
+          "unit": "m",
+          "quantity": 160.0,
+          "unit_cost": 3.5,
+          "category": "plumbing",
+          "total_cost": 560.0
+        },
+        {
+          "item": "PEX fittings",
+          "unit": "pcs",
+          "quantity": 100.0,
+          "unit_cost": 2.5,
+          "category": "plumbing",
+          "total_cost": 250.0
+        }
+      ],
+      "subtotal": 810.0
+    },
+    "hvac": {
+      "items": [
+        {
+          "item": "HVAC ducting",
+          "unit": "m",
+          "quantity": 100.0,
+          "unit_cost": 15.0,
+          "category": "hvac",
+          "total_cost": 1500.0
+        },
+        {
+          "item": "Furnace, gas",
+          "unit": "pcs",
+          "quantity": 1.0,
+          "unit_cost": 2500.0,
+          "category": "hvac",
+          "total_cost": 2500.0
+        }
+      ],
+      "subtotal": 4000.0
+    },
+    "flooring": {
+      "items": [
+        {
+          "item": "Laminate flooring",
+          "unit": "m\u00b2",
+          "quantity": 130.06317354143442,
+          "unit_cost": 25.0,
+          "category": "flooring",
+          "total_cost": 3251.58
+        },
+        {
+          "item": "Carpet",
+          "unit": "m\u00b2",
+          "quantity": 55.74136008918618,
+          "unit_cost": 30.0,
+          "category": "flooring",
+          "total_cost": 1672.24
+        },
+        {
+          "item": "Tile, ceramic",
+          "unit": "m\u00b2",
+          "quantity": 60.0,
+          "unit_cost": 45.0,
+          "category": "flooring",
+          "total_cost": 2700.0
+        }
+      ],
+      "subtotal": 7623.82
+    },
+    "finishing": {
+      "items": [
+        {
+          "item": "Baseboard trim",
+          "unit": "m",
+          "quantity": 743.2181345224824,
+          "unit_cost": 8.0,
+          "category": "finishing",
+          "total_cost": 5945.75
+        },
+        {
+          "item": "Crown molding",
+          "unit": "m",
+          "quantity": 371.6090672612412,
+          "unit_cost": 12.0,
+          "category": "finishing",
+          "total_cost": 4459.31
+        }
+      ],
+      "subtotal": 10405.060000000001
+    },
+    "fixtures": {
+      "items": [
+        {
+          "item": "Kitchen cabinets",
+          "unit": "lf",
+          "quantity": 20.0,
+          "unit_cost": 150.0,
+          "category": "fixtures",
+          "total_cost": 3000.0
+        },
+        {
+          "item": "Countertop, laminate",
+          "unit": "m",
+          "quantity": 6.0,
+          "unit_cost": 200.0,
+          "category": "fixtures",
+          "total_cost": 1200.0
+        },
+        {
+          "item": "Kitchen sink",
+          "unit": "pcs",
+          "quantity": 1.0,
+          "unit_cost": 250.0,
+          "category": "fixtures",
+          "total_cost": 250.0
+        },
+        {
+          "item": "Bathroom vanity",
+          "unit": "pcs",
+          "quantity": 4.0,
+          "unit_cost": 350.0,
+          "category": "fixtures",
+          "total_cost": 1400.0
+        },
+        {
+          "item": "Toilet",
+          "unit": "pcs",
+          "quantity": 4.0,
+          "unit_cost": 250.0,
+          "category": "fixtures",
+          "total_cost": 1000.0
+        },
+        {
+          "item": "Bathtub",
+          "unit": "pcs",
+          "quantity": 2.0,
+          "unit_cost": 600.0,
+          "category": "fixtures",
+          "total_cost": 1200.0
+        },
+        {
+          "item": "Shower stall",
+          "unit": "pcs",
+          "quantity": 1.0,
+          "unit_cost": 800.0,
+          "category": "fixtures",
+          "total_cost": 800.0
+        }
+      ],
+      "subtotal": 8850.0
+    }
+  },
+  "cost_summary": {
+    "materials_subtotal": 111982.4,
+    "labor_subtotal": 167973.6,
+    "subtotal": 279956.0,
+    "profit": 41993.4,
+    "contingency": 27995.6,
+    "grand_total": 349945.0,
+    "cost_per_sqft": 174.97
+  },
+  "total_items": 43,
+  "currency": "CAD",
+  "notes": [
+    "Prices are estimates based on BC market rates (2024)",
+    "Actual costs may vary by \u00b115% based on supplier and location",
+    "Labor costs estimated at 150% of materials",
+    "Includes 15% profit margin and 10% contingency",
+    "Does not include permits, engineering fees, or site preparation"
+  ]
+}

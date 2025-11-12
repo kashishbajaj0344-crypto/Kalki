@@ -166,7 +166,7 @@ class KalkiOrchestrator:
             if complexity in [TaskComplexity.SCIENTIFIC, TaskComplexity.STRATEGIC, TaskComplexity.CREATIVE]:
                 final_result = await self._synthesize_with_supreme_engine(task, agent_results, context, complexity)
             else:
-                final_result = await self._synthesize_result(task, agent_results, context, complexity)
+            final_result = await self._synthesize_result(task, agent_results, context, complexity)
 
             # Phase 6: Self-Evolution Learning
             await self._learn_from_execution(task, result, final_result)
@@ -302,9 +302,9 @@ class KalkiOrchestrator:
                 from modules.domains.domain_registry import DomainRegistry
                 domain_registry = DomainRegistry()
                 domain = domain_registry.get_domain(inferred_domain)
-                if domain and hasattr(domain, 'team_orchestrator'):
+                if domain and hasattr(domain, 'get_team_orchestrator'):
                     # Use domain's professional team orchestrator
-                    team_orch = await domain.team_orchestrator
+                    team_orch = await domain.get_team_orchestrator()
                     if team_orch:
                         # Get team status to see available roles
                         team_status = team_orch.get_team_status()
@@ -444,7 +444,7 @@ class KalkiOrchestrator:
         return results
 
     async def _synthesize_with_supreme_engine(self, task: Dict[str, Any], agent_results: List[Dict[str, Any]],
-                                            context: Dict[str, Any], complexity: str) -> Dict[str, Any]:
+                               context: Dict[str, Any], complexity: str) -> Dict[str, Any]:
         """Synthesize results using SupremeSynthesisEngine for complex tasks"""
         try:
             if not self.synthesis_engine:
@@ -479,7 +479,7 @@ class KalkiOrchestrator:
     async def _synthesize_result(self, task: Dict[str, Any], agent_results: List[Dict[str, Any]],
                                context: Dict[str, Any], complexity: str) -> Dict[str, Any]:
         """Synthesize results using standard synthesis"""
-        return await self._synthesize_basic(task, agent_results, context)
+            return await self._synthesize_basic(task, agent_results, context)
 
     async def _synthesize_basic(self, task: Dict[str, Any], agent_results: List[Dict[str, Any]],
                                context: Dict[str, Any]) -> Dict[str, Any]:

@@ -1,0 +1,109 @@
+{
+  "metadata": {
+    "project_name": "2D Platformer - Classic Jump & Run",
+    "date": "2025-11-07T19:28:27.513581"
+  },
+  "art_assets": {
+    "characters": {
+      "count": 5,
+      "assets_per_character": [
+        "Base model/sprite",
+        "Texture maps (diffuse, normal, specular)",
+        "Animations (idle, walk, run, attack, death)",
+        "UI portrait",
+        "Icon"
+      ]
+    },
+    "environments": {
+      "count": 10,
+      "assets_per_environment": [
+        "Tileset / Modular pieces",
+        "Props",
+        "Lighting setup",
+        "Skybox / Background",
+        "Particle effects"
+      ]
+    },
+    "ui": {
+      "screens": [
+        "Main menu",
+        "HUD",
+        "Inventory",
+        "Settings",
+        "Pause"
+      ],
+      "elements": [
+        "Buttons",
+        "Icons",
+        "Bars",
+        "Panels",
+        "Fonts"
+      ]
+    },
+    "vfx": {
+      "count": 30,
+      "types": [
+        "Hit effects",
+        "Explosions",
+        "Magic",
+        "Environmental",
+        "UI feedback"
+      ]
+    }
+  },
+  "audio_assets": {
+    "music": {
+      "tracks": 15,
+      "types": [
+        "Main theme",
+        "Combat",
+        "Exploration",
+        "Menu",
+        "Boss fights"
+      ]
+    },
+    "sfx": {
+      "count": 200,
+      "categories": [
+        "Player actions",
+        "Enemy sounds",
+        "Environment",
+        "UI",
+        "Weapons"
+      ]
+    },
+    "voice": {
+      "lines": 500,
+      "languages": [
+        "English",
+        "Spanish",
+        "French",
+        "German",
+        "Japanese"
+      ]
+    }
+  },
+  "production_pipeline": {
+    "art_style": "Stylized / Realistic",
+    "tools": {
+      "3d_modeling": "Blender / Maya",
+      "2d_art": "Photoshop / Aseprite",
+      "animation": "Spine / Unity Animator",
+      "audio": "FMOD / Wwise"
+    },
+    "quality_standards": {
+      "textures": "2K max resolution",
+      "models": "Sub-10k poly for characters",
+      "audio": "44.1kHz, compressed to OGG"
+    }
+  },
+  "asset_budget": {
+    "total_size": "5 GB",
+    "breakdown": {
+      "textures": "2 GB",
+      "models": "1 GB",
+      "audio": "1.5 GB",
+      "other": "500 MB"
+    }
+  }
+}

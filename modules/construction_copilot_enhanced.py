@@ -153,161 +153,319 @@ class EnhancedConstructionCopilot:
     """
     
     def __init__(self):
-        logger.info("🏗️ Initializing Enhanced Construction Copilot")
+        """Lightweight initialization - systems load lazily on first use"""
+        logger.info("🏗️ Initializing Enhanced Construction Copilot (lazy-loading enabled)")
         
         # ═══════════════════════════════════════════════════════════
-        # REUSE ALL KALKI SYSTEMS (Zero duplication!)
+        # LAZY-LOADED SYSTEMS (initialized on first use)
         # ═══════════════════════════════════════════════════════════
         
-        # Core Intelligence
-        self.llm = LLMEngine()  # Uses 3.1 8B + 3.2 Vision from models_config
-        logger.info("  ✓ LLM Engine loaded (3.1 8B + 3.2 Vision)")
+        # Core Intelligence (lazy-loaded)
+        self._llm = None
+        self._consciousness = None
+        self._meta_learning = None
+        self._research = None
+        self._multi_agent = None
+        self._knowledge_graph = None
+        self._rl_loop = None
+        self._self_evolution = None
         
-        # Enhancement #1: Consciousness (WHY reasoning)
-        self.consciousness = ConsciousnessEngine()
-        logger.info("  ✓ Consciousness Engine (explains reasoning)")
+        # Professional Systems (will use Construction Domain's instances)
+        self._team_orchestrator = None
+        self._deliverable_generator = None
+        self._cross_learning = None
+        self._workflow_executor = None
+        self._quality_framework = None
+        self._agent_manager = None
         
-        # Enhancement #2: Meta-Learning (learns from outcomes)
-        self.meta_learning = MetaLearningSystem()
-        logger.info("  ✓ Meta-Learning System (improves predictions)")
+        # Construction-specific modules (lazy-loaded)
+        self._journey_manager = None
+        self._property_intel = None
+        self._roadmap_generator = None
         
-        # Enhancement #3: Autonomous Research (investigates unknowns)
-        self.research = AutonomousResearchSystem()
-        logger.info("  ✓ Autonomous Research (handles novel situations)")
+        # Domain Registry (lightweight - just discovers domains)
+        self._domain_registry = DomainRegistry()
+        self._construction_domain = None  # Will be loaded from registry
         
-        # Enhancement #4: Multi-Agent Consensus (validates decisions)
-        self.multi_agent = MultiAgentConsensusSystem(llm_engine=self.llm)
-        logger.info("  ✓ Multi-Agent Consensus (3-agent validation)")
-        
-        # Enhancement #5: Cross-Modal Knowledge Graph (text↔images)
-        self.knowledge_graph = VisualKnowledgeGraph()
-        logger.info("  ✓ Visual Knowledge Graph (automatic diagrams)")
-        
-        # Enhancement #6: Reinforcement Learning (learns from feedback)
-        self.rl_loop = ReinforcementLoop()
-        logger.info("  ✓ Reinforcement Learning (adapts to user)")
-        
-        # Enhancement #7: Self-Evolution (improves processes)
-        self.self_evolution = SelfEvolutionManager()
-        logger.info("  ✓ Self-Evolution (optimizes workflows)")
-        
-        # Enhancement #8: Domain Registry (extensible)
-        self.domain_registry = DomainRegistry()
-        self._register_construction_domain()
-        logger.info("  ✓ Domain Registry (multi-domain capable)")
-        
-        # ═══════════════════════════════════════════════════════════
-        # NEW: PROFESSIONAL TEAM & DELIVERABLE SYSTEMS
-        # ═══════════════════════════════════════════════════════════
-        
-        # Professional Team Orchestration
-        event_bus = EventBus()
-        agent_manager = AgentManager(event_bus)
-        self.agent_manager = agent_manager
-        self.team_orchestrator = ProfessionalTeamOrchestrator(agent_manager, self.llm)
-        logger.info("  ✓ Professional Team Orchestrator (architect + engineer + PM teams)")
-        
-        # Professional Deliverable Generation
-        self.deliverable_generator = ProfessionalDeliverableGenerator(self.llm, self.knowledge_graph)
-        logger.info("  ✓ Professional Deliverable Generator (CAD, blueprints, documents)")
-        
-        # Cross-Domain Learning
-        self.cross_learning = CrossDomainLearning(self.domain_registry, self.meta_learning, self.llm)
-        logger.info("  ✓ Cross-Domain Learning (knowledge transfer)")
-        
-        # Professional Workflow Execution
-        self.workflow_executor = ProfessionalWorkflowExecutor(self.team_orchestrator, self.llm)
-        logger.info("  ✓ Professional Workflow Executor (multi-step workflows)")
-        
-        # Quality Assurance Framework
-        self.quality_framework = QualityAssuranceFramework(self.llm)
-        logger.info("  ✓ Quality Assurance Framework (professional validation)")
-        
-        # ═══════════════════════════════════════════════════════════
-        # CONSTRUCTION-SPECIFIC MODULES (Small orchestration layer)
-        # ═══════════════════════════════════════════════════════════
-        
-        # Journey Management
-        self.journey_manager = ConstructionJourneyManager(
-            llm_engine=self.llm,
-            consciousness=self.consciousness,
-            meta_learning=self.meta_learning
-        )
-        logger.info("  ✓ Construction Journey Manager")
-        
-        # Property Intelligence
-        self.property_intel = PropertyIntelligenceGatherer(
-            llm_engine=self.llm,
-            research_system=self.research
-        )
-        logger.info("  ✓ Property Intelligence Gatherer")
-        
-        # Roadmap Generation
-        self.roadmap_generator = RoadmapGenerator(
-            llm_engine=self.llm,
-            meta_learning=self.meta_learning
-        )
-        logger.info("  ✓ Roadmap Generator")
-        
-        # Project tracking
+        # Project tracking (lightweight)
         self.active_projects: Dict[str, ProjectState] = {}
         self.system_improvements: Dict[str, Dict[str, Any]] = {}
         self.project_persistence = ProjectPersistence()
+        
+        # Initialization state
+        self._initialized = False
+        self._initialization_lock = asyncio.Lock()
+        self._roles_initialized = False
+        
+        # Load persisted projects (lightweight operation)
         self._load_persisted_projects()
         
-        logger.info("✅ Enhanced Construction Copilot Ready!")
-        logger.info("   10/10 intelligence enhancements active")
-        logger.info("   Professional team coordination enabled")
-        logger.info("   Deliverable generation enabled")
-        logger.info("   Cross-domain learning enabled")
-        logger.info("   Quality assurance enabled")
-        
-        # Initialize professional roles asynchronously (will be done on first use)
-        self._roles_initialized = False
+        logger.info("✅ Construction Copilot initialized (systems will load on demand)")
+        logger.info("   Use await copilot.initialize() to pre-load all systems")
     
-    async def _ensure_roles_initialized(self):
-        """Ensure professional roles are initialized (lazy initialization)"""
-        if self._roles_initialized:
-            return
-        
-        await self._initialize_construction_roles()
-        self._roles_initialized = True
+    async def initialize(self):
+        """Lazy-load all systems on first use (async initialization)"""
+        async with self._initialization_lock:
+            if self._initialized:
+                return
+            
+            logger.info("🔄 Loading core systems...")
+            
+            # Initialize core systems (only when needed)
+            self._llm = LLMEngine()
+            try:
+                await self._llm.initialize()
+            except AttributeError:
+                # LLMEngine might not have async initialize
+                pass
+            logger.info("  ✓ LLM Engine loaded (3.1 8B + 3.2 Vision)")
+            
+            self._consciousness = ConsciousnessEngine()
+            logger.info("  ✓ Consciousness Engine (explains reasoning)")
+            
+            self._meta_learning = MetaLearningSystem()
+            logger.info("  ✓ Meta-Learning System (improves predictions)")
+            
+            self._research = AutonomousResearchSystem()
+            logger.info("  ✓ Autonomous Research (handles novel situations)")
+            
+            self._multi_agent = MultiAgentConsensusSystem(llm_engine=self._llm)
+            logger.info("  ✓ Multi-Agent Consensus (3-agent validation)")
+            
+            self._knowledge_graph = VisualKnowledgeGraph()
+            logger.info("  ✓ Visual Knowledge Graph (automatic diagrams)")
+            
+            self._rl_loop = ReinforcementLoop()
+            logger.info("  ✓ Reinforcement Learning (adapts to user)")
+            
+            self._self_evolution = SelfEvolutionManager()
+            logger.info("  ✓ Self-Evolution (optimizes workflows)")
+            
+            # Get Construction Domain (uses its professional systems)
+            self._construction_domain = self._domain_registry.get_domain("construction")
+            if self._construction_domain:
+                # Initialize domain's professional integration
+                await self._construction_domain._get_professional_integration()
+                logger.info("  ✓ Construction Domain loaded with professional systems")
+                
+                # Initialize construction-specific roles via domain
+                await self._initialize_construction_roles()
+            else:
+                logger.warning("  ⚠️ Construction Domain not found - creating fallback professional systems")
+                # Fallback: create professional systems directly
+                event_bus = EventBus()
+                self._agent_manager = AgentManager(event_bus)
+                self._team_orchestrator = ProfessionalTeamOrchestrator(self._agent_manager, self._llm)
+                self._deliverable_generator = ProfessionalDeliverableGenerator(self._llm, self._knowledge_graph)
+                self._cross_learning = CrossDomainLearning(self._domain_registry, self._meta_learning, self._llm)
+                self._workflow_executor = ProfessionalWorkflowExecutor(self._team_orchestrator, self._llm)
+                self._quality_framework = QualityAssuranceFramework(self._llm)
+            
+            # Initialize construction-specific modules (lazy)
+            self._journey_manager = ConstructionJourneyManager(
+                llm_engine=self._llm,
+                consciousness=self._consciousness,
+                meta_learning=self._meta_learning
+            )
+            logger.info("  ✓ Construction Journey Manager")
+            
+            self._property_intel = PropertyIntelligenceGatherer(
+                llm_engine=self._llm,
+                research_system=self._research
+            )
+            logger.info("  ✓ Property Intelligence Gatherer")
+            
+            self._roadmap_generator = RoadmapGenerator(
+                llm_engine=self._llm,
+                meta_learning=self._meta_learning
+            )
+            logger.info("  ✓ Roadmap Generator")
+            
+            self._initialized = True
+            logger.info("✅ All systems loaded and ready!")
+    
+    async def _ensure_initialized(self):
+        """Ensure systems are initialized (called by lazy properties)"""
+        if not self._initialized:
+            await self.initialize()
     
     async def _initialize_construction_roles(self):
         """Initialize professional roles for construction domain"""
+        if self._roles_initialized:
+            return
+        
         try:
+            # Use domain's team orchestrator
+            team_orch = await self.get_team_orchestrator()
+            
             # Assign agents to construction professional roles
-            await self.team_orchestrator.assign_role(
+            await team_orch.assign_role(
                 role=ProfessionalRole.ARCHITECT,
-                agent_capability=AgentCapability.DESIGN
+                agent_capability=AgentCapability.DESIGN,
+                domain="construction"
             )
-            await self.team_orchestrator.assign_role(
+            await team_orch.assign_role(
                 role=ProfessionalRole.STRUCTURAL_ENGINEER,
-                agent_capability=AgentCapability.ANALYSIS
+                agent_capability=AgentCapability.ANALYSIS,
+                domain="construction"
             )
-            await self.team_orchestrator.assign_role(
+            await team_orch.assign_role(
                 role=ProfessionalRole.PROJECT_MANAGER,
-                agent_capability=AgentCapability.PLANNING
+                agent_capability=AgentCapability.PLANNING,
+                domain="construction"
             )
-            await self.team_orchestrator.assign_role(
+            await team_orch.assign_role(
                 role=ProfessionalRole.COST_ESTIMATOR,
-                agent_capability=AgentCapability.ANALYSIS
+                agent_capability=AgentCapability.ANALYSIS,
+                domain="construction"
             )
+            self._roles_initialized = True
             logger.info("  ✓ Construction professional roles initialized")
         except Exception as e:
             logger.warning(f"  ⚠️ Could not initialize all roles: {e} (will auto-assign when needed)")
     
+    # ═══════════════════════════════════════════════════════════
+    # LAZY ACCESS METHODS - Unified Access Pattern
+    # ═══════════════════════════════════════════════════════════
+    
+    async def get_llm(self):
+        """Get LLM Engine (lazy-loaded)"""
+        await self._ensure_initialized()
+        return self._llm
+    
+    async def get_consciousness(self):
+        """Get Consciousness Engine (lazy-loaded)"""
+        await self._ensure_initialized()
+        return self._consciousness
+    
+    async def get_meta_learning(self):
+        """Get Meta-Learning System (lazy-loaded)"""
+        await self._ensure_initialized()
+        return self._meta_learning
+    
+    async def get_research(self):
+        """Get Autonomous Research System (lazy-loaded)"""
+        await self._ensure_initialized()
+        return self._research
+    
+    async def get_multi_agent(self):
+        """Get Multi-Agent Consensus System (lazy-loaded)"""
+        await self._ensure_initialized()
+        return self._multi_agent
+    
+    async def get_knowledge_graph(self):
+        """Get Visual Knowledge Graph (lazy-loaded)"""
+        await self._ensure_initialized()
+        return self._knowledge_graph
+    
+    async def get_rl_loop(self):
+        """Get Reinforcement Loop (lazy-loaded)"""
+        await self._ensure_initialized()
+        return self._rl_loop
+    
+    async def get_self_evolution(self):
+        """Get Self-Evolution Manager (lazy-loaded)"""
+        await self._ensure_initialized()
+        return self._self_evolution
+    
+    async def get_team_orchestrator(self):
+        """Get Professional Team Orchestrator from Construction Domain"""
+        await self._ensure_initialized()
+        if self._construction_domain:
+            return await self._construction_domain.get_team_orchestrator()
+        return self._team_orchestrator
+    
+    async def get_deliverable_generator(self):
+        """Get Professional Deliverable Generator from Construction Domain"""
+        await self._ensure_initialized()
+        if self._construction_domain:
+            return await self._construction_domain.get_deliverable_generator()
+        return self._deliverable_generator
+    
+    async def get_cross_learning(self):
+        """Get Cross-Domain Learning from Construction Domain"""
+        await self._ensure_initialized()
+        if self._construction_domain:
+            return await self._construction_domain.get_cross_learning()
+        return self._cross_learning
+    
+    async def get_workflow_executor(self):
+        """Get Professional Workflow Executor from Construction Domain"""
+        await self._ensure_initialized()
+        if self._construction_domain:
+            return await self._construction_domain.get_workflow_executor()
+        return self._workflow_executor
+    
+    async def get_quality_framework(self):
+        """Get Quality Assurance Framework from Construction Domain"""
+        await self._ensure_initialized()
+        if self._construction_domain:
+            return await self._construction_domain.get_quality_framework()
+        return self._quality_framework
+    
+    async def get_journey_manager(self):
+        """Get Construction Journey Manager (lazy-loaded)"""
+        await self._ensure_initialized()
+        return self._journey_manager
+    
+    async def get_property_intel(self):
+        """Get Property Intelligence Gatherer (lazy-loaded)"""
+        await self._ensure_initialized()
+        return self._property_intel
+    
+    async def get_roadmap_generator(self):
+        """Get Roadmap Generator (lazy-loaded)"""
+        await self._ensure_initialized()
+        return self._roadmap_generator
+    
+    # Convenience properties for backward compatibility (use get_* methods instead)
+    @property
+    def llm(self):
+        """Backward compatibility - use get_llm() instead"""
+        return self._llm if self._initialized else None
+    
+    @property
+    def consciousness(self):
+        """Backward compatibility - use get_consciousness() instead"""
+        return self._consciousness if self._initialized else None
+    
+    @property
+    def meta_learning(self):
+        """Backward compatibility - use get_meta_learning() instead"""
+        return self._meta_learning if self._initialized else None
+    
+    @property
+    def research(self):
+        """Backward compatibility - use get_research() instead"""
+        return self._research if self._initialized else None
+    
+    @property
+    def journey_manager(self):
+        """Backward compatibility - use get_journey_manager() instead"""
+        return self._journey_manager if self._initialized else None
+    
+    @property
+    def property_intel(self):
+        """Backward compatibility - use get_property_intel() instead"""
+        return self._property_intel if self._initialized else None
+    
+    @property
+    def roadmap_generator(self):
+        """Backward compatibility - use get_roadmap_generator() instead"""
+        return self._roadmap_generator if self._initialized else None
+    
     
     def _register_construction_domain(self):
-    """Construction domain is auto-discovered by DomainRegistry.
+        """Construction domain is auto-discovered by DomainRegistry.
         
-    TODO: In the future, add hooks for custom construction domain extensions,
-    validation logic, or dynamic domain registration as needed.
-    """
-    # DomainRegistry automatically discovers construction domain
-    # from modules/domains/construction/
-    logger.info("  ✓ Construction domain registered (auto-discovered)")
-
+        TODO: In the future, add hooks for custom construction domain extensions,
+        validation logic, or dynamic domain registration as needed.
+        """
+        # DomainRegistry automatically discovers construction domain
+        # from modules/domains/construction/
+        logger.info("  ✓ Construction domain registered (auto-discovered)")
+        pass
+    
     def _load_persisted_projects(self):
         """Restore persisted project states from disk."""
         try:
@@ -380,7 +538,8 @@ class EnhancedConstructionCopilot:
         logger.info(f"🧠 Consciousness explaining: {recommendation[:60]}...")
         
         # Consciousness introspects its own reasoning
-        reasoning = await self.consciousness.introspect_decision(
+        consciousness = await self.get_consciousness()
+        reasoning = await consciousness.introspect_decision(
             decision=recommendation,
             context=context,
             domain="construction"
@@ -458,21 +617,23 @@ RISKS IF YOU SKIP:
         }
         
         # Meta-learn: Update models
-        insights = await self.meta_learning.learn_from_outcomes(
+        meta_learning = await self.get_meta_learning()
+        insights = await meta_learning.learn_from_outcomes(
             task_type='construction_project',
             outcomes=outcomes
         )
         
         # Update future roadmap estimates
         if insights.get('timeline_adjustment'):
-            await self.roadmap_generator.adjust_timeline_estimates(
+            roadmap_generator = await self.get_roadmap_generator()
+            await roadmap_generator.adjust_timeline_estimates(
                 project_type=project.project_type,
                 location=project.property_intelligence.get('location'),
                 adjustment_factor=insights['timeline_adjustment']
             )
         
         if insights.get('budget_adjustment'):
-            await self.roadmap_generator.adjust_budget_estimates(
+            await roadmap_generator.adjust_budget_estimates(
                 project_type=project.project_type,
                 adjustment_factor=insights['budget_adjustment']
             )
@@ -508,7 +669,8 @@ RISKS IF YOU SKIP:
         logger.info(f"🔍 Researching unknown situation: {situation[:60]}...")
         
         # Check confidence first
-        initial_response = await self.llm.generate(
+        llm = await self.get_llm()
+        initial_response = await llm.generate(
             prompt=f"Answer this construction question: {situation}",
             context=context
         )
@@ -538,14 +700,15 @@ RISKS IF YOU SKIP:
         # Low confidence - trigger autonomous research
         logger.info(f"⚠️ Low confidence ({confidence:.0%}). Starting autonomous research...")
         
-        research_results = await self.research.investigate(
+        research = await self.get_research()
+        research_results = await research.investigate(
             query=situation,
             context=context,
             methods=['web_search', 'code_lookup', 'similar_projects', 'knowledge_graph_search']
         )
         
         # Synthesize findings
-        synthesized_response = await self.llm.generate(
+        synthesized_response = await llm.generate(
             prompt=f"""Based on research findings, answer: {situation}
             
 Research findings:
@@ -716,7 +879,8 @@ Reasoning: {reasoning[:100]}...
         logger.info(f"💬 Answering with diagrams: {query[:60]}...")
         
         # Generate text answer
-        text_answer_response = await self.llm.generate(
+        llm = await self.get_llm()
+        text_answer_response = await llm.generate(
             prompt=query,
             context=context,
             task='construction_chat'
@@ -1059,13 +1223,14 @@ Path: {diagram.get('image_path', 'N/A')}
             return {'error': 'Project not found'}
         
         # Vision analysis
-        analysis = await self.llm.analyze_image(
+        llm = await self.get_llm()
+        analysis = await llm.analyze_image(
             image_path=site_photo_path,
             prompt=f"""Analyze this construction site photo:
             
 Project type: {project.project_type}
 Current stage: {project.current_stage}
-Expected work: {self.journey_manager.get_current_milestone(project_id)}
+Expected work: {(await self.get_journey_manager()).get_current_milestone(project_id)}
 
 Identify:
 1. What construction work is visible and appears completed?
@@ -1095,7 +1260,8 @@ Provide structured analysis with confidence scores.""",
         
         # Auto-update roadmap
         for item in completed_items:
-            await self.journey_manager.mark_milestone_complete(project_id, item)
+            journey_manager = await self.get_journey_manager()
+            await journey_manager.mark_milestone_complete(project_id, item)
         
         # Update project state
         project.site_photos.append(site_photo_path)
@@ -1110,7 +1276,8 @@ Provide structured analysis with confidence scores.""",
             logger.info(f"✅ Project {project.project_id} marked as complete!")
         
         # Meta-learning: Record observation
-        await self.meta_learning.record_progress_observation(
+        meta_learning = await self.get_meta_learning()
+        await meta_learning.record_progress_observation(
             project_type=project.project_type,
             expected_stage=project.current_stage,
             actual_progress=completed_items,
@@ -1126,7 +1293,7 @@ Provide structured analysis with confidence scores.""",
             'new_completion_percentage': project.completion_percentage,
             'quality_issues': quality_issues,
             'schedule_variance_days': schedule_variance,
-            'next_expected_work': self.journey_manager.get_next_milestone(project_id),
+            'next_expected_work': (await self.get_journey_manager()).get_next_milestone(project_id),
             'photo_analysis': analysis['text'],
             'auto_updated': True,
             'user_message': self._format_progress_update(
@@ -1323,7 +1490,8 @@ Completed work:
             return []
         
         # Use meta-learning to identify risk patterns
-        predictions = await self.meta_learning.predict_risks(
+        meta_learning = await self.get_meta_learning()
+        predictions = await meta_learning.predict_risks(
             current_stage=project.current_stage,
             project_type=project.project_type,
             timeline=project.timeline_estimate_weeks,
@@ -1338,12 +1506,13 @@ Completed work:
         for prediction in predictions:
             if prediction['probability'] > 0.6:
                 # High probability - research mitigation strategies
-                research = await self.research.investigate(
+                research_system = await self.get_research()
+                research_results = await research_system.investigate(
                     query=f"How to prevent: {prediction['issue']} in {project.project_type}",
                     context={'project': project}
                 )
-                prediction['mitigation_strategies'] = research.get('findings', [])
-                prediction['research_sources'] = research.get('sources', [])
+                prediction['mitigation_strategies'] = research_results.get('findings', [])
+                prediction['research_sources'] = research_results.get('sources', [])
             
             enriched_predictions.append(prediction)
         
@@ -1386,7 +1555,8 @@ Completed work:
         logger.info(f"🏗️ Starting new project: {user_input[:60]}...")
         
         # STEP 1: Extract intent
-        intent_response = await self.llm.generate(
+        llm = await self.get_llm()
+        intent_response = await llm.generate(
             f"Extract project information from: {user_input}\n\nProvide address, project type (adu/remodel/new_construction), and square footage.",
             task='construction_reasoning'
         )
@@ -1421,7 +1591,8 @@ Completed work:
         
         # STEP 2: Gather property intelligence
         if intent.get('address'):
-            property_data = await self.property_intel.gather_property_intelligence(
+            property_intel = await self.get_property_intel()
+            property_data = await property_intel.gather_property_intelligence(
                 address=intent['address'],
                 project_type=intent['project_type']
             )
@@ -1429,18 +1600,21 @@ Completed work:
             property_data = {}
         
         # STEP 3: Consciousness assesses readiness (WITH WHY REASONING!)
-        assessment = await self.consciousness.assess_project_readiness(
+        consciousness = await self.get_consciousness()
+        assessment = await consciousness.assess_project_readiness(
             user_input=user_input,
             property_data=property_data,
             domain='construction'
         )
         
         # STEP 4: Generate personalized roadmap (uses meta-learning)
-        roadmap = await self.roadmap_generator.generate_personalized_roadmap(
+        meta_learning = await self.get_meta_learning()
+        roadmap_generator = await self.get_roadmap_generator()
+        roadmap = await roadmap_generator.generate_personalized_roadmap(
             project_type=intent.get('project_type', 'adu'),
             assessment=assessment,
             property_constraints=property_data,
-            historical_data=self.meta_learning.get_patterns(domain='construction')
+            historical_data=meta_learning.get_patterns(domain='construction')
         )
         
         # STEP 5: Multi-agent validates roadmap if high-value

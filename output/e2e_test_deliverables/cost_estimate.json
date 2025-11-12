@@ -1,0 +1,66 @@
+{
+  "construction_costs": {
+    "materials_subtotal": 129810.51,
+    "labor_subtotal": 194715.76,
+    "subtotal": 324526.27,
+    "profit": 48678.94,
+    "contingency": 32452.63,
+    "grand_total": 405657.84,
+    "cost_per_sqft": 162.26
+  },
+  "additional_costs": {
+    "permits_and_fees": {
+      "building_permit": 6250.0,
+      "development_permit": 1500,
+      "utility_connections": 3000,
+      "inspection_fees": 800
+    },
+    "professional_services": {
+      "architectural_design": 12500,
+      "structural_engineering": 3500,
+      "energy_advisor": 1200,
+      "surveyor": 2000
+    },
+    "site_costs": {
+      "excavation": 5000,
+      "grading": 3000,
+      "driveway": 8000,
+      "landscaping": 5000
+    },
+    "temporary_facilities": {
+      "temporary_power": 800,
+      "portable_toilets": 600,
+      "waste_disposal": 2500,
+      "site_fencing": 1200
+    },
+    "insurance_and_bonding": {
+      "builders_risk_insurance": 4056.5784000000003,
+      "liability_insurance": 2500,
+      "performance_bond": 6084.8676000000005
+    }
+  },
+  "cost_summary": {
+    "construction_subtotal": 405657.84,
+    "additional_costs_total": 69491.446,
+    "subtotal": 475149.286,
+    "contingency_10_percent": 47514.92860000001,
+    "grand_total": 522664.2146,
+    "cost_per_sqft": 209.06568584000001
+  },
+  "payment_schedule": {
+    "deposit": 52266.421460000005,
+    "foundation_complete": 104532.84292000001,
+    "framing_complete": 130666.05365,
+    "drywall_complete": 104532.84292000001,
+    "final_completion": 130666.05365
+  },
+  "currency": "CAD",
+  "validity_days": 60,
+  "notes": [
+    "Estimate valid for 60 days from date of issue",
+    "Prices subject to change based on material availability",
+    "Does not include furniture, appliances, or equipment",
+    "Site-specific conditions may affect final cost",
+    "HST/GST not included - add applicable taxes"
+  ]
+}

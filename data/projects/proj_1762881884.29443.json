@@ -1,0 +1,725 @@
+{
+  "project_id": "proj_1762881884.29443",
+  "project_type": "adu",
+  "current_stage": "discovery",
+  "address": null,
+  "start_date": "2025-11-11T09:24:44.294432",
+  "timeline_estimate_weeks": 55,
+  "budget_estimate": 181500,
+  "actual_budget_spent": 0.0,
+  "actual_timeline_weeks": null,
+  "completion_percentage": 0.0,
+  "completion_date": null,
+  "property_intelligence": {},
+  "roadmap": {
+    "project_type": "adu",
+    "total_steps": 25,
+    "timeline_weeks": 55,
+    "estimated_cost": 181500,
+    "complexity_score": 0.5,
+    "steps": [
+      {
+        "id": 1,
+        "name": "Define project vision and goals",
+        "stage": "discovery",
+        "description": "Clarify what you want to build and why",
+        "duration_days": 1,
+        "cost": 0,
+        "dependencies": [],
+        "professional": null
+      },
+      {
+        "id": 2,
+        "name": "Establish preliminary budget",
+        "stage": "discovery",
+        "description": "Determine how much you can invest",
+        "duration_days": 2,
+        "cost": 0,
+        "dependencies": [
+          1
+        ],
+        "professional": null
+      },
+      {
+        "id": 3,
+        "name": "Research local zoning requirements",
+        "stage": "discovery",
+        "description": "Understand what's allowed on your property",
+        "duration_days": 3,
+        "cost": 0,
+        "dependencies": [
+          2
+        ],
+        "professional": null
+      },
+      {
+        "id": 4,
+        "name": "Site assessment and measurements",
+        "stage": "discovery",
+        "description": "Measure property and note conditions",
+        "duration_days": 1,
+        "cost": 0,
+        "dependencies": [
+          3
+        ],
+        "professional": null
+      },
+      {
+        "id": 5,
+        "name": "Utility service verification",
+        "stage": "discovery",
+        "description": "Confirm water, sewer, electric, gas availability",
+        "duration_days": 2,
+        "cost": 0,
+        "dependencies": [
+          4
+        ],
+        "professional": null
+      },
+      {
+        "id": 6,
+        "name": "Soil test (if required)",
+        "stage": "discovery",
+        "description": "Geotechnical evaluation of soil conditions",
+        "duration_days": 7,
+        "cost": 1500,
+        "dependencies": [
+          5
+        ],
+        "professional": "geotechnical_engineer"
+      },
+      {
+        "id": 7,
+        "name": "Topographic survey (if required)",
+        "stage": "discovery",
+        "description": "Professional survey of property elevation",
+        "duration_days": 3,
+        "cost": 800,
+        "dependencies": [
+          5
+        ],
+        "professional": "surveyor"
+      },
+      {
+        "id": 8,
+        "name": "Research financing options",
+        "stage": "discovery",
+        "description": "Explore loans, HELOCs, construction financing",
+        "duration_days": 5,
+        "cost": 0,
+        "dependencies": [
+          2
+        ],
+        "professional": null
+      },
+      {
+        "id": 9,
+        "name": "Finalize project scope",
+        "stage": "discovery",
+        "description": "Define exactly what will be built",
+        "duration_days": 2,
+        "cost": 0,
+        "dependencies": [
+          6,
+          7
+        ],
+        "professional": null
+      },
+      {
+        "id": 10,
+        "name": "Create preliminary timeline",
+        "stage": "discovery",
+        "description": "Estimate project duration and key milestones",
+        "duration_days": 1,
+        "cost": 0,
+        "dependencies": [
+          9
+        ],
+        "professional": null
+      },
+      {
+        "id": 11,
+        "name": "Interview and select architect",
+        "stage": "design",
+        "description": "Find licensed architect experienced with your project type",
+        "duration_days": 14,
+        "cost": 0,
+        "dependencies": [
+          10
+        ],
+        "professional": null
+      },
+      {
+        "id": 12,
+        "name": "Sign architecture contract",
+        "stage": "design",
+        "description": "Formalize scope, fees, timeline with architect",
+        "duration_days": 3,
+        "cost": 0,
+        "dependencies": [
+          11
+        ],
+        "professional": "architect"
+      },
+      {
+        "id": 13,
+        "name": "Schematic design phase",
+        "stage": "design",
+        "description": "Conceptual drawings, floor plans, elevations",
+        "duration_days": 14,
+        "cost": 3000,
+        "dependencies": [
+          12
+        ],
+        "professional": "architect"
+      },
+      {
+        "id": 14,
+        "name": "Review and approve schematics",
+        "stage": "design",
+        "description": "Provide feedback, request revisions",
+        "duration_days": 7,
+        "cost": 0,
+        "dependencies": [
+          13
+        ],
+        "professional": null
+      },
+      {
+        "id": 15,
+        "name": "Design development phase",
+        "stage": "design",
+        "description": "Detailed design with materials, systems specified",
+        "duration_days": 21,
+        "cost": 4000,
+        "dependencies": [
+          14
+        ],
+        "professional": "architect"
+      },
+      {
+        "id": 16,
+        "name": "Structural engineering",
+        "stage": "design",
+        "description": "Foundation design, framing calculations, beam sizing",
+        "duration_days": 14,
+        "cost": 2500,
+        "dependencies": [
+          15
+        ],
+        "professional": "structural_engineer"
+      },
+      {
+        "id": 17,
+        "name": "Title 24 energy calculations",
+        "stage": "design",
+        "description": "Energy compliance calculations (CA requirement)",
+        "duration_days": 7,
+        "cost": 800,
+        "dependencies": [
+          15
+        ],
+        "professional": "energy_consultant"
+      },
+      {
+        "id": 18,
+        "name": "Construction documents phase",
+        "stage": "design",
+        "description": "Complete construction-ready drawings",
+        "duration_days": 21,
+        "cost": 5000,
+        "dependencies": [
+          16,
+          17
+        ],
+        "professional": "architect"
+      },
+      {
+        "id": 19,
+        "name": "Electrical plan",
+        "stage": "design",
+        "description": "Lighting, outlets, panel sizing",
+        "duration_days": 7,
+        "cost": 600,
+        "dependencies": [
+          18
+        ],
+        "professional": "electrical_designer"
+      },
+      {
+        "id": 20,
+        "name": "Plumbing plan",
+        "stage": "design",
+        "description": "Fixture locations, drain/vent routing",
+        "duration_days": 7,
+        "cost": 600,
+        "dependencies": [
+          18
+        ],
+        "professional": "plumbing_designer"
+      },
+      {
+        "id": 21,
+        "name": "HVAC plan",
+        "stage": "design",
+        "description": "Heating/cooling system design",
+        "duration_days": 7,
+        "cost": 800,
+        "dependencies": [
+          18
+        ],
+        "professional": "hvac_designer"
+      },
+      {
+        "id": 22,
+        "name": "Final drawing review",
+        "stage": "design",
+        "description": "Review complete construction documents",
+        "duration_days": 5,
+        "cost": 0,
+        "dependencies": [
+          19,
+          20,
+          21
+        ],
+        "professional": null
+      },
+      {
+        "id": 23,
+        "name": "Cost estimation from plans",
+        "stage": "design",
+        "description": "Detailed cost breakdown from drawings",
+        "duration_days": 5,
+        "cost": 500,
+        "dependencies": [
+          22
+        ],
+        "professional": "estimator"
+      },
+      {
+        "id": 24,
+        "name": "Value engineering (if needed)",
+        "stage": "design",
+        "description": "Adjust design to meet budget",
+        "duration_days": 10,
+        "cost": 1000,
+        "dependencies": [
+          23
+        ],
+        "professional": "architect"
+      },
+      {
+        "id": 25,
+        "name": "Finalize construction documents",
+        "stage": "design",
+        "description": "Stamp and sign drawings",
+        "duration_days": 3,
+        "cost": 500,
+        "dependencies": [
+          24
+        ],
+        "professional": "architect"
+      }
+    ],
+    "critical_path_steps": [
+      6,
+      11,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      24
+    ],
+    "timeline_by_stage": {
+      "discovery": 3,
+      "design": 20
+    },
+    "steps_by_stage": {
+      "discovery": [
+        {
+          "id": 1,
+          "name": "Define project vision and goals",
+          "stage": "discovery",
+          "description": "Clarify what you want to build and why",
+          "duration_days": 1,
+          "cost": 0,
+          "dependencies": [],
+          "professional": null
+        },
+        {
+          "id": 2,
+          "name": "Establish preliminary budget",
+          "stage": "discovery",
+          "description": "Determine how much you can invest",
+          "duration_days": 2,
+          "cost": 0,
+          "dependencies": [
+            1
+          ],
+          "professional": null
+        },
+        {
+          "id": 3,
+          "name": "Research local zoning requirements",
+          "stage": "discovery",
+          "description": "Understand what's allowed on your property",
+          "duration_days": 3,
+          "cost": 0,
+          "dependencies": [
+            2
+          ],
+          "professional": null
+        },
+        {
+          "id": 4,
+          "name": "Site assessment and measurements",
+          "stage": "discovery",
+          "description": "Measure property and note conditions",
+          "duration_days": 1,
+          "cost": 0,
+          "dependencies": [
+            3
+          ],
+          "professional": null
+        },
+        {
+          "id": 5,
+          "name": "Utility service verification",
+          "stage": "discovery",
+          "description": "Confirm water, sewer, electric, gas availability",
+          "duration_days": 2,
+          "cost": 0,
+          "dependencies": [
+            4
+          ],
+          "professional": null
+        },
+        {
+          "id": 6,
+          "name": "Soil test (if required)",
+          "stage": "discovery",
+          "description": "Geotechnical evaluation of soil conditions",
+          "duration_days": 7,
+          "cost": 1500,
+          "dependencies": [
+            5
+          ],
+          "professional": "geotechnical_engineer"
+        },
+        {
+          "id": 7,
+          "name": "Topographic survey (if required)",
+          "stage": "discovery",
+          "description": "Professional survey of property elevation",
+          "duration_days": 3,
+          "cost": 800,
+          "dependencies": [
+            5
+          ],
+          "professional": "surveyor"
+        },
+        {
+          "id": 8,
+          "name": "Research financing options",
+          "stage": "discovery",
+          "description": "Explore loans, HELOCs, construction financing",
+          "duration_days": 5,
+          "cost": 0,
+          "dependencies": [
+            2
+          ],
+          "professional": null
+        },
+        {
+          "id": 9,
+          "name": "Finalize project scope",
+          "stage": "discovery",
+          "description": "Define exactly what will be built",
+          "duration_days": 2,
+          "cost": 0,
+          "dependencies": [
+            6,
+            7
+          ],
+          "professional": null
+        },
+        {
+          "id": 10,
+          "name": "Create preliminary timeline",
+          "stage": "discovery",
+          "description": "Estimate project duration and key milestones",
+          "duration_days": 1,
+          "cost": 0,
+          "dependencies": [
+            9
+          ],
+          "professional": null
+        }
+      ],
+      "design": [
+        {
+          "id": 11,
+          "name": "Interview and select architect",
+          "stage": "design",
+          "description": "Find licensed architect experienced with your project type",
+          "duration_days": 14,
+          "cost": 0,
+          "dependencies": [
+            10
+          ],
+          "professional": null
+        },
+        {
+          "id": 12,
+          "name": "Sign architecture contract",
+          "stage": "design",
+          "description": "Formalize scope, fees, timeline with architect",
+          "duration_days": 3,
+          "cost": 0,
+          "dependencies": [
+            11
+          ],
+          "professional": "architect"
+        },
+        {
+          "id": 13,
+          "name": "Schematic design phase",
+          "stage": "design",
+          "description": "Conceptual drawings, floor plans, elevations",
+          "duration_days": 14,
+          "cost": 3000,
+          "dependencies": [
+            12
+          ],
+          "professional": "architect"
+        },
+        {
+          "id": 14,
+          "name": "Review and approve schematics",
+          "stage": "design",
+          "description": "Provide feedback, request revisions",
+          "duration_days": 7,
+          "cost": 0,
+          "dependencies": [
+            13
+          ],
+          "professional": null
+        },
+        {
+          "id": 15,
+          "name": "Design development phase",
+          "stage": "design",
+          "description": "Detailed design with materials, systems specified",
+          "duration_days": 21,
+          "cost": 4000,
+          "dependencies": [
+            14
+          ],
+          "professional": "architect"
+        },
+        {
+          "id": 16,
+          "name": "Structural engineering",
+          "stage": "design",
+          "description": "Foundation design, framing calculations, beam sizing",
+          "duration_days": 14,
+          "cost": 2500,
+          "dependencies": [
+            15
+          ],
+          "professional": "structural_engineer"
+        },
+        {
+          "id": 17,
+          "name": "Title 24 energy calculations",
+          "stage": "design",
+          "description": "Energy compliance calculations (CA requirement)",
+          "duration_days": 7,
+          "cost": 800,
+          "dependencies": [
+            15
+          ],
+          "professional": "energy_consultant"
+        },
+        {
+          "id": 18,
+          "name": "Construction documents phase",
+          "stage": "design",
+          "description": "Complete construction-ready drawings",
+          "duration_days": 21,
+          "cost": 5000,
+          "dependencies": [
+            16,
+            17
+          ],
+          "professional": "architect"
+        },
+        {
+          "id": 19,
+          "name": "Electrical plan",
+          "stage": "design",
+          "description": "Lighting, outlets, panel sizing",
+          "duration_days": 7,
+          "cost": 600,
+          "dependencies": [
+            18
+          ],
+          "professional": "electrical_designer"
+        },
+        {
+          "id": 20,
+          "name": "Plumbing plan",
+          "stage": "design",
+          "description": "Fixture locations, drain/vent routing",
+          "duration_days": 7,
+          "cost": 600,
+          "dependencies": [
+            18
+          ],
+          "professional": "plumbing_designer"
+        },
+        {
+          "id": 21,
+          "name": "HVAC plan",
+          "stage": "design",
+          "description": "Heating/cooling system design",
+          "duration_days": 7,
+          "cost": 800,
+          "dependencies": [
+            18
+          ],
+          "professional": "hvac_designer"
+        },
+        {
+          "id": 22,
+          "name": "Final drawing review",
+          "stage": "design",
+          "description": "Review complete construction documents",
+          "duration_days": 5,
+          "cost": 0,
+          "dependencies": [
+            19,
+            20,
+            21
+          ],
+          "professional": null
+        },
+        {
+          "id": 23,
+          "name": "Cost estimation from plans",
+          "stage": "design",
+          "description": "Detailed cost breakdown from drawings",
+          "duration_days": 5,
+          "cost": 500,
+          "dependencies": [
+            22
+          ],
+          "professional": "estimator"
+        },
+        {
+          "id": 24,
+          "name": "Value engineering (if needed)",
+          "stage": "design",
+          "description": "Adjust design to meet budget",
+          "duration_days": 10,
+          "cost": 1000,
+          "dependencies": [
+            23
+          ],
+          "professional": "architect"
+        },
+        {
+          "id": 25,
+          "name": "Finalize construction documents",
+          "stage": "design",
+          "description": "Stamp and sign drawings",
+          "duration_days": 3,
+          "cost": 500,
+          "dependencies": [
+            24
+          ],
+          "professional": "architect"
+        }
+      ]
+    },
+    "immediate_next_steps": [
+      {
+        "id": 1,
+        "name": "Define project vision and goals",
+        "stage": "discovery",
+        "description": "Clarify what you want to build and why",
+        "duration_days": 1,
+        "cost": 0,
+        "dependencies": [],
+        "professional": null
+      },
+      {
+        "id": 2,
+        "name": "Establish preliminary budget",
+        "stage": "discovery",
+        "description": "Determine how much you can invest",
+        "duration_days": 2,
+        "cost": 0,
+        "dependencies": [
+          1
+        ],
+        "professional": null
+      },
+      {
+        "id": 3,
+        "name": "Research local zoning requirements",
+        "stage": "discovery",
+        "description": "Understand what's allowed on your property",
+        "duration_days": 3,
+        "cost": 0,
+        "dependencies": [
+          2
+        ],
+        "professional": null
+      },
+      {
+        "id": 4,
+        "name": "Site assessment and measurements",
+        "stage": "discovery",
+        "description": "Measure property and note conditions",
+        "duration_days": 1,
+        "cost": 0,
+        "dependencies": [
+          3
+        ],
+        "professional": null
+      },
+      {
+        "id": 5,
+        "name": "Utility service verification",
+        "stage": "discovery",
+        "description": "Confirm water, sewer, electric, gas availability",
+        "duration_days": 2,
+        "cost": 0,
+        "dependencies": [
+          4
+        ],
+        "professional": null
+      }
+    ],
+    "adjustments_applied": {
+      "property_constraints": true,
+      "historical_data": true,
+      "meta_learning": true
+    },
+    "generated_at": "2025-11-11T09:24:44.293720",
+    "validation_notes": "Error: Model not initialized"
+  },
+  "decisions_made": [],
+  "milestones_completed": [],
+  "site_photos": [],
+  "issues_encountered": [],
+  "user_satisfaction_score": null,
+  "domain": "construction",
+  "last_updated": "2025-11-11T09:24:44.294437"
+}

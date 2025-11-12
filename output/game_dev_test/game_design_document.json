@@ -1,0 +1,240 @@
+{
+  "metadata": {
+    "project_name": "2D Platformer - Classic Jump & Run",
+    "version": "1.0",
+    "date": "2025-11-07T19:28:27.513140",
+    "status": "prototype"
+  },
+  "game_overview": {
+    "high_concept": "A platformer game experience",
+    "genre": "platformer",
+    "target_platforms": [
+      "pc",
+      "mobile"
+    ],
+    "target_audience": {
+      "age_range": "13+",
+      "skill_level": "Casual to Hardcore",
+      "interests": [
+        "platformer"
+      ]
+    },
+    "unique_selling_points": [
+      "Innovative gameplay mechanics",
+      "Compelling narrative",
+      "High replayability"
+    ]
+  },
+  "gameplay": {
+    "core_loop": {
+      "description": "Primary player activity cycle",
+      "steps": [
+        "Explore environment",
+        "Encounter challenge",
+        "Overcome using mechanics",
+        "Earn rewards",
+        "Progress to next challenge"
+      ]
+    },
+    "mechanics": [
+      {
+        "name": "Jumping",
+        "description": "Variable height based on button hold"
+      },
+      {
+        "name": "Running",
+        "description": "Momentum-based movement"
+      },
+      {
+        "name": "Wall Jump",
+        "description": "Bounce between walls"
+      },
+      {
+        "name": "Double Jump",
+        "description": "Mid-air jump ability"
+      }
+    ],
+    "progression": {
+      "system": "Experience-based leveling",
+      "unlocks": [
+        "New abilities",
+        "Areas",
+        "Equipment"
+      ],
+      "difficulty_curve": "Gradual increase with periodic plateaus"
+    },
+    "controls": {
+      "input_method": "Keyboard/Mouse or Gamepad",
+      "key_actions": [
+        "Movement (WASD / Left Stick)",
+        "Jump (Space / A Button)",
+        "Action (E / B Button)",
+        "Menu (Esc / Start)"
+      ]
+    }
+  },
+  "game_systems": {
+    "player_systems": [
+      {
+        "name": "Health System",
+        "description": "Manages player vitality",
+        "mechanics": [
+          "Damage taken",
+          "Healing",
+          "Death/Respawn"
+        ]
+      },
+      {
+        "name": "Inventory System",
+        "description": "Item management",
+        "mechanics": [
+          "Pick up",
+          "Use",
+          "Drop",
+          "Craft"
+        ]
+      },
+      {
+        "name": "Progression System",
+        "description": "Character advancement",
+        "mechanics": [
+          "XP gain",
+          "Level up",
+          "Skill points",
+          "Unlocks"
+        ]
+      }
+    ],
+    "world_systems": [
+      {
+        "name": "AI System",
+        "description": "Enemy behavior",
+        "mechanics": [
+          "Patrol",
+          "Detection",
+          "Combat",
+          "Death"
+        ]
+      },
+      {
+        "name": "Economy System",
+        "description": "Resource management",
+        "mechanics": [
+          "Currency",
+          "Shop",
+          "Loot",
+          "Trading"
+        ]
+      }
+    ]
+  },
+  "content": {
+    "levels": {
+      "count": 10,
+      "structure": "Linear with optional branches",
+      "themes": [
+        "Tutorial",
+        "Forest",
+        "Cave",
+        "Village",
+        "Castle"
+      ],
+      "estimated_playtime": "8-12 hours"
+    },
+    "characters": {
+      "player_character": {
+        "name": "TBD",
+        "background": "Customizable hero",
+        "abilities": [
+          "Basic attack",
+          "Special moves",
+          "Magic/Tech"
+        ]
+      },
+      "npcs": {
+        "count": 20,
+        "types": [
+          "Allies",
+          "Merchants",
+          "Quest givers",
+          "Enemies"
+        ]
+      }
+    },
+    "narrative": {
+      "setting": "Fantasy/Sci-fi world",
+      "plot": "Hero's journey to save the world",
+      "themes": [
+        "Courage",
+        "Friendship",
+        "Sacrifice"
+      ],
+      "story_delivery": [
+        "Cutscenes",
+        "Dialogue",
+        "Environmental storytelling"
+      ]
+    }
+  },
+  "technical_requirements": {
+    "engine": "unity",
+    "minimum_spec": {
+      "os": "Windows 10 / macOS 10.15",
+      "processor": "Intel Core i5 / AMD Ryzen 5",
+      "memory": "8 GB RAM",
+      "graphics": "NVIDIA GTX 1060 / AMD RX 580",
+      "storage": "5 GB available space"
+    },
+    "target_performance": {
+      "resolution": "1920x1080",
+      "framerate": "60 FPS",
+      "load_times": "< 10 seconds"
+    }
+  },
+  "monetization": {
+    "model": "premium",
+    "price_point": "$19.99 - $29.99",
+    "additional_revenue": [
+      "DLC packs",
+      "Season pass",
+      "Expansion"
+    ]
+  },
+  "development_timeline": {
+    "phases": [
+      {
+        "phase": "Concept",
+        "duration": "1 month"
+      },
+      {
+        "phase": "Pre-production",
+        "duration": "2 months"
+      },
+      {
+        "phase": "Prototype",
+        "duration": "3 months"
+      },
+      {
+        "phase": "Production",
+        "duration": "12 months"
+      },
+      {
+        "phase": "Alpha",
+        "duration": "2 months"
+      },
+      {
+        "phase": "Beta",
+        "duration": "2 months"
+      },
+      {
+        "phase": "Polish",
+        "duration": "1 month"
+      },
+      {
+        "phase": "Launch",
+        "duration": "1 month"
+      }
+    ],
+    "total_duration": "24 months"
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "metadata": {
+    "project_name": "2D Platformer - Classic Jump & Run",
+    "version": "1.0",
+    "date": "2025-11-07T19:28:27.513451"
+  },
+  "architecture": {
+    "engine": "unity",
+    "programming_language": "C#",
+    "design_patterns": [
+      "Entity Component System",
+      "State Machine",
+      "Object Pooling",
+      "Observer Pattern",
+      "Command Pattern"
+    ],
+    "project_structure": {
+      "folders": [
+        "Assets/Scripts",
+        "Assets/Prefabs",
+        "Assets/Scenes",
+        "Assets/Art/2D",
+        "Assets/Art/3D",
+        "Assets/Audio",
+        "Assets/UI"
+      ]
+    }
+  },
+  "core_systems": [
+    {
+      "system": "Player Controller",
+      "components": [
+        "Input Handler",
+        "Movement",
+        "Animation Controller"
+      ],
+      "dependencies": [
+        "Physics System",
+        "Animation System"
+      ]
+    },
+    {
+      "system": "Game Manager",
+      "components": [
+        "State Machine",
+        "Save System",
+        "Scene Manager"
+      ],
+      "dependencies": [
+        "All Systems"
+      ]
+    },
+    {
+      "system": "UI Manager",
+      "components": [
+        "HUD",
+        "Menus",
+        "Dialogs"
+      ],
+      "dependencies": [
+        "Input System",
+        "Game Manager"
+      ]
+    },
+    {
+      "system": "Audio Manager",
+      "components": [
+        "Music Player",
+        "SFX Player",
+        "Audio Mixer"
+      ],
+      "dependencies": [
+        "Game Manager"
+      ]
+    }
+  ],
+  "data_management": {
+    "save_system": {
+      "format": "JSON",
+      "location": "LocalAppData or Documents",
+      "encryption": "AES-256 for sensitive data",
+      "cloud_sync": "Optional via platform API"
+    },
+    "configuration": {
+      "settings_file": "config.json",
+      "user_prefs": "PlayerPrefs / Registry",
+      "game_data": "ScriptableObjects"
+    }
+  },
+  "networking": {
+    "architecture": "Client-Server",
+    "protocol": "TCP for reliability, UDP for real-time",
+    "matchmaking": "Platform API (Steam, Epic, etc.)",
+    "anti_cheat": "Server authority + validation"
+  },
+  "performance": {
+    "target_fps": 60,
+    "optimization_techniques": [
+      "Object pooling for frequently spawned objects",
+      "LOD system for 3D models",
+      "Occlusion culling",
+      "Texture atlasing",
+      "Async loading for scenes"
+    ],
+    "memory_budget": {
+      "textures": "512 MB",
+      "audio": "128 MB",
+      "code": "64 MB",
+      "total": "1 GB"
+    }
+  },
+  "tools_and_pipeline": {
+    "version_control": "Git with LFS for large files",
+    "ci_cd": "Unity Cloud Build / GitHub Actions",
+    "asset_pipeline": [
+      "Import raw assets",
+      "Process and optimize",
+      "Generate atlas/bundles",
+      "Build addressables"
+    ],
+    "testing": {
+      "unit_tests": "NUnit / Unity Test Framework",
+      "integration_tests": "PlayMode tests",
+      "performance_tests": "Unity Profiler"
+    }
+  },
+  "platforms": {
+    "target_platforms": [
+      "pc",
+      "mobile"
+    ],
+    "platform_specific": [
+      {
+        "platform": "PC",
+        "requirements": [
+          "Steam SDK integration",
+          "DirectX 11/12 support",
+          "Keyboard/Mouse + Controller support"
+        ]
+      },
+      {
+        "platform": "Mobile",
+        "requirements": [
+          "Touch controls",
+          "Battery optimization",
+          "Multiple aspect ratios",
+          "Low-end device support"
+        ]
+      }
+    ]
+  }
+}

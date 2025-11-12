@@ -1,0 +1,276 @@
+[
+  {
+    "step": 0,
+    "phase": "PREPARATION",
+    "title": "Pre-Assembly Checklist",
+    "description": "Complete these tasks before beginning assembly",
+    "tasks": [
+      "Verify all components against bill of materials",
+      "Inspect all parts for damage or defects",
+      "Organize components by assembly sequence",
+      "Prepare required tools and equipment",
+      "Review safety procedures and PPE requirements",
+      "Clear and prepare assembly workspace"
+    ],
+    "tools_required": [
+      "Socket wrench set (metric)",
+      "Torque wrench (5-50 Nm)",
+      "Allen key set",
+      "Digital calipers",
+      "Level",
+      "Power drill",
+      "Safety equipment (glasses, gloves)"
+    ],
+    "estimated_time_minutes": 30,
+    "safety_notes": [
+      "Wear safety glasses at all times",
+      "Use appropriate lifting techniques for heavy components",
+      "Ensure workspace is well-lit and ventilated"
+    ]
+  },
+  {
+    "step": 1,
+    "phase": "ASSEMBLY",
+    "title": "Install Base Platform",
+    "description": "Install and secure Base Platform. Ensure proper alignment before tightening fasteners.",
+    "components_used": [
+      "Base Platform"
+    ],
+    "fasteners_required": [
+      "M6x20 bolts (4x)",
+      "M6 washers (4x)",
+      "M6 nylock nuts (4x)"
+    ],
+    "tools_required": [
+      "10mm socket",
+      "Torque wrench",
+      "Allen key 5mm"
+    ],
+    "estimated_time_minutes": 15,
+    "torque_specifications": {
+      "M6_fasteners": "10 Nm"
+    },
+    "critical_notes": [
+      "Ensure alignment before tightening",
+      "Verify clearances"
+    ],
+    "quality_checks": [
+      "Visual inspection",
+      "Dimensional verification",
+      "Fastener torque check"
+    ]
+  },
+  {
+    "step": 2,
+    "phase": "ASSEMBLY",
+    "title": "Install Shoulder Joint",
+    "description": "Install and secure Shoulder Joint. Ensure proper alignment before tightening fasteners.",
+    "components_used": [
+      "Shoulder Joint"
+    ],
+    "fasteners_required": [
+      "M6x20 bolts (4x)",
+      "M6 washers (4x)",
+      "M6 nylock nuts (4x)"
+    ],
+    "tools_required": [
+      "10mm socket",
+      "Torque wrench",
+      "Allen key 5mm"
+    ],
+    "estimated_time_minutes": 15,
+    "torque_specifications": {
+      "M6_fasteners": "10 Nm"
+    },
+    "critical_notes": [
+      "Ensure alignment before tightening",
+      "Verify clearances"
+    ],
+    "quality_checks": [
+      "Visual inspection",
+      "Dimensional verification",
+      "Fastener torque check"
+    ]
+  },
+  {
+    "step": 3,
+    "phase": "ASSEMBLY",
+    "title": "Install Upper Arm Link",
+    "description": "Install and secure Upper Arm Link. Ensure proper alignment before tightening fasteners.",
+    "components_used": [
+      "Upper Arm Link"
+    ],
+    "fasteners_required": [
+      "M6x20 bolts (4x)",
+      "M6 washers (4x)",
+      "M6 nylock nuts (4x)"
+    ],
+    "tools_required": [
+      "10mm socket",
+      "Torque wrench",
+      "Allen key 5mm"
+    ],
+    "estimated_time_minutes": 15,
+    "torque_specifications": {
+      "M6_fasteners": "10 Nm"
+    },
+    "critical_notes": [
+      "Ensure alignment before tightening",
+      "Verify clearances"
+    ],
+    "quality_checks": [
+      "Visual inspection",
+      "Dimensional verification",
+      "Fastener torque check"
+    ]
+  },
+  {
+    "step": 4,
+    "phase": "ASSEMBLY",
+    "title": "Install Elbow Joint",
+    "description": "Install and secure Elbow Joint. Ensure proper alignment before tightening fasteners.",
+    "components_used": [
+      "Elbow Joint"
+    ],
+    "fasteners_required": [
+      "M6x20 bolts (4x)",
+      "M6 washers (4x)",
+      "M6 nylock nuts (4x)"
+    ],
+    "tools_required": [
+      "10mm socket",
+      "Torque wrench",
+      "Allen key 5mm"
+    ],
+    "estimated_time_minutes": 15,
+    "torque_specifications": {
+      "M6_fasteners": "10 Nm"
+    },
+    "critical_notes": [
+      "Ensure alignment before tightening",
+      "Verify clearances"
+    ],
+    "quality_checks": [
+      "Visual inspection",
+      "Dimensional verification",
+      "Fastener torque check"
+    ]
+  },
+  {
+    "step": 5,
+    "phase": "ASSEMBLY",
+    "title": "Install Forearm Link",
+    "description": "Install and secure Forearm Link. Ensure proper alignment before tightening fasteners.",
+    "components_used": [
+      "Forearm Link"
+    ],
+    "fasteners_required": [
+      "M6x20 bolts (4x)",
+      "M6 washers (4x)",
+      "M6 nylock nuts (4x)"
+    ],
+    "tools_required": [
+      "10mm socket",
+      "Torque wrench",
+      "Allen key 5mm"
+    ],
+    "estimated_time_minutes": 15,
+    "torque_specifications": {
+      "M6_fasteners": "10 Nm"
+    },
+    "critical_notes": [
+      "Ensure alignment before tightening",
+      "Verify clearances"
+    ],
+    "quality_checks": [
+      "Visual inspection",
+      "Dimensional verification",
+      "Fastener torque check"
+    ]
+  },
+  {
+    "step": 6,
+    "phase": "ASSEMBLY",
+    "title": "Install Wrist Joint",
+    "description": "Install and secure Wrist Joint. Ensure proper alignment before tightening fasteners.",
+    "components_used": [
+      "Wrist Joint"
+    ],
+    "fasteners_required": [
+      "M6x20 bolts (4x)",
+      "M6 washers (4x)",
+      "M6 nylock nuts (4x)"
+    ],
+    "tools_required": [
+      "10mm socket",
+      "Torque wrench",
+      "Allen key 5mm"
+    ],
+    "estimated_time_minutes": 15,
+    "torque_specifications": {
+      "M6_fasteners": "10 Nm"
+    },
+    "critical_notes": [
+      "Ensure alignment before tightening",
+      "Verify clearances"
+    ],
+    "quality_checks": [
+      "Visual inspection",
+      "Dimensional verification",
+      "Fastener torque check"
+    ]
+  },
+  {
+    "step": 7,
+    "phase": "ASSEMBLY",
+    "title": "Install End Effector",
+    "description": "Install and secure End Effector. Ensure proper alignment before tightening fasteners.",
+    "components_used": [
+      "End Effector"
+    ],
+    "fasteners_required": [
+      "M6x20 bolts (4x)",
+      "M6 washers (4x)",
+      "M6 nylock nuts (4x)"
+    ],
+    "tools_required": [
+      "10mm socket",
+      "Torque wrench",
+      "Allen key 5mm"
+    ],
+    "estimated_time_minutes": 15,
+    "torque_specifications": {
+      "M6_fasteners": "10 Nm"
+    },
+    "critical_notes": [
+      "Ensure alignment before tightening",
+      "Verify clearances"
+    ],
+    "quality_checks": [
+      "Visual inspection",
+      "Dimensional verification",
+      "Fastener torque check"
+    ]
+  },
+  {
+    "step": 8,
+    "phase": "VERIFICATION",
+    "title": "Post-Assembly Verification",
+    "description": "Final inspection and testing procedures",
+    "tasks": [
+      "Visual inspection of all connections",
+      "Verify all fasteners are tightened to spec",
+      "Check alignment and fit of all components",
+      "Perform functional testing",
+      "Document any deviations or issues",
+      "Complete final quality control checklist"
+    ],
+    "estimated_time_minutes": 45,
+    "acceptance_criteria": [
+      "All components securely fastened",
+      "No visible gaps or misalignments",
+      "All moving parts operate smoothly",
+      "Meets dimensional tolerances"
+    ]
+  }
+]

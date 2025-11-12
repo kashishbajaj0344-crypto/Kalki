@@ -1,0 +1,16 @@
+{
+  "project_id": "18a0ac6e-e900-4cd6-89c0-16ae5db96fcc",
+  "description": "Design a 2-story garage with workshop",
+  "domain": "construction",
+  "current_phase": "ConstructionPhase.REQUIREMENTS",
+  "phase_history": [],
+  "metadata": {},
+  "issues": [],
+  "milestones": {},
+  "created_at": "2025-11-07T14:20:49.365310",
+  "updated_at": "2025-11-07T14:20:49.365312",
+  "location": "Vancouver",
+  "building_type": null,
+  "budget": {},
+  "timeline": {}
+}

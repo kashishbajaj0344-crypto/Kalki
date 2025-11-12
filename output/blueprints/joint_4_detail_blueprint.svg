@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+    <!-- Title Block -->
+    <rect x="400" y="300" width="200" height="100" fill="none" stroke="black" stroke-width="1"/>
+    <text x="410" y="320" font-family="Arial" font-size="12" font-weight="bold">JOINT 4 DETAIL</text>
+    <text x="410" y="335" font-family="Arial" font-size="10">Scale: 1:2</text>
+    <text x="410" y="350" font-family="Arial" font-size="10">Material: Steel/Aluminum</text>
+
+    <!-- Detailed Joint View -->
+    <g transform="translate(50, 50)">
+        <!-- Harmonic Drive -->
+        <circle cx="150" cy="150" r="40" fill="none" stroke="black" stroke-width="3"/>
+        <circle cx="150" cy="150" r="35" fill="none" stroke="black" stroke-width="2"/>
+        <circle cx="150" cy="150" r="25" fill="none" stroke="black" stroke-width="1"/>
+        <text x="130" y="155" font-family="Arial" font-size="8">HARMONIC DRIVE</text>
+
+        <!-- Bearings -->
+        <circle cx="150" cy="110" r="15" fill="none" stroke="black" stroke-width="2"/>
+        <circle cx="150" cy="190" r="15" fill="none" stroke="black" stroke-width="2"/>
+        <text x="135" y="115" font-family="Arial" font-size="6">BEARING</text>
+        <text x="135" y="195" font-family="Arial" font-size="6">BEARING</text>
+
+        <!-- Servo Motor -->
+        <rect x="200" y="120" width="40" height="60" fill="none" stroke="black" stroke-width="2"/>
+        <circle cx="220" cy="100" r="3" fill="none" stroke="black" stroke-width="1"/>
+        <text x="205" y="145" font-family="Arial" font-size="8">SERVO MOTOR</text>
+        <text x="210" y="155" font-family="Arial" font-size="6">50W</text>
+
+        <!-- Dimensions -->
+        <line x1="110" y1="150" x2="190" y2="150" stroke="black" stroke-width="1" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+        <text x="150" y="145" font-family="Arial" font-size="8">Ø80</text>
+
+        <line x1="150" y1="95" x2="150" y2="125" stroke="black" stroke-width="1" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+        <text x="155" y="110" font-family="Arial" font-size="8">30</text>
+    </g>
+
+    <!-- Arrows for dimensions -->
+    <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="black"/>
+        </marker>
+    </defs>
+</svg>

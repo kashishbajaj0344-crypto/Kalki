@@ -1,0 +1,17 @@
+
+                ISO 2768-1:1989 General Tolerances
+
+                This International Standard specifies general tolerances for linear and angular dimensions
+                without individual tolerance indications in technical drawings.
+
+                Tolerance Classes:
+                - f: fine
+                - m: medium
+                - c: coarse
+                - v: very coarse
+
+                Linear Dimensions:
+                - Up to 6mm: ±0.1mm (f), ±0.2mm (m), ±0.5mm (c)
+                - 6-30mm: ±0.2mm (f), ±0.5mm (m), ±1.0mm (c)
+                - 30-120mm: ±0.3mm (f), ±0.8mm (m), ±1.5mm (c)
+                

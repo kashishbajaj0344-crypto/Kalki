@@ -1,0 +1,290 @@
+{
+  "checklists": {
+    "footing_inspection": {
+      "phase": "Foundation",
+      "items": [
+        {
+          "item": "Excavation to proper depth",
+          "critical": true
+        },
+        {
+          "item": "Undisturbed soil at bottom",
+          "critical": true
+        },
+        {
+          "item": "Footing width per drawings",
+          "critical": true
+        },
+        {
+          "item": "Rebar size and spacing correct",
+          "critical": true
+        },
+        {
+          "item": "Rebar clearances maintained",
+          "critical": true
+        },
+        {
+          "item": "Anchor bolts positioned",
+          "critical": false
+        },
+        {
+          "item": "Formwork secure and level",
+          "critical": true
+        }
+      ]
+    },
+    "foundation_inspection": {
+      "phase": "Foundation",
+      "items": [
+        {
+          "item": "Foundation walls plumb and straight",
+          "critical": true
+        },
+        {
+          "item": "Wall thickness per spec",
+          "critical": true
+        },
+        {
+          "item": "Anchor bolts installed correctly",
+          "critical": true
+        },
+        {
+          "item": "Waterproofing applied properly",
+          "critical": true
+        },
+        {
+          "item": "Weeping tile installed",
+          "critical": true
+        },
+        {
+          "item": "No cracks or defects",
+          "critical": true
+        }
+      ]
+    },
+    "framing_inspection": {
+      "phase": "Framing",
+      "items": [
+        {
+          "item": "All members sized per drawings",
+          "critical": true
+        },
+        {
+          "item": "Proper spacing of studs/joists",
+          "critical": true
+        },
+        {
+          "item": "Headers over openings sized correctly",
+          "critical": true
+        },
+        {
+          "item": "Bearing points adequate",
+          "critical": true
+        },
+        {
+          "item": "Shear walls properly nailed",
+          "critical": true
+        },
+        {
+          "item": "Roof framing secure",
+          "critical": true
+        },
+        {
+          "item": "Fire blocking installed",
+          "critical": true
+        },
+        {
+          "item": "Hurricane ties/straps installed",
+          "critical": true
+        },
+        {
+          "item": "Sheathing properly fastened",
+          "critical": true
+        }
+      ]
+    },
+    "rough_electrical": {
+      "phase": "Rough MEP",
+      "items": [
+        {
+          "item": "Service size adequate (200A minimum)",
+          "critical": true
+        },
+        {
+          "item": "Panel properly located",
+          "critical": true
+        },
+        {
+          "item": "Wire sizes correct for circuits",
+          "critical": true
+        },
+        {
+          "item": "GFCI protection in required areas",
+          "critical": true
+        },
+        {
+          "item": "AFCI protection for bedrooms",
+          "critical": true
+        },
+        {
+          "item": "Boxes properly secured",
+          "critical": false
+        },
+        {
+          "item": "Proper stapling/support of cables",
+          "critical": false
+        },
+        {
+          "item": "Smoke detector locations marked",
+          "critical": true
+        }
+      ]
+    },
+    "rough_plumbing": {
+      "phase": "Rough MEP",
+      "items": [
+        {
+          "item": "All piping properly supported",
+          "critical": true
+        },
+        {
+          "item": "Proper slope on drain lines",
+          "critical": true
+        },
+        {
+          "item": "Vent piping sized correctly",
+          "critical": true
+        },
+        {
+          "item": "Water supply lines protected from freezing",
+          "critical": true
+        },
+        {
+          "item": "Pressure test passed",
+          "critical": true
+        },
+        {
+          "item": "Fixtures properly roughed in",
+          "critical": true
+        }
+      ]
+    },
+    "rough_mechanical": {
+      "phase": "Rough MEP",
+      "items": [
+        {
+          "item": "Furnace/AC sized for building",
+          "critical": true
+        },
+        {
+          "item": "Combustion air provided",
+          "critical": true
+        },
+        {
+          "item": "Ductwork properly sized",
+          "critical": true
+        },
+        {
+          "item": "Return air adequate",
+          "critical": true
+        },
+        {
+          "item": "All ducts properly sealed",
+          "critical": true
+        },
+        {
+          "item": "Clearances to combustibles maintained",
+          "critical": true
+        }
+      ]
+    },
+    "insulation_inspection": {
+      "phase": "Insulation",
+      "items": [
+        {
+          "item": "R-value meets code minimum",
+          "critical": true
+        },
+        {
+          "item": "No gaps or voids",
+          "critical": true
+        },
+        {
+          "item": "Vapor barrier continuous",
+          "critical": true
+        },
+        {
+          "item": "Proper installation around services",
+          "critical": true
+        },
+        {
+          "item": "Attic insulation depth adequate",
+          "critical": true
+        },
+        {
+          "item": "Air sealing complete",
+          "critical": true
+        }
+      ]
+    },
+    "final_building_inspection": {
+      "phase": "Final",
+      "items": [
+        {
+          "item": "All work complete per drawings",
+          "critical": true
+        },
+        {
+          "item": "CO and smoke detectors installed and tested",
+          "critical": true
+        },
+        {
+          "item": "GFCI outlets tested",
+          "critical": true
+        },
+        {
+          "item": "All lights and outlets functional",
+          "critical": true
+        },
+        {
+          "item": "Plumbing fixtures operate properly",
+          "critical": true
+        },
+        {
+          "item": "HVAC system operational",
+          "critical": true
+        },
+        {
+          "item": "Handrails and guards meet code",
+          "critical": true
+        },
+        {
+          "item": "Egress windows operable",
+          "critical": true
+        },
+        {
+          "item": "Address numbers visible",
+          "critical": false
+        },
+        {
+          "item": "Final grading complete",
+          "critical": true
+        },
+        {
+          "item": "All deficiencies from previous inspections corrected",
+          "critical": true
+        }
+      ]
+    }
+  },
+  "total_checklists": 8,
+  "total_items": 59,
+  "critical_items": 55,
+  "jurisdiction": "BC Building Code 2018",
+  "notes": [
+    "All critical items must pass before phase advancement",
+    "Schedule inspections 48 hours in advance",
+    "Inspector may add additional requirements",
+    "Keep inspection records for occupancy permit"
+  ]
+}

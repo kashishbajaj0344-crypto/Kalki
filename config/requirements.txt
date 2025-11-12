@@ -1,0 +1,76 @@
+# Kalki - AI System Requirements
+# ============================================
+# This file defines all dependencies for the Kalki system
+
+# Core AI/ML Dependencies
+torch>=2.0.0
+transformers>=4.30.0
+accelerate>=0.20.0
+sentence-transformers>=2.2.0
+numpy>=1.24.0
+pandas>=2.0.0
+scikit-learn>=1.3.0
+scipy>=1.11.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.15.0
+networkx>=3.1
+
+# Web/API Dependencies
+flask>=2.3.0
+flask-cors>=4.0.0
+fastapi>=0.100.0
+uvicorn>=0.23.0
+pydantic>=2.0.0
+requests>=2.31.0
+aiohttp>=3.8.0
+websockets>=11.0.0
+
+# Database/Vector Search
+chromadb>=0.4.0
+faiss-cpu>=1.7.0
+qdrant-client>=1.5.0
+redis>=4.6.0
+
+# Document Processing
+PyPDF2>=3.0.0
+python-docx>=1.1.0
+openpyxl>=3.1.0
+python-pptx>=0.6.21
+reportlab>=4.0.0
+Pillow>=10.0.0
+opencv-python>=4.8.0
+pytesseract>=0.3.10
+
+# CAD/Engineering
+# Note: OpenSCAD and FreeCAD are external applications, not Python packages
+
+# Development/Debugging
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.5.0
+
+# System Monitoring
+psutil>=5.9.0
+GPUtil>=1.4.0
+
+# Configuration
+python-dotenv>=1.0.0
+pyyaml>=6.0.0
+
+# Logging/Monitoring
+structlog>=23.0.0
+rich>=13.0.0
+
+# Optional: Quantum Computing (for Phase 14)
+# qiskit>=0.44.0
+# pennylane>=0.32.0
+
+# Optional: Robotics (for advanced simulations)
+# pybullet>=3.2.0
+# mujoco>=2.3.0
+
+# Optional: Unity Integration
+# Note: Unity packages are handled separately

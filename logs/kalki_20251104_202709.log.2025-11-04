@@ -1,0 +1,60 @@
+[2025-11-04 20:27:12] [Kalki.UnifiedServer] [INFO]: 🚀 Initializing Kalki Unified Server...
+[2025-11-04 20:27:12] [Kalki.Orchestrator] [INFO]: 🔧 Initializing Kalki core systems...
+[2025-11-04 20:27:12] [Kalki.Orchestrator] [INFO]: ✅ EventBus initialized
+[2025-11-04 20:27:12] [Kalki.Orchestrator] [INFO]: ✅ Metrics collector initialized
+[2025-11-04 20:27:12] [Kalki.session] [INFO]: Loaded existing session 68f1d388-00bc-4d5a-aaa2-fa6240e29e47 created at 2025-10-31T05:37:20Z
+[2025-11-04 20:27:12] [Kalki.Orchestrator] [INFO]: ✅ Session manager initialized
+[2025-11-04 20:27:12] [Kalki.vectordb] [INFO]: [BGE] Loading model 'BAAI/bge-large-en-v1.5' on device: mps
+[2025-11-04 20:27:13] [Kalki.vectordb] [INFO]: VectorDBManager initialized at /Users/kashish/Desktop/Kalki/data/vector_db
+[2025-11-04 20:27:13] [Kalki.Orchestrator] [INFO]: ✅ Vector database initialized
+[2025-11-04 20:27:13] [Kalki.LLM] [INFO]: Initializing LLM on device: mps
+[2025-11-04 20:27:13] [Kalki.Orchestrator] [INFO]: ✅ LLM engine initialized
+[2025-11-04 20:27:13] [Kalki.Orchestrator] [INFO]: ✅ Agent manager initialized
+[2025-11-04 20:27:13] [Kalki.robustness] [INFO]: RobustnessManager initialized
+[2025-11-04 20:27:13] [Kalki.Orchestrator] [INFO]: ✅ Robustness monitoring initialized
+[2025-11-04 20:27:13] [Kalki.Orchestrator] [INFO]: 🎉 All core systems initialized successfully
+[2025-11-04 20:27:13] [Kalki.DesignBrain] [ERROR]: Failed to initialize Design Brain: get_config() missing 2 required positional arguments: 'section' and 'key'
+[2025-11-04 20:27:13] [Kalki.GenDesignEngine] [ERROR]: Failed to initialize Design Brain
+[2025-11-04 20:27:13] [Kalki.vectordb] [INFO]: [BGE] Loading model 'BAAI/bge-large-en-v1.5' on device: mps
+[2025-11-04 20:27:13] [Kalki.vectordb] [INFO]: VectorDBManager initialized at /Users/kashish/Desktop/Kalki/data/vector_db
+[2025-11-04 20:27:13] [Kalki.eventbus] [INFO]: Handler '_handle_system_events' subscribed to topic 'system.*' (subscription: system.*:_handle_system_events:5096922944)
+[2025-11-04 20:27:13] [Kalki.eventbus] [INFO]: Handler '_handle_agent_events' subscribed to topic 'agent.*' (subscription: agent.*:_handle_agent_events:5096923264)
+[2025-11-04 20:27:13] [Kalki.eventbus] [INFO]: Handler '_handle_design_events' subscribed to topic 'design.*' (subscription: design.*:_handle_design_events:5054259520)
+[2025-11-04 20:27:13] [Kalki.UnifiedServer] [INFO]: ✅ Kalki Unified Server initialized
+[2025-11-04 20:30:53] [Kalki.GenDesignEngine] [INFO]: Creating design project: proj_20251104_203053 - Design_20251104_203053
+[2025-11-04 20:30:53] [Kalki.GenDesignEngine] [INFO]: Starting reasoning phase for project: proj_20251104_203053
+[2025-11-04 20:30:53] [Kalki.GenDesignEngine] [ERROR]: Design pipeline failed for project proj_20251104_203053: 'NoneType' object has no attribute 'generate'
+[2025-11-04 20:32:17] [Kalki.GenDesignEngine] [INFO]: Creating design project: proj_20251104_203217 - Design_20251104_203217
+[2025-11-04 20:32:17] [Kalki.GenDesignEngine] [INFO]: Starting reasoning phase for project: proj_20251104_203217
+[2025-11-04 20:32:17] [Kalki.GenDesignEngine] [ERROR]: Design pipeline failed for project proj_20251104_203217: 'NoneType' object has no attribute 'generate'
+[2025-11-04 20:32:43] [Kalki.GenDesignEngine] [INFO]: Creating design project: proj_20251104_203243 - Design_20251104_203243
+[2025-11-04 20:32:43] [Kalki.GenDesignEngine] [INFO]: Starting reasoning phase for project: proj_20251104_203243
+[2025-11-04 20:32:43] [Kalki.GenDesignEngine] [ERROR]: Design pipeline failed for project proj_20251104_203243: 'NoneType' object has no attribute 'generate'
+[2025-11-04 20:33:28] [Kalki.GenDesignEngine] [INFO]: Creating design project: proj_20251104_203328 - Design_20251104_203328
+[2025-11-04 20:33:28] [Kalki.GenDesignEngine] [INFO]: Starting reasoning phase for project: proj_20251104_203328
+[2025-11-04 20:33:28] [Kalki.GenDesignEngine] [ERROR]: Design pipeline failed for project proj_20251104_203328: 'NoneType' object has no attribute 'generate'
+[2025-11-04 20:33:43] [Kalki.GenDesignEngine] [INFO]: Creating design project: proj_20251104_203343 - Design_20251104_203343
+[2025-11-04 20:33:43] [Kalki.GenDesignEngine] [INFO]: Starting reasoning phase for project: proj_20251104_203343
+[2025-11-04 20:33:43] [Kalki.GenDesignEngine] [ERROR]: Design pipeline failed for project proj_20251104_203343: 'NoneType' object has no attribute 'generate'
+[2025-11-04 20:34:15] [Kalki.GenDesignEngine] [INFO]: Creating design project: proj_20251104_203415 - Design_20251104_203415
+[2025-11-04 20:34:15] [Kalki.GenDesignEngine] [INFO]: Starting reasoning phase for project: proj_20251104_203415
+[2025-11-04 20:34:15] [Kalki.GenDesignEngine] [ERROR]: Design pipeline failed for project proj_20251104_203415: 'NoneType' object has no attribute 'generate'
+[2025-11-04 20:34:45] [Kalki.robustness] [INFO]: Received signal 15, initiating graceful shutdown
+[2025-11-04 20:36:08] [Kalki.GenDesignEngine] [INFO]: Creating design project: proj_20251104_203608 - Design_20251104_203608
+[2025-11-04 20:36:08] [Kalki.GenDesignEngine] [INFO]: Starting reasoning phase for project: proj_20251104_203608
+[2025-11-04 20:36:08] [Kalki.GenDesignEngine] [ERROR]: Design pipeline failed for project proj_20251104_203608: 'NoneType' object has no attribute 'generate'
+[2025-11-04 20:36:54] [Kalki.GenDesignEngine] [INFO]: Creating design project: proj_20251104_203654 - Design_20251104_203654
+[2025-11-04 20:36:54] [Kalki.GenDesignEngine] [INFO]: Starting reasoning phase for project: proj_20251104_203654
+[2025-11-04 20:36:54] [Kalki.GenDesignEngine] [ERROR]: Design pipeline failed for project proj_20251104_203654: 'NoneType' object has no attribute 'generate'
+[2025-11-04 20:37:31] [Kalki.GenDesignEngine] [INFO]: Creating design project: proj_20251104_203731 - Design_20251104_203731
+[2025-11-04 20:37:31] [Kalki.GenDesignEngine] [INFO]: Starting reasoning phase for project: proj_20251104_203731
+[2025-11-04 20:37:31] [Kalki.GenDesignEngine] [ERROR]: Design pipeline failed for project proj_20251104_203731: 'NoneType' object has no attribute 'generate'
+[2025-11-04 20:37:51] [Kalki.GenDesignEngine] [INFO]: Creating design project: proj_20251104_203751 - Design_20251104_203751
+[2025-11-04 20:37:51] [Kalki.GenDesignEngine] [INFO]: Starting reasoning phase for project: proj_20251104_203751
+[2025-11-04 20:37:51] [Kalki.GenDesignEngine] [ERROR]: Design pipeline failed for project proj_20251104_203751: 'NoneType' object has no attribute 'generate'
+[2025-11-04 20:42:16] [Kalki.robustness] [INFO]: Received signal 15, initiating graceful shutdown
+[2025-11-04 20:43:17] [Kalki.robustness] [INFO]: Received signal 15, initiating graceful shutdown
+[2025-11-04 21:22:41] [Kalki.robustness] [INFO]: Received signal 15, initiating graceful shutdown
+[2025-11-05 08:16:37] [Kalki.robustness] [INFO]: Received signal 15, initiating graceful shutdown
+[2025-11-05 08:21:26] [Kalki.robustness] [INFO]: Received signal 15, initiating graceful shutdown
+[2025-11-05 08:45:24] [Kalki.robustness] [INFO]: Received signal 15, initiating graceful shutdown

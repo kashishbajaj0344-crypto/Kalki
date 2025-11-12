@@ -10,14 +10,16 @@
 # Install dependencies
 pip3 install -r config/requirements.txt
 
-# Start CLI
-python3 src/kalki_cli.py chat
+# Start KALKI (unified entry point)
+python3 kalki.py                    # Interactive chat (default)
+python3 kalki.py --cli              # CLI mode
+python3 kalki.py --streamlit         # Streamlit web app
+python3 kalki.py --api              # API server
 
-# Or start the unified chatbot
-python3 apps/kalki_unified_chat.py
-
-# Or start Streamlit app
-streamlit run apps/kalki_app_enhanced.py
+# Or use direct entry points
+python3 apps/kalki_unified_chat.py  # Unified chat
+python3 src/kalki_cli.py chat      # CLI interface
+streamlit run apps/kalki_app_enhanced.py  # Streamlit app
 ```
 
 ---

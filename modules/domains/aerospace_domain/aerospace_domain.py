@@ -253,7 +253,7 @@ class AerospaceDomain(BaseDomain):
             name="aerospace",
             description="Aerospace projects - UAVs, aircraft design, flight systems"
         )
-        
+    
         # Professional systems integration (lazy initialization)
         self._professional_integration = None
     
@@ -489,32 +489,27 @@ class AerospaceDomain(BaseDomain):
         
         return self._professional_integration
     
-    @property
-    async def team_orchestrator(self):
+    async def get_team_orchestrator(self):
         """Get professional team orchestrator"""
         integration = await self._get_professional_integration()
         return integration.team_orchestrator
     
-    @property
-    async def deliverable_generator(self):
+    async def get_deliverable_generator(self):
         """Get professional deliverable generator"""
         integration = await self._get_professional_integration()
         return integration.deliverable_generator
     
-    @property
-    async def cross_learning(self):
+    async def get_cross_learning(self):
         """Get cross-domain learning system"""
         integration = await self._get_professional_integration()
         return integration.cross_learning
     
-    @property
-    async def workflow_executor(self):
+    async def get_workflow_executor(self):
         """Get professional workflow executor"""
         integration = await self._get_professional_integration()
         return integration.workflow_executor
     
-    @property
-    async def quality_framework(self):
+    async def get_quality_framework(self):
         """Get quality assurance framework"""
         integration = await self._get_professional_integration()
         return integration.quality_framework

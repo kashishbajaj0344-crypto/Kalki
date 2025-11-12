@@ -1,0 +1,136 @@
+{
+  "metadata": {
+    "project_name": "2D Platformer - Classic Jump & Run",
+    "date": "2025-11-07T19:28:27.513776"
+  },
+  "pre_launch": {
+    "timeline": "6 months before launch",
+    "activities": [
+      {
+        "activity": "Build Community",
+        "channels": [
+          "Discord",
+          "Twitter",
+          "Reddit"
+        ],
+        "goal": "10,000 followers"
+      },
+      {
+        "activity": "Content Creation",
+        "deliverables": [
+          "Teaser trailer",
+          "Gameplay trailer",
+          "Dev blog posts",
+          "Behind-the-scenes videos"
+        ]
+      },
+      {
+        "activity": "Press Outreach",
+        "targets": [
+          "Gaming media",
+          "YouTubers",
+          "Streamers"
+        ],
+        "goal": "50 press contacts"
+      },
+      {
+        "activity": "Beta Testing",
+        "type": "Closed beta",
+        "participants": "1,000 players",
+        "duration": "2 months"
+      }
+    ]
+  },
+  "launch": {
+    "timeline": "Launch week",
+    "activities": [
+      {
+        "activity": "Launch Trailer",
+        "platforms": [
+          "YouTube",
+          "Twitter",
+          "Steam"
+        ],
+        "goal": "100,000 views"
+      },
+      {
+        "activity": "Review Copies",
+        "recipients": [
+          "Press",
+          "Influencers"
+        ],
+        "embargo": "Launch day"
+      },
+      {
+        "activity": "Launch Discount",
+        "discount": "10-20%",
+        "duration": "1 week"
+      },
+      {
+        "activity": "Social Media Blitz",
+        "frequency": "Hourly posts",
+        "content": [
+          "Memes",
+          "GIFs",
+          "Screenshots",
+          "User content"
+        ]
+      }
+    ]
+  },
+  "post_launch": {
+    "timeline": "Ongoing",
+    "activities": [
+      {
+        "activity": "Community Management",
+        "tasks": [
+          "Respond to feedback",
+          "Bug reports",
+          "Feature requests"
+        ]
+      },
+      {
+        "activity": "Content Updates",
+        "cadence": "Monthly",
+        "types": [
+          "New levels",
+          "Events",
+          "Balance patches"
+        ]
+      },
+      {
+        "activity": "Player Retention",
+        "strategies": [
+          "Daily rewards",
+          "Seasonal events",
+          "Challenges",
+          "Leaderboards"
+        ]
+      },
+      {
+        "activity": "DLC Planning",
+        "timeline": "3-6 months post-launch",
+        "content": [
+          "New campaign",
+          "Characters",
+          "Game modes"
+        ]
+      }
+    ]
+  },
+  "marketing_budget": {
+    "total": "$50,000",
+    "breakdown": {
+      "paid_ads": "$20,000",
+      "influencer_marketing": "$15,000",
+      "pr_agency": "$10,000",
+      "community_events": "$5,000"
+    }
+  },
+  "success_metrics": {
+    "downloads": "100,000 in first month",
+    "reviews": "4+ stars average",
+    "revenue": "$250,000 in first year",
+    "retention": "20% Day 7"
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "project_id": "test-2d-platformer",
+  "description": "2D Platformer - Classic Jump & Run",
+  "domain": "game_development",
+  "current_phase": "launch",
+  "phase_history": [],
+  "metadata": {},
+  "issues": [],
+  "milestones": {
+    "concept": [
+      {
+        "name": "Game concept document complete",
+        "complete": true
+      },
+      {
+        "name": "Target audience identified",
+        "complete": true
+      },
+      {
+        "name": "Core mechanics defined",
+        "complete": false
+      }
+    ],
+    "pre_production": [
+      {
+        "name": "Technical design document complete",
+        "complete": true
+      },
+      {
+        "name": "Art style established",
+        "complete": true
+      },
+      {
+        "name": "Prototype plan finalized",
+        "complete": false
+      },
+      {
+        "name": "Development tools set up",
+        "complete": false
+      }
+    ],
+    "prototype": [
+      {
+        "name": "Core gameplay loop implemented",
+        "complete": true
+      },
+      {
+        "name": "Basic controls working",
+        "complete": true
+      },
+      {
+        "name": "Core mechanics tested",
+        "complete": true
+      },
+      {
+        "name": "Proof of fun validated",
+        "complete": true
+      }
+    ],
+    "production": [
+      {
+        "name": "Game systems implemented",
+        "complete": false
+      },
+      {
+        "name": "Level design complete",
+        "complete": false
+      },
+      {
+        "name": "Art assets created",
+        "complete": false
+      },
+      {
+        "name": "Audio implemented",
+        "complete": false
+      },
+      {
+        "name": "UI/UX complete",
+        "complete": false
+      }
+    ],
+    "alpha": [
+      {
+        "name": "All features implemented",
+        "complete": false
+      },
+      {
+        "name": "Content complete",
+        "complete": false
+      },
+      {
+        "name": "Internal playtesting started",
+        "complete": false
+      },
+      {
+        "name": "Major bugs identified",
+        "complete": false
+      }
+    ],
+    "beta": [
+      {
+        "name": "Closed beta launched",
+        "complete": false
+      },
+      {
+        "name": "Community feedback gathered",
+        "complete": false
+      },
+      {
+        "name": "Balancing adjustments made",
+        "complete": false
+      },
+      {
+        "name": "Performance optimized",
+        "complete": false
+      }
+    ],
+    "polish": [
+      {
+        "name": "All critical bugs fixed",
+        "complete": false
+      },
+      {
+        "name": "Final art pass complete",
+        "complete": false
+      },
+      {
+        "name": "Audio polish complete",
+        "complete": false
+      },
+      {
+        "name": "Marketing materials prepared",
+        "complete": false
+      }
+    ],
+    "launch": [
+      {
+        "name": "Store pages live",
+        "complete": false
+      },
+      {
+        "name": "Launch trailer released",
+        "complete": false
+      },
+      {
+        "name": "Press kit distributed",
+        "complete": false
+      },
+      {
+        "name": "Game released",
+        "complete": false
+      }
+    ],
+    "post_launch": [
+      {
+        "name": "Player feedback monitored",
+        "complete": false
+      },
+      {
+        "name": "Patches released",
+        "complete": false
+      },
+      {
+        "name": "DLC/updates planned",
+        "complete": false
+      },
+      {
+        "name": "Community engagement active",
+        "complete": false
+      }
+    ]
+  },
+  "created_at": "2025-11-07T19:28:27.514480",
+  "updated_at": "2025-11-07T19:28:27.514481",
+  "game_engine": "unity",
+  "target_platforms": [
+    "pc",
+    "mobile"
+  ],
+  "genre": "platformer",
+  "team_size": 3,
+  "monetization_model": "premium",
+  "budget": {
+    "estimated_total": 50000,
+    "actual_spent": 28000,
+    "by_phase": {
+      "prototype": {
+        "estimated": 0,
+        "actual": 28000
+      }
+    },
+    "by_category": {
+      "development": 15000,
+      "art": 8000,
+      "audio": 3000,
+      "marketing": 2000,
+      "infrastructure": 0
+    }
+  },
+  "timeline": {
+    "start_date": null,
+    "target_launch": "2025-12-01",
+    "phase_durations": {},
+    "actual_phase_durations": {}
+  }
+}

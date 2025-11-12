@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "size_sqft": 2500,
+    "stories": 3,
+    "location": "Vancouver, BC"
+  },
+  "loads": {
+    "dead_load_psf": 25,
+    "live_load_psf": 40,
+    "snow_load_psf": 25,
+    "wind_load_psf": 20,
+    "seismic_category": "Moderate"
+  },
+  "spans": {
+    "floor_joists": {
+      "span_ft": 16,
+      "spacing_in": 16,
+      "member_size": "2x10",
+      "grade": "#2 SPF",
+      "live_load": 40,
+      "dead_load": 25
+    },
+    "ceiling_joists": {
+      "span_ft": 14,
+      "spacing_in": 24,
+      "member_size": "2x6",
+      "grade": "#2 SPF",
+      "live_load": 10,
+      "dead_load": 10
+    },
+    "roof_rafters": {
+      "span_ft": 18,
+      "spacing_in": 16,
+      "member_size": "2x10",
+      "grade": "#2 SPF",
+      "snow_load": 25,
+      "dead_load": 15
+    },
+    "beams": {
+      "main_beam": {
+        "span_ft": 20,
+        "member_size": "3-2x12",
+        "grade": "#1 SPF",
+        "load_type": "point_loads",
+        "support": "posts at ends"
+      }
+    }
+  },
+  "foundations": {
+    "footing_width_in": 28,
+    "footing_depth_in": 8,
+    "foundation_wall_thickness_in": 8,
+    "soil_bearing_capacity_psf": 2000
+  },
+  "notes": [
+    "Calculations based on BC Building Code 2018",
+    "All lumber to be Grade #2 SPF minimum unless noted",
+    "Spans are maximum - use smaller where practical",
+    "Professional engineer review required before construction",
+    "Site-specific soil report may require foundation adjustments"
+  ],
+  "references": [
+    "BC Building Code 2018, Part 9",
+    "CSA O86 Engineering Design in Wood",
+    "Span Tables for Joists and Rafters (CMHC)"
+  ]
+}

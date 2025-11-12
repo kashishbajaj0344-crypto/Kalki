@@ -1,0 +1,152 @@
+{
+  "items": [
+    {
+      "item_number": "001",
+      "part_number": "KLK-st_001-001",
+      "description": "Base Platform",
+      "type": "structural",
+      "quantity": 1,
+      "material": "Aluminum 6061",
+      "dimensions": {
+        "length": 200,
+        "width": 200,
+        "height": 50
+      },
+      "weight_kg": 5.4,
+      "unit_cost_usd": 54.0,
+      "total_cost_usd": 54.0,
+      "supplier": "McMaster-Carr",
+      "lead_time_days": 7,
+      "notes": "Verify dimensions and tolerances before ordering. Request material certifications."
+    },
+    {
+      "item_number": "002",
+      "part_number": "KLK-st_001-002",
+      "description": "Shoulder Joint",
+      "type": "actuator",
+      "quantity": 1,
+      "material": "Steel 4140",
+      "dimensions": {
+        "diameter": 100,
+        "length": 120,
+        "height": 100
+      },
+      "weight_kg": 7.398,
+      "unit_cost_usd": 110.98,
+      "total_cost_usd": 110.98,
+      "supplier": "Motion Industries",
+      "lead_time_days": 14,
+      "notes": "Verify dimensions and tolerances before ordering. Request material certifications."
+    },
+    {
+      "item_number": "003",
+      "part_number": "KLK-st_001-003",
+      "description": "Upper Arm Link",
+      "type": "structural",
+      "quantity": 1,
+      "material": "Aluminum 6061",
+      "dimensions": {
+        "length": 300,
+        "diameter": 60,
+        "height": 40
+      },
+      "weight_kg": 2.29,
+      "unit_cost_usd": 22.9,
+      "total_cost_usd": 22.9,
+      "supplier": "McMaster-Carr",
+      "lead_time_days": 7,
+      "notes": "Verify dimensions and tolerances before ordering. Request material certifications."
+    },
+    {
+      "item_number": "004",
+      "part_number": "KLK-st_001-004",
+      "description": "Elbow Joint",
+      "type": "actuator",
+      "quantity": 1,
+      "material": "Steel 4140",
+      "dimensions": {
+        "diameter": 80,
+        "length": 100,
+        "height": 80
+      },
+      "weight_kg": 3.946,
+      "unit_cost_usd": 59.19,
+      "total_cost_usd": 59.19,
+      "supplier": "Motion Industries",
+      "lead_time_days": 14,
+      "notes": "Verify dimensions and tolerances before ordering. Request material certifications."
+    },
+    {
+      "item_number": "005",
+      "part_number": "KLK-st_001-005",
+      "description": "Forearm Link",
+      "type": "structural",
+      "quantity": 1,
+      "material": "Aluminum 6061",
+      "dimensions": {
+        "length": 250,
+        "diameter": 50,
+        "height": 35
+      },
+      "weight_kg": 1.325,
+      "unit_cost_usd": 13.25,
+      "total_cost_usd": 13.25,
+      "supplier": "McMaster-Carr",
+      "lead_time_days": 7,
+      "notes": "Verify dimensions and tolerances before ordering. Request material certifications."
+    },
+    {
+      "item_number": "006",
+      "part_number": "KLK-st_001-006",
+      "description": "Wrist Joint",
+      "type": "actuator",
+      "quantity": 1,
+      "material": "Steel 4140",
+      "dimensions": {
+        "diameter": 60,
+        "length": 80,
+        "height": 60
+      },
+      "weight_kg": 1.776,
+      "unit_cost_usd": 26.63,
+      "total_cost_usd": 26.63,
+      "supplier": "Motion Industries",
+      "lead_time_days": 14,
+      "notes": "Verify dimensions and tolerances before ordering. Request material certifications."
+    },
+    {
+      "item_number": "007",
+      "part_number": "KLK-st_001-007",
+      "description": "End Effector",
+      "type": "tool",
+      "quantity": 1,
+      "material": "Aluminum 6061",
+      "dimensions": {
+        "length": 100,
+        "width": 80,
+        "height": 60
+      },
+      "weight_kg": 1.296,
+      "unit_cost_usd": 19.44,
+      "total_cost_usd": 19.44,
+      "supplier": "McMaster-Carr",
+      "lead_time_days": 7,
+      "notes": "Verify dimensions and tolerances before ordering. Request material certifications."
+    },
+    {
+      "item_number": "F01",
+      "part_number": "FASTENERS-ASSORTED",
+      "description": "Fasteners, bolts, nuts, washers (assorted)",
+      "quantity": 35,
+      "material": "Stainless Steel 304",
+      "unit_cost_usd": 0.5,
+      "total_cost_usd": 15.32,
+      "supplier": "McMaster-Carr",
+      "lead_time_days": 3,
+      "notes": "M4, M6, M8 metric fasteners"
+    }
+  ],
+  "total_cost_estimate": 321.71,
+  "total_weight": 23.43,
+  "lead_time_days": 19
+}

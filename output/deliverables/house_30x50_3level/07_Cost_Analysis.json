@@ -1,0 +1,23 @@
+{
+  "cost_breakdown": {
+    "materials": 1960.78,
+    "labor": 180000.0,
+    "overhead": 27294.12,
+    "contingency": 20925.49,
+    "total": 230180.39
+  },
+  "assumptions": {
+    "labor_rate_usd_per_hour": 75.0,
+    "estimated_labor_hours": 2400,
+    "overhead_percentage": 15.0,
+    "contingency_percentage": 10.0
+  },
+  "cost_per_unit": 230180.39,
+  "volume_pricing": {
+    "1_unit": 230180.39,
+    "10_units": 195653.33,
+    "100_units": 161126.27
+  },
+  "currency": "USD",
+  "valid_until": "2025-01-01"
+}

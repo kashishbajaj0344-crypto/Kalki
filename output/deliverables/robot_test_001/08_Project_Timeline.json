@@ -1,0 +1,38 @@
+{
+  "total_duration_days": 36,
+  "total_duration_weeks": 5.2,
+  "phases": [
+    {
+      "phase": "Material Procurement",
+      "duration_days": 14,
+      "start_day": 0,
+      "end_day": 14
+    },
+    {
+      "phase": "Manufacturing",
+      "duration_days": 14,
+      "start_day": 14,
+      "end_day": 28
+    },
+    {
+      "phase": "Assembly",
+      "duration_days": 3.5,
+      "start_day": 28,
+      "end_day": 31.5
+    },
+    {
+      "phase": "Testing & QC",
+      "duration_days": 5,
+      "start_day": 31.5,
+      "end_day": 36.5
+    }
+  ],
+  "critical_path": "Material Procurement \u2192 Manufacturing \u2192 Assembly \u2192 Testing",
+  "estimated_completion": "2025-12-12",
+  "assumptions": [
+    "Standard lead times for materials",
+    "No production delays or material shortages",
+    "Skilled labor available as needed",
+    "Single shift operation (8 hours/day)"
+  ]
+}

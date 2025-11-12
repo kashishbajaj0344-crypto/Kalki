@@ -1,0 +1,103 @@
+{
+  "general": {
+    "project_type": "robotic",
+    "design_standard": "ISO 2768-1 (General Tolerances)",
+    "measurement_system": "Metric (SI Units)",
+    "revision": "1.0",
+    "date": "2025-11-06T09:53:37.190674"
+  },
+  "dimensional_requirements": {
+    "reach_m": {
+      "nominal": 0.85,
+      "tolerance": "\u00b10.05mm",
+      "units": "mm"
+    },
+    "payload_kg": {
+      "nominal": 5.0,
+      "tolerance": "\u00b10.05mm",
+      "units": "mm"
+    },
+    "precision_mm": {
+      "nominal": 0.05,
+      "tolerance": "\u00b10.05mm",
+      "units": "mm"
+    },
+    "total_mass_kg": {
+      "nominal": 18.5,
+      "tolerance": "\u00b10.1mm",
+      "units": "kg"
+    },
+    "degrees_of_freedom": {
+      "nominal": 6,
+      "tolerance": "\u00b10.05mm",
+      "units": "mm"
+    }
+  },
+  "material_specifications": {
+    "aluminum_6061": {
+      "grade": "6061-T6",
+      "yield_strength_mpa": 276,
+      "tensile_strength_mpa": 310,
+      "elongation_percent": 12,
+      "density_kg_m3": 2700,
+      "standard": "ASTM B221"
+    },
+    "steel_4140": {
+      "grade": "4140 Alloy Steel",
+      "yield_strength_mpa": 415,
+      "tensile_strength_mpa": 655,
+      "elongation_percent": 25,
+      "density_kg_m3": 7850,
+      "standard": "ASTM A29"
+    },
+    "stainless_steel_304": {
+      "grade": "stainless_steel_304",
+      "standard": "To be specified"
+    }
+  },
+  "manufacturing_specifications": {
+    "total_components": 7,
+    "recommended_processes": [
+      "Assembly",
+      "Precision Machining",
+      "Welding/Joining",
+      "CNC Machining"
+    ],
+    "assembly_complexity": "MEDIUM - Moderate complexity requiring skilled labor",
+    "estimated_labor_hours": 19
+  },
+  "performance_requirements": {
+    "degrees_of_freedom": 6,
+    "workspace_radius_m": 0.85,
+    "payload_capacity_kg": 5.0,
+    "positional_accuracy_mm": 0.05,
+    "repeatability_mm": 0.025,
+    "max_speed_m_s": 1.5,
+    "operating_voltage": "24V DC",
+    "power_consumption_w": 500,
+    "estimated_labor_hours": 90
+  },
+  "safety_requirements": {
+    "structural_safety_factor": 2.0,
+    "electrical_safety_standard": "IEC 60950-1",
+    "fire_safety_rating": "Class A",
+    "emergency_shutdown": "Required for all motorized components"
+  },
+  "environmental_conditions": {
+    "operating_temperature": {
+      "min": -10,
+      "max": 50,
+      "units": "\u00b0C"
+    },
+    "storage_temperature": {
+      "min": -20,
+      "max": 60,
+      "units": "\u00b0C"
+    },
+    "humidity": {
+      "max": 85,
+      "units": "% RH non-condensing"
+    },
+    "ip_rating": "IP54 (Dust protected, splash resistant)"
+  }
+}

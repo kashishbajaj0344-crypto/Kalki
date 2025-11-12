@@ -102,6 +102,87 @@ class ProfessionalTeamOrchestrator:
         
         logger.info("Professional Team Orchestrator initialized")
     
+    async def process(self, task: Dict[str, Any], context: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Process a task using the professional team.
+        This method makes ProfessionalTeamOrchestrator compatible with orchestrator's agent execution model.
+        
+        Args:
+            task: Task dictionary with 'query' or 'description' key
+            context: Context dictionary
+        
+        Returns:
+            Result dictionary with 'answer' or 'result' key
+        """
+        try:
+            # Extract task description
+            task_description = task.get('query') or task.get('description') or task.get('task', '')
+            if not task_description:
+                return {"status": "error", "error": "No task description provided"}
+            
+            # Determine required roles from task or context
+            required_roles = task.get('required_roles', [])
+            if not required_roles:
+                # Auto-detect roles based on task keywords
+                task_lower = task_description.lower()
+                if any(word in task_lower for word in ['design', 'layout', 'plan']):
+                    required_roles = [ProfessionalRole.ARCHITECT, ProfessionalRole.DESIGNER]
+                elif any(word in task_lower for word in ['analyze', 'validate', 'check']):
+                    required_roles = [ProfessionalRole.ANALYST, ProfessionalRole.VALIDATOR]
+                elif any(word in task_lower for word in ['schedule', 'plan', 'timeline']):
+                    required_roles = [ProfessionalRole.PROJECT_MANAGER, ProfessionalRole.SCHEDULER]
+                else:
+                    # Default to general roles
+                    required_roles = [ProfessionalRole.ANALYST]
+            
+            # Convert string roles to ProfessionalRole enum if needed
+            if required_roles and isinstance(required_roles[0], str):
+                required_roles = [ProfessionalRole(r) for r in required_roles if r in [role.value for role in ProfessionalRole]]
+            
+            # Coordinate team task
+            result = await self.coordinate_team_task(
+                task=task_description,
+                required_roles=required_roles,
+                context=context,
+                domain=context.get('domain', 'general')
+            )
+            
+            # Format result for orchestrator compatibility
+            if isinstance(result, dict):
+                # Extract consensus or first role result
+                if 'team_consensus' in result:
+                    return {
+                        "status": "success",
+                        "answer": result.get('team_consensus', {}).get('consensus', ''),
+                        "result": result,
+                        "confidence": result.get('team_consensus', {}).get('confidence', 0.8)
+                    }
+                elif result:
+                    # Get first role result
+                    first_result = next(iter(result.values())) if result else None
+                    if first_result and hasattr(first_result, 'result'):
+                        return {
+                            "status": "success",
+                            "answer": first_result.result.get('answer', str(first_result.result)),
+                            "result": result,
+                            "confidence": first_result.confidence
+                        }
+            
+            return {
+                "status": "success",
+                "answer": str(result),
+                "result": result,
+                "confidence": 0.7
+            }
+            
+        except Exception as e:
+            logger.error(f"ProfessionalTeamOrchestrator.process failed: {e}")
+            return {
+                "status": "error",
+                "error": str(e),
+                "result": {}
+            }
+    
     async def assign_role(
         self,
         role: ProfessionalRole,

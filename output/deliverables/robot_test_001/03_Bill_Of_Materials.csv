@@ -1,0 +1,9 @@
+Item,Part Number,Description,Qty,Material,Unit Cost,Total Cost,Supplier,Lead Time
+001,KLK-st_001-001,Base Platform,1,Aluminum 6061,54.0,54.0,McMaster-Carr,7
+002,KLK-st_001-002,Shoulder Joint,1,Steel 4140,110.98,110.98,Motion Industries,14
+003,KLK-st_001-003,Upper Arm Link,1,Aluminum 6061,22.9,22.9,McMaster-Carr,7
+004,KLK-st_001-004,Elbow Joint,1,Steel 4140,59.19,59.19,Motion Industries,14
+005,KLK-st_001-005,Forearm Link,1,Aluminum 6061,13.25,13.25,McMaster-Carr,7
+006,KLK-st_001-006,Wrist Joint,1,Steel 4140,26.63,26.63,Motion Industries,14
+007,KLK-st_001-007,End Effector,1,Aluminum 6061,19.44,19.44,McMaster-Carr,7
+F01,FASTENERS-ASSORTED,Fasteners, bolts, nuts, washers (assorted),35,Stainless Steel 304,0.5,15.32,McMaster-Carr,3

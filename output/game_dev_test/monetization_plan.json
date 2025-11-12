@@ -1,0 +1,80 @@
+{
+  "metadata": {
+    "project_name": "2D Platformer - Classic Jump & Run",
+    "date": "2025-11-07T19:28:27.513684"
+  },
+  "business_model": "premium",
+  "pricing_strategy": {
+    "initial_price": "$19.99",
+    "discounts": [
+      "Launch discount 10%",
+      "Seasonal sales 25-50%"
+    ],
+    "bundles": "Include soundtrack and artbook"
+  },
+  "revenue_streams": [
+    "Base game sales",
+    "DLC packs",
+    "Expansion",
+    "Merchandise"
+  ],
+  "player_lifecycle": {
+    "acquisition": {
+      "channels": [
+        "App Store",
+        "Steam",
+        "Social Media",
+        "Influencers"
+      ],
+      "cost_per_install": "$2-5"
+    },
+    "retention": {
+      "day_1": "40%",
+      "day_7": "20%",
+      "day_30": "10%",
+      "strategies": [
+        "Daily rewards",
+        "Events",
+        "Social features",
+        "Content updates"
+      ]
+    },
+    "monetization": {
+      "conversion_rate": "100%",
+      "arpu": "$25",
+      "arppu": "$25",
+      "ltv": "$50-100"
+    }
+  },
+  "in_game_economy": {
+    "currencies": [
+      "Gold (earned)",
+      "XP"
+    ],
+    "sinks": [
+      "Upgrades",
+      "Items",
+      "Cosmetics"
+    ],
+    "faucets": [
+      "Quests",
+      "Enemies",
+      "Treasure"
+    ],
+    "balance": "Generous with gold, progression-based"
+  },
+  "financial_projections": {
+    "year_1": {
+      "downloads": 100000,
+      "revenue": "$250,000",
+      "costs": "$200,000",
+      "profit": "$50,000"
+    },
+    "year_2": {
+      "downloads": 50000,
+      "revenue": "$150,000",
+      "costs": "$75,000",
+      "profit": "$75,000"
+    }
+  }
+}

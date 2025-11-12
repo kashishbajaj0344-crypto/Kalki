@@ -1,0 +1,197 @@
+{
+  "project_id": "test-hub-123",
+  "description": "Build 2-story home in Victoria, BC",
+  "domain": "construction",
+  "current_phase": "requirements_gathering",
+  "phase_history": [],
+  "metadata": {},
+  "issues": [],
+  "milestones": {
+    "requirements_gathering": [
+      {
+        "name": "Site survey complete",
+        "complete": true
+      },
+      {
+        "name": "Budget approved",
+        "complete": true
+      },
+      {
+        "name": "Design brief finalized",
+        "complete": true
+      }
+    ],
+    "design_generation": [
+      {
+        "name": "Schematic design approved",
+        "complete": false
+      },
+      {
+        "name": "Construction drawings complete",
+        "complete": false
+      },
+      {
+        "name": "Structural calculations verified",
+        "complete": false
+      }
+    ],
+    "permit_preparation": [
+      {
+        "name": "Permit documents submitted",
+        "complete": false
+      },
+      {
+        "name": "Plan check responses completed",
+        "complete": false
+      },
+      {
+        "name": "Building permit issued",
+        "complete": false
+      }
+    ],
+    "foundation": [
+      {
+        "name": "Excavation complete",
+        "complete": false
+      },
+      {
+        "name": "Footing inspection passed",
+        "complete": false
+      },
+      {
+        "name": "Foundation walls complete",
+        "complete": false
+      }
+    ],
+    "framing": [
+      {
+        "name": "Floor framing complete",
+        "complete": false
+      },
+      {
+        "name": "Wall framing complete",
+        "complete": false
+      },
+      {
+        "name": "Roof framing complete",
+        "complete": false
+      },
+      {
+        "name": "Framing inspection passed",
+        "complete": false
+      }
+    ],
+    "rough_mechanical_electrical_plumbing": [
+      {
+        "name": "HVAC rough-in complete",
+        "complete": false
+      },
+      {
+        "name": "Electrical rough-in complete",
+        "complete": false
+      },
+      {
+        "name": "Plumbing rough-in complete",
+        "complete": false
+      },
+      {
+        "name": "MEP inspection passed",
+        "complete": false
+      }
+    ],
+    "insulation": [
+      {
+        "name": "Insulation installed",
+        "complete": false
+      },
+      {
+        "name": "Vapor barrier installed",
+        "complete": false
+      },
+      {
+        "name": "Insulation inspection passed",
+        "complete": false
+      }
+    ],
+    "drywall": [
+      {
+        "name": "Drywall hung",
+        "complete": false
+      },
+      {
+        "name": "Taping and mudding complete",
+        "complete": false
+      },
+      {
+        "name": "Sanding complete",
+        "complete": false
+      }
+    ],
+    "finishing": [
+      {
+        "name": "Painting complete",
+        "complete": false
+      },
+      {
+        "name": "Flooring installed",
+        "complete": false
+      },
+      {
+        "name": "Fixtures installed",
+        "complete": false
+      },
+      {
+        "name": "Trim and cabinetry complete",
+        "complete": false
+      }
+    ],
+    "final_inspection": [
+      {
+        "name": "Final building inspection passed",
+        "complete": false
+      },
+      {
+        "name": "Deficiencies corrected",
+        "complete": false
+      }
+    ],
+    "occupancy": [
+      {
+        "name": "Occupancy permit issued",
+        "complete": false
+      },
+      {
+        "name": "Owner handover complete",
+        "complete": false
+      }
+    ],
+    "digital_twin_creation": [
+      {
+        "name": "As-built drawings complete",
+        "complete": false
+      },
+      {
+        "name": "Digital twin model created",
+        "complete": false
+      }
+    ]
+  },
+  "created_at": "2025-11-07T17:41:52.554510",
+  "updated_at": "2025-11-07T17:41:52.554512",
+  "location": "Victoria, BC",
+  "building_type": "residential_multi_story",
+  "size_sqft": 2000,
+  "stories": 2,
+  "budget": {
+    "estimated_total": 600000,
+    "actual_spent": 50000,
+    "by_phase": {},
+    "contingency_percent": 10
+  },
+  "timeline": {
+    "start_date": null,
+    "target_completion": null,
+    "phase_durations": {},
+    "actual_phase_durations": {}
+  }
+}

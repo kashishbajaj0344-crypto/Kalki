@@ -1,0 +1,94 @@
+{
+  "research_answer_fa9caeb2a7": {
+    "id": "research_answer_fa9caeb2a7",
+    "content": "Error: Model not initialized",
+    "node_type": "research_answer",
+    "domain": "construction",
+    "metadata": {
+      "query": "Validate roadmap for {'full_address': '1234 Test Street', 'street': '1234 Test Street', 'city': 'San Jose', 'state': 'CA', 'zip': ''}",
+      "confidence": 0.8,
+      "sources": [
+        {
+          "title": "Result 1 for: Validate roadmap for {'full_address': '1234 Test Street', 'street': '1234 Test Street', 'city': 'San Jose', 'state': 'CA', 'zip': ''}",
+          "url": "https://example.com/result1?q=Validate+roadmap+for+{'full_address':+'1234+Test+Street',+'street':+'1234+Test+Street',+'city':+'San+Jose',+'state':+'CA',+'zip':+''}",
+          "snippet": "Mock search result for Validate roadmap for {'full_address': '1234 Test Street', 'street': '1234 Test Street', 'city': 'San Jose', 'state': 'CA', 'zip': ''}. Replace once live data is available.",
+          "source": "Mock Search"
+        },
+        {
+          "title": "Result 2 for: Validate roadmap for {'full_address': '1234 Test Street', 'street': '1234 Test Street', 'city': 'San Jose', 'state': 'CA', 'zip': ''}",
+          "url": "https://example.com/result2?q=Validate+roadmap+for+{'full_address':+'1234+Test+Street',+'street':+'1234+Test+Street',+'city':+'San+Jose',+'state':+'CA',+'zip':+''}",
+          "snippet": "Fallback content because live search was unavailable for Validate roadmap for {'full_address': '1234 Test Street', 'street': '1234 Test Street', 'city': 'San Jose', 'state': 'CA', 'zip': ''}.",
+          "source": "Mock Search"
+        },
+        {
+          "title": "Result 3 for: Validate roadmap for {'full_address': '1234 Test Street', 'street': '1234 Test Street', 'city': 'San Jose', 'state': 'CA', 'zip': ''}",
+          "url": "https://example.com/result3?q=Validate+roadmap+for+{'full_address':+'1234+Test+Street',+'street':+'1234+Test+Street',+'city':+'San+Jose',+'state':+'CA',+'zip':+''}",
+          "snippet": "Additional mock resources related to Validate roadmap for {'full_address': '1234 Test Street', 'street': '1234 Test Street', 'city': 'San Jose', 'state': 'CA', 'zip': ''}.",
+          "source": "Mock Search"
+        }
+      ],
+      "created_at": "2025-11-11T09:25:05.492822"
+    },
+    "linked_images": [],
+    "linked_texts": []
+  },
+  "research_answer_463cb35881": {
+    "id": "research_answer_463cb35881",
+    "content": "Error: Model not initialized",
+    "node_type": "research_answer",
+    "domain": "construction",
+    "metadata": {
+      "query": "Validate roadmap for None",
+      "confidence": 0.8,
+      "sources": [
+        {
+          "title": "Result 1 for: Validate roadmap for None",
+          "url": "https://example.com/result1?q=Validate+roadmap+for+None",
+          "snippet": "Mock search result for Validate roadmap for None. Replace once live data is available.",
+          "source": "Mock Search"
+        },
+        {
+          "title": "Result 2 for: Validate roadmap for None",
+          "url": "https://example.com/result2?q=Validate+roadmap+for+None",
+          "snippet": "Fallback content because live search was unavailable for Validate roadmap for None.",
+          "source": "Mock Search"
+        },
+        {
+          "title": "Result 3 for: Validate roadmap for None",
+          "url": "https://example.com/result3?q=Validate+roadmap+for+None",
+          "snippet": "Additional mock resources related to Validate roadmap for None.",
+          "source": "Mock Search"
+        }
+      ],
+      "created_at": "2025-11-11T09:25:05.566804"
+    },
+    "linked_images": [],
+    "linked_texts": []
+  },
+  "test_formula_1": {
+    "id": "test_formula_1",
+    "content": "Beam load = W * L^2 / 8",
+    "node_type": "formula",
+    "domain": "construction",
+    "metadata": {},
+    "linked_images": [],
+    "linked_texts": []
+  },
+  "research_answer_e5cb4fd769": {
+    "id": "research_answer_e5cb4fd769",
+    "content": "test answer",
+    "node_type": "research_answer",
+    "domain": "construction",
+    "metadata": {
+      "query": "test question",
+      "confidence": 0.8,
+      "sources": [
+        "source1",
+        "source2"
+      ],
+      "created_at": "2025-11-11T09:25:05.570077"
+    },
+    "linked_images": [],
+    "linked_texts": []
+  }
+}

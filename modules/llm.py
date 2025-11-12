@@ -32,25 +32,39 @@ logger = get_logger("Kalki.LLM")
 
 
 class LlamaEngine:
-    """Llama 3.1 8B engine optimized for Kalki with integrated embeddings"""
+    """Llama 3.1 8B engine optimized for Kalki with integrated embeddings - ALWAYS uses local models"""
 
-    def __init__(self, model_name: str = "meta-llama/Llama-3.1-8B-Instruct", model_path: Optional[str] = None):
-        self.model_name = model_name
-        self.model_path = model_path  # Local path to fine-tuned model
+    def __init__(self, model_name: str = None, model_path: Optional[str] = None):
+        # ALWAYS prioritize local models from kalki/models directory
+        if model_path is None:
+            try:
+                from config.models_config import get_model_path
+                local_path = get_model_path("llama-3.1-8b-instruct")
+                if local_path and Path(local_path).exists():
+                    model_path = local_path
+                    logger.info(f"✅ Found local Llama 3.1 8B model at: {model_path}")
+                else:
+                    logger.warning("⚠️  Local Llama 3.1 8B model not found in models/ directory")
+            except Exception as e:
+                logger.warning(f"Could not check for local model: {e}")
+        
+        self.model_name = model_name or "Llama-3.1-8B-Instruct (local)"
+        self.model_path = model_path  # Local path - REQUIRED
         self.model = None
         self.tokenizer = None
         self.pipe = None
         self.embedder = None  # BGE embedder for semantic embeddings
         self.device = self._get_optimal_device()
         self.memory_threshold = 0.8  # Use up to 80% of available memory
-        self.fallback_models = [
-            "meta-llama/Llama-3.1-8B",  # Non-instruct version as fallback
-            "gpt2-xl",  # Large GPT-2 model
-            "gpt2-large",  # Large GPT-2
-            "gpt2-medium"  # Medium GPT-2 as final fallback
-        ]
+        # NO fallback models - we ONLY use local models
+        self.fallback_models = []
         self.conversation_history = []  # Initialize conversation history
-        logger.info(f"Initializing LLM on device: {self.device}")
+        
+        if not self.model_path:
+            logger.error("❌ No local model path provided. Models must be in models/ directory.")
+        else:
+            logger.info(f"🚀 Initializing LLM from local model: {self.model_path}")
+            logger.info(f"📱 Device: {self.device}")
 
     def _get_optimal_device(self) -> str:
         """Determine the best device for inference - M4 Max optimized"""
@@ -79,45 +93,39 @@ class LlamaEngine:
         return True  # GPU/ MPS have their own memory management
 
     async def initialize(self) -> bool:
-        """Initialize the LLM with specified model or fallback models"""
+        """Initialize the LLM - ONLY uses local models from models/ directory"""
         try:
             if not self._check_memory_usage():
                 logger.error("Insufficient memory to load LLM model")
                 return False
 
-            # First try local fine-tuned model if path provided
-            if self.model_path and os.path.exists(self.model_path):
-                logger.info(f"Loading fine-tuned model from local path: {self.model_path}")
-                if await self._try_load_local_model(self.model_path):
-                    logger.info("Fine-tuned model loaded successfully")
-                    # Initialize BGE embedder for semantic embeddings
-                    await self._initialize_embedder()
-                    return True
+            # REQUIRED: Must have local model path
+            if not self.model_path:
+                logger.error("❌ No local model path provided. Cannot initialize.")
+                logger.error("💡 Place Llama 3.1 8B model in models/llama_3.1_8b/ directory")
+                return False
 
-            # First try specified model
-            logger.info(f"Loading {self.model_name}...")
-            if await self._try_load_model(self.model_name):
-                logger.info("Model loaded successfully")
+            if not Path(self.model_path).exists():
+                logger.error(f"❌ Model path does not exist: {self.model_path}")
+                logger.error("💡 Ensure models are in models/llama_3.1_8b/ directory")
+                return False
+
+            # Load local model - this is the ONLY way we load models
+            logger.info(f"📦 Loading local Llama 3.1 8B from: {self.model_path}")
+            if await self._try_load_local_model(self.model_path):
+                logger.info("✅ Local Llama 3.1 8B model loaded successfully")
                 # Initialize BGE embedder for semantic embeddings
                 await self._initialize_embedder()
+                logger.info("🧠 Model ready for intelligent inference")
                 return True
-
-            # If model fails, try fallback models
-            logger.warning("Model access failed, trying fallback models...")
-            for fallback_model in self.fallback_models:
-                logger.info(f"Trying fallback model: {fallback_model}")
-                if await self._try_load_model(fallback_model, use_token=False):
-                    logger.info(f"Fallback model {fallback_model} loaded successfully")
-                    self.model_name = fallback_model  # Update current model name
-                    # Initialize BGE embedder for semantic embeddings
-                    await self._initialize_embedder()
-                    return True
-
-            logger.error("All models failed to load")
-            return False
+            else:
+                logger.error("❌ Failed to load local model")
+                return False
 
         except Exception as e:
             logger.error(f"Failed to initialize LLM: {e}")
+            import traceback
+            logger.error(traceback.format_exc())
             return False
 
     async def _try_load_model(self, model_name: str, use_token: bool = True) -> bool:
@@ -359,16 +367,44 @@ GENERATION_PATTERNS = {
 }
 
 class LlamaVisionEngine:
-    """Llama 3.2 Vision 11B engine for multimodal diagram analysis"""
+    """Llama 3.2 Vision 11B engine for multimodal diagram analysis - ALWAYS uses local models"""
     
-    def __init__(self, model_path: str = "/Users/kashish/Desktop/Kalki/models/llama_3.2_11b_vision"):
+    def __init__(self, model_path: Optional[str] = None):
+        # ALWAYS prioritize local models from kalki/models directory
+        if model_path is None:
+            try:
+                from config.models_config import get_model_path
+                local_path = get_model_path("llama-3.2-11b-vision-instruct")
+                if local_path and Path(local_path).exists():
+                    model_path = local_path
+                    logger.info(f"✅ Found local Llama 3.2 Vision 11B model at: {model_path}")
+                else:
+                    # Try default path structure
+                    default_path = Path(__file__).parent.parent.parent / "models" / "llama_3.2_11b_vision"
+                    if default_path.exists():
+                        model_path = str(default_path)
+                        logger.info(f"✅ Found local Llama 3.2 Vision 11B at default path: {model_path}")
+                    else:
+                        logger.warning("⚠️  Local Llama 3.2 Vision 11B model not found in models/ directory")
+            except Exception as e:
+                logger.warning(f"Could not check for local vision model: {e}")
+                # Try default path
+                default_path = Path(__file__).parent.parent.parent / "models" / "llama_3.2_11b_vision"
+                if default_path.exists():
+                    model_path = str(default_path)
+        
         self.model_path = model_path
         self.model = None
         self.processor = None
         self.device = self._get_optimal_device()
         self.memory_threshold = 0.8
         self.is_initialized = False
-        logger.info(f"Initializing Vision Engine on device: {self.device}")
+        
+        if not self.model_path:
+            logger.error("❌ No local vision model path provided. Models must be in models/ directory.")
+        else:
+            logger.info(f"🎨 Initializing Vision Engine from local model: {self.model_path}")
+            logger.info(f"📱 Device: {self.device}")
     
     def _get_optimal_device(self) -> str:
         """Determine the best device for vision inference"""
@@ -382,13 +418,19 @@ class LlamaVisionEngine:
             return "cpu"
     
     async def initialize(self) -> bool:
-        """Load Llama 3.2 Vision 11B model"""
+        """Load Llama 3.2 Vision 11B model - ONLY uses local models"""
         try:
+            if not self.model_path:
+                logger.error("❌ No local vision model path provided. Cannot initialize.")
+                logger.error("💡 Place Llama 3.2 Vision 11B model in models/llama_3.2_11b_vision/ directory")
+                return False
+                
             if not Path(self.model_path).exists():
-                logger.error(f"Vision model not found at {self.model_path}")
+                logger.error(f"❌ Vision model not found at {self.model_path}")
+                logger.error("💡 Ensure models are in models/llama_3.2_11b_vision/ directory")
                 return False
             
-            logger.info("Loading Llama 3.2 Vision 11B...")
+            logger.info(f"📦 Loading local Llama 3.2 Vision 11B from: {self.model_path}")
             
             # Load processor and model
             self.processor = AutoProcessor.from_pretrained(
@@ -554,13 +596,15 @@ class LLMEngine:
     
     All generation uses local models - no API calls.
     Optimized with caching and batch processing.
+    Now includes advanced reasoning and domain fine-tuning support.
     """
-
-    def __init__(self, backend: str = "llama", enable_vision: bool = True):
+    
+    def __init__(self, backend: str = "llama", enable_vision: bool = True, domain: Optional[str] = None):
         self.backend = backend
         self.llama_engine = None
         self.vision_engine = None
         self.enable_vision = enable_vision
+        self.domain = domain  # Domain for fine-tuned model selection
         self.knowledge_base = self._load_knowledge_base()
         self.conversation_history = []
         
@@ -572,29 +616,59 @@ class LLMEngine:
         self._batch_queue: List[Dict[str, Any]] = []
         self._batch_size = 5
         self._batch_timeout = 0.5  # seconds
+        
+        # Advanced Reasoning Engine (lazy-loaded)
+        self._advanced_reasoning = None
+        
+        # Domain Fine-Tuning support
+        self._domain_finetuner = None
+        self._domain_model_path = None
 
-        # Initialize Llama text engine
+        # Initialize Llama text engine - ALWAYS uses local models
         if backend == "llama":
-            # Try to get local model path from models_config
+            # ALWAYS get local model path from models_config
             try:
                 from config.models_config import get_model_path
                 local_model_path = get_model_path("llama-3.1-8b-instruct")
                 if local_model_path and Path(local_model_path).exists():
-                    logger.info(f"Using local model from: {local_model_path}")
+                    logger.info(f"✅ Using local Llama 3.1 8B from: {local_model_path}")
                     self.llama_engine = LlamaEngine(model_path=local_model_path)
                 else:
-                    self.llama_engine = LlamaEngine()
+                    logger.error("❌ Local Llama 3.1 8B model not found!")
+                    logger.error("💡 Place model in models/llama_3.1_8b/ directory")
+                    raise FileNotFoundError("Local Llama 3.1 8B model not found")
             except Exception as e:
-                logger.warning(f"Could not load local model path, using default: {e}")
-                self.llama_engine = LlamaEngine()
+                logger.error(f"❌ Failed to load local Llama 3.1 8B model: {e}")
+                logger.error("💡 Ensure models are properly placed in models/ directory")
+                raise
             
             if enable_vision:
-                self.vision_engine = LlamaVisionEngine()
-                logger.info("Dual-model mode: Text (3.1 8B) + Vision (3.2 11B)")
+                # ALWAYS use local vision model
+                try:
+                    vision_model_path = get_model_path("llama-3.2-11b-vision-instruct")
+                    if vision_model_path and Path(vision_model_path).exists():
+                        logger.info(f"✅ Using local Llama 3.2 Vision 11B from: {vision_model_path}")
+                        self.vision_engine = LlamaVisionEngine(model_path=vision_model_path)
+                    else:
+                        logger.warning("⚠️  Local Llama 3.2 Vision 11B not found, vision features disabled")
+                        logger.warning("💡 Place model in models/llama_3.2_11b_vision/ directory for vision support")
+                        self.vision_engine = None
+                        enable_vision = False
+                except Exception as e:
+                    logger.warning(f"Could not load local vision model: {e}")
+                    self.vision_engine = None
+                    enable_vision = False
+                
+                if enable_vision and self.vision_engine:
+                    logger.info("🧠 Dual-model mode: Text (Llama 3.1 8B) + Vision (Llama 3.2 11B)")
+                    logger.info("🚀 Maximum intelligence enabled with local models")
+                else:
+                    logger.info("📝 Text-only mode: Llama 3.1 8B (vision model not available)")
             else:
-                logger.info("Text-only mode: Llama 3.1 8B")
+                logger.info("📝 Text-only mode: Llama 3.1 8B")
         else:
-            logger.info(f"Using {backend} backend (rule-based fallback)")
+            logger.warning(f"⚠️  Using {backend} backend (rule-based fallback - NOT recommended)")
+            logger.warning("💡 Use 'llama' backend to leverage local Llama models for maximum intelligence")
 
     def _load_knowledge_base(self) -> Dict[str, Any]:
         """Load or create a rule-based knowledge base"""
@@ -648,25 +722,88 @@ class LLMEngine:
                 return True
         return True
 
-    async def generate(self, prompt: str, image_path: Optional[str] = None, **kwargs) -> str:
+    async def generate(
+        self,
+        prompt: str,
+        image_path: Optional[str] = None,
+        use_advanced_reasoning: bool = False,
+        reasoning_method: Optional[str] = None,
+        **kwargs
+    ) -> str:
         """
         Generate text with intelligent routing between text and vision models.
         Uses caching and batch processing for optimization.
+        Now supports advanced reasoning (CoT, ToT, Self-Consistency, ReAct, Reflexion).
         
         Args:
             prompt: Text query
             image_path: Optional path to image for vision analysis
+            use_advanced_reasoning: Enable advanced reasoning (default: False for speed)
+            reasoning_method: Specific method ('cot', 'tot', 'self_consistency', 'react', 'reflexion')
             **kwargs: Generation parameters
         
         Returns:
             Generated response
         """
         # Check cache first (for text-only queries)
-        if not image_path:
+        if not image_path and not use_advanced_reasoning:
             cache_key = hashlib.md5(f"{prompt}_{kwargs}".encode()).hexdigest()
             if cache_key in self._response_cache:
                 logger.debug("Cache hit for prompt")
                 return self._response_cache[cache_key]
+        
+        # Advanced Reasoning (if enabled)
+        if use_advanced_reasoning and not image_path:
+            try:
+                from modules.advanced_reasoning import AdvancedReasoningEngine, ReasoningMethod
+                
+                if self._advanced_reasoning is None:
+                    self._advanced_reasoning = AdvancedReasoningEngine(self)
+                
+                # Determine reasoning method
+                if reasoning_method:
+                    method_map = {
+                        'cot': ReasoningMethod.CHAIN_OF_THOUGHT,
+                        'tot': ReasoningMethod.TREE_OF_THOUGHT,
+                        'self_consistency': ReasoningMethod.SELF_CONSISTENCY,
+                        'react': ReasoningMethod.REACT,
+                        'reflexion': ReasoningMethod.REFLEXION
+                    }
+                    method = method_map.get(reasoning_method.lower(), ReasoningMethod.CHAIN_OF_THOUGHT)
+                else:
+                    # Auto-select based on query complexity
+                    if any(word in prompt.lower() for word in ['complex', 'analyze', 'design', 'plan']):
+                        method = ReasoningMethod.TREE_OF_THOUGHT
+                    elif any(word in prompt.lower() for word in ['verify', 'check', 'validate']):
+                        method = ReasoningMethod.SELF_CONSISTENCY
+                    else:
+                        method = ReasoningMethod.CHAIN_OF_THOUGHT
+                
+                context = kwargs.get('context', {})
+                domain = self.domain or context.get('domain', 'general')
+                
+                result = await self._advanced_reasoning.reason(
+                    query=prompt,
+                    method=method,
+                    context=context,
+                    domain=domain
+                )
+                
+                # Extract answer from reasoning result
+                if isinstance(result, dict):
+                    answer = result.get('final_answer') or result.get('consensus_answer') or result.get('answer', str(result))
+                else:
+                    answer = str(result)
+                
+                # Cache result
+                cache_key = hashlib.md5(f"{prompt}_{kwargs}_{reasoning_method}".encode()).hexdigest()
+                self._cache_response(cache_key, answer)
+                
+                return answer
+            except ImportError:
+                logger.warning("Advanced reasoning module not available, using standard generation")
+            except Exception as e:
+                logger.error(f"Advanced reasoning failed: {e}, falling back to standard generation")
         
         # Route to vision model if image provided (uses Llama 3.2 Vision 11B)
         if image_path and self.vision_engine and self.vision_engine.is_initialized:
@@ -681,7 +818,11 @@ class LLMEngine:
             except Exception as e:
                 logger.error(f"Vision generation failed: {e}, falling back to text-only")
         
-        # Route to text model for standard queries (uses Llama 3.1 8B)
+        # Check for domain-specific fine-tuned model
+        if self.domain and self._domain_model_path is None:
+            await self._load_domain_model()
+        
+        # Route to text model for standard queries (uses Llama 3.1 8B or domain fine-tuned)
         if self.llama_engine and self.backend == "llama":
             try:
                 result = await self.llama_engine.generate(prompt, **kwargs)
@@ -695,6 +836,26 @@ class LLMEngine:
 
         # Fallback to rule-based generation
         return self._rule_based_generate(prompt, **kwargs)
+    
+    async def _load_domain_model(self):
+        """Load domain-specific fine-tuned model if available"""
+        if not self.domain:
+            return
+        
+        try:
+            from modules.domain_finetuning import DomainFineTuner
+            if self._domain_finetuner is None:
+                self._domain_finetuner = DomainFineTuner()
+            
+            model_path = await self._domain_finetuner.load_domain_model(self.domain)
+            if model_path:
+                self._domain_model_path = model_path
+                logger.info(f"✅ Loaded domain-specific model: {self.domain}")
+                # Reload llama_engine with domain model
+                self.llama_engine = LlamaEngine(model_path=model_path)
+                await self.llama_engine.initialize()
+        except Exception as e:
+            logger.warning(f"Could not load domain model for {self.domain}: {e}")
     
     def _cache_response(self, cache_key: str, response: str):
         """Cache response with size management"""
@@ -1181,16 +1342,20 @@ console.log("Platform: {platform}");
 _llm_engine = None
 
 def get_llm_engine() -> LLMEngine:
-    """Get the global LLM engine instance"""
+    """Get the global LLM engine instance - ALWAYS uses local Llama models"""
     global _llm_engine
     if _llm_engine is None:
-        # Check configuration for backend preference
+        # ALWAYS use llama backend to leverage local models
         backend = get_config("llm", "backend", "llama")  # Default to llama
-        _llm_engine = LLMEngine(backend=backend)
+        enable_vision = get_config("llm", "enable_vision", True)  # Enable vision by default
+        domain = get_config("llm", "domain", None)  # Optional domain for fine-tuning
+        
+        logger.info("🚀 Initializing LLM Engine with local Llama models...")
+        _llm_engine = LLMEngine(backend=backend, enable_vision=enable_vision, domain=domain)
     return _llm_engine
 
 async def initialize_llm_engine() -> bool:
-    """Initialize the global LLM engine"""
+    """Initialize the global LLM engine - ensures local models are loaded"""
     engine = get_llm_engine()
     return await engine.initialize()
 

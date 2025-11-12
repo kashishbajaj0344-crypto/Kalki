@@ -1,0 +1,6 @@
+{"instruction": "What is the formula for M in engineering?", "input": "", "output": "The formula is: M = wL\u00b2/8"}
+{"instruction": "What is the formula for M in engineering?", "input": "", "output": "The formula is: M = maximum moment (N\u00b7m)"}
+{"instruction": "What is the formula for w in engineering?", "input": "", "output": "The formula is: w = uniform load (N/m)"}
+{"instruction": "What is the formula for L in engineering?", "input": "", "output": "The formula is: L = beam length (m)"}
+{"instruction": "What are the properties of aluminum_6061?", "input": "", "output": "aluminum_6061 has the following mechanical properties: {\"yield_strength_mpa\": \"276\"}"}
+{"instruction": "What are the properties of steel_4140?", "input": "", "output": "steel_4140 has the following mechanical properties: {\"yield_strength_mpa\": \"415\"}"}
