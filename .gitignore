@@ -24,6 +24,11 @@ kalki_env/
 data/vector_db/chroma.sqlite3
 data/vector_db/*.sqlite3
 
+# Ignore model weights, large PDFs, archives, and venv
+models/
+pdfs/
+kalki_env/
+
 # Ignore local settings
 .env
 kalki_settings.json
