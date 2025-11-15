@@ -518,6 +518,31 @@ class SelfEvolutionManager:
 
         return audit
 
+    async def audit_performance(self, time_range_days: int = 7) -> PerformanceAudit:
+        """
+        Public wrapper for perform_comprehensive_audit.
+        
+        Args:
+            time_range_days: Number of days to include in audit
+            
+        Returns:
+            Complete performance audit
+        """
+        return await self.perform_comprehensive_audit(days_to_audit=time_range_days)
+
+    async def generate_recommendations(self) -> List[EvolutionRecommendation]:
+        """
+        Generate and return evolution recommendations.
+        
+        Returns:
+            List of evolution recommendations
+        """
+        # If no recommendations exist, perform a quick audit first
+        if not self.evolution_state.pending_recommendations:
+            await self.perform_comprehensive_audit(days_to_audit=7)
+        
+        return self.evolution_state.pending_recommendations
+
     async def _save_audit(self, audit: PerformanceAudit):
         """Save audit results persistently"""
 

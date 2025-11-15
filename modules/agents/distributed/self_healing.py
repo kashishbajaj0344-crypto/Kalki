@@ -10,7 +10,7 @@ import asyncio
 import time
 import psutil
 import platform
-from typing import Dict, Any, List, Optional, Tuple
+from typing import Dict, Any, List, Optional, Tuple, Callable
 from dataclasses import dataclass
 from collections import defaultdict, deque
 import numpy as np
@@ -102,6 +102,10 @@ class SelfHealingAgent(BaseAgent):
             'max_checkpoints': 50,
             'compression_enabled': True
         })
+
+        # Integration hooks for cross-agent cooperation
+        self.recovery_hooks: List[Callable] = []
+        self.health_alert_hooks: List[Callable] = []
 
     async def initialize(self) -> bool:
         """Initialize self-healing system"""
@@ -244,6 +248,9 @@ class SelfHealingAgent(BaseAgent):
 
             # Execute remediation
             success = await self._perform_remediation_action(action)
+            
+            # Trigger recovery hooks to notify other agents
+            await self._trigger_recovery_hooks(component=action_id, action="remediation")
 
             # Handle remediation outcome
             if success:
@@ -676,6 +683,16 @@ class SelfHealingAgent(BaseAgent):
             # Update current status
             self.current_health_status = health_status["overall"]
             self.last_health_check = time.time()
+            
+            # Trigger health alert hooks if there are critical issues
+            if health_status["overall"] in ["critical", "poor"]:
+                alert = {
+                    "status": health_status["overall"],
+                    "critical_issues": health_status["critical_issues"],
+                    "warning_issues": health_status["warning_issues"],
+                    "timestamp": time.time()
+                }
+                await self._trigger_health_alert_hooks(alert)
 
         except Exception as e:
             logger.exception(f"Health check failed: {e}")
@@ -935,6 +952,38 @@ class SelfHealingAgent(BaseAgent):
             "rollback_manager": rollback_status
         }
 
+    # Integration hook management
+
+    def add_recovery_hook(self, hook: Callable):
+        """Add a hook to run during recovery operations."""
+        self.recovery_hooks.append(hook)
+
+    def add_health_alert_hook(self, hook: Callable):
+        """Add a hook to run when health alerts are triggered."""
+        self.health_alert_hooks.append(hook)
+
+    async def _trigger_recovery_hooks(self, component: str, action: str):
+        """Trigger all registered recovery hooks."""
+        for hook in self.recovery_hooks:
+            try:
+                if asyncio.iscoroutinefunction(hook):
+                    await hook(component, action)
+                else:
+                    hook(component, action)
+            except Exception as e:
+                logger.warning(f"Recovery hook error: {e}")
+
+    async def _trigger_health_alert_hooks(self, alert: Dict[str, Any]):
+        """Trigger all registered health alert hooks."""
+        for hook in self.health_alert_hooks:
+            try:
+                if asyncio.iscoroutinefunction(hook):
+                    await hook(alert)
+                else:
+                    hook(alert)
+            except Exception as e:
+                logger.warning(f"Health alert hook error: {e}")
+
     async def shutdown(self) -> bool:
         """Shutdown the self-healing agent"""
         try:
@@ -957,6 +1006,10 @@ class SelfHealingAgent(BaseAgent):
 
             # Clear failure patterns
             self.failure_patterns.clear()
+
+            # Clear hooks
+            self.recovery_hooks.clear()
+            self.health_alert_hooks.clear()
 
             logger.info("SelfHealingAgent shutdown complete")
             return True

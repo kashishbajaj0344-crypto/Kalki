@@ -29,7 +29,7 @@ from rich.table import Table
 from rich.syntax import Syntax
 
 # Add project root to path
-project_root = Path(__file__).parent
+project_root = Path(__file__).parent.parent  # Go up from apps/ to root
 sys.path.insert(0, str(project_root))
 
 from modules.domains.domain_registry import DomainRegistry
@@ -134,11 +134,16 @@ class UnifiedKalkiChat:
                         break
             
             # Use Supreme Control Hub for domain-aware processing
+            # Supreme Hub now automatically uses copilots when available
             result = await self.supreme_hub.process_domain_aware_query(
                 query=user_input,
                 context=chat_context,
                 project_id=self.current_project_id
             )
+            
+            # Check if copilot was used (for display)
+            if result.get("domain", {}).get("copilot_used"):
+                console.print("[dim]✨ Enhanced processing with copilot[/dim]")
             
             # Handle game dev copilot workflow
             if domain_name == "game_development":
@@ -336,6 +341,11 @@ class UnifiedKalkiChat:
   • /help - Show this help
   • /exit - Exit chat
 
+[bold]YouTube Ingestion:[/bold]
+  • youtube ingest <URL> - Ingest YouTube video and learn from it
+  • yt ingest <URL> - Short form
+  Example: youtube ingest https://www.youtube.com/watch?v=VIDEO_ID
+
 [bold]Features:[/bold]
   • Automatic domain detection
   • Multi-domain support
@@ -367,6 +377,44 @@ class UnifiedKalkiChat:
                 response_text = response_text[:500] + "..."
             
             console.print(f"{domain_tag}[cyan]Kalki:[/cyan] {response_text}")
+    
+    async def _handle_youtube_command(self, command: str) -> Optional[Dict[str, Any]]:
+        """Handle YouTube ingestion commands"""
+        if command.startswith("youtube ingest ") or command.startswith("yt ingest "):
+            url = command.replace("youtube ingest ", "").replace("yt ingest ", "").strip()
+            if not url:
+                return {"error": "Please provide a YouTube URL", "status": "error"}
+            
+            try:
+                from modules.youtube_ingestion import YouTubeIngestionSystem
+                youtube_system = YouTubeIngestionSystem()
+                
+                console.print(f"[cyan]🎥 Ingesting YouTube video...[/cyan]")
+                result = await youtube_system.ingest_youtube_video(url, extract_knowledge=True)
+                
+                if result.get("status") == "success":
+                    metadata = result["result"]["metadata"]
+                    console.print(f"[green]✅ Video ingested: {metadata['title']}[/green]")
+                    console.print(f"[dim]📝 Transcript: {len(result['result']['transcript'])} characters[/dim]")
+                    console.print(f"[dim]🎬 Key frames: {len(result['result']['key_frames'])}[/dim]")
+                    if result["result"]["domain"]:
+                        console.print(f"[dim]🏷️  Domain: {result['result']['domain']}[/dim]")
+                    
+                    return {
+                        "answer": f"✅ Successfully ingested YouTube video: **{metadata['title']}**\n\n"
+                                f"📝 Transcript: {len(result['result']['transcript'])} characters\n"
+                                f"🎬 Key frames: {len(result['result']['key_frames'])}\n"
+                                f"🏷️  Domain: {result['result']['domain'] or 'Not detected'}\n\n"
+                                f"You can now query this video's content!",
+                        "status": "success"
+                    }
+                else:
+                    return {"error": result.get("error", "Ingestion failed"), "status": "error"}
+            except Exception as e:
+                logger.exception(f"YouTube ingestion failed: {e}")
+                return {"error": str(e), "status": "error"}
+        
+        return None
     
     async def start(self):
         """Start the interactive chat session"""
@@ -418,6 +466,15 @@ class UnifiedKalkiChat:
                 if user_input.lower() == '/clear':
                     self.chat_history.clear()
                     console.print("[green]✅ Chat history cleared[/green]")
+                    continue
+                
+                # Handle YouTube ingestion commands
+                youtube_result = await self._handle_youtube_command(user_input)
+                if youtube_result:
+                    if youtube_result.get("status") == "success":
+                        console.print(f"[green]{youtube_result.get('answer', 'Video ingested!')}[/green]")
+                    else:
+                        console.print(f"[red]❌ {youtube_result.get('error', 'Ingestion failed')}[/red]")
                     continue
                 
                 if user_input.startswith('/project '):

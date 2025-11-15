@@ -166,10 +166,14 @@ class KalkiOrchestrator:
             if complexity in [TaskComplexity.SCIENTIFIC, TaskComplexity.STRATEGIC, TaskComplexity.CREATIVE]:
                 final_result = await self._synthesize_with_supreme_engine(task, agent_results, context, complexity)
             else:
-            final_result = await self._synthesize_result(task, agent_results, context, complexity)
+                final_result = await self._synthesize_result(task, agent_results, context, complexity)
 
             # Phase 6: Self-Evolution Learning
             await self._learn_from_execution(task, result, final_result)
+            
+            # Phase 7: Real-Time Learning & Memory Storage
+            await self._store_in_memory(task, final_result, context)
+            await self._learn_from_feedback(task, final_result)
 
             # Record metrics
             execution_time = time.time() - start_time
@@ -182,7 +186,7 @@ class KalkiOrchestrator:
                 "complexity": complexity,
                 "execution_time": execution_time,
                 "agents_used": len(agents),
-                "phases_executed": 6
+                "phases_executed": 7  # Now includes real-time learning & memory
             }
 
         except Exception as e:
@@ -223,7 +227,7 @@ class KalkiOrchestrator:
         except Exception as e:
             self.logger.debug(f"Domain inference failed: {e}")
 
-        # Use LLM for deep task analysis
+        # Use LLM for deep task analysis with advanced reasoning for complex tasks
         analysis_prompt = f"""
         Analyze this task comprehensively:
 
@@ -241,7 +245,17 @@ class KalkiOrchestrator:
         7. Recommended routing strategy (which agents/modules to use)
         """
 
-        analysis_result = await self.llm_engine.generate(analysis_prompt, max_tokens=1000)
+        # Enable advanced reasoning for complex queries
+        use_advanced_reasoning = any(word in query.lower() for word in [
+            "analyze", "design", "plan", "complex", "optimize", "strategy", "research"
+        ])
+        
+        analysis_result = await self.llm_engine.generate(
+            analysis_prompt, 
+            max_tokens=1000,
+            use_advanced_reasoning=use_advanced_reasoning,
+            reasoning_method="cot" if use_advanced_reasoning else None
+        )
         
         # Parse analysis result - handle both JSON and plain text responses
         try:
@@ -296,23 +310,28 @@ class KalkiOrchestrator:
         agents = []
         
         # Route to domain-specific professional teams if domain is identified
+        # Prefer copilots for enhanced processing
         inferred_domain = analysis.get("inferred_domain") or analysis.get("domain")
         if inferred_domain and inferred_domain != "unknown" and inferred_domain != "mixed":
             try:
                 from modules.domains.domain_registry import DomainRegistry
                 domain_registry = DomainRegistry()
-                domain = domain_registry.get_domain(inferred_domain)
-                if domain and hasattr(domain, 'get_team_orchestrator'):
-                    # Use domain's professional team orchestrator
-                    team_orch = await domain.get_team_orchestrator()
-                    if team_orch:
-                        # Get team status to see available roles
-                        team_status = team_orch.get_team_status()
-                        if team_status:
+                
+                # Try to get copilot first (prefer_copilot=True)
+                domain_or_copilot = domain_registry.get_domain(inferred_domain, prefer_copilot=True)
+                
+                if domain_or_copilot:
+                    # Check if it's a copilot (has copilot methods)
+                    if hasattr(domain_or_copilot, 'get_team_orchestrator'):
+                        # It's a domain with professional systems
+                        team_orch = await domain_or_copilot.get_team_orchestrator()
+                        if team_orch:
                             self.logger.info(f"Routing to {inferred_domain} domain professional team")
-                            # Return domain team orchestrator as primary agent
                             agents.append(team_orch)
-                            # Continue with standard agent assembly for additional support
+                    elif hasattr(domain_or_copilot, 'start_new_project') or hasattr(domain_or_copilot, 'start_new_game_project'):
+                        # It's a copilot - use it directly
+                        self.logger.info(f"Routing to {inferred_domain} copilot for enhanced processing")
+                        agents.append(domain_or_copilot)
             except Exception as e:
                 self.logger.debug(f"Domain routing failed: {e}")
 
@@ -348,8 +367,8 @@ class KalkiOrchestrator:
         return agents[:5]  # Max 5 agents per task
 
     async def _gather_context(self, task: Dict[str, Any], analysis: Dict[str, Any]) -> Dict[str, Any]:
-        """Gather comprehensive context from all modalities"""
-        context = {"text": [], "visual": [], "design": [], "knowledge": [], "structured": []}
+        """Gather comprehensive context from all modalities, including advanced memory"""
+        context = {"text": [], "visual": [], "design": [], "knowledge": [], "structured": [], "memory": {}}
 
         # Text context from vector DB
         query = task.get("query", "")
@@ -381,6 +400,24 @@ class KalkiOrchestrator:
                 }
         except Exception as e:
             self.logger.debug(f"HybridLearningSystem context gathering failed: {e}")
+        
+        # Advanced memory retrieval
+        try:
+            if self.advanced_memory is None:
+                from modules.advanced_memory import AdvancedMemorySystem
+                if self.llm_engine:
+                    self.advanced_memory = AdvancedMemorySystem(self.llm_engine)
+            
+            if self.advanced_memory:
+                domain = analysis.get("domain") or analysis.get("inferred_domain", "general")
+                memories = await self.advanced_memory.retrieve_relevant_memories(
+                    query=query,
+                    context={"domain": domain, "task": task},
+                    limit=5
+                )
+                context["memory"] = memories
+        except Exception as e:
+            self.logger.debug(f"Memory retrieval failed: {e}")
 
         return context
 
@@ -479,7 +516,7 @@ class KalkiOrchestrator:
     async def _synthesize_result(self, task: Dict[str, Any], agent_results: List[Dict[str, Any]],
                                context: Dict[str, Any], complexity: str) -> Dict[str, Any]:
         """Synthesize results using standard synthesis"""
-            return await self._synthesize_basic(task, agent_results, context)
+        return await self._synthesize_basic(task, agent_results, context)
 
     async def _synthesize_basic(self, task: Dict[str, Any], agent_results: List[Dict[str, Any]],
                                context: Dict[str, Any]) -> Dict[str, Any]:
@@ -551,21 +588,81 @@ class KalkiOrchestrator:
         if not self.evolution_manager:
             return
 
-            # Record execution for learning
-            learning_data = {
-                "task_id": task_id,
-                "task": task,
-                "execution": execution_result,
-                "result": final_result,
-                "timestamp": datetime.now().isoformat(),
-                "performance_metrics": self.performance_metrics
-            }
+        # Record execution for learning
+        task_id = task.get("task_id", "unknown")
+        learning_data = {
+            "task_id": task_id,
+            "task": task,
+            "execution": execution_result,
+            "result": final_result,
+            "timestamp": datetime.now().isoformat(),
+            "performance_metrics": self.performance_metrics
+        }
 
-            await self.evolution_manager.record_execution(task_id, learning_data)
+        await self.evolution_manager.record_execution(task_id, learning_data)
 
-            should_evolve = await self._should_evolve()
-            if should_evolve:
-                await self.evolution_manager.evolve_system("task_completion", learning_data)
+        should_evolve = await self._should_evolve()
+        if should_evolve:
+            await self.evolution_manager.evolve_system("task_completion", learning_data)
+    
+    async def _store_in_memory(self, task: Dict[str, Any], result: Dict[str, Any], context: Dict[str, Any]):
+        """Store task and result in advanced memory system"""
+        try:
+            if self.advanced_memory is None:
+                # Lazy load advanced memory
+                from modules.advanced_memory import AdvancedMemorySystem
+                if self.llm_engine:
+                    self.advanced_memory = AdvancedMemorySystem(self.llm_engine)
+            
+            if self.advanced_memory:
+                # Store episodic memory
+                await self.advanced_memory.store_episode(
+                    episode_type="task",
+                    content={
+                        "task": task,
+                        "result": result,
+                        "context": context
+                    },
+                    domain=context.get("domain", "general"),
+                    importance=0.7,
+                    tags=context.get("tags", [])
+                )
+                
+                # Store semantic memory if concepts extracted
+                if "concepts" in result:
+                    for concept, knowledge in result.get("concepts", {}).items():
+                        await self.advanced_memory.store_semantic(
+                            concept=concept,
+                            knowledge=knowledge,
+                            domain=context.get("domain", "general")
+                        )
+        except Exception as e:
+            self.logger.debug(f"Memory storage failed: {e}")
+    
+    async def _learn_from_feedback(self, task: Dict[str, Any], result: Dict[str, Any]):
+        """Learn from task execution using real-time learning"""
+        try:
+            if self.realtime_learning is None:
+                # Lazy load real-time learning
+                from modules.realtime_learning import RealTimeLearningSystem
+                if self.llm_engine:
+                    self.realtime_learning = RealTimeLearningSystem(self.llm_engine)
+            
+            if self.realtime_learning and result.get("status") == "completed":
+                # Store as learning example
+                domain = task.get("context", {}).get("domain", "general")
+                await self.realtime_learning.online_update(
+                    feedback={
+                        "type": "task_completion",
+                        "input": task.get("query", ""),
+                        "output": str(result.get("result", "")),
+                        "quality_score": result.get("quality_score", 0.8),
+                        "context": task.get("context", {})
+                    },
+                    domain=domain
+                )
+        except Exception as e:
+            self.logger.debug(f"Real-time learning failed: {e}")
 
     async def _record_task_metrics(self, task_id: str, task: Dict[str, Any],
                                  result: Dict[str, Any], execution_time: float):

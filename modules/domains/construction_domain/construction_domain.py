@@ -475,47 +475,68 @@ class ConstructionDomain(BaseDomain):
     
     def get_deliverable_types(self) -> List[DeliverableSpec]:
         """List construction deliverables"""
+        # Import generator to get function references
+        from .deliverables_generator import ConstructionDeliverablesGenerator
+        
+        # Try to get cache and QA framework if available
+        cache = None
+        qa_framework = None
+        try:
+            from modules.intelligent_cache import IntelligentCache
+            cache = IntelligentCache()
+        except:
+            pass
+        try:
+            from modules.quality_assurance_framework import QualityAssuranceFramework
+            from modules.llm import get_llm_engine
+            llm_engine = get_llm_engine()
+            qa_framework = QualityAssuranceFramework(llm_engine)
+        except:
+            pass
+        
+        generator = ConstructionDeliverablesGenerator(self.data_dir, cache=cache, qa_framework=qa_framework)
+        
         return [
             DeliverableSpec(
                 name="construction_drawings",
                 description="Complete construction drawings (plans, elevations, sections, details)",
                 file_types=["pdf", "dwg", "dxf"],
-                generator_func=None,  # TODO: Implement
+                generator_func=generator.generate_construction_drawings,  # ✅ FIXED
                 required_knowledge=["design_rules", "code_requirements", "span_tables"]
             ),
             DeliverableSpec(
                 name="bill_of_materials",
                 description="Complete BOM with quantities and costs",
                 file_types=["xlsx", "csv", "json", "pdf"],
-                generator_func=None,  # TODO: Implement
+                generator_func=generator.generate_bill_of_materials,  # ✅ FIXED
                 required_knowledge=["materials", "cost_data"]
             ),
             DeliverableSpec(
                 name="construction_schedule",
                 description="Phase-by-phase construction timeline",
                 file_types=["pdf", "json", "xlsx"],
-                generator_func=None,  # TODO: Implement
+                generator_func=generator.generate_construction_schedule,  # ✅ FIXED
                 required_knowledge=["procedures"]
             ),
             DeliverableSpec(
                 name="inspection_checklists",
                 description="QC checklists for each construction phase",
                 file_types=["pdf", "json"],
-                generator_func=None,  # TODO: Implement
+                generator_func=generator.generate_inspection_checklists,  # ✅ FIXED
                 required_knowledge=["inspection_criteria", "code_requirements"]
             ),
             DeliverableSpec(
                 name="structural_calculations",
                 description="Engineering calculations for structural members",
                 file_types=["pdf", "xlsx"],
-                generator_func=None,  # TODO: Implement
+                generator_func=generator.generate_structural_calculations,  # ✅ FIXED
                 required_knowledge=["formulas", "span_tables", "load_parameters"]
             ),
             DeliverableSpec(
                 name="cost_estimate",
                 description="Detailed project cost breakdown",
                 file_types=["pdf", "xlsx", "json"],
-                generator_func=None,  # TODO: Implement
+                generator_func=generator.generate_cost_estimate,  # ✅ FIXED
                 required_knowledge=["cost_data", "materials"]
             )
         ]

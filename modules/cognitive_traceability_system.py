@@ -145,6 +145,10 @@ class CognitiveTraceabilitySystem:
 
         logger.info("Cognitive Traceability System initialized")
 
+    async def initialize(self) -> bool:
+        """Initialize the cognitive traceability system (already initialized in __init__)."""
+        return True
+
     def _initialize_traceability_system(self):
         """Initialize the cognitive traceability system"""
         os.makedirs(self.data_dir, exist_ok=True)

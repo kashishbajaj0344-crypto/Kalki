@@ -305,11 +305,21 @@ class SupremeControlHub:
         # Use first matching domain (or combine if multiple - TODO)
         domain_name = inferred_domain_names[0]
         
-        # CHECK FOR COPILOT FIRST - Use copilot if available for enhanced processing
-        copilot = self.domain_registry.get_copilot(domain_name)
-        if copilot:
-            logger.info(f"🎯 Using {domain_name} copilot for enhanced processing")
-            
+        # GET DOMAIN/COPILOT - Prefer copilot if available (enhanced processing)
+        domain_or_copilot = self.domain_registry.get_domain(domain_name, prefer_copilot=True)
+        
+        # Check if we got a copilot
+        copilot = None
+        is_copilot = False
+        if domain_or_copilot:
+            # Check if it's a copilot (has copilot-specific methods)
+            if hasattr(domain_or_copilot, 'start_new_project') or hasattr(domain_or_copilot, 'start_new_game_project'):
+                copilot = domain_or_copilot
+                is_copilot = True
+                logger.info(f"🎯 Using {domain_name} copilot for enhanced processing")
+        
+        # Use copilot if available
+        if copilot and is_copilot:
             try:
                 # Game Dev Copilot has special methods
                 if domain_name == "game_development":
@@ -343,8 +353,8 @@ class SupremeControlHub:
                             if any(keyword in query.lower() for keyword in ["make", "create", "build", "develop"]):
                                 result = await copilot.start_new_game_project(query)
                             else:
-                                # General game dev query - use domain instead
-                                domain = self.domain_registry.get_domain(domain_name)
+                                # General game dev query - use domain instead (prefer_copilot=False to get domain)
+                                domain = self.domain_registry.get_domain(domain_name, prefer_copilot=False)
                                 if domain:
                                     # Use domain's standard methods
                                     result = {"message": "Game development query processed", "status": "processed"}
@@ -387,9 +397,11 @@ class SupremeControlHub:
                             "timestamp": datetime.now().isoformat()
                         }
                     else:
-                        # For general queries, use handle_unknown_situation which routes appropriately
-                        # or use the domain's standard methods
-                        result = await copilot.handle_unknown_situation(query, context or {})
+                        # For general queries, use answer_with_automatic_diagrams for best experience
+                        result = await copilot.answer_with_automatic_diagrams(
+                            query=query,
+                            context=context or {}
+                        )
                         return {
                             "success": True,
                             "answer": result.get("answer", "Query processed"),
@@ -398,8 +410,8 @@ class SupremeControlHub:
                                 "description": "Construction",
                                 "copilot_used": True
                             },
+                            "diagrams": result.get("diagrams", []),
                             "confidence": result.get("confidence", 0.8),
-                            "research_needed": result.get("research_needed", False),
                             "execution_time": (datetime.now() - start_time).total_seconds(),
                             "timestamp": datetime.now().isoformat()
                         }
@@ -408,7 +420,8 @@ class SupremeControlHub:
                 # Fall through to domain processing
         
         # Fallback to domain if no copilot or copilot failed
-        domain = self.domain_registry.get_domain(domain_name)
+        # Use prefer_copilot=False to get domain, not copilot
+        domain = self.domain_registry.get_domain(domain_name, prefer_copilot=False)
         if not domain:
             return {
                 "success": False,
@@ -514,7 +527,7 @@ class SupremeControlHub:
             
             # Get domain
             domain_name = project_data.get("domain")
-            domain = self.domain_registry.get_domain(domain_name)
+            domain = self.domain_registry.get_domain(domain_name, prefer_copilot=False)
             
             if not domain:
                 return {
@@ -593,7 +606,7 @@ class SupremeControlHub:
             
             # Get domain
             domain_name = project_data.get("domain")
-            domain = self.domain_registry.get_domain(domain_name)
+            domain = self.domain_registry.get_domain(domain_name, prefer_copilot=False)
             
             if not domain:
                 return {

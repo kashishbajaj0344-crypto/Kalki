@@ -208,30 +208,49 @@ class LlamaEngine:
                 else:
                     return f"❌ {command_result['message']}"
 
-            # Get meta-core instance for enhanced prompting
-            meta_core = get_meta_core()
-
-            # Generate meta-prompt based on current settings and task context
-            meta_prompt = meta_core.generate_meta_prompt(prompt)
-
-            # Combine meta-prompt with user prompt
-            enhanced_prompt = f"{meta_prompt}\n\nUSER QUERY: {prompt}"
-
+            # Use clean system prompt (Ollama-like) instead of meta-prompt
+            # Meta-prompt can be enabled via use_meta_prompt=True if needed
+            use_meta_prompt = kwargs.get("use_meta_prompt", False)
+            
+            if use_meta_prompt:
+                # Legacy meta-prompt mode (for specialized tasks)
+                meta_core = get_meta_core()
+                meta_prompt = meta_core.generate_meta_prompt(prompt)
+                system_prompt = meta_prompt
+            else:
+                # Clean system prompt for natural conversation (Ollama-like)
+                system_prompt = kwargs.get(
+                    "system_prompt",
+                    "You are a helpful, intelligent assistant. Provide clear, detailed, and thoughtful responses."
+                )
+            
+            # Build messages with conversation history (Ollama-like)
+            messages = [{"role": "system", "content": system_prompt}]
+            
+            # Add conversation history if available
+            if self.conversation_history:
+                messages.extend(self.conversation_history)
+            
+            # Add current user prompt (clean, no "USER QUERY:" prefix)
+            messages.append({"role": "user", "content": prompt})
+            
             # Format the prompt as a chat message for Llama-3.1-8B-Instruct
-            messages = [{"role": "user", "content": enhanced_prompt}]
             formatted_prompt = self.tokenizer.apply_chat_template(
                 messages,
                 tokenize=False,
                 add_generation_prompt=True
             )
 
-            # Set generation parameters
-            max_new_tokens = kwargs.get("max_new_tokens", 512)
+            # Set generation parameters (Ollama-like defaults)
+            max_new_tokens = kwargs.get("max_new_tokens", 2048)  # Much longer! (was 512)
 
-            # Set default parameters compatible with transformers pipeline
+            # Set default parameters (Ollama-like for better conversation quality)
             generation_kwargs = {
                 "max_new_tokens": max_new_tokens,
                 "temperature": kwargs.get("temperature", 0.7),
+                "top_p": kwargs.get("top_p", 0.9),  # Nucleus sampling (Ollama default)
+                "top_k": kwargs.get("top_k", 40),  # Top-k sampling (Ollama default)
+                "repetition_penalty": kwargs.get("repetition_penalty", 1.1),  # Prevent repetition (Ollama default)
                 "do_sample": kwargs.get("do_sample", True),
                 "pad_token_id": self.tokenizer.eos_token_id,
                 "return_full_text": False,
@@ -274,8 +293,21 @@ class LlamaEngine:
             end_time = asyncio.get_event_loop().time()
             response_time = end_time - start_time
 
-            # Evaluate response quality using meta-core
-            quality_metrics = meta_core.evaluate_response_quality(response, prompt, response_time)
+            # Update conversation history (Ollama-like)
+            # Add user message and assistant response to history
+            self.conversation_history.append({"role": "user", "content": prompt})
+            self.conversation_history.append({"role": "assistant", "content": response})
+            
+            # Limit history length (keep last N exchanges to prevent context overflow)
+            max_history = kwargs.get("max_history", 10)  # Keep last 10 exchanges
+            if len(self.conversation_history) > max_history * 2:
+                # Keep system prompt + last N exchanges
+                self.conversation_history = [messages[0]] + self.conversation_history[-max_history * 2:]
+
+            # Evaluate response quality using meta-core (if meta-prompt was used)
+            if use_meta_prompt:
+                meta_core = get_meta_core()
+                quality_metrics = meta_core.evaluate_response_quality(response, prompt, response_time)
 
             # Memory cleanup
             if self.device == "mps":
@@ -735,16 +767,29 @@ class LLMEngine:
         Uses caching and batch processing for optimization.
         Now supports advanced reasoning (CoT, ToT, Self-Consistency, ReAct, Reflexion).
         
+        Improved defaults for conversation quality (Ollama-like):
+        - max_new_tokens: 2048 (was 512) for longer, more detailed responses
+        - top_p: 0.9 for better sampling
+        - top_k: 40 for better sampling
+        - repetition_penalty: 1.1 to prevent repetition
+        
         Args:
             prompt: Text query
             image_path: Optional path to image for vision analysis
             use_advanced_reasoning: Enable advanced reasoning (default: False for speed)
             reasoning_method: Specific method ('cot', 'tot', 'self_consistency', 'react', 'reflexion')
+            use_meta_prompt: Use meta-prompt (default: False for natural conversation)
             **kwargs: Generation parameters
         
         Returns:
             Generated response
         """
+        # Set better defaults for conversation quality (Ollama-like)
+        kwargs.setdefault("max_new_tokens", 2048)  # Longer responses (was 512)
+        kwargs.setdefault("top_p", 0.9)  # Nucleus sampling
+        kwargs.setdefault("top_k", 40)  # Top-k sampling
+        kwargs.setdefault("repetition_penalty", 1.1)  # Prevent repetition
+        
         # Check cache first (for text-only queries)
         if not image_path and not use_advanced_reasoning:
             cache_key = hashlib.md5(f"{prompt}_{kwargs}".encode()).hexdigest()

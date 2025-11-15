@@ -1,0 +1,212 @@
+{
+  "phases": [
+    {
+      "phase": "Site Preparation",
+      "duration_days": 3,
+      "tasks": [
+        "Survey and staking",
+        "Temporary power and water",
+        "Site fencing and signage",
+        "Excavation"
+      ],
+      "dependencies": [],
+      "inspections": [
+        "Survey verification"
+      ],
+      "start_date": "2025-12-11",
+      "end_date": "2025-12-14"
+    },
+    {
+      "phase": "Foundation",
+      "duration_days": 6,
+      "tasks": [
+        "Footing excavation",
+        "Footing forms and rebar",
+        "Footing pour",
+        "Foundation walls",
+        "Waterproofing",
+        "Backfill"
+      ],
+      "dependencies": [
+        "Site Preparation"
+      ],
+      "inspections": [
+        "Footing inspection",
+        "Foundation inspection"
+      ],
+      "start_date": "2025-12-14",
+      "end_date": "2025-12-20"
+    },
+    {
+      "phase": "Framing",
+      "duration_days": 12,
+      "tasks": [
+        "Floor system framing",
+        "Wall framing",
+        "Roof framing",
+        "Sheathing",
+        "Windows and doors"
+      ],
+      "dependencies": [
+        "Foundation"
+      ],
+      "inspections": [
+        "Framing inspection"
+      ],
+      "start_date": "2025-12-20",
+      "end_date": "2026-01-01"
+    },
+    {
+      "phase": "Rough MEP",
+      "duration_days": 9,
+      "tasks": [
+        "HVAC rough-in",
+        "Electrical rough-in",
+        "Plumbing rough-in",
+        "Install bathtubs/showers"
+      ],
+      "dependencies": [
+        "Framing"
+      ],
+      "inspections": [
+        "Rough electrical",
+        "Rough plumbing",
+        "Rough mechanical"
+      ],
+      "start_date": "2026-01-01",
+      "end_date": "2026-01-10"
+    },
+    {
+      "phase": "Insulation",
+      "duration_days": 3,
+      "tasks": [
+        "Install insulation",
+        "Vapor barrier",
+        "Air sealing"
+      ],
+      "dependencies": [
+        "Rough MEP"
+      ],
+      "inspections": [
+        "Insulation inspection"
+      ],
+      "start_date": "2026-01-10",
+      "end_date": "2026-01-13"
+    },
+    {
+      "phase": "Drywall",
+      "duration_days": 7,
+      "tasks": [
+        "Drywall installation",
+        "Taping and mudding",
+        "Sanding",
+        "Primer coat"
+      ],
+      "dependencies": [
+        "Insulation"
+      ],
+      "inspections": [],
+      "start_date": "2026-01-13",
+      "end_date": "2026-01-20"
+    },
+    {
+      "phase": "Interior Finishing",
+      "duration_days": 12,
+      "tasks": [
+        "Painting",
+        "Flooring installation",
+        "Trim and baseboards",
+        "Cabinet installation",
+        "Countertops",
+        "Tile work"
+      ],
+      "dependencies": [
+        "Drywall"
+      ],
+      "inspections": [],
+      "start_date": "2026-01-20",
+      "end_date": "2026-02-01"
+    },
+    {
+      "phase": "MEP Finishing",
+      "duration_days": 6,
+      "tasks": [
+        "Electrical fixtures",
+        "Plumbing fixtures",
+        "HVAC vents and registers",
+        "Final connections"
+      ],
+      "dependencies": [
+        "Interior Finishing"
+      ],
+      "inspections": [
+        "Final electrical",
+        "Final plumbing",
+        "Final mechanical"
+      ],
+      "start_date": "2026-02-01",
+      "end_date": "2026-02-07"
+    },
+    {
+      "phase": "Exterior Finishing",
+      "duration_days": 9,
+      "tasks": [
+        "Siding installation",
+        "Roofing",
+        "Exterior trim",
+        "Gutters and downspouts",
+        "Landscaping"
+      ],
+      "dependencies": [
+        "Framing"
+      ],
+      "inspections": [],
+      "start_date": "2026-02-07",
+      "end_date": "2026-02-16"
+    },
+    {
+      "phase": "Final Inspection & Handover",
+      "duration_days": 3,
+      "tasks": [
+        "Punch list completion",
+        "Final cleaning",
+        "Final inspections",
+        "Owner walkthrough",
+        "Documentation handover"
+      ],
+      "dependencies": [
+        "Interior Finishing",
+        "MEP Finishing",
+        "Exterior Finishing"
+      ],
+      "inspections": [
+        "Final building inspection"
+      ],
+      "start_date": "2026-02-16",
+      "end_date": "2026-02-19"
+    }
+  ],
+  "project_duration_days": 70,
+  "project_duration_months": 2.3,
+  "start_date": "2025-12-11",
+  "completion_date": "2026-02-19",
+  "total_inspections": 12,
+  "critical_path": [
+    "Site Preparation",
+    "Foundation",
+    "Framing",
+    "Rough MEP",
+    "Insulation",
+    "Drywall",
+    "Interior Finishing",
+    "MEP Finishing",
+    "Final Inspection"
+  ],
+  "notes": [
+    "Schedule assumes normal weather conditions",
+    "Exterior finishing can proceed in parallel with interior work",
+    "Allow 2-3 days for each inspection",
+    "Factor in 10-15% buffer for delays"
+  ],
+  "generated_at": "2025-11-11T22:14:04.968811"
+}

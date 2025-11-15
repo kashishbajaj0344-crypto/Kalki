@@ -113,6 +113,196 @@ class GameDevCopilot:
         self.research = AutonomousResearchSystem()
         self.multi_agent = MultiAgentConsensusSystem(llm_engine=self.llm)
         
+        # Phase 13: Vision Agent (NEW - Full Integration)
+        try:
+            from modules.agents.multimodal import VisionAgent
+            self.vision_agent = VisionAgent()
+            logger.info("✅ Vision Agent (Phase 13) integrated")
+        except Exception as e:
+            logger.warning(f"Vision Agent unavailable: {e}")
+            self.vision_agent = None
+        
+        # Phase 9: Simulation Engine (NEW - Full Integration)
+        try:
+            from modules.sim_engine import SimulationEngine
+            self.simulation_engine = SimulationEngine()
+            logger.info("✅ Simulation Engine (Phase 9) integrated")
+        except Exception as e:
+            logger.warning(f"Simulation Engine unavailable: {e}")
+            self.simulation_engine = None
+        
+        # Phase 3-5: Agent System (NEW - Full Integration)
+        try:
+            from modules.agents.agent_manager import AgentManager
+            from modules.agents.core import PlannerAgent, ReasoningAgent, MemoryAgent
+            from modules.utils.eventbus import EventBus
+            self.agent_manager = AgentManager()
+            self.event_bus = EventBus()
+            logger.info("✅ Agent System (Phase 3-5) integrated")
+        except Exception as e:
+            logger.warning(f"Agent System unavailable: {e}")
+            self.agent_manager = None
+            self.event_bus = None
+        
+        # Phase 12: Safety Agents (NEW - Full Integration)
+        try:
+            from modules.agents.safety import EthicsAgent, RiskAssessmentAgent
+            self.ethics_agent = EthicsAgent()
+            self.risk_agent = RiskAssessmentAgent()
+            logger.info("✅ Safety Agents (Phase 12) integrated")
+        except Exception as e:
+            logger.warning(f"Safety Agents unavailable: {e}")
+            self.ethics_agent = None
+            self.risk_agent = None
+        
+        # Phase 6-7: Feedback Agents (NEW - Full Integration)
+        try:
+            from modules.agents.cognitive import FeedbackAgent, ConflictDetectionAgent, PerformanceMonitorAgent
+            self.feedback_agent = FeedbackAgent()
+            self.conflict_agent = ConflictDetectionAgent()
+            self.performance_agent = PerformanceMonitorAgent()
+            logger.info("✅ Feedback Agents (Phase 6-7) integrated")
+        except Exception as e:
+            logger.warning(f"Feedback Agents unavailable: {e}")
+            self.feedback_agent = None
+            self.conflict_agent = None
+            self.performance_agent = None
+        
+        # Phase 10-11: Creative Agents (NEW - Full Integration)
+        try:
+            from modules.agents.creative import CreativeAgent, PatternRecognitionAgent, DreamModeAgent, IdeaFusionAgent
+            self.creative_agent = CreativeAgent()
+            self.pattern_agent = PatternRecognitionAgent()
+            self.dream_agent = DreamModeAgent()
+            self.idea_fusion_agent = IdeaFusionAgent()
+            logger.info("✅ Creative Agents (Phase 10-11) integrated")
+        except Exception as e:
+            logger.warning(f"Creative Agents unavailable: {e}")
+            self.creative_agent = None
+            self.pattern_agent = None
+            self.dream_agent = None
+            self.idea_fusion_agent = None
+        
+        # Phase 14: Quantum & Predictive (NEW - Full Integration)
+        try:
+            from modules.agents.quantum import QuantumReasoningAgent, PredictiveDiscoveryAgent, TemporalParadoxEngine, IntentionImpactAnalyzer
+            self.quantum_agent = QuantumReasoningAgent()
+            self.predictive_agent = PredictiveDiscoveryAgent()
+            self.temporal_engine = TemporalParadoxEngine()
+            self.impact_analyzer = IntentionImpactAnalyzer()
+            logger.info("✅ Quantum & Predictive (Phase 14) integrated")
+        except Exception as e:
+            logger.warning(f"Quantum & Predictive unavailable: {e}")
+            self.quantum_agent = None
+            self.predictive_agent = None
+            self.temporal_engine = None
+            self.impact_analyzer = None
+        
+        # Phase 15-16: Emotional Intelligence (NEW - Full Integration)
+        try:
+            from modules.agents.emotional import EmotionalIntelligenceAgent
+            from modules.agents.interaction import VoiceAssistant
+            self.emotional_agent = EmotionalIntelligenceAgent()
+            self.voice_assistant = VoiceAssistant()
+            logger.info("✅ Emotional Intelligence (Phase 15-16) integrated")
+        except Exception as e:
+            logger.warning(f"Emotional Intelligence unavailable: {e}")
+            self.emotional_agent = None
+            self.voice_assistant = None
+        
+        # Phase 17-18: Design & Visual Pipeline (NEW - Full Integration)
+        try:
+            from modules.design_brain import DesignBrain
+            from modules.cad_drawings import CADDrawingGenerator
+            from modules.architectural_drawings import ArchitecturalDrawingGenerator
+            from modules.visual_render import VisualRenderEngine
+            from modules.modeling_bridge import ModelingBridge
+            self.design_brain = DesignBrain()
+            self.cad_generator = CADDrawingGenerator()
+            self.blueprint_generator = ArchitecturalDrawingGenerator()
+            self.visual_render = VisualRenderEngine()
+            self.modeling_bridge = ModelingBridge()
+            logger.info("✅ Design & Visual Pipeline (Phase 17-18) integrated")
+        except Exception as e:
+            logger.warning(f"Design & Visual Pipeline unavailable: {e}")
+            self.design_brain = None
+            self.cad_generator = None
+            self.blueprint_generator = None
+            self.visual_render = None
+            self.modeling_bridge = None
+        
+        # Phase 24: Evolutionary Agents (NEW - Full Integration)
+        try:
+            from modules.agents.evolutionary import AutoFineTuneAgent, AutonomousCurriculumDesigner, RecursiveKnowledgeGenerator
+            self.auto_finetune_agent = AutoFineTuneAgent()
+            self.curriculum_agent = AutonomousCurriculumDesigner()
+            self.knowledge_gen_agent = RecursiveKnowledgeGenerator()
+            logger.info("✅ Evolutionary Agents (Phase 24) integrated")
+        except Exception as e:
+            logger.warning(f"Evolutionary Agents unavailable: {e}")
+            self.auto_finetune_agent = None
+            self.curriculum_agent = None
+            self.knowledge_gen_agent = None
+        
+        # Phase 25: Production Monitoring (NEW - Full Integration)
+        try:
+            from modules.production_observability_dashboard import ProductionObservabilityDashboard
+            from modules.ethical_reinforcement_layer import EthicalReinforcementLayer
+            from modules.cognitive_traceability_system import CognitiveTraceabilitySystem
+            from modules.temporal_consistency import TemporalConsistencyBuffer
+            self.observability = ProductionObservabilityDashboard()
+            self.ethical_layer = EthicalReinforcementLayer()
+            self.traceability = CognitiveTraceabilitySystem()
+            self.temporal_buffer = TemporalConsistencyBuffer()
+            logger.info("✅ Production Monitoring (Phase 25) integrated")
+        except Exception as e:
+            logger.warning(f"Production Monitoring unavailable: {e}")
+            self.observability = None
+            self.ethical_layer = None
+            self.traceability = None
+            self.temporal_buffer = None
+        
+        # Supreme Intelligence Systems (NEW - Full KALKI Integration)
+        try:
+            from modules.supreme_control_hub import SupremeControlHub
+            self.supreme_hub = SupremeControlHub()
+            logger.info("✅ Supreme Control Hub integrated")
+        except Exception as e:
+            logger.warning(f"Supreme Control Hub unavailable: {e}")
+            self.supreme_hub = None
+        
+        try:
+            from modules.hybrid_learning_system import get_hybrid_system
+            self.hybrid_learning = get_hybrid_system()
+            logger.info("✅ Hybrid Learning System integrated")
+        except Exception as e:
+            logger.warning(f"Hybrid Learning System unavailable: {e}")
+            self.hybrid_learning = None
+        
+        try:
+            from modules.supreme_synthesis_engine import get_supreme_synthesis_engine
+            self.supreme_synthesis = get_supreme_synthesis_engine()
+            logger.info("✅ Supreme Synthesis Engine integrated")
+        except Exception as e:
+            logger.warning(f"Supreme Synthesis Engine unavailable: {e}")
+            self.supreme_synthesis = None
+        
+        try:
+            from modules.meta_core import get_meta_core
+            self.meta_core = get_meta_core()
+            logger.info("✅ Meta-Core System integrated")
+        except Exception as e:
+            logger.warning(f"Meta-Core System unavailable: {e}")
+            self.meta_core = None
+        
+        try:
+            from modules.self_evolution_manager import SelfEvolutionManager
+            self.self_evolution = SelfEvolutionManager()
+            logger.info("✅ Self-Evolution Manager integrated")
+        except Exception as e:
+            logger.warning(f"Self-Evolution Manager unavailable: {e}")
+            self.self_evolution = None
+        
         # Game dev domain
         self.domain_registry = DomainRegistry()
         self.game_domain = self.domain_registry.get_domain("game_development")
@@ -135,7 +325,7 @@ class GameDevCopilot:
             logger.warning("SoftwareDeliverablesGenerator not available")
             self.software_generator = None
         
-        logger.info("✅ Game Development Copilot Ready!")
+        logger.info("✅ Game Development Copilot Ready with Full KALKI Integration!")
     
     
     async def start_new_game_project(self, user_input: str) -> Dict[str, Any]:
@@ -248,6 +438,8 @@ class GameDevCopilot:
         """
         Process user's answer to a question and continue gathering requirements.
         
+        ENHANCED: Now includes consciousness assessment, quality metrics, and emotional intelligence.
+        
         Returns next question or creates project if complete.
         
         Production-ready: Enforces ALL critical requirements before project creation.
@@ -265,6 +457,125 @@ class GameDevCopilot:
                 'requirements': requirements,
                 'completeness': requirements.completeness_score()
             }
+        
+        # ENHANCED: Consciousness assessment for emotional intelligence
+        consciousness_state = None
+        if self.consciousness:
+            try:
+                consciousness_state = await self.consciousness.achieve_consciousness({
+                    'game_dev_copilot': {
+                        'session_id': session_id,
+                        'user_answer': answer,
+                        'requirements': requirements.to_dict() if hasattr(requirements, 'to_dict') else str(requirements)
+                    }
+                })
+                logger.debug(f"🧠 Consciousness level: {consciousness_state.awareness_level:.3f}, Emotional resonance: {consciousness_state.emotional_resonance:.3f}")
+            except Exception as e:
+                logger.warning(f"Consciousness assessment failed: {e}")
+        
+        # ENHANCED: Quality metrics tracking
+        start_time = datetime.now()
+        quality_metrics = None
+        
+        # IMPROVED: Check if user is asking for a recommendation
+        answer_lower = answer.lower().strip()
+        recommendation_keywords = [
+            'recommend', 'recommendation', 'suggest', 'suggestion', 'advice', 
+            'what do you', 'what would you', 'what should', 'which is best',
+            'help me choose', 'not sure', 'dont know', "don't know",
+            'what do you think', 'your opinion', 'prefer', 'better'
+        ]
+        
+        is_recommendation_request = any(keyword in answer_lower for keyword in recommendation_keywords)
+        
+        if is_recommendation_request:
+            # User is asking for a recommendation - provide intelligent advice
+            logger.info("User requested recommendation")
+            recommendation = await self._provide_recommendation(requirements, session_id)
+            
+            # ENHANCED: Evaluate recommendation quality
+            if self.meta_core:
+                try:
+                    response_time = (datetime.now() - start_time).total_seconds()
+                    quality_metrics = self.meta_core.evaluate_response_quality(
+                        str(recommendation.get('message', '')),
+                        f"Recommendation request: {answer}",
+                        response_time
+                    )
+                    logger.info(f"📊 Recommendation quality: {quality_metrics.coherence_score:.2f}")
+                except Exception as e:
+                    logger.warning(f"Quality evaluation failed: {e}")
+            
+            # Return recommendation message but keep the same question
+            missing_critical = []
+            if not requirements.target_platforms or len(requirements.target_platforms) == 0:
+                missing_critical.append('platforms')
+            if not requirements.game_engine:
+                missing_critical.append('engine')
+            if not requirements.monetization_model:
+                missing_critical.append('monetization')
+            
+            # Find the current question category
+            current_question_category = None
+            if 'engine' in missing_critical:
+                current_question_category = 'engine'
+            elif 'platforms' in missing_critical:
+                current_question_category = 'platforms'
+            elif 'monetization' in missing_critical:
+                current_question_category = 'monetization'
+            
+            # Build the question again with recommendation
+            critical_gaps = []
+            if 'platforms' in missing_critical:
+                critical_gaps.append(RequirementGap(
+                    category='platform',
+                    question='What platforms do you want to target? (Android, iOS, both, or web/PC?)',
+                    importance='critical',
+                    options=['Android only', 'iOS only', 'Both Android & iOS', 'Web/PC', 'All platforms'],
+                    context='Platform choice affects engine selection, build process, and deployment strategy.'
+                ))
+            
+            if 'engine' in missing_critical:
+                if requirements.target_platforms:
+                    if 'android' in requirements.target_platforms or 'ios' in requirements.target_platforms:
+                        options = ['Unity (best for mobile games)', 'Flutter (cross-platform)', 'React Native (web + mobile)', 'Unreal (AAA quality)']
+                    else:
+                        options = ['Unity', 'Unreal', 'Godot', 'Custom engine']
+                else:
+                    options = ['Unity', 'Unreal', 'Godot', 'Flutter', 'React Native']
+                
+                critical_gaps.append(RequirementGap(
+                    category='engine',
+                    question='What game engine/framework do you want to use?',
+                    importance='critical',
+                    options=options,
+                    context='Engine choice determines development workflow, performance, and available features.'
+                ))
+            
+            if 'monetization' in missing_critical:
+                critical_gaps.append(RequirementGap(
+                    category='monetization',
+                    question='How do you want to monetize? (Premium paid, freemium with ads/IAP, subscription, or free?)',
+                    importance='critical',
+                    options=['Premium (one-time purchase)', 'Freemium (free with ads/IAP)', 'Subscription', 'Free (no monetization)'],
+                    context='Monetization affects game design, store presence, and revenue strategy.'
+                ))
+            
+            if critical_gaps:
+                recommendation_message = recommendation.get('message', '')
+                question_message = self._format_question_message(critical_gaps[0])
+                
+                return {
+                    'session_id': session_id,
+                    'status': 'needs_input',
+                    'requirements': requirements,
+                    'questions': [g.question for g in critical_gaps[:3]],
+                    'next_question': critical_gaps[0],
+                    'completeness': requirements.completeness_score(),
+                    'message': f"{recommendation_message}\n\n{question_message}",
+                    'recommendation': recommendation,
+                    'missing_critical': missing_critical
+                }
         
         # Extract answer and update requirements
         try:
@@ -655,6 +966,306 @@ Respond in JSON format:
         
         return message
     
+    async def _provide_recommendation(
+        self,
+        requirements: ProjectRequirements,
+        session_id: str
+    ) -> Dict[str, Any]:
+        """
+        Provide intelligent recommendations using FULL KALKI intelligence stack.
+        
+        ENHANCED: Now uses Supreme Control Hub, Hybrid Learning, Meta-Learning, and more!
+        """
+        # Determine what we're recommending for
+        missing_critical = []
+        if not requirements.target_platforms or len(requirements.target_platforms) == 0:
+            missing_critical.append('platforms')
+        if not requirements.game_engine:
+            missing_critical.append('engine')
+        if not requirements.monetization_model:
+            missing_critical.append('monetization')
+        
+        # Build context for recommendation
+        context_parts = []
+        context_parts.append(f"Game concept: {requirements.game_concept}")
+        
+        if requirements.genre:
+            context_parts.append(f"Genre: {requirements.genre.value}")
+        if requirements.target_platforms:
+            context_parts.append(f"Platforms: {', '.join(requirements.target_platforms)}")
+        if requirements.core_mechanics:
+            context_parts.append(f"Mechanics: {', '.join(requirements.core_mechanics)}")
+        if requirements.art_style:
+            context_parts.append(f"Art style: {requirements.art_style}")
+        
+        context = "\n".join(context_parts)
+        
+        # Determine recommendation type
+        if 'engine' in missing_critical:
+            recommendation_type = 'engine'
+            query = f"Recommend best game engine/framework for: {requirements.game_concept}"
+        elif 'platforms' in missing_critical:
+            recommendation_type = 'platforms'
+            query = f"Recommend best target platforms for: {requirements.game_concept}"
+        elif 'monetization' in missing_critical:
+            recommendation_type = 'monetization'
+            query = f"Recommend best monetization model for: {requirements.game_concept}"
+        else:
+            recommendation_type = 'general'
+            query = f"Provide recommendations for: {requirements.game_concept}"
+        
+        # ENHANCED: Use Supreme Control Hub if available
+        if self.supreme_hub:
+            try:
+                logger.info("🧠 Using Supreme Control Hub for recommendation")
+                
+                # Use Supreme Hub for intelligent processing
+                supreme_result = await self.supreme_hub.process_domain_aware_query(
+                    query=query,
+                    context={
+                        'domain': 'game_development',
+                        'requirements': requirements.to_dict(),
+                        'session_id': session_id,
+                        'recommendation_type': recommendation_type,
+                        'missing_critical': missing_critical
+                    }
+                )
+                
+                # Extract recommendation from supreme result
+                if supreme_result and supreme_result.get('message'):
+                    recommendation_text = supreme_result.get('message', '')
+                    
+                    # Try to extract structured recommendation
+                    recommendation_value = self._extract_recommendation_value(
+                        recommendation_text, recommendation_type
+                    )
+                    
+                    return {
+                        'type': recommendation_type,
+                        'message': f"💡 **My Recommendation (Powered by KALKI Supreme Intelligence):**\n\n{recommendation_text}\n\nYou can accept my recommendation or choose something else!",
+                        'raw_response': recommendation_text,
+                        'recommendation': recommendation_value,
+                        'supreme_intelligence': True,
+                        'consciousness_level': supreme_result.get('consciousness_level', 0.5),
+                        'reasoning_depth': supreme_result.get('reasoning_depth', 'standard')
+                    }
+            except Exception as e:
+                logger.warning(f"Supreme Hub recommendation failed: {e}, falling back to enhanced method")
+        
+        # ENHANCED: Use Hybrid Learning System for knowledge-based recommendations
+        knowledge_context = ""
+        if self.hybrid_learning:
+            try:
+                logger.info("📚 Retrieving knowledge from Hybrid Learning System")
+                
+                # Query game development knowledge
+                hybrid_result = self.hybrid_learning.hybrid_query(
+                    query=query,
+                    query_type='general'
+                )
+                
+                if hybrid_result and hybrid_result.get('answer'):
+                    knowledge_context = f"\n\n📚 Knowledge Base Insights:\n{hybrid_result.get('answer')}\n"
+                    
+                    # Add similar projects if available
+                    if hybrid_result.get('results'):
+                        similar_count = len(hybrid_result.get('results', []))
+                        knowledge_context += f"\nFound {similar_count} similar projects in knowledge base.\n"
+            except Exception as e:
+                logger.warning(f"Hybrid Learning query failed: {e}")
+        
+        # ENHANCED: Use Meta-Learning for experience-based recommendations
+        meta_learning_context = ""
+        if self.meta_learning:
+            try:
+                logger.info("🧠 Consulting Meta-Learning System")
+                
+                # Get learning from past projects
+                from modules.meta_learning_system import LearningTask
+                learning_task = LearningTask(
+                    task_type='recommendation',
+                    task_context={
+                        'genre': requirements.genre.value if requirements.genre else None,
+                        'platforms': requirements.target_platforms,
+                        'recommendation_type': recommendation_type
+                    }
+                )
+                
+                # Select best strategy based on past experience
+                strategy = await self.meta_learning.select_strategy(learning_task)
+                
+                if strategy and strategy.performance_history:
+                    avg_performance = strategy.avg_performance
+                    meta_learning_context = f"\n\n🧠 Meta-Learning Insights:\nBased on {len(strategy.performance_history)} past projects, this approach has {avg_performance:.0%} success rate.\n"
+            except Exception as e:
+                logger.warning(f"Meta-Learning query failed: {e}")
+        
+        # Build enhanced prompt with all context
+        prompt = f"""Based on this game project, recommend the best {recommendation_type}:
+
+{context}
+{knowledge_context}
+{meta_learning_context}
+
+Consider:
+- Target platforms (if specified)
+- Game genre and mechanics
+- Development complexity
+- Performance requirements
+- Community and resources
+- Best practices from knowledge base
+- Success patterns from past projects
+
+Provide a clear recommendation with reasoning. Format:
+RECOMMENDATION: [Your recommendation]
+REASONING: [Why this is best for this project]
+ALTERNATIVES: [Other good options]
+"""
+        
+        try:
+            # Get LLM recommendation with enhanced context
+            llm_response = await self.llm.generate(
+                prompt=prompt,
+                max_new_tokens=300,
+                temperature=0.7
+            )
+            
+            # Parse response (simplified - could be enhanced)
+            recommendation_text = llm_response if isinstance(llm_response, str) else str(llm_response)
+            
+            # Extract recommendation value from response
+            recommendation_value = self._extract_recommendation_value(
+                recommendation_text, recommendation_type
+            )
+            
+            # Format recommendation message with enhanced context indicators
+            message = f"💡 **My Recommendation (Enhanced with KALKI Intelligence):**\n\n{recommendation_text}\n\n"
+            if knowledge_context:
+                message += "📚 *Includes insights from knowledge base*\n"
+            if meta_learning_context:
+                message += "🧠 *Includes learnings from past projects*\n"
+            message += "\nYou can accept my recommendation or choose something else!"
+            
+            return {
+                'type': recommendation_type,
+                'message': message,
+                'raw_response': recommendation_text,
+                'recommendation': recommendation_value,
+                'enhanced': True,
+                'knowledge_used': bool(knowledge_context),
+                'meta_learning_used': bool(meta_learning_context)
+            }
+        
+        except Exception as e:
+            logger.warning(f"Enhanced recommendation failed: {e}, using fallback")
+            # Fallback to rule-based recommendations
+            return self._provide_fallback_recommendation(requirements, missing_critical)
+    
+    def _extract_recommendation_value(
+        self,
+        recommendation_text: str,
+        recommendation_type: str
+    ) -> Optional[str]:
+        """Extract structured recommendation value from text"""
+        recommendation_value = None
+        
+        if 'RECOMMENDATION:' in recommendation_text:
+            # Extract from formatted response
+            lines = recommendation_text.split('\n')
+            for line in lines:
+                if 'RECOMMENDATION:' in line:
+                    recommendation_value = line.split('RECOMMENDATION:')[-1].strip()
+                    break
+        
+        # If no structured format, try to extract from text
+        if not recommendation_value:
+            if recommendation_type == 'engine':
+                # Look for engine names
+                for engine in ['Unity', 'Unreal', 'Flutter', 'React Native', 'Godot']:
+                    if engine.lower() in recommendation_text.lower():
+                        recommendation_value = engine
+                        break
+            elif recommendation_type == 'platforms':
+                # Look for platform names
+                if 'both' in recommendation_text.lower() or 'android and ios' in recommendation_text.lower():
+                    recommendation_value = 'Both Android & iOS'
+                elif 'android' in recommendation_text.lower():
+                    recommendation_value = 'Android only'
+                elif 'ios' in recommendation_text.lower():
+                    recommendation_value = 'iOS only'
+            elif recommendation_type == 'monetization':
+                # Look for monetization models
+                if 'freemium' in recommendation_text.lower():
+                    recommendation_value = 'Freemium (free with ads/IAP)'
+                elif 'premium' in recommendation_text.lower():
+                    recommendation_value = 'Premium (one-time purchase)'
+                elif 'subscription' in recommendation_text.lower():
+                    recommendation_value = 'Subscription'
+        
+        return recommendation_value
+    
+    def _provide_fallback_recommendation(
+        self,
+        requirements: ProjectRequirements,
+        missing_critical: List[str]
+    ) -> Dict[str, Any]:
+        """Provide rule-based recommendations as fallback"""
+        if 'engine' in missing_critical:
+            # Engine recommendation
+            if requirements.target_platforms:
+                if 'android' in requirements.target_platforms or 'ios' in requirements.target_platforms:
+                    recommendation = "Unity"
+                    reasoning = "Unity is the best choice for mobile games - excellent performance, huge asset store, easy deployment to both Android and iOS."
+                else:
+                    recommendation = "Unity"
+                    reasoning = "Unity works great for web and PC games with excellent cross-platform support."
+            else:
+                recommendation = "Unity"
+                reasoning = "Unity is the most versatile engine - works on all platforms, has great documentation, and a huge community."
+            
+            message = f"💡 **My Recommendation:**\n\n**RECOMMENDATION: {recommendation}**\n\n**REASONING:** {reasoning}\n\n**ALTERNATIVES:**\n- Flutter: Great for cross-platform mobile games\n- React Native: Good for web + mobile\n- Unreal: Best for AAA-quality 3D games\n\nYou can accept my recommendation or choose something else!"
+            
+            return {
+                'type': 'engine',
+                'message': message,
+                'recommendation': recommendation
+            }
+        
+        elif 'platforms' in missing_critical:
+            # Platform recommendation
+            if requirements.genre == GameGenre.RACING or requirements.genre == GameGenre.ARCADE:
+                recommendation = "Both Android & iOS"
+                reasoning = "Mobile games like racing and arcade games perform best on both Android and iOS for maximum reach."
+            else:
+                recommendation = "Both Android & iOS"
+                reasoning = "Targeting both mobile platforms gives you the largest audience and best revenue potential."
+            
+            message = f"💡 **My Recommendation:**\n\n**RECOMMENDATION: {recommendation}**\n\n**REASONING:** {reasoning}\n\nYou can accept my recommendation or choose something else!"
+            
+            return {
+                'type': 'platforms',
+                'message': message,
+                'recommendation': recommendation
+            }
+        
+        elif 'monetization' in missing_critical:
+            # Monetization recommendation
+            recommendation = "Freemium (free with ads/IAP)"
+            reasoning = "Freemium model works best for mobile games - free to download attracts users, ads and in-app purchases generate revenue."
+            
+            message = f"💡 **My Recommendation:**\n\n**RECOMMENDATION: {recommendation}**\n\n**REASONING:** {reasoning}\n\n**ALTERNATIVES:**\n- Premium: One-time purchase, no ads\n- Free: No monetization, just for fun\n\nYou can accept my recommendation or choose something else!"
+            
+            return {
+                'type': 'monetization',
+                'message': message,
+                'recommendation': recommendation
+            }
+        
+        return {
+            'type': 'general',
+            'message': '💡 I recommend proceeding with the options provided. Choose what works best for your project!'
+        }
+    
     
     async def _process_answer(
         self,
@@ -762,7 +1373,10 @@ Respond in JSON format:
         session_id: str,
         requirements: ProjectRequirements
     ) -> Dict[str, Any]:
-        """Create actual game project from complete requirements (production-ready)"""
+        """Create actual game project from complete requirements (production-ready)
+        
+        ENHANCED: Now includes multi-agent consensus validation, quality metrics, and learning
+        """
         completeness = requirements.completeness_score()
         logger.info(f"✅ Creating project from requirements (completeness: {completeness:.0%})")
         
@@ -781,6 +1395,55 @@ Respond in JSON format:
                 }
             }
         
+        # ENHANCED: Multi-Agent Consensus validation for critical decisions
+        if self.multi_agent:
+            try:
+                logger.info("🗳️ Validating project configuration with multi-agent consensus")
+                consensus = await self.multi_agent.validate_decision(
+                    decision=f"Create game project: {requirements.game_concept} with {requirements.game_engine} on {requirements.target_platforms}",
+                    context={
+                        'requirements': requirements.to_dict(),
+                        'completeness': completeness
+                    },
+                    require_unanimous=False
+                )
+                
+                if consensus.decision == 'rejected':
+                    logger.warning(f"Multi-agent consensus rejected project: {consensus.reasoning}")
+                    return {
+                        'session_id': session_id,
+                        'status': 'needs_input',
+                        'error': f'Project configuration needs adjustment: {consensus.reasoning}',
+                        'requirements': requirements,
+                        'consensus_feedback': consensus.reasoning
+                    }
+                elif consensus.decision == 'requires_modification':
+                    logger.info(f"Consensus suggests modifications: {consensus.reasoning}")
+            except Exception as e:
+                logger.warning(f"Multi-agent consensus validation failed: {e}")
+        
+        # ENHANCED: Use Supreme Synthesis for complex project analysis
+        synthesis_insights = {}
+        if self.supreme_synthesis:
+            try:
+                logger.info("🎨 Using Supreme Synthesis for project analysis")
+                from modules.supreme_synthesis_engine import SynthesisMode
+                synthesis = await self.supreme_synthesis.synthesize(
+                    query=f"Analyze game project: {requirements.game_concept}",
+                    context={
+                        'requirements': requirements.to_dict(),
+                        'domain': 'game_development'
+                    },
+                    synthesis_mode=SynthesisMode.ADVANCED
+                )
+                synthesis_insights = {
+                    'engineering_analysis': synthesis.engineering_standards if hasattr(synthesis, 'engineering_standards') else None,
+                    'creative_insights': synthesis.aesthetic_principles if hasattr(synthesis, 'aesthetic_principles') else None,
+                    'quality_score': synthesis.quality_score if hasattr(synthesis, 'quality_score') else 0.0
+                }
+            except Exception as e:
+                logger.warning(f"Supreme Synthesis analysis failed: {e}")
+        
         # Create project via domain
         project = await self.game_domain.create_project(
             description=requirements.game_concept,
@@ -789,6 +1452,28 @@ Respond in JSON format:
         
         self.active_projects[project.project_id] = project
         self.requirement_sessions[session_id] = requirements
+        
+        # ENHANCED: Record project creation for meta-learning
+        if self.meta_learning:
+            try:
+                from modules.meta_learning_system import LearningTask
+                await self.meta_learning.record_task_execution(
+                    task_id=f"project_{project.project_id}",
+                    task=LearningTask(
+                        task_type='game_development',
+                        task_context={
+                            'genre': requirements.genre.value if requirements.genre else None,
+                            'engine': requirements.game_engine,
+                            'platforms': requirements.target_platforms,
+                            'monetization': requirements.monetization_model
+                        }
+                    ),
+                    strategy_id='default',
+                    performance=completeness  # Use completeness as initial performance metric
+                )
+                logger.info("📚 Project recorded for meta-learning")
+            except Exception as e:
+                logger.warning(f"Meta-learning recording failed: {e}")
         
         # Generate initial roadmap
         roadmap = await self._generate_development_roadmap(project, requirements)
@@ -818,6 +1503,23 @@ Respond in JSON format:
             "Next: Generating code and building your game..."
         ])
         
+        # ENHANCED: Self-Evolution learning from project creation
+        if self.self_evolution:
+            try:
+                await self.self_evolution.record_execution({
+                    'task': 'game_project_creation',
+                    'input': requirements.to_dict(),
+                    'output': {
+                        'project_id': project.project_id,
+                        'completeness': completeness
+                    },
+                    'quality_score': synthesis_insights.get('quality_score', completeness) if synthesis_insights else completeness,
+                    'timestamp': datetime.now()
+                })
+                logger.info("🔄 Project creation recorded for self-evolution")
+            except Exception as e:
+                logger.warning(f"Self-evolution recording failed: {e}")
+        
         # Auto-start code generation after project creation
         code_generation_result = await self.generate_game_code(project.project_id, requirements)
         
@@ -829,7 +1531,9 @@ Respond in JSON format:
             'roadmap': roadmap,
             'next_steps': roadmap.get('immediate_next_steps', []),
             'code_generation': code_generation_result,
-            'message': '\n'.join(message_parts)
+            'message': '\n'.join(message_parts),
+            'synthesis_insights': synthesis_insights,
+            'kalki_enhanced': True
         }
     
     
@@ -927,6 +1631,238 @@ Format as JSON."""
         return '2d'  # Default
     
     # ==================== CODE GENERATION ====================
+    
+    # ═══════════════════════════════════════════════════════════
+    # PHASE INTEGRATION METHODS - Using All 25 Phases
+    # ═══════════════════════════════════════════════════════════
+    
+    async def analyze_game_screenshot(self, screenshot_path: str, session_id: str) -> Dict[str, Any]:
+        """Phase 13: Vision Agent - Analyze game screenshots for quality, UI, gameplay"""
+        if not self.vision_agent:
+            return {"error": "Vision Agent not available"}
+        
+        try:
+            # Use Vision Agent for screenshot analysis
+            result = await self.vision_agent.execute({
+                "action": "analyze",
+                "params": {"image_path": screenshot_path}
+            })
+            
+            # Also use LLM vision if available
+            if self.llm.vision_engine:
+                vision_analysis = await self.llm.analyze_image(
+                    screenshot_path,
+                    "Analyze this game screenshot. Identify: UI elements, art style, gameplay mechanics, quality issues, and improvement suggestions."
+                )
+                result["llm_vision_analysis"] = vision_analysis
+            
+            return result
+        except Exception as e:
+            logger.error(f"Vision analysis failed: {e}")
+            return {"error": str(e)}
+    
+    async def simulate_game_mechanics(self, game_spec: Dict[str, Any], session_id: str) -> Dict[str, Any]:
+        """Phase 9: Simulation Engine - Test game mechanics before building"""
+        if not self.simulation_engine:
+            return {"error": "Simulation Engine not available"}
+        
+        try:
+            # Create simulation scenario
+            scenario = {
+                "name": f"Game Mechanics Test - {game_spec.get('name', 'Unknown')}",
+                "description": f"Testing game mechanics for {game_spec.get('name')}",
+                "simulation_type": "game_mechanics",
+                "parameters": {
+                    "game_engine": game_spec.get("engine"),
+                    "platform": game_spec.get("platform"),
+                    "mechanics": game_spec.get("mechanics", {}),
+                    "performance_targets": game_spec.get("performance", {})
+                }
+            }
+            
+            # Run simulation
+            result = await self.simulation_engine.run_experiment(scenario)
+            return result
+        except Exception as e:
+            logger.error(f"Simulation failed: {e}")
+            return {"error": str(e)}
+    
+    async def plan_with_agents(self, requirements: Dict[str, Any]) -> Dict[str, Any]:
+        """Phase 3-5: Agent System - Use specialized agents for planning"""
+        if not self.agent_manager:
+            return {"error": "Agent System not available"}
+        
+        try:
+            # Use PlannerAgent for task decomposition
+            planner = await self.agent_manager.get_agent("PlannerAgent")
+            plan = await planner.execute({
+                "action": "plan",
+                "params": {"goal": requirements, "domain": "game_development"}
+            })
+            
+            # Use ReasoningAgent for analysis
+            reasoner = await self.agent_manager.get_agent("ReasoningAgent")
+            analysis = await reasoner.execute({
+                "action": "analyze",
+                "params": {"plan": plan, "requirements": requirements}
+            })
+            
+            # Use MemoryAgent for knowledge retrieval
+            memory = await self.agent_manager.get_agent("MemoryAgent")
+            knowledge = await memory.execute({
+                "action": "retrieve",
+                "params": {"query": f"game development {requirements.get('genre', '')}"}
+            })
+            
+            return {
+                "plan": plan,
+                "analysis": analysis,
+                "knowledge": knowledge
+            }
+        except Exception as e:
+            logger.error(f"Agent planning failed: {e}")
+            return {"error": str(e)}
+    
+    async def assess_risks_and_ethics(self, game_spec: Dict[str, Any]) -> Dict[str, Any]:
+        """Phase 12: Safety Agents - Risk and ethical assessment"""
+        results = {}
+        
+        if self.risk_agent:
+            try:
+                risk_assessment = await self.risk_agent.execute({
+                    "action": "assess",
+                    "params": {"project": game_spec, "domain": "game_development"}
+                })
+                results["risk_assessment"] = risk_assessment
+            except Exception as e:
+                logger.warning(f"Risk assessment failed: {e}")
+        
+        if self.ethics_agent:
+            try:
+                ethics_check = await self.ethics_agent.execute({
+                    "action": "evaluate",
+                    "params": {"project": game_spec, "domain": "game_development"}
+                })
+                results["ethics_check"] = ethics_check
+            except Exception as e:
+                logger.warning(f"Ethics check failed: {e}")
+        
+        return results
+    
+    async def get_quality_feedback(self, project_id: str, code: str) -> Dict[str, Any]:
+        """Phase 6-7: Feedback Agents - Quality assessment and conflict detection"""
+        results = {}
+        
+        if self.feedback_agent:
+            try:
+                feedback = await self.feedback_agent.execute({
+                    "action": "evaluate",
+                    "params": {"code": code, "project_id": project_id}
+                })
+                results["feedback"] = feedback
+            except Exception as e:
+                logger.warning(f"Feedback evaluation failed: {e}")
+        
+        if self.conflict_agent:
+            try:
+                conflicts = await self.conflict_agent.execute({
+                    "action": "detect",
+                    "params": {"code": code, "project_id": project_id}
+                })
+                results["conflicts"] = conflicts
+            except Exception as e:
+                logger.warning(f"Conflict detection failed: {e}")
+        
+        if self.performance_agent:
+            try:
+                performance = await self.performance_agent.execute({
+                    "action": "monitor",
+                    "params": {"project_id": project_id}
+                })
+                results["performance"] = performance
+            except Exception as e:
+                logger.warning(f"Performance monitoring failed: {e}")
+        
+        return results
+    
+    async def generate_creative_ideas(self, genre: str, constraints: Dict[str, Any]) -> Dict[str, Any]:
+        """Phase 10-11: Creative Agents - Generate creative game ideas"""
+        results = {}
+        
+        if self.creative_agent:
+            try:
+                ideas = await self.creative_agent.execute({
+                    "action": "generate",
+                    "params": {"genre": genre, "constraints": constraints}
+                })
+                results["creative_ideas"] = ideas
+            except Exception as e:
+                logger.warning(f"Creative generation failed: {e}")
+        
+        if self.pattern_agent:
+            try:
+                patterns = await self.pattern_agent.execute({
+                    "action": "recognize",
+                    "params": {"domain": "game_development", "genre": genre}
+                })
+                results["patterns"] = patterns
+            except Exception as e:
+                logger.warning(f"Pattern recognition failed: {e}")
+        
+        return results
+    
+    async def predict_technology_trends(self, timeframe: str = "1 year") -> Dict[str, Any]:
+        """Phase 14: Quantum & Predictive - Technology trend prediction"""
+        results = {}
+        
+        if self.predictive_agent:
+            try:
+                predictions = await self.predictive_agent.execute({
+                    "action": "predict",
+                    "params": {"domain": "game_development", "timeframe": timeframe}
+                })
+                results["predictions"] = predictions
+            except Exception as e:
+                logger.warning(f"Prediction failed: {e}")
+        
+        if self.impact_analyzer:
+            try:
+                impact = await self.impact_analyzer.execute({
+                    "action": "analyze",
+                    "params": {"domain": "game_development"}
+                })
+                results["impact_analysis"] = impact
+            except Exception as e:
+                logger.warning(f"Impact analysis failed: {e}")
+        
+        return results
+    
+    async def generate_3d_assets(self, asset_spec: Dict[str, Any]) -> Dict[str, Any]:
+        """Phase 17-18: Design & Visual Pipeline - Generate 3D game assets"""
+        results = {}
+        
+        if self.design_brain:
+            try:
+                design = await self.design_brain.generate_design(asset_spec)
+                results["design"] = design
+            except Exception as e:
+                logger.warning(f"Design generation failed: {e}")
+        
+        if self.modeling_bridge:
+            try:
+                model = await self.modeling_bridge.generate_3d_model(asset_spec)
+                results["3d_model"] = model
+            except Exception as e:
+                logger.warning(f"3D modeling failed: {e}")
+        
+        if self.visual_render:
+            try:
+                render = await self.visual_render.render(asset_spec)
+                results["render"] = render
+            except Exception as e:
+                logger.warning(f"Rendering failed: {e}")
+        
+        return results
     
     async def generate_game_code(
         self,

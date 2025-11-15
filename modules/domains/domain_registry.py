@@ -135,16 +135,26 @@ class DomainRegistry:
         
         self._copilots_loaded = True
     
-    def get_domain(self, domain_name: str) -> Optional[BaseDomain]:
+    def get_domain(self, domain_name: str, prefer_copilot: bool = True) -> Optional[Any]:
         """
-        Get a specific domain by name.
+        Get a specific domain by name, with option to prefer copilot if available.
         
         Args:
             domain_name: Name of domain (e.g., "construction", "game_development")
+            prefer_copilot: If True, returns copilot if available, otherwise domain
         
         Returns:
-            Domain instance or None if not found
+            Copilot instance (if available and prefer_copilot=True), 
+            Domain instance, or None if not found
         """
+        # If copilot is preferred and available, return it
+        if prefer_copilot and self.has_copilot(domain_name):
+            copilot = self.get_copilot(domain_name)
+            if copilot:
+                logger.info(f"✅ Using copilot for {domain_name} domain")
+                return copilot
+        
+        # Otherwise return domain
         module = self.domains.get(domain_name)
         return module.domain if module else None
     

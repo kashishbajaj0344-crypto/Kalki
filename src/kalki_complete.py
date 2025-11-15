@@ -1054,10 +1054,7 @@ class KalkiOrchestrator:
         try:
             # 3. Production Observability Dashboard - Real-time monitoring
             logger.info("Initializing ProductionObservabilityDashboard...")
-            self.observability_dashboard = ProductionObservabilityDashboard(
-                safety_monitor=self.safety_monitoring,
-                cognitive_tracer=self.cognitive_traceability
-            )
+            self.observability_dashboard = ProductionObservabilityDashboard()
             await self.observability_dashboard.start()
             
             logger.info("✅ Observability dashboard running on configured port")

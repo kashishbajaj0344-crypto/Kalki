@@ -600,6 +600,20 @@ class ReinforcementLoop:
 
         return covered
 
+    def get_learning_progress(self) -> Dict[str, Any]:
+        """Get learning progress metrics"""
+        return {
+            "overall_score": self.performance_metrics.average_composite_score,
+            "improvement_rate": self.performance_metrics.improvement_rate,
+            "learning_sessions": self.performance_metrics.learning_sessions,
+            "total_responses": self.performance_metrics.total_responses,
+            "bias_detection_rate": self.performance_metrics.bias_detection_rate,
+            "ethical_alignment_rate": self.performance_metrics.ethical_alignment_rate,
+            "efficiency_ratio": self.performance_metrics.efficiency_ratio,
+            "last_update": self.performance_metrics.last_update,
+            "recent_scores": [r.composite_score for r in self.response_history[-10:]] if self.response_history else []
+        }
+    
     def get_performance_report(self) -> Dict[str, Any]:
         """Get comprehensive performance report"""
         return {

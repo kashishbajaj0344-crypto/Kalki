@@ -161,6 +161,10 @@ class EthicalReinforcementLayer:
 
         logger.info("Ethical Reinforcement Layer initialized")
 
+    async def initialize(self) -> bool:
+        """Initialize the ethical reinforcement layer (already initialized in __init__)."""
+        return True
+
     def _initialize_moral_development(self) -> MoralDevelopmentStage:
         """Initialize moral development stage"""
         return MoralDevelopmentStage(

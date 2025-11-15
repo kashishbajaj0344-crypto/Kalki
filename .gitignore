@@ -18,7 +18,9 @@ kalki_agents.log
 
 # Ignore data directories (created at runtime)
 /vector_db/
-/pdfs/
+pdfs/
+models/
+kalki_env/
 data/vector_db/chroma.sqlite3
 data/vector_db/*.sqlite3
 

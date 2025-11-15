@@ -137,6 +137,10 @@ class SafetyMonitoringSystem:
 
         logger.info("Safety Monitoring System initialized")
 
+    async def initialize(self) -> bool:
+        """Initialize the safety monitoring system (already initialized in __init__)."""
+        return True
+
     def _generate_audit_secret(self) -> str:
         """Generate or load audit secret for tamper-evident logging"""
         secret_file = f"{self.data_dir}/audit_secret.key"
@@ -806,6 +810,17 @@ Please review the system status immediately.
         self._save_persistent_state()
         return True
 
+    def get_safety_status(self) -> Dict[str, Any]:
+        """Get safety status for observability dashboard"""
+        system_status = self.get_system_status()
+        return {
+            "active_violations": len([a for a in self.active_alerts.values() if a.severity.value == "critical"]),
+            "ethics_compliance_score": 0.95 if len(self.active_alerts) == 0 else max(0.5, 1.0 - (len(self.active_alerts) * 0.1)),
+            "alerts": system_status.get("alerts", {}),
+            "audit_trail": system_status.get("audit_trail", {}),
+            "safety_gates": system_status.get("safety_gates", {})
+        }
+    
     def get_system_status(self) -> Dict[str, Any]:
         """Get comprehensive system status"""
 
@@ -850,8 +865,8 @@ Please review the system status immediately.
                 "total_rules": len(self.alert_rules)
             },
             "monitoring": {
-                "active": self.monitoring_active,
-                "check_interval": self.check_interval
+                "active": getattr(self, 'monitoring_active', True),
+                "check_interval": getattr(self, 'check_interval', 60)
             }
         }
 

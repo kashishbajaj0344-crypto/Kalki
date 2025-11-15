@@ -183,6 +183,65 @@ class EnhancedConstructionCopilot:
         self._property_intel = None
         self._roadmap_generator = None
         
+        # Advanced design & visualization systems (lazy-loaded)
+        self._generative_design = None
+        self._supreme_synthesis = None
+        self._visual_render = None
+        self._sim_engine = None
+        self._quantum_optimizer = None
+        self._digital_twin = None
+        
+        # CAD & Blueprint systems (lazy-loaded)
+        self._architectural_drawings = None
+        self._blueprint_gen = None
+        self._cad_drawings = None
+        
+        # Phase 13: Vision Agent (NEW - Full Integration)
+        self._vision_agent = None
+        
+        # Phase 3-5: Agent System (NEW - Full Integration)
+        self._agent_manager = None
+        self._event_bus = None
+        self._planner_agent = None
+        self._reasoning_agent = None
+        self._memory_agent = None
+        
+        # Phase 12: Safety Agents (NEW - Full Integration)
+        self._ethics_agent = None
+        self._risk_agent = None
+        
+        # Phase 6-7: Feedback Agents (NEW - Full Integration)
+        self._feedback_agent = None
+        self._conflict_agent = None
+        self._performance_agent = None
+        
+        # Phase 10-11: Creative Agents (NEW - Full Integration)
+        self._creative_agent = None
+        self._pattern_agent = None
+        
+        # Phase 14: Quantum & Predictive (already lazy-loaded as _quantum_optimizer)
+        self._predictive_agent = None
+        self._temporal_engine = None
+        
+        # Phase 15-16: Emotional Intelligence (NEW - Full Integration)
+        self._emotional_agent = None
+        self._voice_assistant = None
+        
+        # Phase 17-18: Design & Visual Pipeline (partially loaded)
+        self._design_brain = None
+        self._cad_generator = None
+        self._modeling_bridge = None
+        
+        # Phase 24: Evolutionary Agents (NEW - Full Integration)
+        self._auto_finetune_agent = None
+        self._curriculum_agent = None
+        
+        # Phase 25: Production Monitoring (NEW - Full Integration)
+        self._observability = None
+        self._ethical_layer = None
+        self._traceability = None
+        self._temporal_buffer = None
+        
         # Domain Registry (lightweight - just discovers domains)
         self._domain_registry = DomainRegistry()
         self._construction_domain = None  # Will be loaded from registry
@@ -280,6 +339,9 @@ class EnhancedConstructionCopilot:
                 meta_learning=self._meta_learning
             )
             logger.info("  ✓ Roadmap Generator")
+            
+            # Note: Advanced systems (generative design, simulation, etc.) are lazy-loaded
+            # They will be initialized on first use via get_*() methods
             
             self._initialized = True
             logger.info("✅ All systems loaded and ready!")
@@ -417,6 +479,480 @@ class EnhancedConstructionCopilot:
         """Get Roadmap Generator (lazy-loaded)"""
         await self._ensure_initialized()
         return self._roadmap_generator
+    
+    # ═══════════════════════════════════════════════════════════════════════
+    # ADVANCED DESIGN & VISUALIZATION SYSTEMS (Lazy-loaded)
+    # ═══════════════════════════════════════════════════════════════════════
+    
+    async def get_generative_design(self):
+        """Get Generative Design Engine (lazy-loaded)"""
+        await self._ensure_initialized()
+        if not self._generative_design:
+            from modules.generative_design_engine import GenerativeDesignEngine
+            self._generative_design = GenerativeDesignEngine()
+            await self._generative_design.initialize()
+            logger.info("  ✓ Generative Design Engine loaded")
+        return self._generative_design
+    
+    async def get_supreme_synthesis(self):
+        """Get Supreme Synthesis Engine (lazy-loaded)"""
+        await self._ensure_initialized()
+        if not self._supreme_synthesis:
+            from modules.supreme_synthesis_engine import SupremeSynthesisEngine
+            self._supreme_synthesis = SupremeSynthesisEngine()
+            logger.info("  ✓ Supreme Synthesis Engine loaded")
+        return self._supreme_synthesis
+    
+    async def get_visual_render(self):
+        """Get Visual Render Engine (lazy-loaded)"""
+        await self._ensure_initialized()
+        if not self._visual_render:
+            from modules.visual_render import VisualRenderEngine
+            self._visual_render = VisualRenderEngine()
+            logger.info("  ✓ Visual Render Engine loaded")
+        return self._visual_render
+    
+    async def get_sim_engine(self):
+        """Get Simulation Engine (lazy-loaded)"""
+        await self._ensure_initialized()
+        if not self._sim_engine:
+            from modules.sim_engine import SimulationEngine
+            self._sim_engine = SimulationEngine()
+            logger.info("  ✓ Simulation Engine loaded")
+        return self._sim_engine
+    
+    async def get_quantum_optimizer(self):
+        """Get Quantum Design Optimizer (lazy-loaded)"""
+        await self._ensure_initialized()
+        if not self._quantum_optimizer:
+            from modules.quantum_design_optimizer import QuantumDesignOptimizer
+            self._quantum_optimizer = QuantumDesignOptimizer()
+            logger.info("  ✓ Quantum Design Optimizer loaded")
+        return self._quantum_optimizer
+    
+    async def get_digital_twin(self):
+        """Get Digital Twin System (lazy-loaded)"""
+        await self._ensure_initialized()
+        if not self._digital_twin:
+            from modules.digital_twin_system import DigitalTwinSystem
+            self._digital_twin = DigitalTwinSystem()
+            logger.info("  ✓ Digital Twin System loaded")
+        return self._digital_twin
+    
+    # ═══════════════════════════════════════════════════════════════════════
+    # CAD & BLUEPRINT SYSTEMS (Lazy-loaded)
+    # ═══════════════════════════════════════════════════════════════════════
+    
+    async def get_architectural_drawings(self):
+        """Get Architectural Drawing Generator (lazy-loaded)"""
+        await self._ensure_initialized()
+        if not self._architectural_drawings:
+            try:
+                from modules.architectural_drawings import ArchitecturalDrawingGenerator
+                self._architectural_drawings = ArchitecturalDrawingGenerator()
+                logger.info("  ✓ Architectural Drawing Generator loaded")
+            except ImportError:
+                logger.warning("  ⚠️ ArchitecturalDrawings module not available")
+                return None
+        return self._architectural_drawings
+    
+    async def get_blueprint_gen(self):
+        """Get Blueprint Generator (lazy-loaded)"""
+        await self._ensure_initialized()
+        if not self._blueprint_gen:
+            from modules.blueprint_gen import BlueprintGenerator
+            self._blueprint_gen = BlueprintGenerator()
+            logger.info("  ✓ Blueprint Generator loaded")
+        return self._blueprint_gen
+    
+    async def get_cad_drawings(self):
+        """Get CAD Drawing Generator (lazy-loaded)"""
+        await self._ensure_initialized()
+        if not self._cad_drawings:
+            try:
+                from modules.cad_drawings import CADDrawingGenerator
+                self._cad_drawings = CADDrawingGenerator()
+                logger.info("  ✓ CAD Drawing Generator loaded")
+            except ImportError:
+                logger.warning("  ⚠️ CADDrawings module not available")
+                return None
+        return self._cad_drawings
+    
+    # ═══════════════════════════════════════════════════════════════════════
+    # PHASE 13: VISION AGENT (NEW - Full Integration)
+    # ═══════════════════════════════════════════════════════════════════════
+    
+    async def get_vision_agent(self):
+        """Get Vision Agent (Phase 13) - lazy-loaded"""
+        await self._ensure_initialized()
+        if not self._vision_agent:
+            try:
+                from modules.agents.multimodal import VisionAgent
+                self._vision_agent = VisionAgent()
+                await self._vision_agent.initialize()
+                logger.info("  ✓ Vision Agent (Phase 13) loaded")
+            except Exception as e:
+                logger.warning(f"  ⚠️ Vision Agent unavailable: {e}")
+                return None
+        return self._vision_agent
+    
+    async def analyze_progress_photo(self, photo_path: str, project_id: str) -> Dict[str, Any]:
+        """Phase 13: Analyze construction progress photos"""
+        vision_agent = await self.get_vision_agent()
+        if not vision_agent:
+            return {"error": "Vision Agent not available"}
+        
+        try:
+            # Use Vision Agent
+            result = await vision_agent.execute({
+                "action": "analyze",
+                "params": {"image_path": photo_path}
+            })
+            
+            # Also use LLM vision if available
+            llm = await self.get_llm()
+            if llm and hasattr(llm, 'vision_engine') and llm.vision_engine:
+                vision_analysis = await llm.analyze_image(
+                    photo_path,
+                    "Analyze this construction progress photo. Identify: construction phase, materials visible, progress percentage, safety issues, and next steps."
+                )
+                result["llm_vision_analysis"] = vision_analysis
+            
+            return result
+        except Exception as e:
+            logger.error(f"Vision analysis failed: {e}")
+            return {"error": str(e)}
+    
+    # ═══════════════════════════════════════════════════════════════════════
+    # PHASE 3-5: AGENT SYSTEM (NEW - Full Integration)
+    # ═══════════════════════════════════════════════════════════════════════
+    
+    async def get_agent_manager(self):
+        """Get Agent Manager (Phase 3-5) - lazy-loaded"""
+        await self._ensure_initialized()
+        if not self._agent_manager:
+            try:
+                from modules.agents.agent_manager import AgentManager
+                from modules.utils.eventbus import EventBus
+                self._agent_manager = AgentManager()
+                self._event_bus = EventBus()
+                logger.info("  ✓ Agent System (Phase 3-5) loaded")
+            except Exception as e:
+                logger.warning(f"  ⚠️ Agent System unavailable: {e}")
+                return None
+        return self._agent_manager
+    
+    async def plan_with_agents(self, requirements: Dict[str, Any]) -> Dict[str, Any]:
+        """Phase 3-5: Use specialized agents for planning"""
+        agent_manager = await self.get_agent_manager()
+        if not agent_manager:
+            return {"error": "Agent System not available"}
+        
+        try:
+            from modules.agents.core import PlannerAgent, ReasoningAgent, MemoryAgent
+            
+            # Use PlannerAgent
+            planner = await agent_manager.get_agent("PlannerAgent")
+            plan = await planner.execute({
+                "action": "plan",
+                "params": {"goal": requirements, "domain": "construction"}
+            })
+            
+            # Use ReasoningAgent
+            reasoner = await agent_manager.get_agent("ReasoningAgent")
+            analysis = await reasoner.execute({
+                "action": "analyze",
+                "params": {"plan": plan, "requirements": requirements}
+            })
+            
+            # Use MemoryAgent
+            memory = await agent_manager.get_agent("MemoryAgent")
+            knowledge = await memory.execute({
+                "action": "retrieve",
+                "params": {"query": f"construction {requirements.get('project_type', '')}"}
+            })
+            
+            return {"plan": plan, "analysis": analysis, "knowledge": knowledge}
+        except Exception as e:
+            logger.error(f"Agent planning failed: {e}")
+            return {"error": str(e)}
+    
+    # ═══════════════════════════════════════════════════════════════════════
+    # PHASE 12: SAFETY AGENTS (NEW - Full Integration)
+    # ═══════════════════════════════════════════════════════════════════════
+    
+    async def get_safety_agents(self):
+        """Get Safety Agents (Phase 12) - lazy-loaded"""
+        await self._ensure_initialized()
+        if not self._ethics_agent or not self._risk_agent:
+            try:
+                from modules.agents.safety import EthicsAgent, RiskAssessmentAgent
+                self._ethics_agent = EthicsAgent()
+                self._risk_agent = RiskAssessmentAgent()
+                logger.info("  ✓ Safety Agents (Phase 12) loaded")
+            except Exception as e:
+                logger.warning(f"  ⚠️ Safety Agents unavailable: {e}")
+        return {"ethics": self._ethics_agent, "risk": self._risk_agent}
+    
+    async def assess_project_risks(self, project_spec: Dict[str, Any]) -> Dict[str, Any]:
+        """Phase 12: Risk and ethical assessment"""
+        agents = await self.get_safety_agents()
+        results = {}
+        
+        if agents.get("risk"):
+            try:
+                risk_assessment = await agents["risk"].execute({
+                    "action": "assess",
+                    "params": {"project": project_spec, "domain": "construction"}
+                })
+                results["risk_assessment"] = risk_assessment
+            except Exception as e:
+                logger.warning(f"Risk assessment failed: {e}")
+        
+        if agents.get("ethics"):
+            try:
+                ethics_check = await agents["ethics"].execute({
+                    "action": "evaluate",
+                    "params": {"project": project_spec, "domain": "construction"}
+                })
+                results["ethics_check"] = ethics_check
+            except Exception as e:
+                logger.warning(f"Ethics check failed: {e}")
+        
+        return results
+    
+    # ═══════════════════════════════════════════════════════════════════════
+    # PHASE 6-7: FEEDBACK AGENTS (NEW - Full Integration)
+    # ═══════════════════════════════════════════════════════════════════════
+    
+    async def get_feedback_agents(self):
+        """Get Feedback Agents (Phase 6-7) - lazy-loaded"""
+        await self._ensure_initialized()
+        if not self._feedback_agent:
+            try:
+                from modules.agents.cognitive import FeedbackAgent, ConflictDetectionAgent, PerformanceMonitorAgent
+                self._feedback_agent = FeedbackAgent()
+                self._conflict_agent = ConflictDetectionAgent()
+                self._performance_agent = PerformanceMonitorAgent()
+                logger.info("  ✓ Feedback Agents (Phase 6-7) loaded")
+            except Exception as e:
+                logger.warning(f"  ⚠️ Feedback Agents unavailable: {e}")
+        return {
+            "feedback": self._feedback_agent,
+            "conflict": self._conflict_agent,
+            "performance": self._performance_agent
+        }
+    
+    async def get_quality_feedback(self, project_id: str, deliverables: Dict[str, Any]) -> Dict[str, Any]:
+        """Phase 6-7: Quality assessment and conflict detection"""
+        agents = await self.get_feedback_agents()
+        results = {}
+        
+        if agents.get("feedback"):
+            try:
+                feedback = await agents["feedback"].execute({
+                    "action": "evaluate",
+                    "params": {"project_id": project_id, "deliverables": deliverables}
+                })
+                results["feedback"] = feedback
+            except Exception as e:
+                logger.warning(f"Feedback evaluation failed: {e}")
+        
+        if agents.get("conflict"):
+            try:
+                conflicts = await agents["conflict"].execute({
+                    "action": "detect",
+                    "params": {"project_id": project_id, "deliverables": deliverables}
+                })
+                results["conflicts"] = conflicts
+            except Exception as e:
+                logger.warning(f"Conflict detection failed: {e}")
+        
+        if agents.get("performance"):
+            try:
+                performance = await agents["performance"].execute({
+                    "action": "monitor",
+                    "params": {"project_id": project_id}
+                })
+                results["performance"] = performance
+            except Exception as e:
+                logger.warning(f"Performance monitoring failed: {e}")
+        
+        return results
+    
+    # ═══════════════════════════════════════════════════════════════════════
+    # PHASE 10-11: CREATIVE AGENTS (NEW - Full Integration)
+    # ═══════════════════════════════════════════════════════════════════════
+    
+    async def get_creative_agents(self):
+        """Get Creative Agents (Phase 10-11) - lazy-loaded"""
+        await self._ensure_initialized()
+        if not self._creative_agent:
+            try:
+                from modules.agents.creative import CreativeAgent, PatternRecognitionAgent
+                self._creative_agent = CreativeAgent()
+                self._pattern_agent = PatternRecognitionAgent()
+                logger.info("  ✓ Creative Agents (Phase 10-11) loaded")
+            except Exception as e:
+                logger.warning(f"  ⚠️ Creative Agents unavailable: {e}")
+        return {"creative": self._creative_agent, "pattern": self._pattern_agent}
+    
+    async def generate_creative_designs(self, constraints: Dict[str, Any]) -> Dict[str, Any]:
+        """Phase 10-11: Generate creative design ideas"""
+        agents = await self.get_creative_agents()
+        results = {}
+        
+        if agents.get("creative"):
+            try:
+                ideas = await agents["creative"].execute({
+                    "action": "generate",
+                    "params": {"domain": "construction", "constraints": constraints}
+                })
+                results["creative_ideas"] = ideas
+            except Exception as e:
+                logger.warning(f"Creative generation failed: {e}")
+        
+        if agents.get("pattern"):
+            try:
+                patterns = await agents["pattern"].execute({
+                    "action": "recognize",
+                    "params": {"domain": "construction"}
+                })
+                results["patterns"] = patterns
+            except Exception as e:
+                logger.warning(f"Pattern recognition failed: {e}")
+        
+        return results
+    
+    # ═══════════════════════════════════════════════════════════════════════
+    # PHASE 14: QUANTUM & PREDICTIVE (Enhanced)
+    # ═══════════════════════════════════════════════════════════════════════
+    
+    async def get_predictive_agents(self):
+        """Get Predictive Agents (Phase 14) - lazy-loaded"""
+        await self._ensure_initialized()
+        if not self._predictive_agent:
+            try:
+                from modules.agents.quantum import PredictiveDiscoveryAgent, TemporalParadoxEngine
+                self._predictive_agent = PredictiveDiscoveryAgent()
+                self._temporal_engine = TemporalParadoxEngine()
+                logger.info("  ✓ Predictive Agents (Phase 14) loaded")
+            except Exception as e:
+                logger.warning(f"  ⚠️ Predictive Agents unavailable: {e}")
+        return {"predictive": self._predictive_agent, "temporal": self._temporal_engine}
+    
+    async def predict_project_outcomes(self, project_spec: Dict[str, Any], timeframe: str = "6 months") -> Dict[str, Any]:
+        """Phase 14: Predict project outcomes and technology trends"""
+        agents = await self.get_predictive_agents()
+        results = {}
+        
+        if agents.get("predictive"):
+            try:
+                predictions = await agents["predictive"].execute({
+                    "action": "predict",
+                    "params": {"domain": "construction", "project": project_spec, "timeframe": timeframe}
+                })
+                results["predictions"] = predictions
+            except Exception as e:
+                logger.warning(f"Prediction failed: {e}")
+        
+        if agents.get("temporal"):
+            try:
+                temporal_analysis = await agents["temporal"].execute({
+                    "action": "analyze",
+                    "params": {"project": project_spec}
+                })
+                results["temporal_analysis"] = temporal_analysis
+            except Exception as e:
+                logger.warning(f"Temporal analysis failed: {e}")
+        
+        return results
+    
+    # ═══════════════════════════════════════════════════════════════════════
+    # PHASE 15-16: EMOTIONAL INTELLIGENCE (NEW - Full Integration)
+    # ═══════════════════════════════════════════════════════════════════════
+    
+    async def get_emotional_intelligence(self):
+        """Get Emotional Intelligence (Phase 15-16) - lazy-loaded"""
+        await self._ensure_initialized()
+        if not self._emotional_agent:
+            try:
+                from modules.agents.emotional import EmotionalIntelligenceAgent
+                from modules.agents.interaction import VoiceAssistant
+                self._emotional_agent = EmotionalIntelligenceAgent()
+                self._voice_assistant = VoiceAssistant()
+                logger.info("  ✓ Emotional Intelligence (Phase 15-16) loaded")
+            except Exception as e:
+                logger.warning(f"  ⚠️ Emotional Intelligence unavailable: {e}")
+        return {"emotional": self._emotional_agent, "voice": self._voice_assistant}
+    
+    # ═══════════════════════════════════════════════════════════════════════
+    # PHASE 17-18: DESIGN & VISUAL PIPELINE (Enhanced)
+    # ═══════════════════════════════════════════════════════════════════════
+    
+    async def get_design_pipeline(self):
+        """Get Design Pipeline (Phase 17-18) - lazy-loaded"""
+        await self._ensure_initialized()
+        if not self._design_brain:
+            try:
+                from modules.design_brain import DesignBrain
+                from modules.cad_drawings import CADDrawingGenerator
+                from modules.modeling_bridge import ModelingBridge
+                self._design_brain = DesignBrain()
+                self._cad_generator = CADDrawingGenerator()
+                self._modeling_bridge = ModelingBridge()
+                logger.info("  ✓ Design Pipeline (Phase 17-18) loaded")
+            except Exception as e:
+                logger.warning(f"  ⚠️ Design Pipeline unavailable: {e}")
+        return {
+            "design_brain": self._design_brain,
+            "cad": self._cad_generator,
+            "modeling": self._modeling_bridge
+        }
+    
+    # ═══════════════════════════════════════════════════════════════════════
+    # PHASE 24: EVOLUTIONARY AGENTS (NEW - Full Integration)
+    # ═══════════════════════════════════════════════════════════════════════
+    
+    async def get_evolutionary_agents(self):
+        """Get Evolutionary Agents (Phase 24) - lazy-loaded"""
+        await self._ensure_initialized()
+        if not self._auto_finetune_agent:
+            try:
+                from modules.agents.evolutionary import AutoFineTuneAgent, AutonomousCurriculumDesigner
+                self._auto_finetune_agent = AutoFineTuneAgent()
+                self._curriculum_agent = AutonomousCurriculumDesigner()
+                logger.info("  ✓ Evolutionary Agents (Phase 24) loaded")
+            except Exception as e:
+                logger.warning(f"  ⚠️ Evolutionary Agents unavailable: {e}")
+        return {"finetune": self._auto_finetune_agent, "curriculum": self._curriculum_agent}
+    
+    # ═══════════════════════════════════════════════════════════════════════
+    # PHASE 25: PRODUCTION MONITORING (NEW - Full Integration)
+    # ═══════════════════════════════════════════════════════════════════════
+    
+    async def get_production_monitoring(self):
+        """Get Production Monitoring (Phase 25) - lazy-loaded"""
+        await self._ensure_initialized()
+        if not self._observability:
+            try:
+                from modules.production_observability_dashboard import ProductionObservabilityDashboard
+                from modules.ethical_reinforcement_layer import EthicalReinforcementLayer
+                from modules.cognitive_traceability_system import CognitiveTraceabilitySystem
+                from modules.temporal_consistency import TemporalConsistencyBuffer
+                self._observability = ProductionObservabilityDashboard()
+                self._ethical_layer = EthicalReinforcementLayer()
+                self._traceability = CognitiveTraceabilitySystem()
+                self._temporal_buffer = TemporalConsistencyBuffer()
+                logger.info("  ✓ Production Monitoring (Phase 25) loaded")
+            except Exception as e:
+                logger.warning(f"  ⚠️ Production Monitoring unavailable: {e}")
+        return {
+            "observability": self._observability,
+            "ethical": self._ethical_layer,
+            "traceability": self._traceability,
+            "temporal": self._temporal_buffer
+        }
     
     # Convenience properties for backward compatibility (use get_* methods instead)
     @property
@@ -725,7 +1261,8 @@ Provide comprehensive answer with sources.""",
             synthesized_text = str(synthesized_response)
         
         # Store for future
-        await self.knowledge_graph.add_new_knowledge(
+        knowledge_graph = await self.get_knowledge_graph()
+        await knowledge_graph.add_new_knowledge(
             query=situation,
             answer=synthesized_text,
             confidence=research_results.get('confidence', 0.7),
@@ -787,7 +1324,8 @@ Provide comprehensive answer with sources.""",
         logger.info(f"🤝 Multi-agent validating: {decision[:60]}...")
         
         # Deploy 3 specialized agents
-        consensus = await self.multi_agent.analyze(
+        multi_agent = await self.get_multi_agent()
+        consensus = await multi_agent.analyze(
             decision=decision,
             context=context,
             agents=['structural_safety', 'code_compliance', 'cost_optimization'],
@@ -893,7 +1431,8 @@ Reasoning: {reasoning[:100]}...
             text_answer = str(text_answer_response)
         
         # Find related diagrams automatically
-        related_diagrams = await self.knowledge_graph.find_visual_evidence(
+        knowledge_graph = await self.get_knowledge_graph()
+        related_diagrams = await knowledge_graph.find_visual_evidence(
             text=text_answer,
             query=query,
             top_k=3,
@@ -1074,13 +1613,14 @@ Path: {diagram.get('image_path', 'N/A')}
         }
         
         # Self-analyze
-        analysis = await self.self_evolution.analyze_system_performance(
+        self_evolution = await self.get_self_evolution()
+        analysis = await self_evolution.analyze_system_performance(
             metrics=metrics,
             system_name='construction_copilot'
         )
         
         # Propose improvements
-        improvements = await self.self_evolution.propose_improvements(
+        improvements = await self_evolution.propose_improvements(
             analysis=analysis,
             confidence_threshold=0.85,
             risk_threshold='low'
@@ -1150,7 +1690,8 @@ Path: {diagram.get('image_path', 'N/A')}
         }
 
         if improvement_id:
-            await self.self_evolution.record_improvement_result(
+            self_evolution = await self.get_self_evolution()
+            await self_evolution.record_improvement_result(
                 improvement_id=improvement_id,
                 success=True,
                 outcome_metrics=outcome_metrics,
@@ -1251,7 +1792,8 @@ Provide structured analysis with confidence scores.""",
         
         # Multi-agent quality validation
         if quality_issues:
-            qc_validation = await self.multi_agent.validate_quality_issues(
+            multi_agent = await self.get_multi_agent()
+            qc_validation = await multi_agent.validate_quality_issues(
                 issues=quality_issues,
                 expected_quality=project.roadmap.get('quality_standards'),
                 photo_analysis=analysis['text']
@@ -1526,6 +2068,421 @@ Completed work:
         
         return enriched_predictions[:5]  # Top 5 risks
     
+    # ═══════════════════════════════════════════════════════════════════════
+    # ADVANCED DESIGN & VISUALIZATION METHODS
+    # ═══════════════════════════════════════════════════════════════════════
+    
+    async def generate_3d_model(
+        self,
+        project_id: str,
+        specifications: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """
+        Generate 3D model of construction project using Generative Design Engine.
+        
+        Args:
+            project_id: Project identifier
+            specifications: Optional design specifications
+        
+        Returns:
+            Dict with 3D model data and file paths
+        """
+        project = self.active_projects.get(project_id)
+        if not project:
+            return {"error": f"Project {project_id} not found"}
+        
+        try:
+            gen_design = await self.get_generative_design()
+            
+            # Create design request from project
+            design_request = f"""
+            Generate 3D model for {project.project_type} project at {project.address}.
+            Project type: {project.project_type}
+            Square footage: {project.property_intelligence.get('square_feet', 'unknown')}
+            """
+            
+            if specifications:
+                design_request += f"\nAdditional specifications: {specifications}"
+            
+            # Create design project
+            design_project = await gen_design.create_design_project(
+                design_request=design_request,
+                project_name=f"{project.project_type}_{project_id}"
+            )
+            
+            return {
+                "success": True,
+                "project_id": project_id,
+                "design_project_id": design_project.project_id,
+                "models_3d": design_project.models_3d,
+                "blueprint": design_project.blueprint,
+                "status": design_project.status
+            }
+        except Exception as e:
+            logger.error(f"Failed to generate 3D model: {e}")
+            return {"error": str(e)}
+    
+    async def render_project_visualization(
+        self,
+        project_id: str,
+        render_type: str = "photorealistic"
+    ) -> Dict[str, Any]:
+        """
+        Generate photorealistic render of construction project.
+        
+        Args:
+            project_id: Project identifier
+            render_type: Type of render ("photorealistic", "technical", "animation")
+        
+        Returns:
+            Dict with render file paths and metadata
+        """
+        project = self.active_projects.get(project_id)
+        if not project:
+            return {"error": f"Project {project_id} not found"}
+        
+        try:
+            gen_design = await self.get_generative_design()
+            visual_render = await self.get_visual_render()
+            
+            # Get or create 3D model first
+            if not hasattr(gen_design, 'active_projects') or project_id not in gen_design.active_projects:
+                await self.generate_3d_model(project_id)
+            
+            # Render photorealistic image
+            render_result = await visual_render.render_photorealistic(
+                design_id=project_id,
+                prompt=f"Photorealistic {project.project_type} at {project.address}, modern architecture, professional photography, high quality"
+            )
+            
+            return {
+                "success": True,
+                "project_id": project_id,
+                "render_type": render_type,
+                "render_files": render_result.get("output_files", []),
+                "metadata": render_result
+            }
+        except Exception as e:
+            logger.error(f"Failed to render visualization: {e}")
+            return {"error": str(e)}
+    
+    async def validate_structure(
+        self,
+        project_id: str,
+        design: Optional[Dict[str, Any]] = None,
+        load_cases: Optional[List[str]] = None
+    ) -> Dict[str, Any]:
+        """
+        Run structural simulation to validate design.
+        
+        Args:
+            project_id: Project identifier
+            design: Optional design specifications
+            load_cases: Optional load cases to test (default: ["static", "dynamic", "wind"])
+        
+        Returns:
+            Dict with simulation results and safety factors
+        """
+        project = self.active_projects.get(project_id)
+        if not project:
+            return {"error": f"Project {project_id} not found"}
+        
+        try:
+            sim_engine = await self.get_sim_engine()
+            
+            # Use project design or provided design
+            if not design:
+                design = project.roadmap.get("design", {})
+            
+            if not load_cases:
+                load_cases = ["static", "dynamic", "wind"]
+            
+            # Run structural FEA
+            result = await sim_engine.run_structural_analysis(
+                design=design,
+                load_cases=load_cases,
+                safety_factors=[1.5, 2.0, 3.0]
+            )
+            
+            return {
+                "success": True,
+                "project_id": project_id,
+                "simulation_results": result.results,
+                "metrics": result.metrics,
+                "status": result.status,
+                "safety_factors": {
+                    "static": 1.5,
+                    "dynamic": 2.0,
+                    "wind": 3.0
+                }
+            }
+        except Exception as e:
+            logger.error(f"Failed to validate structure: {e}")
+            return {"error": str(e)}
+    
+    async def optimize_design_with_supreme_synthesis(
+        self,
+        project_id: str,
+        requirements: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """
+        Use Supreme Synthesis Engine for design optimization.
+        
+        Args:
+            project_id: Project identifier
+            requirements: Design requirements and constraints
+        
+        Returns:
+            Dict with optimized design and reasoning
+        """
+        project = self.active_projects.get(project_id)
+        if not project:
+            return {"error": f"Project {project_id} not found"}
+        
+        try:
+            from modules.supreme_synthesis_engine import SynthesisMode
+            supreme_synthesis = await self.get_supreme_synthesis()
+            
+            query = f"Optimize design for {project.project_type} project with requirements: {requirements}"
+            context = {
+                "project_id": project_id,
+                "project_type": project.project_type,
+                "address": project.address,
+                "requirements": requirements,
+                "current_design": project.roadmap.get("design", {})
+            }
+            
+            result = await supreme_synthesis.synthesize(
+                query=query,
+                context=context,
+                synthesis_mode=SynthesisMode.SUPREME
+            )
+            
+            return {
+                "success": True,
+                "project_id": project_id,
+                "optimized_design": result.synthesis_output,
+                "quality_score": result.quality_score,
+                "reasoning": result.reasoning_path,
+                "engineering_standards": result.engineering_standards,
+                "aesthetic_principles": result.aesthetic_principles
+            }
+        except Exception as e:
+            logger.error(f"Failed to optimize design: {e}")
+            return {"error": str(e)}
+    
+    async def generate_blueprints(
+        self,
+        project_id: str,
+        output_format: str = "dwg"
+    ) -> Dict[str, Any]:
+        """
+        Generate professional blueprints for construction project.
+        
+        Args:
+            project_id: Project identifier
+            output_format: Output format ("dwg", "pdf", "svg")
+        
+        Returns:
+            Dict with blueprint file paths
+        """
+        project = self.active_projects.get(project_id)
+        if not project:
+            return {"error": f"Project {project_id} not found"}
+        
+        try:
+            blueprint_gen = await self.get_blueprint_gen()
+            
+            # Get design from project
+            design = project.roadmap.get("design", {})
+            
+            # Generate architectural drawings
+            drawings = await blueprint_gen.generate_architectural_drawings(
+                design=design,
+                output_format=output_format
+            )
+            
+            return {
+                "success": True,
+                "project_id": project_id,
+                "blueprints": drawings,
+                "output_format": output_format
+            }
+        except Exception as e:
+            logger.error(f"Failed to generate blueprints: {e}")
+            return {"error": str(e)}
+    
+    async def optimize_design_quantum(
+        self,
+        project_id: str,
+        objectives: List[str],
+        constraints: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """
+        Use Quantum Design Optimizer for multi-objective optimization.
+        
+        Args:
+            project_id: Project identifier
+            objectives: List of optimization objectives (e.g., ["cost", "efficiency", "sustainability"])
+            constraints: Design constraints
+        
+        Returns:
+            Dict with optimized design
+        """
+        project = self.active_projects.get(project_id)
+        if not project:
+            return {"error": f"Project {project_id} not found"}
+        
+        try:
+            quantum_optimizer = await self.get_quantum_optimizer()
+            
+            # Get current design
+            design_specs = project.roadmap.get("design", {})
+            
+            # Optimize
+            optimized = await quantum_optimizer.optimize(
+                design_specs=design_specs,
+                objectives=objectives,
+                constraints=constraints
+            )
+            
+            return {
+                "success": True,
+                "project_id": project_id,
+                "optimized_design": optimized,
+                "objectives": objectives,
+                "improvements": optimized.get("improvements", [])
+            }
+        except Exception as e:
+            logger.error(f"Failed to optimize with quantum optimizer: {e}")
+            return {"error": str(e)}
+    
+    async def create_digital_twin(
+        self,
+        project_id: str,
+        sensors: Optional[List[str]] = None
+    ) -> Dict[str, Any]:
+        """
+        Create digital twin of construction project for real-time monitoring.
+        
+        Args:
+            project_id: Project identifier
+            sensors: Optional list of sensor types to integrate
+        
+        Returns:
+            Dict with digital twin information
+        """
+        project = self.active_projects.get(project_id)
+        if not project:
+            return {"error": f"Project {project_id} not found"}
+        
+        try:
+            digital_twin = await self.get_digital_twin()
+            
+            if not sensors:
+                sensors = ["temperature", "humidity", "vibration", "progress"]
+            
+            # Create twin
+            twin_info = await digital_twin.create_twin(
+                project_id=project_id,
+                sensors=sensors,
+                metadata={
+                    "project_type": project.project_type,
+                    "address": project.address,
+                    "start_date": project.start_date.isoformat()
+                }
+            )
+            
+            return {
+                "success": True,
+                "project_id": project_id,
+                "twin_id": twin_info.get("twin_id"),
+                "sensors": sensors,
+                "status": "active"
+            }
+        except Exception as e:
+            logger.error(f"Failed to create digital twin: {e}")
+            return {"error": str(e)}
+    
+    # ═══════════════════════════════════════════════════════════════════════
+    # AGENT SYSTEM INTEGRATION
+    # ═══════════════════════════════════════════════════════════════════════
+    
+    async def plan_project_with_agents(
+        self,
+        project_id: str,
+        requirements: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """
+        Use specialized agents for project planning and analysis.
+        
+        Args:
+            project_id: Project identifier
+            requirements: Project requirements
+        
+        Returns:
+            Dict with plan, analysis, and risk assessment from agents
+        """
+        project = self.active_projects.get(project_id)
+        if not project:
+            return {"error": f"Project {project_id} not found"}
+        
+        try:
+            await self._ensure_initialized()
+            
+            # Ensure agent manager is available
+            if not self._agent_manager:
+                event_bus = EventBus()
+                self._agent_manager = AgentManager(event_bus)
+            
+            # Use specialized agents
+            from modules.agents.core import PlannerAgent, ReasoningAgent
+            from modules.agents.safety import RiskAssessmentAgent
+            
+            # Get agents
+            planner = self._agent_manager.get_agent(PlannerAgent) if hasattr(self._agent_manager, 'get_agent') else None
+            reasoner = self._agent_manager.get_agent(ReasoningAgent) if hasattr(self._agent_manager, 'get_agent') else None
+            risk_agent = self._agent_manager.get_agent(RiskAssessmentAgent) if hasattr(self._agent_manager, 'get_agent') else None
+            
+            results = {}
+            
+            # Use planner agent if available
+            if planner and hasattr(planner, 'execute'):
+                plan = await planner.execute({
+                    "action": "plan",
+                    "params": {"goal": requirements, "project": project}
+                })
+                results["plan"] = plan
+            
+            # Use reasoning agent if available
+            if reasoner and hasattr(reasoner, 'execute'):
+                analysis = await reasoner.execute({
+                    "action": "analyze",
+                    "params": {"plan": results.get("plan"), "requirements": requirements}
+                })
+                results["analysis"] = analysis
+            
+            # Use risk assessment agent if available
+            if risk_agent and hasattr(risk_agent, 'execute'):
+                risks = await risk_agent.execute({
+                    "action": "assess",
+                    "params": {"plan": results.get("plan"), "project": project}
+                })
+                results["risks"] = risks
+            
+            return {
+                "success": True,
+                "project_id": project_id,
+                "agent_results": results
+            }
+        except Exception as e:
+            logger.error(f"Failed to plan with agents: {e}")
+            # Fallback to standard planning
+            return {
+                "success": False,
+                "error": str(e),
+                "fallback": "Using standard planning method"
+            }
     
     def _get_similar_projects(self, project: ProjectState) -> List[Dict]:
         """Get similar historical projects for pattern analysis"""
